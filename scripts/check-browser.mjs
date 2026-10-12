@@ -59,6 +59,8 @@ try {
     page.getByRole("alert").waitFor({ timeout: 180000 }),
   ]);
   if (await page.locator(".career").count()) {
+    if ((await page.locator(".career").count()) > 3)
+      throw new Error("More than three pathways returned");
     await page.screenshot({
       path: "artifacts/pathways-phone.png",
       fullPage: true,
@@ -79,8 +81,7 @@ try {
     await page
       .locator("#storyboard img")
       .evaluateAll(
-        async (images) =>
-          await Promise.all(images.map((img) => img.decode().catch(() => {}))),
+        async (images) => await Promise.all(images.map((img) => img.decode())),
       );
     await page
       .locator("#storyboard")
@@ -99,6 +100,22 @@ try {
         .getByText("Path ran: storyboard-cache", { exact: true })
         .waitFor({ timeout: 15000 });
       console.log("Verified storyboard-cache");
+      await page.locator("#storyboard").screenshot({
+        path: "artifacts/storyboard-phone.png",
+      });
+      const cachedResult = calls.findLast(
+        (call) => call.result?.path === "storyboard-cache",
+      )?.result;
+      const firstResult = calls.find(
+        (call) => call.result?.path === "openai-storyboard-and-images",
+      )?.result;
+      if (
+        firstResult &&
+        cachedResult &&
+        JSON.stringify(firstResult.panels.map((p) => p.storageId)) !==
+          JSON.stringify(cachedResult.panels.map((p) => p.storageId))
+      )
+        throw new Error("Storyboard cache changed stored illustrations");
     }
   } else {
     await page.screenshot({

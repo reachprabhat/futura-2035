@@ -2,10 +2,14 @@ import { convexTest } from "convex-test";
 import { describe, it, expect, vi, afterEach } from "vitest";
 import schema from "./schema";
 import { api, internal } from "./_generated/api";
-const mocks = vi.hoisted(() => ({ parse: vi.fn(), generate: vi.fn() }));
+const mocks = vi.hoisted(() => ({
+  create: vi.fn(),
+  parse: vi.fn(),
+  generate: vi.fn(),
+}));
 vi.mock("openai", () => {
   class FakeOpenAI {
-    responses = { parse: mocks.parse };
+    responses = { create: mocks.create, parse: mocks.parse };
     images = { generate: mocks.generate };
     static APIError = class extends Error {
       status = 500;
@@ -19,6 +23,59 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 describe("Storyboard recovery through the action", () => {
+  it("requires completed research before generating careers and reuses equivalent inputs", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
+    const t = convexTest(schema, modules);
+    mocks.create.mockResolvedValue({
+      output: [
+        {
+          type: "web_search_call",
+          status: "completed",
+          action: {
+            sources: [
+              { title: "Workforce research", url: "https://www.weforum.org/" },
+            ],
+          },
+        },
+      ],
+      output_text: "Published workforce research.",
+    });
+    mocks.parse.mockResolvedValue({
+      output: [],
+      output_parsed: { careers: [], note: "Test research result" },
+    });
+    const args = {
+      interests: "Economics, writing",
+      hopes: "stability, overseas",
+    };
+    const first = await t.action(api.ai.recommend, args);
+    expect(first.sources).toHaveLength(1);
+    expect(mocks.parse.mock.calls[0][0].input[1].content).toContain(
+      "Published workforce research.",
+    );
+    const cached = await t.action(api.ai.recommend, {
+      interests: "writing, Economics",
+      hopes: "overseas, stability",
+    });
+    expect(cached.path).toBe("career-cache");
+    expect(mocks.create).toHaveBeenCalledTimes(1);
+    expect(mocks.parse).toHaveBeenCalledTimes(1);
+  });
+  it("refuses recommendations when the research tool did not finish", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
+    const t = convexTest(schema, modules);
+    mocks.create.mockResolvedValue({
+      output: [],
+      output_text: "Unsupported claims",
+    });
+    await expect(
+      t.action(api.ai.recommend, {
+        interests: "economics",
+        hopes: "stability",
+      }),
+    ).rejects.toThrow(/try again/);
+    expect(mocks.parse).not.toHaveBeenCalled();
+  });
   it("keeps captions when images fail, retries only images, then returns saved images without AI calls", async () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
     const t = convexTest(schema, modules);
