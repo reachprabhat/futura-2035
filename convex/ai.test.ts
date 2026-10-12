@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { convexTest } from "convex-test";
 import { describe, it, expect, vi, afterEach } from "vitest";
 import schema from "./schema";
@@ -120,6 +121,9 @@ describe("Storyboard recovery through the action", () => {
       expect(request.model).toBe("gpt-image-1");
       expect(request.quality).toBe("high");
       expect(request.prompt).toContain(
+        "a single scene, one image, not a grid, collage, comic strip or multiple panels",
+      );
+      expect(request.prompt).toContain(
         "no text, letters, numbers, words, signs, charts or screens with writing anywhere in the image",
       );
       expect(request.prompt).toContain(
@@ -148,6 +152,37 @@ describe("Storyboard recovery through the action", () => {
     expect(mocks.generate).toHaveBeenCalledTimes(8);
     const used = await t.run((ctx) => ctx.db.query("usage").collect());
     expect(used[0].calls).toBe(10);
+  });
+  it("starts every image before any completes and publishes each result immediately", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
+    const t = convexTest(schema, modules);
+    await t.mutation(internal.data.saveSearch, { key: "parallel", result: { careers: [{ title: "Parallel Career" }] } });
+    await t.mutation(internal.data.claim, { key: "parallel career", title: "Parallel Career", token: "prep" });
+    await t.mutation(internal.data.saveStory, { key: "parallel career", token: "prep", status: "prepared",
+      raw: JSON.stringify({ imageCharacter: "Fixed existing character" }),
+      panels: Array.from({ length: 4 }, (_, i) => ({ time: `${i}`, caption: `Existing caption ${i}`, illustration: "Existing scene" })) });
+    const resolvers: ((value: any) => void)[] = [];
+    mocks.generate.mockImplementation(() => new Promise(resolve => resolvers.push(resolve)));
+    const run = t.action(api.ai.storyboard, { searchKey: "parallel", careerIndex: 0 });
+    for (let i = 0; i < 100 && resolvers.length < 4; i++) await new Promise(r => setTimeout(r, 1));
+    expect(resolvers).toHaveLength(4);
+    const image = { data: [{ b64_json: "dGVzdA==" }], usage: { input_tokens: 20, input_tokens_details: { text_tokens: 20, image_tokens: 0 }, output_tokens: 4160, total_tokens: 4180 } };
+    resolvers[2](image);
+    let partial: any;
+    for (let i = 0; i < 100; i++) {
+      partial = await t.query(internal.data.getStory, { key: "parallel career" });
+      if (partial.panels[2].storageId) break;
+      await new Promise(r => setTimeout(r, 1));
+    }
+    expect(partial.panels.filter((p: any) => p.storageId)).toHaveLength(1);
+    expect(partial.status).toBe("generating");
+    resolvers[0](image); resolvers[1](image); resolvers[3](image);
+    await run;
+    const final = await t.query(internal.data.getStory, { key: "parallel career" });
+    expect(final?.panels.every((p: any) => p.storageId)).toBe(true);
+    const calls = await t.run(ctx => ctx.db.query("aiCalls").collect());
+    expect(calls.filter(c => c.fullStoryboardCompleted)).toHaveLength(1);
+    expect(calls.every(c => c.costUSD === 0.1665)).toBe(true);
   });
   it("does not call OpenAI after the daily allowance is used, and still returns saved captions", async () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");

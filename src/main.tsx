@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import { ConvexProvider, ConvexReactClient, useAction } from "convex/react";
+import { ConvexProvider, ConvexReactClient, useAction, useMutation, useQuery } from "convex/react";
 import { ConvexError } from "convex/values";
 import { api } from "../convex/_generated/api";
 import "./style.css";
+import AdminCosts from "./AdminCosts";
 type Career = {
   title: string;
   description: string[];
@@ -15,6 +16,7 @@ type Career = {
   stability: string;
 };
 type Results = {
+  stories?: Story[];
   careers: Career[];
   note: string;
   searchKey: string;
@@ -23,6 +25,7 @@ type Results = {
   sources: { title: string; url: string }[];
 };
 type Story = {
+  status?: string;
   title: string;
   panels: {
     time: string;
@@ -44,21 +47,33 @@ const message = (e: unknown) =>
   e instanceof ConvexError
     ? String(e.data)
     : "We couldn’t finish that request. Please try again.";
+function PanelImage({ panel, index, failed }: { panel: Story["panels"][number]; index: number; failed: boolean }) {
+  const [loaded, setLoaded] = useState(false);
+  return <div className="panel-image image-fallback">
+    {!loaded && <><span className="number">0{index + 1}</span><p>{panel.imageError || failed ? "Illustration unavailable" : "Illustrating this moment…"}</p></>}
+    {panel.imageUrl && <img src={panel.imageUrl} alt={panel.caption} className={loaded ? "image-visible" : ""} onLoad={() => setLoaded(true)} />}
+  </div>;
+}
 function App() {
   const recommend = useAction(api.ai.recommend),
-    illustrate = useAction(api.ai.storyboard);
+    startStories = useMutation(api.data.startStories);
   const [interests, setInterests] = useState(""),
     [hopes, setHopes] = useState(""),
     [results, setResults] = useState<Results | null>(null),
     [selected, setSelected] = useState<number | null>(null),
-    [story, setStory] = useState<Story | null>(null),
+    [openedPath, setOpenedPath] = useState(""),
     [busy, setBusy] = useState(false),
     [error, setError] = useState("");
+  const liveStories = useQuery(api.data.stories, results ? { searchKey: results.searchKey } : "skip") as (Story | null)[] | undefined;
+  const currentStory = selected === null ? null : liveStories?.[selected] ?? results?.stories?.[selected] ?? null;
+  const story: Story | null = currentStory ? { ...currentStory, path: openedPath || currentStory.path } : null;
+  useEffect(() => {
+    if (results) startStories({ searchKey: results.searchKey }).catch(e => setError(message(e)));
+  }, [results, startStories]);
   async function explore(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
     setError("");
-    setStory(null);
     setSelected(null);
     try {
       setResults(await recommend({ interests, hopes }));
@@ -77,9 +92,9 @@ function App() {
   }
   async function choose(index: number) {
     if (!results) return;
+    const available = liveStories?.[index] ?? results.stories?.[index];
+    setOpenedPath(available?.status === "ready" || available?.panels.every(p => p.imageUrl) ? "storyboard-cache" : "openai-background-images");
     setSelected(index);
-    setStory(null);
-    setBusy(true);
     setError("");
     setTimeout(
       () =>
@@ -89,9 +104,7 @@ function App() {
       100,
     );
     try {
-      setStory(
-        await illustrate({ searchKey: results.searchKey, careerIndex: index }),
-      );
+      await startStories({ searchKey: results.searchKey, careerIndex: index });
     } catch (e) {
       setError(message(e));
     } finally {
@@ -101,7 +114,6 @@ function App() {
   function edit() {
     setResults(null);
     setSelected(null);
-    setStory(null);
     setError("");
     window.scrollTo({ top: 0, behavior: "smooth" });
     setTimeout(() => document.getElementById("interests")?.focus(), 100);
@@ -299,7 +311,7 @@ function App() {
               )}
             </section>
             {selected !== null && (
-              <section id="storyboard" aria-busy={busy}>
+              <section id="storyboard" aria-busy={story?.status === "generating"}>
                 <div className="story-heading">
                   <div>
                     <p className="eyebrow">A GLIMPSE INTO 2035</p>
@@ -313,8 +325,7 @@ function App() {
                     disabled={busy}
                     onClick={() => {
                       setSelected(null);
-                      setStory(null);
-                      document
+                                        document
                         .getElementById("pathways")
                         ?.scrollIntoView({ behavior: "smooth" });
                     }}
@@ -322,7 +333,7 @@ function App() {
                     Choose another pathway ↑
                   </button>
                 </div>
-                {busy && (
+                {!story?.panels.length && (
                   <div className="loading" role="status">
                     <span className="spinner" />
                     <h3>Bringing a possible future to life.</h3>
@@ -337,14 +348,7 @@ function App() {
                     <div className="panel-grid">
                       {story.panels.map((panel, i) => (
                         <figure key={i}>
-                          {panel.imageUrl ? (
-                            <img src={panel.imageUrl} alt={panel.caption} />
-                          ) : (
-                            <div className="image-fallback">
-                              <span className="number">0{i + 1}</span>
-                              <p>Illustration unavailable</p>
-                            </div>
-                          )}
+                          <PanelImage key={panel.imageUrl ?? `${story.title}-${i}`} panel={panel} index={i} failed={story.status === "failed"} />
                           <figcaption>
                             <span className="eyebrow">{panel.time}</span>
                             <p>{panel.caption}</p>
@@ -433,7 +437,7 @@ const url = import.meta.env.VITE_CONVEX_URL;
 createRoot(document.getElementById("root")!).render(
   url ? (
     <ConvexProvider client={new ConvexReactClient(url)}>
-      <App />
+      {window.location.pathname === "/admin/costs" ? <AdminCosts /> : <App />}
     </ConvexProvider>
   ) : (
     <main>

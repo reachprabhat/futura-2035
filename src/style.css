@@ -387,6 +387,16 @@ figure img {
   object-fit: cover;
   display: block;
 }
+.panel-image { position: relative; }
+.panel-image img { position: absolute; inset: 0; opacity: 0; transition: opacity 450ms ease; }
+.panel-image img.image-visible { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .panel-image img { transition: none; } }
+.admin-costs { padding-top: 28px; padding-bottom: 28px; }
+.admin-costs input { display: block; padding: 14px; margin: 14px 0; width: 100%; max-width: 440px; border: 1px solid #c5d5c7; border-radius: 12px; background: #fcfdf8; }
+.cost-table { overflow-x: auto; margin: 24px 0; }
+.cost-table table { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; }
+.cost-table th, .cost-table td { padding: 16px; text-align: left; vertical-align: top; border: 1px solid #d7e1d8; }
+.cost-table th { background: #e9efcc; }
 figcaption {
   padding: 22px;
 }

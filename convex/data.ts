@@ -1,4 +1,6 @@
-import { internalMutation, internalQuery } from "./_generated/server";
+import { internalMutation, internalQuery, query, mutation } from "./_generated/server";
+import { internal } from "./_generated/api";
+import { storyKey } from "./storyKey";
 import { v, ConvexError } from "convex/values";
 export const reserve = internalMutation({
   args: {},
@@ -92,5 +94,57 @@ export const saveStory = internalMutation({
         ...fields,
         lease: fields.status === "generating" ? Date.now() + 540000 : 0,
       });
+  },
+});
+
+// Each completed image is committed on its own; simultaneous panels cannot overwrite one another.
+export const savePanel = internalMutation({
+  args: { key: v.string(), token: v.string(), index: v.number(), panel: v.any() }, returns: v.null(),
+  handler: async (ctx, args) => {
+    const row = await ctx.db.query("storyboards").withIndex("by_key", q => q.eq("key", args.key)).unique();
+    if (row?.token === args.token) {
+      const panels = [...row.panels];
+      panels[args.index] = args.panel;
+      await ctx.db.patch(row._id, { panels, lease: Date.now() + 540000 });
+    }
+    return null;
+  },
+});
+export const stories = query({
+  args: { searchKey: v.string() }, returns: v.any(),
+  handler: async (ctx, { searchKey }) => {
+    const search = await ctx.db.query("searches").withIndex("by_key", q => q.eq("key", searchKey)).unique();
+    if (!search) return [];
+    return Promise.all(search.result.careers.map(async (career: any) => {
+      const row = await ctx.db.query("storyboards").withIndex("by_key", q => q.eq("key", storyKey(career.title))).unique();
+      if (!row) return null;
+      return { title: row.title, status: row.status, raw: row.raw ?? null,
+        path: row.status === "ready" ? "storyboard-cache" : row.status === "generating" ? "openai-background-images" : "storyboard-captions-ready",
+        error: row.status === "failed" ? "Some illustrations could not finish. Please try again." : null,
+        panels: await Promise.all(row.panels.map(async (p: any) => ({ ...p, imageUrl: p.storageId ? await ctx.storage.getUrl(p.storageId) : null }))),
+      };
+    }));
+  },
+});
+// Scheduling returns immediately. The existing atomic claim prevents duplicate paid calls.
+export const startStories = mutation({
+  args: { searchKey: v.string(), careerIndex: v.optional(v.number()) }, returns: v.null(),
+  handler: async (ctx, args) => {
+    const search = await ctx.db.query("searches").withIndex("by_key", q => q.eq("key", args.searchKey)).unique();
+    if (!search || (args.careerIndex !== undefined && (!Number.isInteger(args.careerIndex) || !search.result.careers[args.careerIndex])))
+      throw new ConvexError("Choose a career from your results first.");
+    const indexes = args.careerIndex === undefined ? search.result.careers.map((_: any, i: number) => i) : [args.careerIndex];
+    for (const careerIndex of indexes) {
+      const career = search.result.careers[careerIndex];
+      const row = await ctx.db.query("storyboards").withIndex("by_key", q => q.eq("key", storyKey(career.title))).unique();
+      if (row?.status === "ready") {
+        if (args.careerIndex !== undefined) await ctx.runMutation(internal.costs.cache, {
+          careerTitle: career.title, callType: "panel image", stage: "storyboard-cache", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: "high",
+        });
+      } else if (row?.status !== "generating" || row.lease <= Date.now()) {
+        await ctx.scheduler.runAfter(0, internal.ai.generate, { searchKey: args.searchKey, careerIndex });
+      }
+    }
+    return null;
   },
 });
