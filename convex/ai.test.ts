@@ -3,6 +3,8 @@ import { convexTest } from "convex-test";
 import { describe, it, expect, vi, afterEach } from "vitest";
 import schema from "./schema";
 import { api, internal } from "./_generated/api";
+import { CAREER_CATALOG, CAREER_TITLES } from "./careerCatalog";
+import { storyKey } from "./storyKey";
 const mocks = vi.hoisted(() => ({
   create: vi.fn(),
   parse: vi.fn(),
@@ -19,6 +21,9 @@ vi.mock("openai", () => {
   return { default: FakeOpenAI };
 });
 const modules = import.meta.glob("./**/*.ts");
+const discoveryCareer = (title: string) => ({ title, description: ["Future work.", "Human contribution."],
+  whyItFits: "Personalised child and parent match.", salaryMinINR: 1000000, salaryMaxINR: 2000000,
+  salaryBasis: "Illustrative India range.", overseas: "Possible.", stability: "Tradeoffs." });
 afterEach(() => {
   vi.unstubAllEnvs();
   vi.clearAllMocks();
@@ -43,14 +48,20 @@ describe("Storyboard recovery through the action", () => {
     });
     mocks.parse.mockResolvedValue({
       output: [],
-      output_parsed: { careers: [], note: "Test research result" },
+      output_parsed: { careers: ["Economist", "Author", "Food Scientist"].map(discoveryCareer), note: "Test research result" },
     });
+    for (const title of ["Economist", "Author", "Food Scientist"]) {
+      await t.mutation(internal.data.claim, { key: title, title, token: "cached-fixture" });
+      await t.mutation(internal.data.saveStory, { key: title, token: "cached-fixture", panels: [], status: "ready" });
+    }
     const args = {
       interests: "Economics, writing",
       hopes: "stability, overseas",
     };
     const first = await t.action(api.ai.recommend, args);
     expect(first.sources).toHaveLength(1);
+    expect(first.careers.map((c: any) => c.title)).toEqual(["Economist", "Author", "Food Scientist"]);
+    expect(JSON.parse(mocks.parse.mock.calls[0][0].input[1].content).careerCatalog).toHaveLength(80);
     expect(mocks.parse.mock.calls[0][0].input[1].content).toContain(
       "Published workforce research.",
     );
@@ -61,6 +72,40 @@ describe("Storyboard recovery through the action", () => {
     expect(cached.path).toBe("career-cache");
     expect(mocks.create).toHaveBeenCalledTimes(1);
     expect(mocks.parse).toHaveBeenCalledTimes(1);
+  });
+  it.each([
+    ["Invented Future Job", "Author", "Food Scientist"],
+    ["economist", "Author", "Food Scientist"],
+    ["Economist", "Economist", "Food Scientist"],
+    ["Economist", "Author"],
+  ])("refuses invented, renamed, repeated or missing catalog titles: %j", async (...titles) => {
+    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
+    const t = convexTest(schema, modules);
+    mocks.create.mockResolvedValue({ output: [{ type: "web_search_call", status: "completed", action: { sources: [] } }], output_text: "Research." });
+    mocks.parse.mockResolvedValue({ output_parsed: { careers: titles.map(discoveryCareer), note: "Test result" } });
+    await expect(t.action(api.ai.recommend, { interests: "Test", hopes: "Test" })).rejects.toThrow(/try again/);
+    expect(await t.run(ctx => ctx.db.query("searches").collect())).toHaveLength(0);
+    expect(mocks.generate).not.toHaveBeenCalled();
+  });
+  it("has 80 unique plain titles and reuses the exact title across different searches", async () => {
+    expect(CAREER_CATALOG).toHaveLength(80);
+    expect(new Set(CAREER_TITLES).size).toBe(80);
+    expect(CAREER_CATALOG.every(c => c.description.trim() && !c.description.includes("\n"))).toBe(true);
+    expect(storyKey("Food Scientist")).toBe("Food Scientist");
+    expect(storyKey("Older Career Name")).toBe("older career name");
+    const t = convexTest(schema, modules);
+    const id = await t.run(ctx => ctx.storage.store(new Blob(["existing image"], { type: "image/webp" })));
+    const panels = Array.from({ length: 4 }, (_, i) => ({ time: `${i}`, caption: "Existing caption", illustration: "Existing scene", storageId: id }));
+    await t.mutation(internal.data.claim, { key: "Food Scientist", title: "Food Scientist", token: "saved" });
+    await t.mutation(internal.data.saveStory, { key: "Food Scientist", token: "saved", status: "ready", panels, raw: "{}" });
+    for (const searchKey of ["different-input-a", "different-input-b"]) {
+      await t.mutation(internal.data.saveSearch, { key: searchKey, result: { careers: [discoveryCareer("Food Scientist")] } });
+      const result = await t.action(api.ai.storyboard, { searchKey, careerIndex: 0 });
+      expect(result.path).toBe("storyboard-cache");
+      expect(result.panels.map((p: any) => p.storageId)).toEqual(panels.map(p => p.storageId));
+    }
+    expect(mocks.parse).not.toHaveBeenCalled();
+    expect(mocks.generate).not.toHaveBeenCalled();
   });
   it("refuses recommendations when the research tool did not finish", async () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
