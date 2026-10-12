@@ -30,6 +30,17 @@ const Scenes = z.object({
     )
     .length(4),
 });
+const ImageCharacter = z.object({
+  age: z.number(),
+  face: z.string(),
+  hair: z.string(),
+  clothing: z.string(),
+  skinTone: z.string(),
+});
+const IMAGE_STYLE =
+  "simple flat illustration, soft muted colours, clean lines, one or two people per panel, plain background, no detailed screens";
+const IMAGE_NO_WRITING =
+  "no text, letters, numbers, words, signs, charts or screens with writing anywhere in the image";
 type Panel = {
   time: string;
   caption: string;
@@ -242,24 +253,95 @@ export const storyboard = action({
           raw,
         });
       }
+      // Image-only preparation: keep career text, captions and cache behavior intact.
+      const imageMetadata = JSON.parse(raw || "{}");
+      if (!imageMetadata.imageCharacter) {
+        await ctx.runMutation(internal.data.reserve, {});
+        const characterResponse = await ai.responses.parse({
+          model: "gpt-4.1-mini",
+          max_output_tokens: 250,
+          temperature: 0.2,
+          input: [
+            {
+              role: "system",
+              content:
+                "Describe one adult Indian protagonist for a four-panel illustration. Supply an age between 25 and 45 and brief, concrete face shape/features, hair style/colour, exact clothing/colour, and skin tone. Each string must be a short visual phrase. No names, actions, background, lettering, alternative outfits or multiple people. Keep the total description under 60 words. Use the existing protagonist as context, filling missing appearance details.",
+            },
+            {
+              role: "user",
+              content: JSON.stringify({
+                existingCharacter:
+                  imageMetadata.output_parsed?.character ??
+                  imageMetadata.character ??
+                  career.title,
+              }),
+            },
+          ],
+          text: {
+            format: zodTextFormat(ImageCharacter, "fixed_image_character"),
+          },
+        });
+        if (!characterResponse.output_parsed)
+          throw new Error("Missing fixed image character");
+        const c = characterResponse.output_parsed;
+        imageMetadata.imageCharacter = `${c.age}-year-old Indian adult; face: ${c.face}; hair: ${c.hair}; clothing: ${c.clothing}; skin tone: ${c.skinTone}.`;
+        imageMetadata.characterResponse = characterResponse;
+        console.info(
+          "futura-character-usage",
+          JSON.stringify({
+            title: career.title,
+            model: "gpt-4.1-mini",
+            usage: characterResponse.usage ?? null,
+          }),
+        );
+        raw = JSON.stringify(imageMetadata, null, 2);
+        await ctx.runMutation(internal.data.saveStory, {
+          key,
+          token,
+          panels,
+          status: "generating",
+          raw,
+        });
+      }
+      const imageRuns: any[] = [];
       // Four bounded calls, each counted atomically before contacting OpenAI. Existing images survive retries.
       panels = await Promise.all(
         panels.map(async (panel, index) => {
           if (panel.storageId) return panel;
           try {
             await ctx.runMutation(internal.data.reserve, {});
+            const prompt = [
+              `Fixed protagonist, identical appearance in every panel: ${imageMetadata.imageCharacter}`,
+              IMAGE_STYLE,
+              IMAGE_NO_WRITING,
+              "EXACTLY ONE HUMAN is visible in the entire image: the fixed protagonist. No other humans anywhere, even as photographs, avatars, tiny figures, floating portraits, icons, thumbnails, video windows or inset pictures. No robots or speech bubbles. No visible screens of any kind; laptops must be closed or facing away. Keep the protagonist's face simple and naturally proportioned. Only blank paper and a few plain physical objects against a plain background. Other people mentioned in the activity are entirely off-canvas. For virtual meetings or webinars show only the protagonist's listening or speaking gesture. These restrictions override the activity context.",
+              `Use this activity only to choose the protagonist's gesture and physical objects, never to add people or screens: ${panel.caption.slice(0, 600)}`,
+            ]
+              .join("\n")
+              .slice(0, 1800);
             const generated = await ai.images.generate({
               model: "gpt-image-1",
               n: 1,
               size: "1024x1024",
-              quality: "low",
+              quality: "high",
               output_format: "webp",
-              prompt:
-                `Single full-bleed editorial comic illustration, panel ${index + 1} in a consistent four-scene story about ${career.title} in 2035. Warm cream, deep forest green, pale sage palette, graceful ink outlines, sophisticated hand-drawn magazine illustration. Same adult protagonist across panels. No words, labels, speech bubbles or lettering. Scene: ${panel.illustration}`.slice(
-                  0,
-                  1800,
-                ),
+              prompt,
             });
+            const imageRun = {
+              panel: index + 1,
+              model: "gpt-image-1",
+              quality: "high",
+              size: "1024x1024",
+              prompt,
+              created: generated.created ?? null,
+              usage: generated.usage ?? null,
+              requestId: generated._request_id ?? null,
+            };
+            imageRuns.push(imageRun);
+            console.info(
+              "futura-image-usage",
+              JSON.stringify({ title: career.title, ...imageRun }),
+            );
             const base64 = generated.data?.[0]?.b64_json;
             if (!base64) throw new Error("No image returned");
             const bytes = Uint8Array.from(Buffer.from(base64, "base64"));
@@ -274,6 +356,11 @@ export const storyboard = action({
           }
         }),
       );
+      imageMetadata.imageRuns = [
+        ...(imageMetadata.imageRuns ?? []),
+        ...imageRuns.sort((a, b) => a.panel - b.panel),
+      ];
+      raw = JSON.stringify(imageMetadata, null, 2);
     } catch (e) {
       errors.push(friendly(e));
     }

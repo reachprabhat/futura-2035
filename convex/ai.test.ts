@@ -91,7 +91,17 @@ describe("Storyboard recovery through the action", () => {
         illustration: `Test illustration ${i + 1}`,
       })),
     };
-    mocks.parse.mockResolvedValue({ output_parsed: scenes });
+    mocks.parse
+      .mockResolvedValueOnce({ output_parsed: scenes })
+      .mockResolvedValueOnce({
+        output_parsed: {
+          age: 35,
+          face: "oval face, dark eyes",
+          hair: "black shoulder-length bob",
+          clothing: "sage green kurta",
+          skinTone: "medium brown",
+        },
+      });
     mocks.generate.mockRejectedValue(new Error("Simulated image failure"));
     const failed = await t.action(api.ai.storyboard, {
       searchKey: "test-search",
@@ -104,8 +114,21 @@ describe("Storyboard recovery through the action", () => {
       "openai-storyboard-and-images:captions-only-or-partial",
     );
     expect(failed.error).toContain("try again");
-    expect(mocks.parse).toHaveBeenCalledTimes(1);
+    expect(mocks.parse).toHaveBeenCalledTimes(2);
     expect(mocks.generate).toHaveBeenCalledTimes(4);
+    for (const [request] of mocks.generate.mock.calls) {
+      expect(request.model).toBe("gpt-image-1");
+      expect(request.quality).toBe("high");
+      expect(request.prompt).toContain(
+        "no text, letters, numbers, words, signs, charts or screens with writing anywhere in the image",
+      );
+      expect(request.prompt).toContain(
+        "simple flat illustration, soft muted colours, clean lines, one or two people per panel, plain background, no detailed screens",
+      );
+      expect(request.prompt.split("\n")[0]).toBe(
+        mocks.generate.mock.calls[0][0].prompt.split("\n")[0],
+      );
+    }
     mocks.generate.mockResolvedValue({ data: [{ b64_json: "dGVzdA==" }] });
     const retry = await t.action(api.ai.storyboard, {
       searchKey: "test-search",
@@ -115,7 +138,7 @@ describe("Storyboard recovery through the action", () => {
     expect(retry.panels.every((p: any) => p.storageId && p.imageUrl)).toBe(
       true,
     );
-    expect(mocks.parse).toHaveBeenCalledTimes(1);
+    expect(mocks.parse).toHaveBeenCalledTimes(2);
     expect(mocks.generate).toHaveBeenCalledTimes(8);
     const cached = await t.action(api.ai.storyboard, {
       searchKey: "test-search",
@@ -124,7 +147,7 @@ describe("Storyboard recovery through the action", () => {
     expect(cached.path).toBe("storyboard-cache");
     expect(mocks.generate).toHaveBeenCalledTimes(8);
     const used = await t.run((ctx) => ctx.db.query("usage").collect());
-    expect(used[0].calls).toBe(9);
+    expect(used[0].calls).toBe(10);
   });
   it("does not call OpenAI after the daily allowance is used, and still returns saved captions", async () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
