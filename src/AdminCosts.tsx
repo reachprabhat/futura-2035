@@ -1,9 +1,10 @@
 import React, { Component, useEffect, useState } from "react";
-import { usePaginatedQuery } from "convex/react";
+import { usePaginatedQuery, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { USD_TO_INR, PRICING_DATE, PRICING_URL } from "../convex/pricing";
 
 function Report({ adminKey, lock }: { adminKey: string; lock: () => void }) {
+  const today = useQuery(api.costs.controls, { adminKey });
   const { results, status, loadMore } = usePaginatedQuery(api.costs.rows, { adminKey }, { initialNumItems: 100 });
   useEffect(() => { if (status === "CanLoadMore") loadMore(100); }, [status, loadMore]);
   const groups = new Map<string, { title: string; generated: number; hits: number; usd: number; inr: number; unknown: number }>();
@@ -19,6 +20,7 @@ function Report({ adminKey, lock }: { adminKey: string; lock: () => void }) {
   return <>
     <div className="section-top"><span className="pill">ADMIN ONLY · DEV</span><button className="text-button" onClick={lock}>Lock costs</button></div>
     <h1>AI costs</h1>
+    {today && <p className="section-description" data-testid="today-controls">Today ({today.day}, IST): spend ₹{today.spendINR.toFixed(4)} · estimated including pending/unknown ₹{today.estimatedSpendINR.toFixed(4)} · calls {today.callCount} / {today.dailyCallCap} · daily spending cap ₹{today.dailyCostCapINR} · AI_ENABLED={String(today.aiEnabled)}</p>}
     <p className="section-description">Recorded OpenAI usage. All background storyboards count toward spending, including those a parent does not open.</p>
     <h2>${usd.toFixed(6)} · ₹{inr.toFixed(4)}</h2>
     {status !== "Exhausted" && <p role="status">Loading all recorded calls… totals are partial.</p>}

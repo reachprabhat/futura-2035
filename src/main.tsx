@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { ConvexProvider, ConvexReactClient, useAction, useMutation, useQuery } from "convex/react";
 import { ConvexError } from "convex/values";
 import { api } from "../convex/_generated/api";
 import "./style.css";
 import AdminCosts from "./AdminCosts";
+import MilestoneOne from "./MilestoneOne";
 type Career = {
   title: string;
   description: string[];
@@ -67,9 +68,6 @@ function App() {
   const liveStories = useQuery(api.data.stories, results ? { searchKey: results.searchKey } : "skip") as (Story | null)[] | undefined;
   const currentStory = selected === null ? null : liveStories?.[selected] ?? results?.stories?.[selected] ?? null;
   const story: Story | null = currentStory ? { ...currentStory, path: openedPath || currentStory.path } : null;
-  useEffect(() => {
-    if (results) startStories({ searchKey: results.searchKey }).catch(e => setError(message(e)));
-  }, [results, startStories]);
   async function explore(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
@@ -104,7 +102,7 @@ function App() {
       100,
     );
     try {
-      await startStories({ searchKey: results.searchKey, careerIndex: index });
+      await startStories({ searchKey: results.searchKey, careerIndex: index, cachedOnly: results.path === "career-cache" });
     } catch (e) {
       setError(message(e));
     } finally {
@@ -437,7 +435,7 @@ const url = import.meta.env.VITE_CONVEX_URL;
 createRoot(document.getElementById("root")!).render(
   url ? (
     <ConvexProvider client={new ConvexReactClient(url)}>
-      {window.location.pathname === "/admin/costs" ? <AdminCosts /> : <App />}
+      {window.location.pathname === "/admin/costs" ? <AdminCosts /> : <MilestoneOne />}
     </ConvexProvider>
   ) : (
     <main>

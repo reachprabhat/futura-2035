@@ -34,4 +34,4 @@ node scripts/check-browser.mjs
 
 The browser check uses the requested example and writes full unedited Convex action responses to `artifacts/raw-dev-output.json`, plus phone-width screenshots. It requires an installed Playwright Chromium browser and a running local frontend. Run `npx playwright install chromium` once if needed.
 
-Hosting is not configured in milestone 1: this task is verified on development. Any future publishing must use Convex static hosting and the requested `convex-dev-static-hosting` skill. That skill was not present in this folder or the available skill directories during setup.
+Hosting uses @convex-dev/static-hosting. Run `npm run deploy` to push the Futura production backend, build the frontend for that deployment, and upload static files. The build receives the public deployment address directly through Vite configuration; the deploy script does not set environment variables or write environment files. Production is https://nautical-chicken-192.convex.site/.

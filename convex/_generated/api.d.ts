@@ -9,6 +9,7 @@
  */
 
 import type * as ai from "../ai.js";
+import type * as aiControls from "../aiControls.js";
 import type * as careerCatalog from "../careerCatalog.js";
 import type * as costs from "../costs.js";
 import type * as data from "../data.js";
@@ -23,6 +24,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   ai: typeof ai;
+  aiControls: typeof aiControls;
   careerCatalog: typeof careerCatalog;
   costs: typeof costs;
   data: typeof data;
@@ -56,4 +58,6 @@ export declare const internal: FilterApi<
   FunctionReference<any, "internal">
 >;
 
-export declare const components: {};
+export declare const components: {
+  staticHosting: import("@convex-dev/static-hosting/_generated/component.js").ComponentApi<"staticHosting">;
+};

@@ -9,13 +9,15 @@
     "dev:backend": "convex dev",
     "build": "tsc --noEmit && vite build",
     "test:backend": "vitest run",
-    "check:browser": "node scripts/check-browser.mjs"
+    "check:browser": "node scripts/check-browser.mjs",
+    "deploy": "node scripts/deploy.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@convex-dev/static-hosting": "^0.2.1",
     "convex": "^1.46.0",
     "openai": "^7.32.0",
     "react": "^19.3.0",

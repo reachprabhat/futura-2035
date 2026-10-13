@@ -1,6 +1,6 @@
 "use node";
 import { action, internalAction } from "./_generated/server";
-import { internal } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 import { v, ConvexError } from "convex/values";
 import OpenAI from "openai";
 import { z } from "zod";
@@ -57,13 +57,9 @@ const normalise = (s: string) =>
     .replace(/[^\p{L}\p{N}\s]/gu, " ")
     .replace(/\s+/g, " ")
     .trim();
-const normaliseInput = (s: string) =>
-  s
-    .split(/[,;\n]+/)
-    .map(normalise)
-    .filter(Boolean)
-    .sort()
-    .join(", ");
+// These fields are lists: item order, separator choice and extra spaces do not change the match.
+const normaliseInput = (s: string) => s.trim().toLowerCase().split(/[,;\n]+/)
+  .map(item => item.trim().replace(/\s+/g, " ")).filter(Boolean).sort().join(", ");
 function client() {
   const key = process.env.OPENAI_API_KEY;
   if (!key)
@@ -94,7 +90,8 @@ async function urls(ctx: ActionCtx, panels: Panel[]) {
 }
 
 async function tracked<T extends { usage?: any; _request_id?: string | null; output?: any[] }>(ctx: ActionCtx, metadata: any, call: () => Promise<T>): Promise<T> {
-  await ctx.runMutation(internal.data.reserve, {});
+  if (process.env.AI_ENABLED !== "true")
+    throw new ConvexError("Futura is paused for a moment, please try again later");
   const id = await ctx.runMutation(internal.costs.begin, metadata);
   try {
     const response = await call();
@@ -105,9 +102,6 @@ async function tracked<T extends { usage?: any; _request_id?: string | null; out
     await ctx.runMutation(internal.costs.finish, { id, usage: null, webSearchCalls: 0, error: friendly(e) });
     throw e;
   }
-}
-async function preparedStories(ctx: ActionCtx, searchKey: string, careers: any[]) {
-  return Promise.all(careers.map((_: any, careerIndex: number) => generateStory(ctx, { searchKey, careerIndex, prepareOnly: true })));
 }
 
 export const recommend = action({
@@ -130,13 +124,17 @@ export const recommend = action({
     ]);
     const cached = await ctx.runQuery(internal.data.search, { key });
     if (cached) {
-      await ctx.runMutation(internal.costs.cache, { careerTitle: "Career discovery (shared)", callType: "careers", stage: "career-cache", model: "gpt-4.1" });
-      const stories = await preparedStories(ctx, key, cached.result.careers);
+      await ctx.runMutation(internal.costs.cache, { careerTitle: "Career discovery (shared)", callType: "careers", stage: "career-cache", model: "gpt-4.1", cacheKey: key });
+      const stories = await Promise.all(cached.result.careers.map(async (career: any) => {
+        const row = await ctx.runQuery(internal.data.getStory, { key: storyKey(career.title) });
+        return row ? { title: row.title, status: row.status, panels: await urls(ctx, row.panels),
+          path: "storyboard-cache", raw: row.raw ?? null } : null;
+      }));
       return { ...cached.result, searchKey: key, path: "career-cache", stories };
     }
     try {
       const ai = client();
-      const research = await tracked(ctx, { careerTitle: "Career discovery (shared)", callType: "careers", stage: "research", model: "gpt-4.1" }, () => ai.responses.create({
+      const research = await tracked(ctx, { careerTitle: "Career discovery (shared)", callType: "careers", stage: "research", model: "gpt-4.1", cacheKey: key }, () => ai.responses.create({
         model: "gpt-4.1",
         max_output_tokens: 1600,
         tools: [{ type: "web_search", search_context_size: "low" }],
@@ -153,7 +151,7 @@ export const recommend = action({
         )
       )
         throw new Error("Required workforce research did not run");
-      const response = await tracked(ctx, { careerTitle: "Career discovery (shared)", callType: "careers", stage: "recommendations", model: "gpt-4.1" }, () => ai.responses.parse({
+      const response = await tracked(ctx, { careerTitle: "Career discovery (shared)", callType: "careers", stage: "recommendations", model: "gpt-4.1", cacheKey: key }, () => ai.responses.parse({
         model: "gpt-4.1",
         max_output_tokens: 3000,
         temperature: 0.2,
@@ -200,7 +198,7 @@ export const recommend = action({
         key,
         result,
       });
-      const stories = await preparedStories(ctx, key, saved.careers);
+      const stories = await ctx.runQuery(api.data.stories, { searchKey: key });
       return { ...saved, searchKey: key, path: "openai-careers-web-search", stories };
     } catch (e) {
       throw new ConvexError(friendly(e));
@@ -216,6 +214,15 @@ async function generateStory(ctx: ActionCtx, args: { searchKey: string; careerIn
       throw new ConvexError("Choose a career from your results first.");
     const key = storyKey(career.title),
       token = crypto.randomUUID();
+    if (process.env.AI_ENABLED !== "true") {
+      const saved = await ctx.runQuery(internal.data.getStory, { key });
+      if (!saved || (saved.status !== "ready" && !saved.panels.length))
+        throw new ConvexError("Futura is paused for a moment, please try again later");
+      if (!args.prepareOnly) await ctx.runMutation(internal.costs.cache, { careerTitle: career.title,
+        callType: "panel image", stage: "storyboard-cache", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: "high" });
+      return { title: saved.title, status: saved.status, panels: await urls(ctx, saved.panels),
+        path: "storyboard-cache", raw: saved.raw ?? null };
+    }
     const claim = await ctx.runMutation(internal.data.claim, {
       key,
       title: career.title,

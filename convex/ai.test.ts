@@ -1,9 +1,9 @@
 /// <reference types="vite/client" />
 import { convexTest } from "convex-test";
-import { describe, it, expect, vi, afterEach } from "vitest";
+import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import schema from "./schema";
 import { api, internal } from "./_generated/api";
-import { CAREER_CATALOG, CAREER_TITLES } from "./careerCatalog";
+import { CAREER_CATALOG, CAREER_TITLES, CAREER_CATALOG_VERSION } from "./careerCatalog";
 import { storyKey } from "./storyKey";
 const mocks = vi.hoisted(() => ({
   create: vi.fn(),
@@ -21,6 +21,10 @@ vi.mock("openai", () => {
   return { default: FakeOpenAI };
 });
 const modules = import.meta.glob("./**/*.ts");
+beforeEach(() => {
+  vi.stubEnv("AI_ENABLED", "true");
+  vi.stubEnv("DAILY_COST_CAP_INR", "2000");
+});
 const discoveryCareer = (title: string) => ({ title, description: ["Future work.", "Human contribution."],
   whyItFits: "Personalised child and parent match.", salaryMinINR: 1000000, salaryMaxINR: 2000000,
   salaryBasis: "Illustrative India range.", overseas: "Possible.", stability: "Tradeoffs." });
@@ -29,7 +33,7 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 describe("Storyboard recovery through the action", () => {
-  it("requires completed research before generating careers and reuses equivalent inputs", async () => {
+  it("requires completed research and reuses trimmed lowercased inputs with AI off", async () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
     const t = convexTest(schema, modules);
     mocks.create.mockResolvedValue({
@@ -50,28 +54,50 @@ describe("Storyboard recovery through the action", () => {
       output: [],
       output_parsed: { careers: ["Economist", "Author", "Food Scientist"].map(discoveryCareer), note: "Test research result" },
     });
-    for (const title of ["Economist", "Author", "Food Scientist"]) {
-      await t.mutation(internal.data.claim, { key: title, title, token: "cached-fixture" });
-      await t.mutation(internal.data.saveStory, { key: title, token: "cached-fixture", panels: [], status: "ready" });
-    }
     const args = {
       interests: "Economics, writing",
       hopes: "stability, overseas",
     };
     const first = await t.action(api.ai.recommend, args);
     expect(first.sources).toHaveLength(1);
+    expect(first.stories).toEqual([null, null, null]);
+    expect(mocks.generate).not.toHaveBeenCalled();
+    expect(await t.run(ctx => ctx.db.query("storyboards").collect())).toHaveLength(0);
+    expect((await t.run(ctx => ctx.db.query("aiCalls").collect())).map(row => row.callType)).toEqual(["careers", "careers"]);
     expect(first.careers.map((c: any) => c.title)).toEqual(["Economist", "Author", "Food Scientist"]);
     expect(JSON.parse(mocks.parse.mock.calls[0][0].input[1].content).careerCatalog).toHaveLength(80);
     expect(mocks.parse.mock.calls[0][0].input[1].content).toContain(
       "Published workforce research.",
     );
+    vi.stubEnv("AI_ENABLED", "false");
     const cached = await t.action(api.ai.recommend, {
-      interests: "writing, Economics",
-      hopes: "overseas, stability",
+      interests: "  ECONOMICS, WRITING  ",
+      hopes: " STABILITY, OVERSEAS ",
     });
     expect(cached.path).toBe("career-cache");
     expect(mocks.create).toHaveBeenCalledTimes(1);
     expect(mocks.parse).toHaveBeenCalledTimes(1);
+    expect((await t.action(api.ai.recommend, { interests: "writing; Economics", hopes: "overseas,  stability" })).path).toBe("career-cache");
+    expect(mocks.create).toHaveBeenCalledTimes(1);
+    await expect(t.action(api.ai.recommend, { interests: "writing, Cricket", hopes: "stability, overseas" })).rejects.toThrow(/Futura is paused/);
+  });
+  it("serves cached careers and partial storyboards while off without preparing missing stories", async () => {
+    const t = convexTest(schema, modules);
+    const key = JSON.stringify([CAREER_CATALOG_VERSION, "economics", "stability"]);
+    await t.mutation(internal.data.saveSearch, { key, result: { careers: ["Economist", "Author", "Food Scientist"].map(discoveryCareer) } });
+    await t.mutation(internal.data.claim, { key: "Economist", title: "Economist", token: "partial" });
+    await t.mutation(internal.data.saveStory, { key: "Economist", token: "partial", status: "failed", panels: [{ time: "9 AM", caption: "Saved caption", illustration: "Saved scene" }] });
+    vi.stubEnv("AI_ENABLED", "false");
+    const result = await t.action(api.ai.recommend, { interests: " Economics ", hopes: "STABILITY" });
+    expect(result.path).toBe("career-cache");
+    expect(result.stories[0].panels[0].caption).toBe("Saved caption");
+    expect(result.stories[1]).toBeNull();
+    expect((await t.action(api.ai.storyboard, { searchKey: key, careerIndex: 0 })).path).toBe("storyboard-cache");
+    await expect(t.action(api.ai.storyboard, { searchKey: key, careerIndex: 1 })).rejects.toThrow(/Futura is paused/);
+    await expect(t.mutation(api.data.startStories, { searchKey: key, cachedOnly: true } as any)).rejects.toThrow();
+    await t.mutation(api.data.startStories, { searchKey: key, careerIndex: 0, cachedOnly: true });
+    expect(mocks.create).not.toHaveBeenCalled(); expect(mocks.parse).not.toHaveBeenCalled(); expect(mocks.generate).not.toHaveBeenCalled();
+    expect((await t.run(ctx => ctx.db.query("aiCalls").collect())).every(row => row.cacheHit)).toBe(true);
   });
   it.each([
     ["Invented Future Job", "Author", "Food Scientist"],
@@ -189,6 +215,8 @@ describe("Storyboard recovery through the action", () => {
     );
     expect(mocks.parse).toHaveBeenCalledTimes(2);
     expect(mocks.generate).toHaveBeenCalledTimes(8);
+    vi.stubEnv("AI_ENABLED", "false");
+    vi.stubEnv("DAILY_COST_CAP_INR", "1");
     const cached = await t.action(api.ai.storyboard, {
       searchKey: "test-search",
       careerIndex: 0,

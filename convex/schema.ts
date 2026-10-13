@@ -5,6 +5,7 @@ export default defineSchema({
     careerTitle: v.string(),
     callType: v.union(v.literal("careers"), v.literal("captions"), v.literal("panel image")),
     stage: v.string(), model: v.string(),
+    cacheKey: v.optional(v.string()),
     imageSize: v.optional(v.string()), imageQuality: v.optional(v.string()),
     usage: v.any(), cacheHit: v.boolean(), timestamp: v.number(),
     status: v.string(), costUSD: v.union(v.number(), v.null()), costINR: v.union(v.number(), v.null()),
@@ -12,7 +13,7 @@ export default defineSchema({
     requestId: v.optional(v.string()), webSearchCalls: v.optional(v.number()),
     fullStoryboardCompleted: v.optional(v.boolean()), error: v.optional(v.string()),
     pricingDate: v.string(), usdToInr: v.number(),
-  }).index("by_timestamp", ["timestamp"]).index("by_generationId", ["generationId"]),
+  }).index("by_timestamp", ["timestamp"]).index("by_generationId", ["generationId"]).index("by_cache_timestamp", ["cacheHit", "timestamp"]),
   usage: defineTable({ day: v.string(), calls: v.number() }).index("by_day", [
     "day",
   ]),
