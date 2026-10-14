@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Doctor",
+    "gender": "girl",
+    "width": 390,
+    "monthsOpen": 12,
+    "themes": [
+      "reading-research",
+      "notebook-writing",
+      "interview",
+      "survey-form",
+      "planning-board",
+      "poster-making",
+      "model-making",
+      "presentation-slides",
+      "video-recording",
+      "poster-making",
+      "reading-research",
+      "workshop-class"
+    ],
+    "screenshot": "design/thumb-doctor.png"
+  },
+  {
+    "title": "Author",
+    "gender": "boy",
+    "width": 390,
+    "monthsOpen": 12,
+    "themes": [
+      "reading-research",
+      "reading-research",
+      "notebook-writing",
+      "planning-board",
+      "notebook-writing",
+      "workshop-class",
+      "notebook-writing",
+      "reading-research",
+      "workshop-class",
+      "poster-making",
+      "notebook-writing",
+      "finished-project"
+    ],
+    "screenshot": "design/thumb-author.png"
+  }
+]

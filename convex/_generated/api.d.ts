@@ -19,12 +19,15 @@ import type * as legacyStoryboardGenders from "../legacyStoryboardGenders.js";
 import type * as libraryActions from "../libraryActions.js";
 import type * as photoPrompt from "../photoPrompt.js";
 import type * as photoTests from "../photoTests.js";
+import type * as planThumbnailActions from "../planThumbnailActions.js";
+import type * as planThumbnails from "../planThumbnails.js";
 import type * as plans from "../plans.js";
 import type * as pricing from "../pricing.js";
 import type * as sceneCatalog from "../sceneCatalog.js";
 import type * as sceneLibrary from "../sceneLibrary.js";
 import type * as storyKey from "../storyKey.js";
 import type * as storyboardErrors from "../storyboardErrors.js";
+import type * as thumbnailCatalog from "../thumbnailCatalog.js";
 
 import type {
   ApiFromModules,
@@ -44,12 +47,15 @@ declare const fullApi: ApiFromModules<{
   libraryActions: typeof libraryActions;
   photoPrompt: typeof photoPrompt;
   photoTests: typeof photoTests;
+  planThumbnailActions: typeof planThumbnailActions;
+  planThumbnails: typeof planThumbnails;
   plans: typeof plans;
   pricing: typeof pricing;
   sceneCatalog: typeof sceneCatalog;
   sceneLibrary: typeof sceneLibrary;
   storyKey: typeof storyKey;
   storyboardErrors: typeof storyboardErrors;
+  thumbnailCatalog: typeof thumbnailCatalog;
 }>;
 
 /**

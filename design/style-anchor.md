@@ -8,3 +8,7 @@ Mood: curious, grounded, optimistic.
 Never: flat illustration, cartoon, CGI, plastic skin, neon, lens flare, text, logos, watermarks or collage.
 
 Reference: career-detail-reference.png. Use candid eye-level workplace portraits with a softly blurred background, realistic skin and warm clothing. Preserve a single identical protagonist description across all four panels. Do not regenerate archived illustrations.
+
+## 12-month plan thumbnails
+
+Keep the same soft daylight, warm real materials, and quiet lavender, mint, and peach accents. Use square, close editorial photographs of project objects and activities, composed to read inside a small rounded card. This slot is independent of the storyboard character and gender. Show no identifiable faces; hands or distant people from behind are acceptable. Avoid legible text, logos, invented screen interfaces, illustration, and CGI.

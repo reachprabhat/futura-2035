@@ -246,7 +246,7 @@ it("keeps an image committed before a stale failure save", async () => {
   expect(row?.panels[0].storageId).toBe(storageId);
   expect(row?.lastError).toBe("Later operation failed.");
 });
-const planFixture = () => ({ subtitle: "Turn ideas into memorable stories.", skills: ["Research", "Writing", "Collaboration", "Communication"], projects: Array.from({ length: 12 }, (_, i) => ({ month: i + 1, title: `Project ${i + 1}`, skillIndex: i % 4, panelIndex: i % 4, build: `Portfolio piece ${i + 1}` })) });
+const planFixture = () => ({ subtitle: "Turn ideas into memorable stories.", skills: ["Research", "Writing", "Collaboration", "Communication"], projects: Array.from({ length: 12 }, (_, i) => ({ month: i + 1, title: `Project ${i + 1}`, skillIndex: i % 4, panelIndex: i % 4, thumbnailThemeId: "notebook-writing", build: `Portfolio piece ${i + 1}` })) });
 describe("Career plan text cache", () => {
   it("creates a plan only on its explicit screen request, once per career across searches", async () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");

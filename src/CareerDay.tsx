@@ -4,7 +4,7 @@ import { ConvexError } from "convex/values";
 import { api } from "../convex/_generated/api";
 import "./career-day.css";
 type Panel = { caption: string; imageUrl: string | null; time?: string };
-type Plan = { subtitle: string; skills: string[]; projects: { month: number; title: string; skillIndex: number; build: string; panelIndex: number }[] };
+type Plan = { subtitle: string; skills: string[]; projects: { month: number; title: string; skillIndex: number; build: string; panelIndex: number; thumbnailThemeId?: string }[] };
 const times = ["9:00", "11:00", "2:00", "4:00"];
 const icons = ["chart", "people", "idea", "note"] as const;
 function DayIcon({ kind }: { kind: typeof icons[number] }) {
@@ -17,9 +17,12 @@ export function captionLabel(caption: string) {
 }
 export default function CareerDay({ title, searchKey, careerIndex, panels, cachedOnly = false }: { title: string; searchKey: string; careerIndex: number; panels: Panel[]; cachedOnly?: boolean }) {
   const createPlan = useAction(api.ai.careerPlan);
+  const tagPlanThemes = useAction(api.planThumbnailActions.tagCachedPlan);
   const saved = useQuery(api.plans.get, { title });
+  const thumbnailImages = useQuery(api.planThumbnails.images, {});
   const [returned, setReturned] = useState<Plan | null>(null), [error, setError] = useState(""), [full, setFull] = useState(false), [skillsOpen, setSkillsOpen] = useState(true);
   const requested = useRef("");
+  const tagsRequested = useRef("");
   useEffect(() => {
     if (cachedOnly) return;
     if (requested.current === title) return;
@@ -29,10 +32,16 @@ export default function CareerDay({ title, searchKey, careerIndex, panels, cache
     return () => { active = false; };
   }, [title, searchKey, careerIndex, createPlan, cachedOnly]);
   const plan: Plan | null = saved?.status === "ready" ? saved.plan : returned;
-  const projects = plan?.projects.slice(0, full ? 12 : 3) ?? (cachedOnly ? Array.from({length:3}, (_, i) => ({month:i+1,title:"Project not available yet",skillIndex:i,build:"-",panelIndex:i})) : []);
+  useEffect(() => {
+    if (cachedOnly || !plan || plan.projects.every(project => project.thumbnailThemeId)) return;
+    if (tagsRequested.current === title) return;
+    tagsRequested.current = title;
+    tagPlanThemes({ searchKey, careerIndex }).catch(() => { tagsRequested.current = ""; });
+  }, [cachedOnly, plan, title, searchKey, careerIndex, tagPlanThemes]);
+  const projects = plan?.projects.slice(0, full ? 12 : 3) ?? (cachedOnly ? Array.from({length:3}, (_, i) => ({month:i+1,title:"Project not available yet",skillIndex:i,build:"-",panelIndex:i,thumbnailThemeId:undefined})) : []);
   const skills = plan?.skills ?? (cachedOnly ? Array(4).fill("Skill unavailable") : []);
   const firstImage = panels[0]?.imageUrl;
-  const fallbackImage = panels.find(p => p.imageUrl)?.imageUrl;
+  const themeImageById = new Map((thumbnailImages ?? []).filter((item: any) => item.status === "ready" && item.imageUrl).map((item: any) => [item.themeId, item.imageUrl]));
   return <section className="career-day" id="storyboard" aria-busy={!plan && !error && !cachedOnly}>
     <div className="day-hero">
       <div className="day-hero-copy"><p className="day-eyebrow">A DAY IN THE LIFE</p><h1>{title}</h1><p className="day-subtitle">{plan?.subtitle ?? "A working day, a world of possibilities."}</p></div>
@@ -50,10 +59,10 @@ export default function CareerDay({ title, searchKey, careerIndex, panels, cache
     </section>
     <section className="day-card day-plan"><div className="day-card-heading"><div><h2>Your 12-month plan</h2><p>12 projects. Real skills. A clear path.</p></div><button className="day-chevron" aria-label="Show full 12-month plan" aria-expanded={full} disabled={!plan} onClick={() => setFull(value => !value)}>›</button></div>
       {error || saved?.status === "failed" ? <p className="day-plan-error" role="alert">{error || "This plan could not finish. Reopen the career to try again."}</p> : !plan && !cachedOnly ? <p className="day-plan-loading" role="status">Preparing your monthly projects…</p> : <ol className="day-timeline">{projects.map(project => {
-        const image = panels[project.panelIndex]?.imageUrl ?? fallbackImage;
+        const image = project.thumbnailThemeId ? themeImageById.get(project.thumbnailThemeId) as string | undefined : undefined;
         return <li className={`day-month day-tone-${project.skillIndex}`} key={project.month}>
           <span className="day-timeline-dot" aria-hidden="true">{project.month === 1 ? "✓" : ""}</span><span className="day-month-number">Month {project.month}</span>
-          <div className="day-project"><div className="day-project-copy"><h3>{project.title}</h3><span className="day-tag">{skills[project.skillIndex]}</span><p><strong>Build:</strong> {project.build}</p></div>{image ? <img className="day-project-image" src={image} alt={`Workday illustration related to ${skills[project.skillIndex]}`} /> : <div className="day-project-image day-image-placeholder">No saved image</div>}</div>
+          <div className="day-project"><div className="day-project-copy"><h3>{project.title}</h3><span className="day-tag">{skills[project.skillIndex]}</span><p><strong>Build:</strong> {project.build}</p></div>{image ? <img className="day-project-image" data-thumbnail-theme={project.thumbnailThemeId} src={image} alt="" /> : <div className="day-project-image day-image-placeholder">Thumbnail loading</div>}</div>
         </li>;
       })}</ol>}
     </section>

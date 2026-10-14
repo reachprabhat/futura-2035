@@ -3,6 +3,9 @@ import { v } from "convex/values";
 import { genderValidator } from "./gender";
 import { failureDetailValidator } from "./storyboardErrors";
 export default defineSchema({
+  planThumbnailImages: defineTable({ key: v.string(), themeId: v.string(), token: v.string(), status: v.string(), storageId: v.optional(v.id("_storage")), error: v.optional(v.union(v.string(), v.null())) }).index("by_key", ["key"]),
+  planThumbnailLocks: defineTable({ key: v.string(), token: v.union(v.string(), v.null()) }).index("by_key", ["key"]),
+  planThumbnailTags: defineTable({ key: v.string(), title: v.string(), token: v.string(), status: v.string(), lease: v.number(), tags: v.optional(v.array(v.object({ month: v.number(), themeId: v.string() }))), error: v.optional(v.union(v.string(), v.null())) }).index("by_key", ["key"]),
   sceneReferences: defineTable({ key: v.string(), storageId: v.id("_storage"), digest: v.optional(v.string()) }).index("by_key", ["key"]),
   sceneImages: defineTable({ key: v.string(), sceneId: v.string(), gender: v.union(v.literal("girl"), v.literal("boy")), token: v.string(), status: v.string(), storageId: v.optional(v.id("_storage")), error: v.optional(v.union(v.string(), v.null())) }).index("by_key", ["key"]),
   sceneMappings: defineTable({ key: v.string(), title: v.string(), token: v.string(), status: v.string(), lease: v.number(), panels: v.optional(v.array(v.object({ time: v.string(), caption: v.string(), sceneId: v.string() }))), error: v.optional(v.union(v.string(), v.null())) }).index("by_key", ["key"]),

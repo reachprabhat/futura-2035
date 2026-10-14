@@ -1,0 +1,1053 @@
+{
+  "rows": [
+    {
+      "_creationTime": 1791969963084.4238,
+      "_id": "jh7evhqg92pq7ec9p472k4n5mn8g8j63",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:laptop-charts",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: laptop-charts",
+      "costINR": 1.07415,
+      "costUSD": 0.011935,
+      "generationId": "22387f15-8c62-487a-b0a7-811774aa6a01",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_b90657453ee041bea407c50d687a0975",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791969963084,
+      "usage": {
+        "input_tokens": 211,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 211
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 483
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791969978614.728,
+      "_id": "jh7dg01p1hawyyky2w865pynms8g8k30",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:spreadsheet",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: spreadsheet",
+      "costINR": 1.0719,
+      "costUSD": 0.01191,
+      "generationId": "22d72f39-7d4b-466a-9f0a-feb7d40853ad",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_19f867cac9d144e3bb1f0b5bcd4bd571",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791969978614,
+      "usage": {
+        "input_tokens": 206,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 206
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 478
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791969993909.9207,
+      "_id": "jh7667ym7j23nax8kce0ys6ygn8g8srp",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:notebook-writing",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: notebook-writing",
+      "costINR": 1.0719,
+      "costUSD": 0.01191,
+      "generationId": "b431abef-e116-48ea-b844-00625dfdfb0b",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_3e48535d551e4b9db735bdd93460d260",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791969993909,
+      "usage": {
+        "input_tokens": 206,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 206
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 478
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970010626.3755,
+      "_id": "jh78mnx4kac198z6x574ehdt518g8c7w",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:reading-research",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: reading-research",
+      "costINR": 1.07055,
+      "costUSD": 0.011895,
+      "generationId": "93961a7b-1805-44db-914e-0337f9beb6e3",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_3ed20b31ded242e1b8843b6c77b05d88",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970010626,
+      "usage": {
+        "input_tokens": 203,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 203
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 475
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970028042.242,
+      "_id": "jh78acffrjqm4kekj9g1m8tqph8g9tyv",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:interview",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: interview",
+      "costINR": 1.0773,
+      "costUSD": 0.01197,
+      "generationId": "b159f0d4-0c61-4811-bd50-3c61af6fa6a9",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_0b2313968e154be7a463636fb08ddb47",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970028042,
+      "usage": {
+        "input_tokens": 218,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 218
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 490
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970042022.5942,
+      "_id": "jh7deep0j8p37q9dqp33ab32jh8g97b4",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:survey-form",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: survey-form",
+      "costINR": 1.07325,
+      "costUSD": 0.011925,
+      "generationId": "56c6f744-8aa3-4649-8ba9-ac8a3fbc6633",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_8fdcc480e4104c4281f9042fd6afdb95",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970042022,
+      "usage": {
+        "input_tokens": 209,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 209
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 481
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970059993.8293,
+      "_id": "jh7687xzd7wbwh1y9qn33a8hdn8g9ac0",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:sticky-note-brainstorm",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: sticky-note-brainstorm",
+      "costINR": 1.0728,
+      "costUSD": 0.01192,
+      "generationId": "09ffa2e5-dbee-4bfb-aad4-e8b5eceacc79",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_e8969f063c0d4ff2a5c0c0d0cc4c9bfd",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970059993,
+      "usage": {
+        "input_tokens": 208,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 208
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 480
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970074803.2334,
+      "_id": "jh7009m3fcpj1xk60pfjnt6fxx8g8y4v",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:prototype-testing",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: prototype-testing",
+      "costINR": 1.0719,
+      "costUSD": 0.01191,
+      "generationId": "d4c68b57-a9cf-42b9-94ec-87d7abdf23c9",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_06d9fe326a5e42dd94c10e29d3b4f1cf",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970074803,
+      "usage": {
+        "input_tokens": 206,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 206
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 478
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970089246.1987,
+      "_id": "jh70t2ywp3q203zpt69v8jj7698g9jap",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:planning-board",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: planning-board",
+      "costINR": 1.0728,
+      "costUSD": 0.01192,
+      "generationId": "ecab7fb7-6d93-4448-8295-8e65f42ba066",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_9e898fb46e904bf6a8baf1cb791615cd",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970089246,
+      "usage": {
+        "input_tokens": 208,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 208
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 480
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970105374.105,
+      "_id": "jh78750ss18paxc1n2tstj8eb98g91kg",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:presentation-slides",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: presentation-slides",
+      "costINR": 1.07505,
+      "costUSD": 0.011945,
+      "generationId": "9d2dd4e1-6f59-4967-9292-d9c89f9fee63",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_aa3c953448ec4e81b1978d310c4f8d55",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970105374,
+      "usage": {
+        "input_tokens": 213,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 213
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 485
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970122683.2253,
+      "_id": "jh7d1ees1rzsq11fz5yskkgba98g8vg4",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:workshop-class",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: workshop-class",
+      "costINR": 1.07325,
+      "costUSD": 0.011925,
+      "generationId": "e5d3782f-067c-494b-985a-fcc001e6b53c",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_e80ab1ca44af4d15ae0debdb40fe19df",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970122683,
+      "usage": {
+        "input_tokens": 209,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 209
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 481
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970140781.05,
+      "_id": "jh724rzej6xjbx2e2crbp002q98g85xb",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:coding-screen",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: coding-screen",
+      "costINR": 1.0736999999999999,
+      "costUSD": 0.01193,
+      "generationId": "05ebff4b-5f20-4870-9abb-72bbf49dab37",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_ee8c02f841b24e51aed66dcd98ab360c",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970140781,
+      "usage": {
+        "input_tokens": 210,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 210
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 482
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970156868.2231,
+      "_id": "jh7c94wakx2gex764p8qd7tzy98g8y9f",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:design-sketch",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: design-sketch",
+      "costINR": 1.0736999999999999,
+      "costUSD": 0.01193,
+      "generationId": "e13c4293-ff21-4539-bacd-456d7ea69b35",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_916bdd9b3a794f478921302a61f3832c",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970156868,
+      "usage": {
+        "input_tokens": 210,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 210
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 482
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970172190.3323,
+      "_id": "jh72knehngx9h8sd1f9bqe5t3h8g8yqg",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:video-recording",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: video-recording",
+      "costINR": 1.07235,
+      "costUSD": 0.011915,
+      "generationId": "90d92b5e-cae8-4b50-bc48-8ef6dd423503",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_8c5d06c4affb4fc0bafb976d88cd330c",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970172190,
+      "usage": {
+        "input_tokens": 207,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 207
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 479
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970188212.847,
+      "_id": "jh73adxgsw6gwsevzc33fbr5ss8g8dzr",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:poster-making",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: poster-making",
+      "costINR": 1.0728,
+      "costUSD": 0.01192,
+      "generationId": "7048a9df-0461-4487-8c1a-820fb6fd92b1",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_8ab76d2a9cb44fe5ba3de7fb77e59acb",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970188212,
+      "usage": {
+        "input_tokens": 208,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 208
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 480
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970203199.2659,
+      "_id": "jh7f00mr0q9shjfk84y8ghvp998g9ydh",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:lab-bench",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: lab-bench",
+      "costINR": 1.0728,
+      "costUSD": 0.01192,
+      "generationId": "055dafd7-9968-4242-8346-190f23e81850",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_9ca95343b35f442981ff695f5a52de21",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970203199,
+      "usage": {
+        "input_tokens": 208,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 208
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 480
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970220094.198,
+      "_id": "jh7ezdaef3xrgq26vvcjfdq11x8g8jpn",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:medical-tools",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: medical-tools",
+      "costINR": 1.07505,
+      "costUSD": 0.011945,
+      "generationId": "adb18ec0-e4cd-4bec-9e49-54f752a9c838",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_e76ac2b41c7940d9a7f5d8e1c50490f4",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970220094,
+      "usage": {
+        "input_tokens": 213,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 213
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 485
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970234489.7993,
+      "_id": "jh707hd38vw6y8qzxxeh5dhvqd8g8yhs",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:model-making",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: model-making",
+      "costINR": 1.0710000000000002,
+      "costUSD": 0.0119,
+      "generationId": "528af9d2-262c-4e95-be03-a6572a47c891",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_97a5e6f2c5864146864039d9497e2a72",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970234489,
+      "usage": {
+        "input_tokens": 204,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 204
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 476
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970252202.7124,
+      "_id": "jh71cpc4c2hneypvndg7mtr8cx8g8e03",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:field-visit",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: field-visit",
+      "costINR": 1.07325,
+      "costUSD": 0.011925,
+      "generationId": "affc295e-2385-4247-99eb-4065d084e82f",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_b91a696b0e5f4c82b4dbb2b9c6bb726f",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970252202,
+      "usage": {
+        "input_tokens": 209,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 209
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 481
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970270302.7385,
+      "_id": "jh79a9g6zenfg4963hwwck9rps8g8rpf",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:finished-project",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: finished-project",
+      "costINR": 1.07325,
+      "costUSD": 0.011925,
+      "generationId": "91b328c5-2003-4895-960b-c85550ac8d4b",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_cbc7b2a8ca6f471f9d9f35551ed3a8a7",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970270302,
+      "usage": {
+        "input_tokens": 209,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 209
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 481
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970286990.9866,
+      "_id": "jh776scemc2zx68ze1038b0st58g9xe4",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:stage-rehearsal",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: stage-rehearsal",
+      "costINR": 1.0764,
+      "costUSD": 0.01196,
+      "generationId": "adaf9a1e-9862-46f2-b845-a37bed2816d3",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_de8c997baea848ea8a55f03461a28f64",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970286990,
+      "usage": {
+        "input_tokens": 216,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 216
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 488
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970303027.3596,
+      "_id": "jh7ca3b19jpw1k1s0wt3360nt98g84tt",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:kitchen-tasting",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: kitchen-tasting",
+      "costINR": 1.0736999999999999,
+      "costUSD": 0.01193,
+      "generationId": "222383cd-841d-4eaf-b374-bfa0c7450533",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_2e4a505d260c41d8804fc0e0e4dc5cf5",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970303027,
+      "usage": {
+        "input_tokens": 210,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 210
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 482
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970316601.0254,
+      "_id": "jh7eh6pccdq67st15bm2fjrg1d8g804k",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:law-contract",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: law-contract",
+      "costINR": 1.07685,
+      "costUSD": 0.011965,
+      "generationId": "3d752ab5-c33e-4f05-a255-286f6cc884e7",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_1255aebed3b248c88fe9e775fb273a60",
+      "stage": "plan-thumbnail-image",
+      "status": "succeeded",
+      "timestamp": 1791970316601,
+      "usage": {
+        "input_tokens": 217,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 217
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 489
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970468135.8132,
+      "_id": "jh7b0wgb8gjqd3d2j14fk8g9c98g8m5w",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:tags:Financial Analyst",
+      "callType": "plan",
+      "careerTitle": "Financial Analyst",
+      "costINR": 0.073044,
+      "costUSD": 0.0008116,
+      "generationId": "d21186eb-c3a9-4dfe-897b-7b912d56c3ae",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_3844a052a73e4ea19169be7c90101f47",
+      "stage": "plan-thumbnail-tags",
+      "status": "succeeded",
+      "timestamp": 1791970468135,
+      "usage": {
+        "input_tokens": 1481,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1618
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970471833.6545,
+      "_id": "jh751svngs96pkqkjwk5mzjq0d8g8nnt",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:tags:Doctor",
+      "callType": "plan",
+      "careerTitle": "Doctor",
+      "costINR": 0.07135200000000001,
+      "costUSD": 0.0007928000000000001,
+      "generationId": "1b590fb5-45cd-44a3-a9cd-bec486cad360",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_50838cdee6f143c39721bc853d25183e",
+      "stage": "plan-thumbnail-tags",
+      "status": "succeeded",
+      "timestamp": 1791970471833,
+      "usage": {
+        "input_tokens": 1454,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 132,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1586
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970475463.9866,
+      "_id": "jh76e4kbv08b1htw0kg8z65y6d8g9mg1",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:tags:Corporate Lawyer",
+      "callType": "plan",
+      "careerTitle": "Corporate Lawyer",
+      "costINR": 0.072576,
+      "costUSD": 0.0008064000000000001,
+      "generationId": "ccc58683-8e10-4643-b91a-b3ae42f8bbda",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6311c2f9e4ce4665bc58ba84e7201ba9",
+      "stage": "plan-thumbnail-tags",
+      "status": "succeeded",
+      "timestamp": 1791970475463,
+      "usage": {
+        "input_tokens": 1472,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 136,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1608
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970478625.1062,
+      "_id": "jh709s2zyc8gfe5md5yq6e1kds8g89wh",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:tags:Economist",
+      "callType": "plan",
+      "careerTitle": "Economist",
+      "costINR": 0.07275600000000002,
+      "costUSD": 0.0008084000000000001,
+      "generationId": "2b2f654f-d428-4383-9471-67039e528237",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_324bee724cfd4e61b4af8cd9a6889ea0",
+      "stage": "plan-thumbnail-tags",
+      "status": "succeeded",
+      "timestamp": 1791970478625,
+      "usage": {
+        "input_tokens": 1477,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 136,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1613
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970481895.0325,
+      "_id": "jh7dmfcdqtst48a2gdjmy6nyh58g9tcb",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:tags:Author",
+      "callType": "plan",
+      "careerTitle": "Author",
+      "costINR": 0.07203599999999999,
+      "costUSD": 0.0008003999999999999,
+      "generationId": "37a891ac-d9bc-4181-be00-2d4ffcd754a4",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_da52aeca1390481888a18ebc533f5455",
+      "stage": "plan-thumbnail-tags",
+      "status": "succeeded",
+      "timestamp": 1791970481895,
+      "usage": {
+        "input_tokens": 1461,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 135,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1596
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970504533.7007,
+      "_id": "jh75cknsajv1ykcshzz3bm8qkn8g9tp0",
+      "cacheHit": true,
+      "cacheKey": "[\"careers-v4-catalog-80\",\"biology, chemistry, debate\",\"high earning medical professional in usa\"]",
+      "callType": "careers",
+      "careerTitle": "Career discovery (shared)",
+      "costINR": 0,
+      "costUSD": 0,
+      "model": "gpt-4.1",
+      "pricingDate": "2026-10-12",
+      "stage": "career-cache",
+      "status": "cached",
+      "timestamp": 1791970504533,
+      "usage": null,
+      "usdToInr": 90
+    },
+    {
+      "_creationTime": 1791970505893.7756,
+      "_id": "jh727yq3cnkf7q5z0sw9evq7ts8g9m3b",
+      "cacheHit": true,
+      "callType": "plan",
+      "careerTitle": "Doctor",
+      "costINR": 0,
+      "costUSD": 0,
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "stage": "plan-cache",
+      "status": "cached",
+      "timestamp": 1791970505893,
+      "usage": null,
+      "usdToInr": 90
+    },
+    {
+      "_creationTime": 1791970512890.708,
+      "_id": "jh75dw5vtqcqqxy1rzqryebkn98g9d4x",
+      "cacheHit": true,
+      "cacheKey": "[\"careers-v4-catalog-80\",\"literature, philosphy, watching movies\",\"good earning, overseas opportunity, stability\"]",
+      "callType": "careers",
+      "careerTitle": "Career discovery (shared)",
+      "costINR": 0,
+      "costUSD": 0,
+      "model": "gpt-4.1",
+      "pricingDate": "2026-10-12",
+      "stage": "career-cache",
+      "status": "cached",
+      "timestamp": 1791970512890,
+      "usage": null,
+      "usdToInr": 90
+    },
+    {
+      "_creationTime": 1791970515398.0647,
+      "_id": "jh75gsepkdpeg3z3xdhcyv2psx8g8p4m",
+      "cacheHit": true,
+      "callType": "plan",
+      "careerTitle": "Author",
+      "costINR": 0,
+      "costUSD": 0,
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "stage": "plan-cache",
+      "status": "cached",
+      "timestamp": 1791970515398,
+      "usage": null,
+      "usdToInr": 90
+    }
+  ],
+  "totalCostINR": 25.051464000000006,
+  "imageCount": 23,
+  "flows": [
+    {
+      "title": "Doctor",
+      "gender": "girl",
+      "width": 390,
+      "monthsOpen": 12,
+      "themes": [
+        "reading-research",
+        "notebook-writing",
+        "interview",
+        "survey-form",
+        "planning-board",
+        "poster-making",
+        "model-making",
+        "presentation-slides",
+        "video-recording",
+        "poster-making",
+        "reading-research",
+        "workshop-class"
+      ],
+      "screenshot": "design/thumb-doctor.png"
+    },
+    {
+      "title": "Author",
+      "gender": "boy",
+      "width": 390,
+      "monthsOpen": 12,
+      "themes": [
+        "reading-research",
+        "reading-research",
+        "notebook-writing",
+        "planning-board",
+        "notebook-writing",
+        "workshop-class",
+        "notebook-writing",
+        "reading-research",
+        "workshop-class",
+        "poster-making",
+        "notebook-writing",
+        "finished-project"
+      ],
+      "screenshot": "design/thumb-author.png"
+    }
+  ]
+}

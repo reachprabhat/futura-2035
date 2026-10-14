@@ -1,0 +1,162 @@
+{
+  "cachedPlans": 5,
+  "taggedPlans": 5,
+  "rows": [
+    {
+      "_creationTime": 1791970468135.8132,
+      "_id": "jh7b0wgb8gjqd3d2j14fk8g9c98g8m5w",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:tags:Financial Analyst",
+      "callType": "plan",
+      "careerTitle": "Financial Analyst",
+      "costINR": 0.073044,
+      "costUSD": 0.0008116,
+      "generationId": "d21186eb-c3a9-4dfe-897b-7b912d56c3ae",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_3844a052a73e4ea19169be7c90101f47",
+      "stage": "plan-thumbnail-tags",
+      "status": "succeeded",
+      "timestamp": 1791970468135,
+      "usage": {
+        "input_tokens": 1481,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1618
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970471833.6545,
+      "_id": "jh751svngs96pkqkjwk5mzjq0d8g8nnt",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:tags:Doctor",
+      "callType": "plan",
+      "careerTitle": "Doctor",
+      "costINR": 0.07135200000000001,
+      "costUSD": 0.0007928000000000001,
+      "generationId": "1b590fb5-45cd-44a3-a9cd-bec486cad360",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_50838cdee6f143c39721bc853d25183e",
+      "stage": "plan-thumbnail-tags",
+      "status": "succeeded",
+      "timestamp": 1791970471833,
+      "usage": {
+        "input_tokens": 1454,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 132,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1586
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970475463.9866,
+      "_id": "jh76e4kbv08b1htw0kg8z65y6d8g9mg1",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:tags:Corporate Lawyer",
+      "callType": "plan",
+      "careerTitle": "Corporate Lawyer",
+      "costINR": 0.072576,
+      "costUSD": 0.0008064000000000001,
+      "generationId": "ccc58683-8e10-4643-b91a-b3ae42f8bbda",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6311c2f9e4ce4665bc58ba84e7201ba9",
+      "stage": "plan-thumbnail-tags",
+      "status": "succeeded",
+      "timestamp": 1791970475463,
+      "usage": {
+        "input_tokens": 1472,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 136,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1608
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970478625.1062,
+      "_id": "jh709s2zyc8gfe5md5yq6e1kds8g89wh",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:tags:Economist",
+      "callType": "plan",
+      "careerTitle": "Economist",
+      "costINR": 0.07275600000000002,
+      "costUSD": 0.0008084000000000001,
+      "generationId": "2b2f654f-d428-4383-9471-67039e528237",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_324bee724cfd4e61b4af8cd9a6889ea0",
+      "stage": "plan-thumbnail-tags",
+      "status": "succeeded",
+      "timestamp": 1791970478625,
+      "usage": {
+        "input_tokens": 1477,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 136,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1613
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791970481895.0325,
+      "_id": "jh7dmfcdqtst48a2gdjmy6nyh58g9tcb",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:tags:Author",
+      "callType": "plan",
+      "careerTitle": "Author",
+      "costINR": 0.07203599999999999,
+      "costUSD": 0.0008003999999999999,
+      "generationId": "37a891ac-d9bc-4181-be00-2d4ffcd754a4",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_da52aeca1390481888a18ebc533f5455",
+      "stage": "plan-thumbnail-tags",
+      "status": "succeeded",
+      "timestamp": 1791970481895,
+      "usage": {
+        "input_tokens": 1461,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 135,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1596
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    }
+  ],
+  "totalCostINR": 0.36176400000000003
+}

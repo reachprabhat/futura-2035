@@ -18,7 +18,7 @@ export const begin = internalMutation({
     if (args.cacheKey?.startsWith("shared-scenes-v1:") && (await libraryTotals(ctx)).overBudget) throw new ConvexError("Shared scene library passed the ₹250 limit. Generation stopped.");
     if (process.env.AI_ENABLED !== "true") throw new ConvexError(PAUSED_MESSAGE);
     const today = await todayControls(ctx);
-    if (today.estimatedSpendINR + estimateINR(args.model) > today.dailyCostCapINR)
+    if (today.estimatedSpendINR + estimateINR(args.model, args.imageQuality) > today.dailyCostCapINR)
       throw new ConvexError(PAUSED_MESSAGE);
     // Both reservations and the pending ledger entry commit together, including under concurrency.
     await ctx.runMutation(internal.data.reserve, {});

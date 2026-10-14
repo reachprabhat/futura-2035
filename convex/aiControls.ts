@@ -16,7 +16,7 @@ export function costCap() {
 }
 // Budget estimates for our current bounded requests, not claimed invoice amounts.
 // Unknown costs retain their estimate; pending calls reserve it atomically.
-export function estimateINR(model: string) { return model === "gpt-image-1" ? 20 : 5; }
+export function estimateINR(model: string, imageQuality?: string) { return model === "gpt-image-1" ? imageQuality === "low" ? 2 : 20 : 5; }
 export async function todayControls(ctx: Pick<QueryCtx, "db">) {
   const { day, start, end } = istToday();
   let spendINR = 0, estimatedSpendINR = 0, callCount = 0, unknownCosts = 0;
@@ -24,7 +24,7 @@ export async function todayControls(ctx: Pick<QueryCtx, "db">) {
     q.eq("cacheHit", false).gte("timestamp", start).lt("timestamp", end))) {
     callCount++;
     spendINR += row.costINR ?? 0;
-    estimatedSpendINR += row.costINR ?? estimateINR(row.model);
+      estimatedSpendINR += row.costINR ?? estimateINR(row.model, row.imageQuality);
     if (row.costINR === null) unknownCosts++;
   }
   const usage = await ctx.db.query("usage").withIndex("by_day", q => q.eq("day", day)).unique();

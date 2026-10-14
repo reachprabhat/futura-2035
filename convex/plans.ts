@@ -1,10 +1,17 @@
-import { internalMutation, query } from "./_generated/server";
+import { internalMutation, internalQuery, query } from "./_generated/server";
+import type { QueryCtx } from "./_generated/server";
 import { v } from "convex/values";
 import { storyKey } from "./storyKey";
-export const get = query({
-  args: { title: v.string() }, returns: v.any(),
-  handler: (ctx, { title }) => ctx.db.query("careerPlans").withIndex("by_key", q => q.eq("key", storyKey(title))).unique(),
-});
+import { thumbnailTagsKey } from "./thumbnailCatalog";
+async function getPlan(ctx: QueryCtx, title: string) {
+  const row = await ctx.db.query("careerPlans").withIndex("by_key", q => q.eq("key", storyKey(title))).unique();
+  if (!row?.plan?.projects?.length) return row;
+  const tagRow = await ctx.db.query("planThumbnailTags").withIndex("by_key", q => q.eq("key", thumbnailTagsKey(title))).unique();
+  const tagByMonth = new Map((tagRow?.status === "ready" ? tagRow.tags ?? [] : []).map((tag: any) => [tag.month, tag.themeId]));
+  return { ...row, plan: { ...row.plan, projects: row.plan.projects.map((project: any) => ({ ...project, thumbnailThemeId: project.thumbnailThemeId ?? tagByMonth.get(project.month) })) } };
+}
+export const internalGet = internalQuery({ args: { title: v.string() }, returns: v.any(), handler: (ctx, { title }) => getPlan(ctx, title) });
+export const get = query({ args: { title: v.string() }, returns: v.any(), handler: (ctx, { title }) => getPlan(ctx, title) });
 export const claim = internalMutation({
   args: { title: v.string(), token: v.string() }, returns: v.any(),
   handler: async (ctx, { title, token }) => {
