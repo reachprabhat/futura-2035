@@ -1,10 +1,10 @@
 {
   "target": "dev:doting-basilisk-558",
   "startedAt": 1791957326616,
-  "endedAt": 1791959943853,
+  "endedAt": 1791960890645,
   "archivedStoryboardsUnchanged": true,
-  "totalCostUSD": 1.5420367999999998,
-  "totalCostINR": 138.78331200000005,
+  "totalCostUSD": 1.5870467999999998,
+  "totalCostINR": 142.83421200000006,
   "unknownCosts": 0,
   "rows": [
     {
@@ -3817,6 +3817,40 @@
           "reasoning_tokens": 0
         },
         "total_tokens": 813
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791960820455.4023,
+      "_id": "jh72asj1259xkxn0jvt9weq5tx8g9x5f",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:documents:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: documents (girl)",
+      "costINR": 4.0509,
+      "costUSD": 0.04501,
+      "generationId": "girl-documents-navy-v2",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6340cb0f27db488abf192f5a7ce780a4",
+      "stage": "shared-scene-correction",
+      "status": "succeeded",
+      "timestamp": 1791960820455,
+      "usage": {
+        "input_tokens": 360,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 166
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1416
       },
       "usdToInr": 90,
       "webSearchCalls": 0

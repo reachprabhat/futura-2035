@@ -29,6 +29,77 @@ const run = async (fn, args) => {
   const output = await cli(["run", fn, JSON.stringify(args)]);
   return output ? JSON.parse(output) : null;
 };
+if (process.argv.includes("--fix-girl-documents") || process.argv.includes("--apply-girl-documents")) {
+  const generationId = "girl-documents-navy-v2", sceneId = "documents", gender = "girl";
+  const correctionDir = path.join(root, "design/library-evidence/replacements");
+  await mkdir(correctionDir, { recursive: true });
+  const candidatePath = path.join(correctionDir, "documents-girl-navy-v2.webp");
+  const receiptPath = path.join(correctionDir, "documents-girl-navy-v2-aiCall.json");
+  const sceneRows = JSON.parse(await cli(["data", "sceneImages", "--limit", "1000", "--format", "json"]));
+  const target = sceneRows.find(row => row.key === "shared-scenes-v1:documents:girl");
+  if (!target?.storageId || target.status !== "ready") throw new Error("The saved Girl document-review scene is missing.");
+  const inventory = await run("sceneLibrary:inventory", {});
+  const current = inventory.scenes.find(scene => scene.sceneId === sceneId && scene.gender === gender);
+  const findReceipt = async () => {
+    let cursor = null;
+    for (let i = 0; i < 100; i++) {
+      const page = await run("costs:rows", { adminKey, paginationOpts: { numItems: 100, cursor } });
+      const row = page.page.find(row => row.generationId === generationId);
+      if (row || page.isDone) return row ?? null;
+      cursor = page.continueCursor;
+    }
+    throw new Error("Receipt scan exceeded safety limit.");
+  };
+  if (process.argv.includes("--fix-girl-documents")) {
+    if (await findReceipt()) throw new Error("This correction already has an AI call. No further generation is allowed.");
+    const source = await fetch(current.imageUrl);
+    if (!source.ok) throw new Error("Could not read the existing library image.");
+    const original = Buffer.from(await source.arrayBuffer());
+    await writeFile(path.join(correctionDir, "documents-girl-original.webp"), original);
+    await writeFile(path.join(correctionDir, "before.json"), JSON.stringify({ target, inventory }, null, 2));
+    const prompt = "Make a precise color-only correction to this existing document-review photograph. Change ONLY the woman's blazer fabric to true deep navy blue, approximately #14263D, with neutral navy highlights and shadows. Remove all purple, violet, plum, magenta and lavender cast from the blazer. Keep the white shirt white. Preserve exactly the same original fictional Indian woman, face, skin tone, hair, earrings, expression, pose, hands, pen, blank documents, desk, laptop, background, lighting, framing and photographic texture. Do not redesign the photograph, add people, change the activity, or add text. Keep the blazer's existing tailoring and fabric texture. The final blazer must clearly read as dark blue navy, never purple.";
+    await writeFile(path.join(correctionDir, "documents-girl-navy-v2-prompt.txt"), prompt);
+    const apiKey = (await cli(["env", "get", "OPENAI_API_KEY"])).replace(/^"|"$/g, "");
+    const { default: OpenAI, toFile } = await import("openai");
+    const ai = new OpenAI({ apiKey, maxRetries: 0, timeout: 150000 });
+    const id = await run("costs:begin", { careerTitle: "Shared scene: documents (girl)", callType: "panel image", stage: "shared-scene-correction", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: "medium", cacheKey: target.key, generationId });
+    let result;
+    try { result = await ai.images.edit({ model: "gpt-image-1", image: await toFile(original, "documents-girl.webp", { type: "image/webp" }), prompt, n: 1, quality: "medium", size: "1024x1024", output_format: "webp" }); }
+    catch (error) { await run("costs:finish", { id, usage: null, webSearchCalls: 0, error: error instanceof Error ? error.message : String(error) }); throw new Error("The one correction request failed. No retry or other generation was made."); }
+    if (result.data?.[0]?.b64_json) await writeFile(candidatePath, Buffer.from(result.data[0].b64_json, "base64"));
+    await run("costs:finish", { id, usage: result.usage ?? null, ...(result._request_id ? { requestId: result._request_id } : {}), webSearchCalls: 0 });
+    const receipt = await findReceipt();
+    await writeFile(receiptPath, JSON.stringify(receipt, null, 2));
+    console.log(JSON.stringify(receipt, null, 2));
+    console.log("Saved one correction for visual inspection; library replacement has not run yet.");
+    process.exit(0);
+  }
+  const receipt = await findReceipt();
+  if (receipt?.status !== "succeeded") throw new Error("The correction must have exactly one successful recorded call.");
+  const before = JSON.parse(await readFile(path.join(correctionDir, "before.json"), "utf8"));
+  if (target.storageId !== before.target.storageId || target.token !== before.target.token) throw new Error("The target library entry changed; stop before replacement.");
+  const bytes = await readFile(candidatePath);
+  const uploadUrl = await run("sceneLibrary:referenceUpload", { adminKey });
+  const uploaded = await fetch(uploadUrl, { method: "POST", headers: { "Content-Type": "image/webp" }, body: bytes });
+  if (!uploaded.ok) throw new Error("Corrected image upload failed.");
+  const { storageId } = await uploaded.json();
+  await run("sceneLibrary:finishImage", { sceneId, gender, token: target.token, storageId });
+  const after = await run("sceneLibrary:inventory", {});
+  const changed = after.scenes.filter(scene => scene.imageUrl !== before.inventory.scenes.find(previous => previous.sceneId === scene.sceneId && previous.gender === scene.gender)?.imageUrl);
+  if (changed.length !== 1 || changed[0].sceneId !== sceneId || changed[0].gender !== gender || changed[0].status !== "ready") throw new Error("Expected only the Girl document-review entry to change.");
+  await writeFile(path.join(root, "design/library-evidence/documents-girl.webp"), bytes);
+  await writeFile(path.join(root, "design/library-evidence/inventory.json"), JSON.stringify(after, null, 2));
+  const reportPath = path.join(root, "design/library-evidence/aiCalls.json");
+  const report = JSON.parse(await readFile(reportPath, "utf8"));
+  if (!report.rows.some(row => row._id === receipt._id)) report.rows.push(receipt);
+  report.totalCostUSD = report.rows.reduce((sum, row) => sum + (row.costUSD ?? 0), 0);
+  report.totalCostINR = report.rows.reduce((sum, row) => sum + (row.costINR ?? 0), 0);
+  report.endedAt = Date.now();
+  await writeFile(reportPath, JSON.stringify(report, null, 2));
+  console.log("Verified: only documents/girl was replaced in DEV. No deployment or additional generation.");
+  console.log(JSON.stringify(receipt, null, 2));
+  process.exit(0);
+}
 if (process.argv.includes("--preflight")) {
   const controls = await run("costs:controls", { adminKey });
   const inventory = await run("sceneLibrary:inventory", {});
