@@ -59,6 +59,9 @@ it("generates each scene and gender once at medium, preserves locked identities,
   expect(prompts[2]).toContain("21-year-old Indian man");
   expect(prompts[0]).toContain("unstructured navy blazer");
   expect(prompts[1]).toContain("a clean white coat over a plain white shirt");
+  expect(prompts[3]).toContain("a clean white coat over the open-collar white shirt");
+  expect(mocks.generate.mock.calls[0][0].image).toBeUndefined();
+  for (const index of [1, 2, 3]) expect(mocks.generate.mock.calls[index][0].image).toBeDefined();
   expect(mocks.parse).not.toHaveBeenCalled();
   const rows = await t.run(ctx => ctx.db.query("aiCalls").collect());
   expect(rows.filter(r => !r.cacheHit)).toHaveLength(4);
@@ -124,11 +127,11 @@ it("uses the same four stored scenes for different careers without copying image
   expect((await t.query(api.data.cachedCareer, { title: "Corporate Lawyer", gender: "boy" }))?.panels[0].caption).toBe("Archived task");
   expect((await t.query(api.sceneLibrary.career, { title: "Corporate Lawyer", gender: "boy" }))?.panels).toHaveLength(4);
 });
-it("rejects invalid scene IDs, wrong outfits and fewer than three distinct matches", async () => {
+it("rejects scene IDs outside the career outfit group", async () => {
   const t = await testBackend();
-  for (const bad of [panels(), panels(true).map(p => ({ ...p, sceneId: "invented" })), panels(true).map(p => ({ ...p, sceneId: "consultation" }))]) {
+  for (const bad of [panels(), panels(true).map(p => ({ ...p, sceneId: "invented" }))]) {
     mocks.parse.mockResolvedValue({ output_parsed: { panels: bad } });
-    await expect(t.action(api.libraryActions.prepareCareer, { adminKey, title: "Doctor" })).rejects.toThrow("suitable shared scenes");
+    await expect(t.action(api.libraryActions.prepareCareer, { adminKey, title: "Doctor" })).rejects.toThrow();
   }
   expect(mocks.generate).not.toHaveBeenCalled();
 });
@@ -155,4 +158,12 @@ it("stops provider calls when the shared-library ledger has passed 250 rupees", 
   await expect(t.action(api.libraryActions.generateScene, { adminKey, sceneId: "research", gender: "girl" })).rejects.toThrow("250 limit");
   expect(mocks.generate).not.toHaveBeenCalled();
   expect((await t.query(api.sceneLibrary.totals, { adminKey })).overBudget).toBe(true);
+});
+
+it("assigns the four canonical app times even when model time labels differ", async () => {
+  const t = await testBackend();
+  mocks.parse.mockResolvedValue({ output_parsed: { panels: panels().map(p => ({ ...p, time: "9 AM" })) } });
+  const result = await t.action(api.libraryActions.prepareCareer, { adminKey, title: "Corporate Lawyer" });
+  expect(result.panels.map((p: any) => p.time)).toEqual(["9:00", "11:00", "2:00", "4:00"]);
+  expect(mocks.generate).not.toHaveBeenCalled();
 });

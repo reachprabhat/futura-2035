@@ -15,9 +15,12 @@ async function cli(args) {
   try {
     const { stdout } = await exec(process.execPath, [path.join(root, "node_modules/convex/bin/main.js"), ...args, "--deployment", "doting-basilisk-558"], { cwd: root, maxBuffer: 16 * 1024 * 1024, timeout: 240000 });
     return stdout.trim();
-  } catch {
+  } catch (error) {
     // Never print child-process command arguments: they contain the admin key.
-    throw new Error("DEV command failed; inspect the DEV dashboard. No automatic retry was made.");
+    let detail = String(error.stderr ?? "").trim();
+    try { if (adminKey) detail = detail.replaceAll(adminKey, "<redacted>"); } catch {}
+    detail = detail.replace(/sk-[^\s"']+/g, "<redacted>");
+    throw new Error(`DEV command failed. No automatic retry was made.${detail ? ` ${detail}` : ""}`);
   }
 }
 const adminKey = (await cli(["env", "get", "ADMIN_COSTS_KEY"])).replace(/^"|"$/g, "");
@@ -30,6 +33,38 @@ if (process.argv.includes("--preflight")) {
   const controls = await run("costs:controls", { adminKey });
   const inventory = await run("sceneLibrary:inventory", {});
   console.log(JSON.stringify({ controls, readyImages: inventory.scenes.filter(s => s.status === "ready").length, otherImageStates: inventory.scenes.filter(s => s.status !== "ready" && s.status !== "missing"), readyMappings: inventory.mappings.filter(s => s.status === "ready").length }, null, 2));
+  process.exit(0);
+}
+if (process.argv.includes("--proof-plans")) {
+  const { CAREER_CATALOG } = await import("../convex/careerCatalog.ts");
+  const titles = ["Corporate Lawyer", "Doctor"], key = "shared-library-proof-v1", started = Date.now();
+  const reportPath = path.join(root, "design/library-evidence/aiCalls.json");
+  const report = JSON.parse(await readFile(reportPath, "utf8"));
+  report.startedAt = Math.min(report.startedAt, ...report.rows.map(r => r.timestamp));
+  const checkBudget = async () => {
+    const totals = await run("sceneLibrary:totals", { adminKey });
+    if (totals.costINR + (report.proofPlanCostINR ?? 0) > 250) throw new Error("STOP: total passed ₹250; no more AI calls.");
+  };
+  await run("data:saveSearch", { key, result: { careers: titles.map(title => CAREER_CATALOG.find(c => c.title === title)) } });
+  for (let careerIndex = 0; careerIndex < titles.length; careerIndex++) {
+    const saved = await run("plans:get", { title: titles[careerIndex] });
+    if (saved?.status === "ready") { console.log(`reused saved plan: ${titles[careerIndex]}`); continue; }
+    await checkBudget();
+    const plan = await run("ai:careerPlan", { searchKey: key, careerIndex });
+    if (plan?.projects?.length !== 12) throw new Error(`Proof plan is not ready: ${titles[careerIndex]}`);
+    const page = await run("costs:rows", { adminKey, paginationOpts: { numItems: 100, cursor: null } });
+    const added = page.page.filter(r => r.timestamp >= started && r.stage === "12-month-plan" && titles.includes(r.careerTitle) && !report.rows.some(old => old._id === r._id));
+    report.rows.push(...added);
+    report.proofPlanCostINR = (report.proofPlanCostINR ?? 0) + added.reduce((sum, r) => sum + (r.costINR ?? 0), 0);
+    report.totalCostUSD = report.rows.reduce((sum, r) => sum + (r.costUSD ?? 0), 0);
+    report.totalCostINR = report.rows.reduce((sum, r) => sum + (r.costINR ?? 0), 0);
+    await writeFile(reportPath, JSON.stringify(report, null, 2));
+    await checkBudget();
+    console.log(`prepared plan: ${titles[careerIndex]}; total ₹${report.totalCostINR.toFixed(2)}`);
+  }
+  report.endedAt = Date.now();
+  report.unknownCosts = report.rows.filter(r => !r.cacheHit && r.costUSD === null).length;
+  await writeFile(reportPath, JSON.stringify(report, null, 2));
   process.exit(0);
 }
 // Explicit one-image comparison. It exits before any shared-library work can run.

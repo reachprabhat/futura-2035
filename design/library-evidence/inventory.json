@@ -1,0 +1,539 @@
+{
+  "mappings": [
+    {
+      "status": "ready",
+      "title": "Product Manager"
+    },
+    {
+      "status": "ready",
+      "title": "Software Engineer"
+    },
+    {
+      "status": "ready",
+      "title": "AI Engineer"
+    },
+    {
+      "status": "ready",
+      "title": "Data Scientist"
+    },
+    {
+      "status": "ready",
+      "title": "Data Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Cybersecurity Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Robotics Engineer"
+    },
+    {
+      "status": "ready",
+      "title": "Automation Engineer"
+    },
+    {
+      "status": "ready",
+      "title": "Cloud Engineer"
+    },
+    {
+      "status": "ready",
+      "title": "Privacy Specialist"
+    },
+    {
+      "status": "ready",
+      "title": "AI Safety Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Digital Accessibility Specialist"
+    },
+    {
+      "status": "ready",
+      "title": "User Experience Designer"
+    },
+    {
+      "status": "ready",
+      "title": "Game Designer"
+    },
+    {
+      "status": "ready",
+      "title": "Game Developer"
+    },
+    {
+      "status": "ready",
+      "title": "Simulation Designer"
+    },
+    {
+      "status": "ready",
+      "title": "Digital Artist"
+    },
+    {
+      "status": "ready",
+      "title": "Animator"
+    },
+    {
+      "status": "ready",
+      "title": "Illustrator"
+    },
+    {
+      "status": "ready",
+      "title": "Medical Illustrator"
+    },
+    {
+      "status": "ready",
+      "title": "Science Communicator"
+    },
+    {
+      "status": "ready",
+      "title": "Author"
+    },
+    {
+      "status": "ready",
+      "title": "Journalist"
+    },
+    {
+      "status": "ready",
+      "title": "Food Critic"
+    },
+    {
+      "status": "ready",
+      "title": "Content Strategist"
+    },
+    {
+      "status": "ready",
+      "title": "Editor"
+    },
+    {
+      "status": "ready",
+      "title": "Documentary Filmmaker"
+    },
+    {
+      "status": "ready",
+      "title": "Learning Designer"
+    },
+    {
+      "status": "ready",
+      "title": "Teacher"
+    },
+    {
+      "status": "ready",
+      "title": "Career Adviser"
+    },
+    {
+      "status": "ready",
+      "title": "Economist"
+    },
+    {
+      "status": "ready",
+      "title": "Economic Policy Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Financial Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Risk Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Actuary"
+    },
+    {
+      "status": "ready",
+      "title": "Financial Planner"
+    },
+    {
+      "status": "ready",
+      "title": "Market Researcher"
+    },
+    {
+      "status": "ready",
+      "title": "Consumer Insights Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Supply Chain Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Operations Research Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Climate Data Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Environmental Scientist"
+    },
+    {
+      "status": "ready",
+      "title": "Renewable Energy Engineer"
+    },
+    {
+      "status": "ready",
+      "title": "Energy Storage Engineer"
+    },
+    {
+      "status": "ready",
+      "title": "Water Engineer"
+    },
+    {
+      "status": "ready",
+      "title": "Urban Planner"
+    },
+    {
+      "status": "ready",
+      "title": "Transport Planner"
+    },
+    {
+      "status": "ready",
+      "title": "Sustainability Consultant"
+    },
+    {
+      "status": "ready",
+      "title": "Circular Economy Specialist"
+    },
+    {
+      "status": "ready",
+      "title": "Conservation Scientist"
+    },
+    {
+      "status": "ready",
+      "title": "Food Scientist"
+    },
+    {
+      "status": "ready",
+      "title": "Food Safety Specialist"
+    },
+    {
+      "status": "ready",
+      "title": "Agricultural Scientist"
+    },
+    {
+      "status": "ready",
+      "title": "Precision Farming Specialist"
+    },
+    {
+      "status": "ready",
+      "title": "Nutritionist"
+    },
+    {
+      "status": "ready",
+      "title": "Food Systems Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Biotechnology Researcher"
+    },
+    {
+      "status": "ready",
+      "title": "Bioinformatics Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Biomedical Engineer"
+    },
+    {
+      "status": "ready",
+      "title": "Medical Researcher"
+    },
+    {
+      "status": "ready",
+      "title": "Doctor"
+    },
+    {
+      "status": "ready",
+      "title": "Nurse"
+    },
+    {
+      "status": "ready",
+      "title": "Physiotherapist"
+    },
+    {
+      "status": "ready",
+      "title": "Occupational Therapist"
+    },
+    {
+      "status": "ready",
+      "title": "Psychologist"
+    },
+    {
+      "status": "ready",
+      "title": "Public Health Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Health Data Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Genetic Counsellor"
+    },
+    {
+      "status": "ready",
+      "title": "Assistive Technology Designer"
+    },
+    {
+      "status": "ready",
+      "title": "Community Health Worker"
+    },
+    {
+      "status": "ready",
+      "title": "Sports Data Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Sports Scientist"
+    },
+    {
+      "status": "ready",
+      "title": "Sports Coach"
+    },
+    {
+      "status": "ready",
+      "title": "Sports Physiotherapist"
+    },
+    {
+      "status": "ready",
+      "title": "Sports Psychologist"
+    },
+    {
+      "status": "ready",
+      "title": "Sports Technology Engineer"
+    },
+    {
+      "status": "ready",
+      "title": "Industrial Designer"
+    },
+    {
+      "status": "ready",
+      "title": "Materials Scientist"
+    },
+    {
+      "status": "ready",
+      "title": "Social Worker"
+    },
+    {
+      "status": "ready",
+      "title": "Public Policy Analyst"
+    },
+    {
+      "status": "ready",
+      "title": "Corporate Lawyer"
+    },
+    {
+      "status": "ready",
+      "title": "Chartered Accountant"
+    },
+    {
+      "status": "ready",
+      "title": "Civil Servant (IAS/IPS)"
+    },
+    {
+      "status": "ready",
+      "title": "Banker"
+    },
+    {
+      "status": "ready",
+      "title": "Performing Artist"
+    }
+  ],
+  "scenes": [
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/d51b35c9-34b6-4824-b243-74e9bc306161",
+      "sceneId": "research",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/b4b0036c-9dc4-40d2-ad5d-6da10298179a",
+      "sceneId": "research",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/a70b557b-c5ca-4770-a49e-ca5446999d77",
+      "sceneId": "meeting",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/49705116-16d7-474d-a35c-d4ab73cf662c",
+      "sceneId": "meeting",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/47cb3f23-c66b-4fd9-86b9-041eaa09b8d4",
+      "sceneId": "whiteboard",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/b4eccf7e-c6ba-421d-9da3-8a416d269ba6",
+      "sceneId": "whiteboard",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/e789ecee-da49-4108-953e-6106647dbdc8",
+      "sceneId": "presentation",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/b9002303-4cf8-4d56-ad1d-8d2683e45c37",
+      "sceneId": "presentation",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/dfc667f5-4b32-4cd1-99f3-063bbfa81d32",
+      "sceneId": "documents",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/4e8dc9f8-555e-489f-8768-3343e87671d6",
+      "sceneId": "documents",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/b8289222-47d2-470d-a632-4c40a4487068",
+      "sceneId": "coding",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/2006150c-e35b-4829-bb50-1b721470d764",
+      "sceneId": "coding",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/6f8aa55f-af27-4e31-84e0-dffba6c0d4ad",
+      "sceneId": "lab",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/472cf9dc-2ab0-41a1-8fe1-d28dd7a7d792",
+      "sceneId": "lab",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/d42ef659-dd5c-4f16-af33-5fd294f4b055",
+      "sceneId": "field",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/f29a414b-17cd-4656-9784-fa0209252508",
+      "sceneId": "field",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/b9cd9c51-dd2f-4d89-8b09-9d427ffc03d8",
+      "sceneId": "sketching",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/58273db0-2b6f-45f8-ae46-213629951347",
+      "sceneId": "sketching",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/b7c1b87b-3845-4a61-b0d2-4fc968c8a19e",
+      "sceneId": "interview",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/853d905c-428a-444b-920b-47e3c86c5f00",
+      "sceneId": "interview",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/22633862-3ec7-4e62-bcbe-f81570b10b09",
+      "sceneId": "prototype",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/97129912-db96-4846-bf91-f31de9dbc321",
+      "sceneId": "prototype",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/ece10c66-ddbd-4c02-9476-2e6c082e48fc",
+      "sceneId": "practice",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/b3dd4799-d7b8-4797-871d-17b5d6e5a0f4",
+      "sceneId": "practice",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/05f3a7b4-31b5-4c09-8251-6dba453325a9",
+      "sceneId": "health-research",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/383c9989-c887-4961-af90-03fd114f532e",
+      "sceneId": "health-research",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/b5244b34-2be0-439e-876f-9b7974281068",
+      "sceneId": "consultation",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/b646c2fe-dd42-41ab-b18a-d93b55de4aba",
+      "sceneId": "consultation",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/f3d98bcd-816c-4bae-a15e-fd64d9554e83",
+      "sceneId": "health-planning",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/21c90763-35a5-45a5-8582-7a110ea5cddd",
+      "sceneId": "health-planning",
+      "status": "ready"
+    },
+    {
+      "gender": "girl",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/53fefa31-99cc-4ca0-9cb5-5aa992d1bcb2",
+      "sceneId": "health-explanation",
+      "status": "ready"
+    },
+    {
+      "gender": "boy",
+      "imageUrl": "https://doting-basilisk-558.convex.cloud/api/storage/c3befafc-e133-4cfe-b8b4-3d9aaebba521",
+      "sceneId": "health-explanation",
+      "status": "ready"
+    }
+  ],
+  "version": "shared-scenes-v1"
+}

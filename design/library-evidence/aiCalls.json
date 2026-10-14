@@ -1,0 +1,3826 @@
+{
+  "target": "dev:doting-basilisk-558",
+  "startedAt": 1791957326616,
+  "endedAt": 1791959943853,
+  "archivedStoryboardsUnchanged": true,
+  "totalCostUSD": 1.5420367999999998,
+  "totalCostINR": 138.78331200000005,
+  "unknownCosts": 0,
+  "rows": [
+    {
+      "_creationTime": 1791957326616.9797,
+      "_id": "jh7fmcwte2fsqfw4sggpyzn62d8g8zjm",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:research:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: research (girl)",
+      "costINR": 4.0572,
+      "costUSD": 0.04508,
+      "generationId": "bc3cb43c-7521-4b21-9f66-f265a8d3813d",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_8668f1f243a44e97ac439b21fb8de542",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957326616,
+      "usage": {
+        "input_tokens": 568,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 568
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1624
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957353757.261,
+      "_id": "jh72cz06fxty2swee5s7eqmfms8g95j6",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:research:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: research (boy)",
+      "costINR": 4.219650000000001,
+      "costUSD": 0.046885,
+      "generationId": "af675ba7-7a48-4809-b131-ba31ebe88a26",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_15052da87d3e40d89707f70c417caa5f",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957353757,
+      "usage": {
+        "input_tokens": 735,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 541
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1791
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957384774.7812,
+      "_id": "jh75ge0yyc4tdcyj9zjvzn2ev18g9y86",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:meeting:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: meeting (girl)",
+      "costINR": 4.2408,
+      "costUSD": 0.04712,
+      "generationId": "d65c7ccc-955b-4869-ac9f-4492e8d26326",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_7b8019145162409cb23ed1cdde15520b",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957384774,
+      "usage": {
+        "input_tokens": 782,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 588
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1838
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957414174.7463,
+      "_id": "jh7851kvbf0kehxd140pqk9g2d8g91my",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:meeting:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: meeting (boy)",
+      "costINR": 4.22145,
+      "costUSD": 0.046905,
+      "generationId": "a841a07b-e3cb-476e-8d96-184ae7f7af14",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_22c9f93d55504136b8bb70b4ff2a9208",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957414174,
+      "usage": {
+        "input_tokens": 739,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 545
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1795
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957443131.7766,
+      "_id": "jh772n0p30mgba6em9x6k29zkd8g9dqb",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:whiteboard:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: whiteboard (girl)",
+      "costINR": 4.23945,
+      "costUSD": 0.047105,
+      "generationId": "d44ad1f7-3d32-4731-b601-e6db54c1803c",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6ed674237669405abbd16d581faeb43c",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957443131,
+      "usage": {
+        "input_tokens": 779,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 585
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1835
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957469684.1814,
+      "_id": "jh72dn7vxhxxmm67415t1p7ysh8g8cb0",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:whiteboard:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: whiteboard (boy)",
+      "costINR": 4.2201,
+      "costUSD": 0.04689,
+      "generationId": "d48497f6-cc61-4353-94bf-146e2ab16b15",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6a01effebf4d4acab717a9a017ecbc66",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957469684,
+      "usage": {
+        "input_tokens": 736,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 542
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1792
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957495593.2207,
+      "_id": "jh7cw2devv4f8qkq82t7cpsxzd8g8a40",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:presentation:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: presentation (girl)",
+      "costINR": 4.2399,
+      "costUSD": 0.04711,
+      "generationId": "70236d6c-86a6-4fbf-81c0-ca90621454fa",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6461eb920fc147f3826dd2b68dde40ec",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957495593,
+      "usage": {
+        "input_tokens": 780,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 586
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1836
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957522319.348,
+      "_id": "jh7br43pdr26fy9ntk3cs1t0rn8g8wqe",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:presentation:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: presentation (boy)",
+      "costINR": 4.22055,
+      "costUSD": 0.046895,
+      "generationId": "52fd0bd4-f253-46f6-bd1f-87ad3dad96a2",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_616ef8221a6746df8af5ea71a65a66db",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957522319,
+      "usage": {
+        "input_tokens": 737,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 543
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1793
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957550613.182,
+      "_id": "jh705aj2sdrbkve7vb4pd4fxax8g9esj",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:documents:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: documents (girl)",
+      "costINR": 4.23765,
+      "costUSD": 0.047085,
+      "generationId": "bb3fd4be-8eb3-42df-a4c3-fab93b25064d",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_0c7c61baf8ab4e819677af9e4b3ff704",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957550613,
+      "usage": {
+        "input_tokens": 775,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 581
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1831
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957581311.9597,
+      "_id": "jh74tc13napv18w4z2vnkdazwn8g81n1",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:documents:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: documents (boy)",
+      "costINR": 4.2183,
+      "costUSD": 0.04687,
+      "generationId": "552b8da9-ae74-4a06-aa67-478b877bc922",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_cc285c20f9f1474d8c5deee8a59ab9b3",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957581311,
+      "usage": {
+        "input_tokens": 732,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 538
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1788
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957607988.7612,
+      "_id": "jh7dme94fctar97e8jfh4adepx8g8qmk",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:coding:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: coding (girl)",
+      "costINR": 4.23945,
+      "costUSD": 0.047105,
+      "generationId": "2bb7b3ac-e4bb-4fe3-a035-75b74c8aa706",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_8a1ecf93e3c9445ea3b724f2423cbd3f",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957607988,
+      "usage": {
+        "input_tokens": 779,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 585
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1835
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957637579.3418,
+      "_id": "jh7ew16bam4187dx2c8673xxms8g9dyh",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:coding:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: coding (boy)",
+      "costINR": 4.2201,
+      "costUSD": 0.04689,
+      "generationId": "1471ac38-efac-469e-bd41-aebfab96371f",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_170cd1df8c8743a5b53b499e074fb089",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957637579,
+      "usage": {
+        "input_tokens": 736,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 542
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1792
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957668777.5315,
+      "_id": "jh7dmkmz9smvda3j5ajr9z0m5h8g850h",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:lab:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: lab (girl)",
+      "costINR": 4.2444,
+      "costUSD": 0.04716,
+      "generationId": "77f001ee-8feb-4f53-a694-64c21c66501d",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_79b9b24226864fe2ae0e30b2cb845fc4",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957668777,
+      "usage": {
+        "input_tokens": 790,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 596
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1846
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957699077.4895,
+      "_id": "jh76naqdfzm4pf05a266bx83998g9bhy",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:lab:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: lab (boy)",
+      "costINR": 4.22505,
+      "costUSD": 0.046945,
+      "generationId": "cc0587bf-3cd6-4ebc-9648-ddc7a1b73f87",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_c069f55ee0504d7e98958b92e53eadd0",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957699077,
+      "usage": {
+        "input_tokens": 747,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 553
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1803
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957730899.3694,
+      "_id": "jh785zr535dk7pfb76gx6q1dyn8g8mwa",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:field:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: field (girl)",
+      "costINR": 4.2421500000000005,
+      "costUSD": 0.047135,
+      "generationId": "2a11b03d-b940-4418-9166-93ebb434ce40",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_f90febda20f14f9b88b93cdc5901f804",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957730899,
+      "usage": {
+        "input_tokens": 785,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 591
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1841
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957758727.258,
+      "_id": "jh7b6d9b1rfgbhkp1x77ft2y118g9pn0",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:field:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: field (boy)",
+      "costINR": 4.2228,
+      "costUSD": 0.04692,
+      "generationId": "5c6369a6-5d96-4be9-a78f-9e455a1d40eb",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_860a912fccd94f87b7cc7173e0435264",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957758727,
+      "usage": {
+        "input_tokens": 742,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 548
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1798
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957789277.13,
+      "_id": "jh74myys33exbk0nhhqbrk2n498g9yaz",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:sketching:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: sketching (girl)",
+      "costINR": 4.2417,
+      "costUSD": 0.04713,
+      "generationId": "dc3f2729-360b-4a6d-a46a-290c2e72a0d0",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_48a50e248df14682a42bdc4d67a95d41",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957789277,
+      "usage": {
+        "input_tokens": 784,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 590
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1840
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957816239.219,
+      "_id": "jh737rr92gfyjghs6j76r7ty0h8g973g",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:sketching:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: sketching (boy)",
+      "costINR": 4.22235,
+      "costUSD": 0.046915,
+      "generationId": "de0c0971-06a0-4a6a-b5ef-0775b842cbdf",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_275126ae5cbc44c4adb16b4cccbf856e",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957816239,
+      "usage": {
+        "input_tokens": 741,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 547
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1797
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791957841610.7595,
+      "_id": "jh7bwgnth2tvpc97bbf6xj7qfh8g88ma",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:interview:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: interview (girl)",
+      "costINR": 4.2399,
+      "costUSD": 0.04711,
+      "generationId": "32d7e165-f0d1-49ca-8aee-495f458828d5",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_b55334f6587b4d909603cf5984796396",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791957841610,
+      "usage": {
+        "input_tokens": 780,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 586
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1836
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958689522.9707,
+      "_id": "jh71tah76dcbzfat5g9g4wdxt98g8hxc",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:interview:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: interview (boy)",
+      "costINR": 4.22055,
+      "costUSD": 0.046895,
+      "generationId": "46f16dbf-9ac9-4206-bde9-cd5390379be4",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_93c3478e47af4ced96f2820926e4018a",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958689522,
+      "usage": {
+        "input_tokens": 737,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 543
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1793
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958716603.4238,
+      "_id": "jh7emxy0rgsa460ft1shv132k98g9xtb",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:prototype:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: prototype (girl)",
+      "costINR": 4.24125,
+      "costUSD": 0.047125,
+      "generationId": "6d1bc6ff-4d0c-4fe0-8ad0-7f9b4e988f75",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_2ee32699ac7441b79a4a1cddb31439b9",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958716603,
+      "usage": {
+        "input_tokens": 783,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 589
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1839
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958742416.0354,
+      "_id": "jh75e8076x0604fbedcc9nwc398g950f",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:prototype:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: prototype (boy)",
+      "costINR": 4.2219,
+      "costUSD": 0.04691,
+      "generationId": "b94c79b1-19f2-4e20-8aff-8e71c7edb3f4",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_867a5867c3f1482ba1a9e9f92b40b95d",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958742416,
+      "usage": {
+        "input_tokens": 740,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 546
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1796
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958771709.4758,
+      "_id": "jh7f01kttbcedv68g4anthegfs8g8w8a",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:practice:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: practice (girl)",
+      "costINR": 4.24125,
+      "costUSD": 0.047125,
+      "generationId": "982906a8-c428-4128-92fa-f308dcf81fac",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_bcba93ee30b14d67a7f589e1ebff91e5",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958771709,
+      "usage": {
+        "input_tokens": 783,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 589
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1839
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958795514.9253,
+      "_id": "jh79rjerh7va3s0ss3tcfkzk5x8g919y",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:practice:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: practice (boy)",
+      "costINR": 4.2219,
+      "costUSD": 0.04691,
+      "generationId": "ca0a5983-fa72-4f32-bc0b-5f67d2d4a53d",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_a1bbf52c4f09471ca7fe7f2c805001e8",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958795514,
+      "usage": {
+        "input_tokens": 740,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 546
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1796
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958821084.2566,
+      "_id": "jh789hs386qeh36aqyjwsdpdjd8g866c",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:health-research:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: health-research (girl)",
+      "costINR": 4.2345,
+      "costUSD": 0.04705,
+      "generationId": "cdb748ae-e36c-41fa-96e5-b4880c1a6536",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_71f406a46c1c4527855f9fad88b77a6e",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958821084,
+      "usage": {
+        "input_tokens": 768,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 574
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1824
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958846206.0925,
+      "_id": "jh7cthmc9hcxmjwcsjw2v2b3958g84mr",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:health-research:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: health-research (boy)",
+      "costINR": 4.2349499999999995,
+      "costUSD": 0.047055,
+      "generationId": "c37a559f-700a-42f0-bfea-eb4766d5a347",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_c48d41ee5b68439c9ed687006b1046bb",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958846206,
+      "usage": {
+        "input_tokens": 769,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 575
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1825
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958871768.833,
+      "_id": "jh7ddv402q0jsxr8wc9fxw6qzd8g8bz6",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:consultation:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: consultation (girl)",
+      "costINR": 4.23315,
+      "costUSD": 0.047035,
+      "generationId": "030b5cf6-ec17-40d6-a854-84a1357b6690",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_ecd15af8ae8f4f489fe1a29b1148c6c1",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958871768,
+      "usage": {
+        "input_tokens": 765,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 571
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1821
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958897256.7725,
+      "_id": "jh73pt2m4whcqv3bv1gqhkeafd8g8q5m",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:consultation:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: consultation (boy)",
+      "costINR": 4.2336,
+      "costUSD": 0.04704,
+      "generationId": "38b5be95-d247-4e7f-84b2-7db31978e90d",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6654c3a3960944a9af18c25eb9e0d58c",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958897256,
+      "usage": {
+        "input_tokens": 766,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 572
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1822
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958922378.7266,
+      "_id": "jh71kqkh6c2jfxqjwzwr5bd7ph8g8m66",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:health-planning:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: health-planning (girl)",
+      "costINR": 4.23585,
+      "costUSD": 0.047065,
+      "generationId": "6cf92ac7-eb05-40ab-a9c3-3302efaa8b2e",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_70b50b96823d4be4a4c7e7a3566ca21b",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958922378,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 577
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1827
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958947853.0544,
+      "_id": "jh77symh53aaf4pe8h4ehyfdnd8g8hp1",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:health-planning:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: health-planning (boy)",
+      "costINR": 4.2363,
+      "costUSD": 0.04707,
+      "generationId": "4071d4da-b04b-477b-b2ab-673817e571ab",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_a332ea9709e94e63bb1c54c043f30ae5",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958947853,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 578
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1828
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958974189.4343,
+      "_id": "jh732sst8t8ajmfgxrjdwmzw158g84fp",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:health-explanation:girl",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: health-explanation (girl)",
+      "costINR": 4.2349499999999995,
+      "costUSD": 0.047055,
+      "generationId": "961d3ca7-46c8-4dda-84b2-4db5420f9571",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_8b566b421fbe478dba4f428388445cae",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958974189,
+      "usage": {
+        "input_tokens": 769,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 575
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1825
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791958999455.2397,
+      "_id": "jh7exvks9qxavxbc01ye5n6t7h8g8a8a",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:health-explanation:boy",
+      "callType": "panel image",
+      "careerTitle": "Shared scene: health-explanation (boy)",
+      "costINR": 4.235399999999999,
+      "costUSD": 0.04706,
+      "generationId": "2ce2746f-c56b-4716-973f-0bcccd7560a4",
+      "imageQuality": "medium",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_8a5a2408d4114882ad190dcde973e3cf",
+      "stage": "shared-scene-image",
+      "status": "succeeded",
+      "timestamp": 1791958999455,
+      "usage": {
+        "input_tokens": 770,
+        "input_tokens_details": {
+          "image_tokens": 194,
+          "text_tokens": 576
+        },
+        "output_tokens": 1056,
+        "output_tokens_details": {
+          "image_tokens": 1056,
+          "text_tokens": 0
+        },
+        "total_tokens": 1826
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959027523.4028,
+      "_id": "jh77r1xzp384sd34h5akpzxtq18g8syz",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Product Manager",
+      "callType": "captions",
+      "careerTitle": "Product Manager",
+      "costINR": 0.043992,
+      "costUSD": 0.0004888000000000001,
+      "generationId": "c8e74f06-38d0-4fc2-9970-8ec62256dd0c",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_066e2f4daa0c4ced9c9130130884a089",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959027523,
+      "usage": {
+        "input_tokens": 738,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 121,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 859
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959239943.4814,
+      "_id": "jh702e4z3h3tbrma68g2zkdxz58g91sn",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Product Manager",
+      "callType": "captions",
+      "careerTitle": "Product Manager",
+      "costINR": 0.040824,
+      "costUSD": 0.0004536,
+      "generationId": "656559d5-30c3-4c92-b4e2-092a9c3bb588",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_f52e3984c89d475d8eb4f19aeeffa659",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959239943,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 90,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 864
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959247288.9688,
+      "_id": "jh7bt4pska7y2p44xss78v9k598g8rze",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Software Engineer",
+      "callType": "captions",
+      "careerTitle": "Software Engineer",
+      "costINR": 0.040752000000000003,
+      "costUSD": 0.0004528,
+      "generationId": "64dd1140-53f3-4952-b2ed-170590930008",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_e0f8a5b3d5494ad7bf04312e89190af1",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959247288,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 90,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 862
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959255280.032,
+      "_id": "jh7ednh1ctp1292xgd1y93hbg58g976m",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:AI Engineer",
+      "callType": "captions",
+      "careerTitle": "AI Engineer",
+      "costINR": 0.041508,
+      "costUSD": 0.00046120000000000004,
+      "generationId": "cd892487-4fc1-4f47-a253-8d2697ddcc9e",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_b5acb2401ffe45d2a4a340178aff9825",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959255280,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 868
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959263705.812,
+      "_id": "jh7a1dd81neesaf433tsgwxd5h8g81sw",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Data Scientist",
+      "callType": "captions",
+      "careerTitle": "Data Scientist",
+      "costINR": 0.04032,
+      "costUSD": 0.000448,
+      "generationId": "144b71a9-0f2b-4505-a61d-e5b661c8fdc3",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_2837326e385c42d286c50ab165670aaa",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959263705,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 87,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 859
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959270974.5967,
+      "_id": "jh77dyshat2q2gna363fsezpxh8g8jcz",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Data Analyst",
+      "callType": "captions",
+      "careerTitle": "Data Analyst",
+      "costINR": 0.041148000000000004,
+      "costUSD": 0.00045720000000000005,
+      "generationId": "8154e2c2-5761-430a-b77e-e5e0cfab30cb",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_ca2a54c61c39443d953f748f7c1c3d99",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959270974,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 93,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 864
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959280245.5967,
+      "_id": "jh73p5g9t4jkfzjrz3qaaxg7fs8g96kj",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Cybersecurity Analyst",
+      "callType": "captions",
+      "careerTitle": "Cybersecurity Analyst",
+      "costINR": 0.04251600000000001,
+      "costUSD": 0.0004724000000000001,
+      "generationId": "db07e91b-e262-4ca9-a8b1-624017d46dd0",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_73305268db8a42d194aeebc2969c8fe3",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959280245,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 102,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 875
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959286368.469,
+      "_id": "jh7exekwtz1866xm2cv847vha18g9w9x",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Robotics Engineer",
+      "callType": "captions",
+      "careerTitle": "Robotics Engineer",
+      "costINR": 0.042876,
+      "costUSD": 0.0004764,
+      "generationId": "d96f4e77-39f7-4e34-b4ee-412f52bf6360",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6961993c88eb4f679ea5a023fa058e09",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959286368,
+      "usage": {
+        "input_tokens": 775,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 104,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 879
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959292650.202,
+      "_id": "jh75yvp909qtwh0bht38z544xx8g9sd4",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Automation Engineer",
+      "callType": "captions",
+      "careerTitle": "Automation Engineer",
+      "costINR": 0.042192,
+      "costUSD": 0.0004688,
+      "generationId": "33daf9bd-b2d9-4eb9-bd51-33e464e87a3e",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_e9928bacc00a491c8fced53a82830155",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959292650,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 100,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 872
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959298349.5828,
+      "_id": "jh70j8txy9xesa4v667p8y3jxx8g8p6e",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Cloud Engineer",
+      "callType": "captions",
+      "careerTitle": "Cloud Engineer",
+      "costINR": 0.040536,
+      "costUSD": 0.0004504,
+      "generationId": "86c28683-9e57-43d8-abdf-0f8a76821fb6",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6105f10281404923a532462d22869bbc",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959298349,
+      "usage": {
+        "input_tokens": 770,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 859
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959303919.2468,
+      "_id": "jh79v4a7fxj3snnej4qc7w1jcx8g8pn7",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Privacy Specialist",
+      "callType": "captions",
+      "careerTitle": "Privacy Specialist",
+      "costINR": 0.042696,
+      "costUSD": 0.0004744,
+      "generationId": "42859dc3-4744-49fd-b351-3a0a8e61d2eb",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_40aa9bc17fd34e6e8d4572b2750cb82d",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959303919,
+      "usage": {
+        "input_tokens": 770,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 104,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 874
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959309636.881,
+      "_id": "jh772xjv99w9kqgejqypzh7ye18g9wwr",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:AI Safety Analyst",
+      "callType": "captions",
+      "careerTitle": "AI Safety Analyst",
+      "costINR": 0.040896,
+      "costUSD": 0.0004544,
+      "generationId": "dd33a012-aa64-4d3d-831a-ecf7dd82744e",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_39fd0ebbded24b11bae6f72cf4de8ffb",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959309636,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 863
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959317400.7085,
+      "_id": "jh7ch0v6rmvepwr3dp6zk9m1vx8g8f9g",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Digital Accessibility Specialist",
+      "callType": "captions",
+      "careerTitle": "Digital Accessibility Specialist",
+      "costINR": 0.041004,
+      "costUSD": 0.0004556,
+      "generationId": "b5740238-4be8-4983-a839-1a4b0514b6f4",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_bc6362b65572486288e54b517a63c453",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959317400,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 863
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959324955.013,
+      "_id": "jh77sze6gr9ra9m407sandfm0x8g92sw",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:User Experience Designer",
+      "callType": "captions",
+      "careerTitle": "User Experience Designer",
+      "costINR": 0.041688,
+      "costUSD": 0.00046320000000000004,
+      "generationId": "5afa9ba3-3111-45c4-9e0e-ee3854450aca",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_0c6f21488f64460cb8d8b7b6495ab755",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959324955,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 96,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 870
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959332409.0374,
+      "_id": "jh79f0nz95jaedcn1myds68vrh8g9jm6",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Game Designer",
+      "callType": "captions",
+      "careerTitle": "Game Designer",
+      "costINR": 0.042444,
+      "costUSD": 0.0004716,
+      "generationId": "f273976e-40df-4f4e-98cd-3878a71f9b38",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_dff5e4fa96a043b19047809eb134a96a",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959332409,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 102,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 873
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959339911.0522,
+      "_id": "jh70g5tf25n8r9rmsemxxwadk58g842s",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Game Developer",
+      "callType": "captions",
+      "careerTitle": "Game Developer",
+      "costINR": 0.040175999999999996,
+      "costUSD": 0.00044639999999999995,
+      "generationId": "defab93b-7b12-42ac-b7fb-33ddcffc77bb",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_4899e6398eaf49fe8432821073f61ff9",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959339911,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 86,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 858
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959348976.3914,
+      "_id": "jh71md9bt6hx1znfqh4n4r2pq98g8te6",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Simulation Designer",
+      "callType": "captions",
+      "careerTitle": "Simulation Designer",
+      "costINR": 0.039384,
+      "costUSD": 0.0004376,
+      "generationId": "746bb984-80ca-45df-a513-c80d0e780b7c",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_a4a216d4ca5344bd8421a3b6b9a74c71",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959348976,
+      "usage": {
+        "input_tokens": 770,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 81,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 851
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959356190.5415,
+      "_id": "jh713t7pb0pkbc79y7806c1fwn8g90f9",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Digital Artist",
+      "callType": "captions",
+      "careerTitle": "Digital Artist",
+      "costINR": 0.0414,
+      "costUSD": 0.00046,
+      "generationId": "ae3bcdd8-b13e-4704-ae83-319f3fb87639",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_ce7eccbac1034fb9ba0dc8b4bb399b14",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959356190,
+      "usage": {
+        "input_tokens": 770,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 865
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959364388.7124,
+      "_id": "jh78q4qttcjpvm729e5hh6qvq58g9898",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Animator",
+      "callType": "captions",
+      "careerTitle": "Animator",
+      "costINR": 0.043776,
+      "costUSD": 0.00048640000000000006,
+      "generationId": "5a23c57b-ae83-48df-a6b1-43f6c0a54b0e",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_561d2c44ce444bd0ab2f1d5a0c0528fd",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959364388,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 111,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 883
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959372907.9465,
+      "_id": "jh741681516qk1m1n868ems5vd8g95kf",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Illustrator",
+      "callType": "captions",
+      "careerTitle": "Illustrator",
+      "costINR": 0.04165200000000001,
+      "costUSD": 0.0004628000000000001,
+      "generationId": "e5fe66d8-3204-4f1b-9684-d682958df2e7",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_afba1553b3fc4b8f8ff2b4dedcf4e823",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959372907,
+      "usage": {
+        "input_tokens": 769,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 97,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 866
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959382648.601,
+      "_id": "jh75retmrshvkyjcgpestagx9d8g96v6",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Medical Illustrator",
+      "callType": "captions",
+      "careerTitle": "Medical Illustrator",
+      "costINR": 0.02934,
+      "costUSD": 0.000326,
+      "generationId": "ac82fe71-4bc1-47d4-98a1-bafa79b72c02",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_90175e6c86b54ceda1b78bae9aeec5a7",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959382648,
+      "usage": {
+        "input_tokens": 439,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 94,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 533
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959391253.5408,
+      "_id": "jh76yc4jw23wharrxkhz4dfnw98g89we",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Science Communicator",
+      "callType": "captions",
+      "careerTitle": "Science Communicator",
+      "costINR": 0.04086,
+      "costUSD": 0.000454,
+      "generationId": "b964fcb5-d3b6-4e5b-b712-8285611f6e0a",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_39f3e8642b844661b86adc9d3683a33a",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959391253,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 862
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959399097.116,
+      "_id": "jh70b4daahk2mezf1d7j1sd6mn8g8bs7",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Author",
+      "callType": "captions",
+      "careerTitle": "Author",
+      "costINR": 0.041004,
+      "costUSD": 0.0004556,
+      "generationId": "cd79ab5d-16cb-428d-a401-2b0176408e70",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_ba2850ee9b0b4a859788e19f3e2cd7c7",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959399097,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 863
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959407077.5793,
+      "_id": "jh71n0jmx0d9q3j43b3w6nfxhx8g86y8",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Journalist",
+      "callType": "captions",
+      "careerTitle": "Journalist",
+      "costINR": 0.043056000000000004,
+      "costUSD": 0.00047840000000000003,
+      "generationId": "0e001ff6-d4ba-4e07-965b-d42aff424dff",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_461b33c50fd046339f6d52c337689938",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959407077,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 106,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 878
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959414278.5845,
+      "_id": "jh7dh8hfzxgnwbm773rp72xb2h8g8a98",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Food Critic",
+      "callType": "captions",
+      "careerTitle": "Food Critic",
+      "costINR": 0.0414,
+      "costUSD": 0.00046,
+      "generationId": "419ef16f-b033-40b7-b3d2-cfdae7a31381",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_34d335fbea65481ebb8150a01435b9c3",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959414278,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 94,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 868
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959424187.23,
+      "_id": "jh778mprvn6wadhf2j7z409rfx8g8xp0",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Content Strategist",
+      "callType": "captions",
+      "careerTitle": "Content Strategist",
+      "costINR": 0.042624,
+      "costUSD": 0.0004736,
+      "generationId": "2b4fb83c-633f-497d-aa11-2f33cbc2baf0",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_08cfc55845af4c689e24ae968cc87978",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959424187,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 103,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 875
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959434966.4346,
+      "_id": "jh76tqwmst5v9t6cwmkvtk1ypn8g8r71",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Editor",
+      "callType": "captions",
+      "careerTitle": "Editor",
+      "costINR": 0.04104,
+      "costUSD": 0.000456,
+      "generationId": "93186a11-0877-41f6-a1ab-3240a9d23051",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_c77de4d8584248d2ac8b00388fee0a37",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959434966,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 864
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959444514.4067,
+      "_id": "jh75aycbs37m16np892p3zqs8x8g9q9b",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Documentary Filmmaker",
+      "callType": "captions",
+      "careerTitle": "Documentary Filmmaker",
+      "costINR": 0.04212,
+      "costUSD": 0.000468,
+      "generationId": "172111ed-912a-4bd2-821b-a2a540989236",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_61e908d372894ed7bb5576989d10d266",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959444514,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 99,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 873
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959452400.4932,
+      "_id": "jh77nqk2mp7xyyr247kk6hm0nx8g8cdt",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Learning Designer",
+      "callType": "captions",
+      "careerTitle": "Learning Designer",
+      "costINR": 0.04086,
+      "costUSD": 0.000454,
+      "generationId": "f7c900c6-3310-4e24-a8db-e0f6824ac77a",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_55f09f44353943b68e563fe3eefa496c",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959452400,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 862
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959460036.0679,
+      "_id": "jh73bexam7tjxvvcgk9knnrgbd8g9gtq",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Teacher",
+      "callType": "captions",
+      "careerTitle": "Teacher",
+      "costINR": 0.041436,
+      "costUSD": 0.0004604,
+      "generationId": "3104e95d-0c2c-408e-a3a0-c3cadbe04b8e",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_29e46b1d48f44a2aac5677062c552aea",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959460036,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 866
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959468256.915,
+      "_id": "jh77kfgady7f3kt6wcv95fakg98g9e1d",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Career Adviser",
+      "callType": "captions",
+      "careerTitle": "Career Adviser",
+      "costINR": 0.04086,
+      "costUSD": 0.000454,
+      "generationId": "885898f5-1fd2-4a59-9db8-1192c44a899f",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_98b2221c46eb45dfb5a600b222981e38",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959468256,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 862
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959478579.0671,
+      "_id": "jh732xr704aptf5z1j9hcmtzvn8g9a09",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Economist",
+      "callType": "captions",
+      "careerTitle": "Economist",
+      "costINR": 0.04104,
+      "costUSD": 0.000456,
+      "generationId": "ffb1da4a-fac4-4a74-bac1-3e59cd9674d2",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_dece55d9d963434896b33d4636ff43d4",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959478579,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 864
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959488943.3804,
+      "_id": "jh705d3npctfsfqjxtczvx8h398g96bz",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Economic Policy Analyst",
+      "callType": "captions",
+      "careerTitle": "Economic Policy Analyst",
+      "costINR": 0.040644,
+      "costUSD": 0.0004516,
+      "generationId": "932d6ac0-bf3c-4262-ae9a-5a67221e4fe8",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_5c89cd1216f24ddb933df6159f9099b2",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959488943,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 862
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959498804.4517,
+      "_id": "jh70mhx3gj3g5g4y4yqqvpbj998g8zqd",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Financial Analyst",
+      "callType": "captions",
+      "careerTitle": "Financial Analyst",
+      "costINR": 0.041364,
+      "costUSD": 0.0004596,
+      "generationId": "73fbea2e-4591-42dd-87c1-f2b464ae1a8b",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_043f4056f6754fd1a7debe81198945c8",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959498804,
+      "usage": {
+        "input_tokens": 769,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 864
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959510256.1912,
+      "_id": "jh7cb6jhd9mze0qwke5eq692sh8g8hq4",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Risk Analyst",
+      "callType": "captions",
+      "careerTitle": "Risk Analyst",
+      "costINR": 0.040212000000000005,
+      "costUSD": 0.00044680000000000007,
+      "generationId": "25ba4e9e-feb4-4e97-8f93-34f40481b3b6",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_962dcebe849c4035ba02df0b8924878b",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959510256,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 86,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 859
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959518251.5134,
+      "_id": "jh7bdvh9rg9m53y8nw71sb898x8g8jqm",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Actuary",
+      "callType": "captions",
+      "careerTitle": "Actuary",
+      "costINR": 0.042624,
+      "costUSD": 0.0004736,
+      "generationId": "4c5a1e40-9dd1-4da3-b4f6-1bca12615ec3",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_36473dee13654316a271b92ded19b8bf",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959518251,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 103,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 875
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959527471.0933,
+      "_id": "jh74r2rkahbccm0wkh363s7tzx8g97fy",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Financial Planner",
+      "callType": "captions",
+      "careerTitle": "Financial Planner",
+      "costINR": 0.041508,
+      "costUSD": 0.00046120000000000004,
+      "generationId": "8170dcc2-9c5c-414e-9e12-937ad1cf1324",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_8b1c6aefe56c4363aa456fe131ecb7ed",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959527471,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 868
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959536088.8438,
+      "_id": "jh72gje6009cvjva2jx0xcc6r98g8nr3",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Market Researcher",
+      "callType": "captions",
+      "careerTitle": "Market Researcher",
+      "costINR": 0.040068000000000006,
+      "costUSD": 0.00044520000000000003,
+      "generationId": "75d8a484-634a-4074-951c-571e7b3c968c",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_3237d9a69b4846d2ad39d67a6336a9df",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959536088,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 85,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 858
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959546011.1218,
+      "_id": "jh78pk2vwspv5qnrgpmtez4m1h8g9xbz",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Consumer Insights Analyst",
+      "callType": "captions",
+      "careerTitle": "Consumer Insights Analyst",
+      "costINR": 0.04179600000000001,
+      "costUSD": 0.00046440000000000007,
+      "generationId": "16bfc097-df22-4d99-bef0-2b7f82878d8c",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_4e8d555d551f4fb583e7f6d5ff08dce0",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959546011,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 97,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 870
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959554549.7,
+      "_id": "jh794whxkfr1bq8mzhaqj2kedn8g9e7p",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Supply Chain Analyst",
+      "callType": "captions",
+      "careerTitle": "Supply Chain Analyst",
+      "costINR": 0.041256,
+      "costUSD": 0.00045840000000000003,
+      "generationId": "9701b47a-789a-4017-aa4d-ab21033d78db",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_eb31becbaff24a1ba2108a37ac38ba55",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959554549,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 93,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 867
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959562060.4565,
+      "_id": "jh788cjpsfrssps9qqxzxrj4qn8g8e6p",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Operations Research Analyst",
+      "callType": "captions",
+      "careerTitle": "Operations Research Analyst",
+      "costINR": 0.04176,
+      "costUSD": 0.000464,
+      "generationId": "62c4944b-137b-4379-b203-06c4a7f02259",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_a4fac695738345299e233f9c590aa594",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959562060,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 97,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 869
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959570130.458,
+      "_id": "jh79vh29hddhnebcha2wehc85s8g9nwx",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Climate Data Analyst",
+      "callType": "captions",
+      "careerTitle": "Climate Data Analyst",
+      "costINR": 0.040608000000000005,
+      "costUSD": 0.00045120000000000007,
+      "generationId": "376ba251-1b39-47c1-900d-5639cc570add",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_5255704884c840f7871d5a6c91a258fa",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959570130,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 861
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959577466.34,
+      "_id": "jh75c08xcss93ybyds5mb9ebfx8g8y17",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Environmental Scientist",
+      "callType": "captions",
+      "careerTitle": "Environmental Scientist",
+      "costINR": 0.04086,
+      "costUSD": 0.000454,
+      "generationId": "1c58b078-cf1a-4c4a-9ee9-d19918a7c579",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_cadd1b6079f84f61ada7f5e217b079d0",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959577466,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 862
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959584911.9465,
+      "_id": "jh735h88t225pvm31c91p7tq9d8g9ksq",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Renewable Energy Engineer",
+      "callType": "captions",
+      "careerTitle": "Renewable Energy Engineer",
+      "costINR": 0.043272000000000005,
+      "costUSD": 0.0004808000000000001,
+      "generationId": "50eb4cd9-680c-4ebc-b59e-b846f7e67548",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_61fdeb98377840d9adb6f024fd60e984",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959584911,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 107,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 881
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959592229.8777,
+      "_id": "jh7a1kb6cm4bxd9s56n6v3hv418g8k0z",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Energy Storage Engineer",
+      "callType": "captions",
+      "careerTitle": "Energy Storage Engineer",
+      "costINR": 0.039564,
+      "costUSD": 0.0004396,
+      "generationId": "2ce62cce-ae9d-45b6-a2af-ad1d57ff19de",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_28e8857f83354c7c8d6f8c640a54ced4",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959592229,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 82,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 853
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959599618.1746,
+      "_id": "jh74vkgn2qg7v9nk0tzjysnq8s8g929a",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Water Engineer",
+      "callType": "captions",
+      "careerTitle": "Water Engineer",
+      "costINR": 0.04179600000000001,
+      "costUSD": 0.00046440000000000007,
+      "generationId": "fd3297f1-25f7-4e5c-9698-eb6651434a01",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_e2988722802f418ea1d6bcaca0b85468",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959599618,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 97,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 870
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959606783.4016,
+      "_id": "jh7dm7cze6dvfh4zx04g237rg18g8tbz",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Urban Planner",
+      "callType": "captions",
+      "careerTitle": "Urban Planner",
+      "costINR": 0.040968000000000004,
+      "costUSD": 0.00045520000000000006,
+      "generationId": "8f0b57c9-d43f-4250-9000-2e457b501f07",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_d11ad905746e4a9ba480513778f0fff9",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959606783,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 865
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959614841.5227,
+      "_id": "jh73xc7k4p4kbnpgwpqzwkpw6s8g94vk",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Transport Planner",
+      "callType": "captions",
+      "careerTitle": "Transport Planner",
+      "costINR": 0.039924,
+      "costUSD": 0.00044360000000000005,
+      "generationId": "05348916-0237-47bd-9c8e-19132168f945",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_35fac6a9f3e94051ba389c6ec3e7e8e0",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959614841,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 84,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 857
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959622322.4937,
+      "_id": "jh74a4qzxf5xv509hcdxmzdvpx8g8b2a",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Sustainability Consultant",
+      "callType": "captions",
+      "careerTitle": "Sustainability Consultant",
+      "costINR": 0.040788000000000005,
+      "costUSD": 0.00045320000000000007,
+      "generationId": "ceea4ed2-ba77-49a1-870a-8998363eb3ba",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_e166230f6fa04bbfbe23a3090987caca",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959622322,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 90,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 863
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959633103.4268,
+      "_id": "jh7a726d135q1cp9fwdtkqezx58g9nce",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Circular Economy Specialist",
+      "callType": "captions",
+      "careerTitle": "Circular Economy Specialist",
+      "costINR": 0.040536,
+      "costUSD": 0.00045040000000000005,
+      "generationId": "f4c92f7a-22cd-4c66-a30a-e841f8536105",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_0090aff11de840a8b2845b0ebaa36998",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959633103,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 88,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 862
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959639726.293,
+      "_id": "jh7eh12rwk85vmvx6gq9ghpek58g80rh",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Conservation Scientist",
+      "callType": "captions",
+      "careerTitle": "Conservation Scientist",
+      "costINR": 0.040896,
+      "costUSD": 0.0004544,
+      "generationId": "012ff178-4386-46b2-b338-c814b9652c35",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_8523faae892645b1979ff7d65b4606a9",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959639726,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 863
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959645332.219,
+      "_id": "jh7at7qe3nwprpwe0fgekx5bz98g8g1k",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Food Scientist",
+      "callType": "captions",
+      "careerTitle": "Food Scientist",
+      "costINR": 0.041364,
+      "costUSD": 0.0004596,
+      "generationId": "7f9dfb98-7952-4075-8b70-0852c067b5b1",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_339b2ac65f6c4ed1b54696c059e15321",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959645332,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 94,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 867
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959651550.9702,
+      "_id": "jh77mrtedq38vk67je140v9vq18g8tmz",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Food Safety Specialist",
+      "callType": "captions",
+      "careerTitle": "Food Safety Specialist",
+      "costINR": 0.040536,
+      "costUSD": 0.00045040000000000005,
+      "generationId": "614fa03d-b0e9-470f-b494-39ae5218cce6",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_0950dd1046fb451a851de8bb34055890",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959651550,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 88,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 862
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959661198.0059,
+      "_id": "jh71js7cxvy5saayyfb7y9hv898g9p1e",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Agricultural Scientist",
+      "callType": "captions",
+      "careerTitle": "Agricultural Scientist",
+      "costINR": 0.04107600000000001,
+      "costUSD": 0.0004564000000000001,
+      "generationId": "e10dd85e-060b-45e4-9925-db4046d6a39b",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_4dbe9c9c421c47b2983047cb5ac5d9f7",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959661198,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 865
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959671322.7747,
+      "_id": "jh75tn9etanx7v3vfs747126y58g967r",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Precision Farming Specialist",
+      "callType": "captions",
+      "careerTitle": "Precision Farming Specialist",
+      "costINR": 0.04035600000000001,
+      "costUSD": 0.0004484000000000001,
+      "generationId": "006401f8-446e-4905-b9b7-76025e9ddd62",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_4a6d48b4e22a49c5bb74375107f25683",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959671322,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 87,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 860
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959677046.612,
+      "_id": "jh71t65ysj51j77daxcz7n6xf98g8w0b",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Nutritionist",
+      "callType": "captions",
+      "careerTitle": "Nutritionist",
+      "costINR": 0.029196000000000003,
+      "costUSD": 0.0003244,
+      "generationId": "449ff7a9-51e1-4c74-b8fb-5284526be275",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_9be6d03c9d134858b4980b4f868b1128",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959677046,
+      "usage": {
+        "input_tokens": 439,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 93,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 532
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959683405.6565,
+      "_id": "jh731dcxazb006fvmtyrhdex6h8g9ayh",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Food Systems Analyst",
+      "callType": "captions",
+      "careerTitle": "Food Systems Analyst",
+      "costINR": 0.042192,
+      "costUSD": 0.0004688,
+      "generationId": "c033b46e-da07-405c-b003-e1c2c820e218",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6dad714ff2254cab9ac6bc4be492c521",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959683405,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 100,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 872
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959689281.31,
+      "_id": "jh70e69p27atwp9hh5jmk3b9wd8g9evc",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Biotechnology Researcher",
+      "callType": "captions",
+      "careerTitle": "Biotechnology Researcher",
+      "costINR": 0.044028000000000005,
+      "costUSD": 0.0004892000000000001,
+      "generationId": "d4b8f7aa-4b51-4311-8607-279de635b943",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_e3f2de1783ed49d7b3ded4b4216a924a",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959689281,
+      "usage": {
+        "input_tokens": 775,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 112,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 887
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959695027.8296,
+      "_id": "jh77jr2n86fmbkc18487fzrnqx8g8ws3",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Bioinformatics Analyst",
+      "callType": "captions",
+      "careerTitle": "Bioinformatics Analyst",
+      "costINR": 0.040536,
+      "costUSD": 0.0004504,
+      "generationId": "7775d579-a531-463d-91fb-2bedcbd183d3",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_b8202bbc61af4194815ea3c900ba930a",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959695027,
+      "usage": {
+        "input_tokens": 770,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 859
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959700819.428,
+      "_id": "jh7bt0tt9h4q7n2c9a7yq6vqd58g9e1b",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Biomedical Engineer",
+      "callType": "captions",
+      "careerTitle": "Biomedical Engineer",
+      "costINR": 0.02905200000000001,
+      "costUSD": 0.0003228000000000001,
+      "generationId": "3e428d1b-0574-4d64-b5f9-e3cfed0dfba4",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_9aae6761ebcb4bcdb7ebe226fec79e02",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959700819,
+      "usage": {
+        "input_tokens": 439,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 531
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959708842.9114,
+      "_id": "jh72mzqsvxr3sftj62k8zvwmch8g9g76",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Medical Researcher",
+      "callType": "captions",
+      "careerTitle": "Medical Researcher",
+      "costINR": 0.029592000000000004,
+      "costUSD": 0.0003288,
+      "generationId": "2766b7a0-897e-47cf-a223-ea2f459866c6",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_22b53e547e1a468588bb8aa807552e85",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959708842,
+      "usage": {
+        "input_tokens": 442,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 537
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959715828.336,
+      "_id": "jh7f521vxs27xtp259hph2ah6h8g8jsp",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Doctor",
+      "callType": "captions",
+      "careerTitle": "Doctor",
+      "costINR": 0.029772000000000007,
+      "costUSD": 0.00033080000000000007,
+      "generationId": "16f1848c-a88a-4d1b-80e0-069b02a98699",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_2c1e541f880b4add8ecaa8429ab229f2",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959715828,
+      "usage": {
+        "input_tokens": 439,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 97,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 536
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959722129.7466,
+      "_id": "jh71pbzmb16fskp1vmmqtkd1s98g9qre",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Nurse",
+      "callType": "captions",
+      "careerTitle": "Nurse",
+      "costINR": 0.029628,
+      "costUSD": 0.00032920000000000003,
+      "generationId": "14e2f763-a5c8-4d7e-9401-e5a654dd7ca8",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_9323ff2c4d804cb6bf9acb5edeb0ddca",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959722129,
+      "usage": {
+        "input_tokens": 439,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 96,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 535
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959729043.1716,
+      "_id": "jh7fzq407afacb9mak9shb4qjs8g82ch",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Physiotherapist",
+      "callType": "captions",
+      "careerTitle": "Physiotherapist",
+      "costINR": 0.030096,
+      "costUSD": 0.0003344,
+      "generationId": "83d64e80-e4a3-424f-9627-3dd804562104",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_ef598b0b8ba24c6dab234c55340e2426",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959729043,
+      "usage": {
+        "input_tokens": 440,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 99,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 539
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959735252.0872,
+      "_id": "jh74hz1qx0jx9tr5nygp0kjz318g9y76",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Occupational Therapist",
+      "callType": "captions",
+      "careerTitle": "Occupational Therapist",
+      "costINR": 0.030995999999999996,
+      "costUSD": 0.00034439999999999997,
+      "generationId": "a27be66d-0d38-49e2-b965-e771143fec0c",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_86d97b7018e14f96aa070626d1dc789e",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959735252,
+      "usage": {
+        "input_tokens": 441,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 105,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 546
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959742118.5657,
+      "_id": "jh7f6j343zazdv301aveya7xpn8g95cm",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Psychologist",
+      "callType": "captions",
+      "careerTitle": "Psychologist",
+      "costINR": 0.029628,
+      "costUSD": 0.00032920000000000003,
+      "generationId": "045f7ca1-8110-4908-a335-d02080f87aeb",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_210f76b686fb411e81e46024d8c2fdce",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959742118,
+      "usage": {
+        "input_tokens": 439,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 96,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 535
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959750041.7576,
+      "_id": "jh7dssj26n8xejfetv7qqy6fad8g82ac",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Public Health Analyst",
+      "callType": "captions",
+      "careerTitle": "Public Health Analyst",
+      "costINR": 0.030096,
+      "costUSD": 0.0003344,
+      "generationId": "5b14cf92-2941-45ec-91c9-bbedbf1b928e",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_b0e216befc4e4d1a9d5d26a479bc8a44",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959750041,
+      "usage": {
+        "input_tokens": 440,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 99,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 539
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959759715.3926,
+      "_id": "jh74cp2qbp7swectbvfx2kww6d8g9df4",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Health Data Analyst",
+      "callType": "captions",
+      "careerTitle": "Health Data Analyst",
+      "costINR": 0.030564,
+      "costUSD": 0.0003396,
+      "generationId": "b5294fc5-9470-40d2-9c05-03adca0a2daa",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_d659841bf2f040b892b65c3bffeeb1b7",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959759715,
+      "usage": {
+        "input_tokens": 441,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 102,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 543
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959768251.7717,
+      "_id": "jh74h8pcf42anrnjfeb1qkb0m18g988g",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Genetic Counsellor",
+      "callType": "captions",
+      "careerTitle": "Genetic Counsellor",
+      "costINR": 0.030564,
+      "costUSD": 0.0003396,
+      "generationId": "7b9b4aa7-8a75-4e19-9c94-ec9e58679f23",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_f0ab7d509a6f4d1285d826e613681a27",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959768251,
+      "usage": {
+        "input_tokens": 441,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 102,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 543
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959777869.7004,
+      "_id": "jh7fzwzb531ckj7qyz1tvxp5jx8g8ft7",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Assistive Technology Designer",
+      "callType": "captions",
+      "careerTitle": "Assistive Technology Designer",
+      "costINR": 0.0405,
+      "costUSD": 0.00045000000000000004,
+      "generationId": "9ae9f64b-80fa-4f89-a91f-73bf967746a9",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_a3188a03c60c4a1fafb5fa683c08bcfc",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959777869,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 88,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 861
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959786024.7976,
+      "_id": "jh7979df0s4325avygd7z1gy0s8g8h7f",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Community Health Worker",
+      "callType": "captions",
+      "careerTitle": "Community Health Worker",
+      "costINR": 0.030528000000000007,
+      "costUSD": 0.00033920000000000006,
+      "generationId": "26659fde-b9e2-48c6-ac34-41b6770bc26a",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_558c045f43924bf6810c731b81254d99",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959786024,
+      "usage": {
+        "input_tokens": 440,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 102,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 542
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959793483.0957,
+      "_id": "jh79004jr2fbdq8nxd4znk65nx8g9kf1",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Sports Data Analyst",
+      "callType": "captions",
+      "careerTitle": "Sports Data Analyst",
+      "costINR": 0.040068000000000006,
+      "costUSD": 0.00044520000000000003,
+      "generationId": "09f3faec-041d-4a1a-b83b-4cf8a429a78a",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_f3755b274bcb41018f050500c08417f0",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959793483,
+      "usage": {
+        "input_tokens": 773,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 85,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 858
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959803247.7302,
+      "_id": "jh733rmjbn7pp37ntyzm8ks6px8g9ykj",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Sports Scientist",
+      "callType": "captions",
+      "careerTitle": "Sports Scientist",
+      "costINR": 0.040752000000000003,
+      "costUSD": 0.0004528,
+      "generationId": "0472d1f0-6b61-46e7-ba4f-59471ff24f4b",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_6368e7c6a648422dbd0fcdbdb8b17a83",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959803247,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 90,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 862
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959809041.3232,
+      "_id": "jh73byh9vy8kkrx7h93x0wyft98g8xyh",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Sports Coach",
+      "callType": "captions",
+      "careerTitle": "Sports Coach",
+      "costINR": 0.041112,
+      "costUSD": 0.00045680000000000004,
+      "generationId": "597fbd2c-7843-488c-906b-f1bd5a3a3621",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_aa798368dded45818856ce9afa0297e8",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959809041,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 866
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959814841.832,
+      "_id": "jh709fawjkajap0a2gb0d4ybp18g90qh",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Sports Physiotherapist",
+      "callType": "captions",
+      "careerTitle": "Sports Physiotherapist",
+      "costINR": 0.0297,
+      "costUSD": 0.00033,
+      "generationId": "30c69a70-bfb6-491f-8972-ef24048221ba",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_c8d81b1ddadc423c940f0dd5f54bc0bc",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959814841,
+      "usage": {
+        "input_tokens": 441,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 96,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 537
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959820875.0225,
+      "_id": "jh72dytbae6gfej8f83sy8rzyn8g9rrw",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Sports Psychologist",
+      "callType": "captions",
+      "careerTitle": "Sports Psychologist",
+      "costINR": 0.02934,
+      "costUSD": 0.000326,
+      "generationId": "88fce5ff-be16-4d37-926e-4275e91fed8e",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_a20e8f6a1aef4c549212d064569343c7",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959820875,
+      "usage": {
+        "input_tokens": 439,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 94,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 533
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959827040.656,
+      "_id": "jh75x164sx0v3df7336gxgf8ds8g8h29",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Sports Technology Engineer",
+      "callType": "captions",
+      "careerTitle": "Sports Technology Engineer",
+      "costINR": 0.042696000000000005,
+      "costUSD": 0.00047440000000000004,
+      "generationId": "4913fd4d-431f-431a-80cd-ebc076ddc2d4",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_5834a91f4338460d8aac65e0aedf5dba",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959827040,
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 103,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 877
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959833830.7458,
+      "_id": "jh7fszn8snj0kbgkfm6wqd3a0n8g8k21",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Industrial Designer",
+      "callType": "captions",
+      "careerTitle": "Industrial Designer",
+      "costINR": 0.04258800000000001,
+      "costUSD": 0.00047320000000000006,
+      "generationId": "c1dba6e8-8bc2-4a21-84c7-ad5d2b6326ba",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_7550625985164f33a0783a190c1deedf",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959833830,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 103,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 874
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959843196.1003,
+      "_id": "jh79hpwjs0dqymnrptya773am58g8s2q",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Materials Scientist",
+      "callType": "captions",
+      "careerTitle": "Materials Scientist",
+      "costINR": 0.04032,
+      "costUSD": 0.000448,
+      "generationId": "38213466-af5a-42f4-aa40-d12c4fc75609",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_5f3ca7f4b79643879565d2f3e39fbffb",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959843196,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 87,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 859
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959851946.8843,
+      "_id": "jh729r6mhbe8wet82bp8p10fdx8g94as",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Social Worker",
+      "callType": "captions",
+      "careerTitle": "Social Worker",
+      "costINR": 0.041328000000000004,
+      "costUSD": 0.00045920000000000005,
+      "generationId": "1bc7365f-05bf-4cb6-b6a5-82aa3ad52679",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_5301041f9b99487fafe1d29d0ca0450d",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959851946,
+      "usage": {
+        "input_tokens": 772,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 94,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 866
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959860886.5605,
+      "_id": "jh7dcm1qz35yw5t4a4mhp6pk4s8g8j3q",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Public Policy Analyst",
+      "callType": "captions",
+      "careerTitle": "Public Policy Analyst",
+      "costINR": 0.03970800000000001,
+      "costUSD": 0.00044120000000000004,
+      "generationId": "f26e31fe-c51b-483f-bc6a-666d409f18ff",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_f7eabc2107064d7f808e5b0ca5640d0d",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959860886,
+      "usage": {
+        "input_tokens": 771,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 83,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 854
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959869830.05,
+      "_id": "jh71pve8vqree541m3f5k0c69n8g9yx2",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Corporate Lawyer",
+      "callType": "captions",
+      "careerTitle": "Corporate Lawyer",
+      "costINR": 0.04888800000000001,
+      "costUSD": 0.0005432000000000001,
+      "generationId": "05ebe382-2558-4bf0-88b2-e28aa3e945de",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_cb3e3a5b80064e95a9fbd6712606fb7b",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959869830,
+      "usage": {
+        "input_tokens": 910,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 112,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1022
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959876299.9934,
+      "_id": "jh75y40c1ca67qeqy6gx2gf7x58g8q16",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Chartered Accountant",
+      "callType": "captions",
+      "careerTitle": "Chartered Accountant",
+      "costINR": 0.042228,
+      "costUSD": 0.0004692,
+      "generationId": "576829a0-b875-450e-b07d-829e26a79408",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_75841c2458794bb3b017f0c731d1fcf9",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959876299,
+      "usage": {
+        "input_tokens": 777,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 99,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 876
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959882224.4617,
+      "_id": "jh73yy3twwe5rw52d0w242xax58g8e8z",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Civil Servant (IAS/IPS)",
+      "callType": "captions",
+      "careerTitle": "Civil Servant (IAS/IPS)",
+      "costINR": 0.04122,
+      "costUSD": 0.000458,
+      "generationId": "852e0ade-4d4b-42c6-9efe-0242d45e0ea6",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_c13ae45de93147db8c365e472b228dbb",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959882224,
+      "usage": {
+        "input_tokens": 781,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 872
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959888173.0784,
+      "_id": "jh78sek252kw2efakfwgd2qsad8g80hk",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Banker",
+      "callType": "captions",
+      "careerTitle": "Banker",
+      "costINR": 0.04158,
+      "costUSD": 0.000462,
+      "generationId": "a082e23b-411e-44c9-ade0-53a74db2f362",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_533a860ba6384afb8b0903ec9168fe34",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959888173,
+      "usage": {
+        "input_tokens": 775,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 870
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959893725.8037,
+      "_id": "jh7d564fbmn68xhrt6g0yp43218g8d6x",
+      "cacheHit": false,
+      "cacheKey": "shared-scenes-v1:Performing Artist",
+      "callType": "captions",
+      "careerTitle": "Performing Artist",
+      "costINR": 0.04352400000000001,
+      "costUSD": 0.00048360000000000005,
+      "generationId": "b1687243-9a46-498e-a8b9-84dc876e05ab",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_5357a8cb3d2f48bd82a4979681a32fbc",
+      "stage": "shared-scene-mapping",
+      "status": "succeeded",
+      "timestamp": 1791959893725,
+      "usage": {
+        "input_tokens": 777,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 108,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 885
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959924667.6924,
+      "_id": "jh7fd7sms7w2wxg2x4tcqzg46h8g91at",
+      "cacheHit": false,
+      "callType": "plan",
+      "careerTitle": "Corporate Lawyer",
+      "costINR": 0.07794000000000001,
+      "costUSD": 0.0008660000000000001,
+      "generationId": "987cb1f5-b722-4f72-9d3b-0b35a437f8fd",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_2e5902c7f25249d78cbffe1c894777a2",
+      "stage": "12-month-plan",
+      "status": "succeeded",
+      "timestamp": 1791959924667,
+      "usage": {
+        "input_tokens": 449,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 429,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 878
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791959937434.7778,
+      "_id": "jh75x9cd1y0v6z4zgy5nc4zerd8g8men",
+      "cacheHit": false,
+      "callType": "plan",
+      "careerTitle": "Doctor",
+      "costINR": 0.073656,
+      "costUSD": 0.0008184,
+      "generationId": "5a924a1d-bfa9-4f4f-a4d4-ba42de8d7e8a",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_55dbca82f58248f6818544ce2edc7d06",
+      "stage": "12-month-plan",
+      "status": "succeeded",
+      "timestamp": 1791959937434,
+      "usage": {
+        "input_tokens": 402,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 411,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 813
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    }
+  ],
+  "proofPlanCostINR": 0.151596
+}
