@@ -6,6 +6,7 @@ import { api } from "../convex/_generated/api";
 import "./style.css";
 import AdminCosts from "./AdminCosts";
 import MilestoneOne from "./MilestoneOne";
+import CachedCareerDay from "./CachedCareerDay";
 type Career = {
   title: string;
   description: string[];
@@ -57,7 +58,7 @@ function PanelImage({ panel, index, failed }: { panel: Story["panels"][number]; 
 }
 function App() {
   const recommend = useAction(api.ai.recommend),
-    startStories = useMutation(api.data.startStories);
+    requestStoryboard = useAction(api.ai.storyboard);
   const [interests, setInterests] = useState(""),
     [hopes, setHopes] = useState(""),
     [results, setResults] = useState<Results | null>(null),
@@ -102,7 +103,7 @@ function App() {
       100,
     );
     try {
-      await startStories({ searchKey: results.searchKey, careerIndex: index, cachedOnly: results.path === "career-cache" });
+      await requestStoryboard({ searchKey: results.searchKey, careerIndex: index });
     } catch (e) {
       setError(message(e));
     } finally {
@@ -432,10 +433,12 @@ function App() {
   );
 }
 const url = import.meta.env.VITE_CONVEX_URL;
+const savedCareer = new URLSearchParams(window.location.search).get("career");
+const savedGender = new URLSearchParams(window.location.search).get("gender");
 createRoot(document.getElementById("root")!).render(
   url ? (
     <ConvexProvider client={new ConvexReactClient(url)}>
-      {window.location.pathname === "/admin/costs" ? <AdminCosts /> : <MilestoneOne />}
+      {window.location.pathname === "/admin/costs" ? <AdminCosts /> : savedCareer ? <CachedCareerDay title={savedCareer} gender={savedGender === "girl" || savedGender === "boy" ? savedGender : "unspecified"} /> : <MilestoneOne />}
     </ConvexProvider>
   ) : (
     <main>

@@ -3,11 +3,14 @@ import { useAction, useMutation, useQuery } from "convex/react";
 import { ConvexError } from "convex/values";
 import { api } from "../convex/_generated/api";
 import "./milestone-one.css";
+import CareerDay from "./CareerDay";
+import CareerDayHeader from "./CareerDayHeader";
 
 type Career = { title: string; description: string[]; whyItFits: string; salaryMinINR: number; salaryMaxINR: number; salaryBasis: string; stability: string; overseas: string };
 type Panel = { time?: string; caption: string; imageUrl: string | null; imageError?: string };
 type Story = { title: string; status?: string; panels: Panel[]; path: string; error?: string; raw?: string };
 type Results = { careers: Career[]; note: string; searchKey: string; path: string; stories?: (Story | null)[]; sources: { title: string; url: string }[] };
+type Gender = "girl" | "boy" | "unspecified";
 type Screen = "landing" | "input" | "results" | "detail" | "storyboard";
 type IconName = "arrow" | "back" | "spark" | "leaf" | "heart" | "compass" | "briefcase" | "rupee" | "globe" | "info" | "clock" | "edit" | "lock" | "plan" | "person";
 function Icon({ name, className = "" }: { name: IconName; className?: string }) {
@@ -33,9 +36,9 @@ const items = (text: string) => text.split(/[,;\n]+/).map(s => s.trim()).filter(
 const money = (value: number) => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(value);
 const errorText = (e: unknown) => e instanceof ConvexError ? String(e.data) : "We couldn’t finish that request. Please try again.";
 function Chips({ text }: { text: string }) { return <div className="m-chips">{items(text).map((item, i) => <span key={`${item}-${i}`}>{item}</span>)}</div>; }
-function PanelImage({ panel, index }: { panel: Panel; index: number }) {
+function PanelImage({ panel, index, cachedOnly }: { panel: Panel; index: number; cachedOnly: boolean }) {
   const [loaded, setLoaded] = useState(false);
-  return <div className="m-panel-image">{!loaded && <div className="m-placeholder"><Icon name="spark" /><span>{panel.imageError ? "Illustration unavailable" : "Illustrating this moment…"}</span></div>}
+  return <div className="m-panel-image">{!loaded && <div className="m-placeholder"><Icon name="spark" /><span>{cachedOnly ? "No saved illustration yet" : panel.imageError ? "Illustration unavailable" : "Illustrating this moment…"}</span></div>}
     {panel.imageUrl && <img src={panel.imageUrl} alt={panel.caption} className={loaded ? "image-visible" : ""} onLoad={() => setLoaded(true)} loading={index === 0 ? "eager" : "lazy"} />}</div>;
 }
 function Facts({ career }: { career: Career }) {
@@ -46,33 +49,34 @@ function Facts({ career }: { career: Career }) {
   </dl>;
 }
 export default function MilestoneOne() {
-  const recommend = useAction(api.ai.recommend), startStories = useMutation(api.data.startStories), example = useMutation(api.data.example);
+  const recommend = useAction(api.ai.recommend), example = useMutation(api.data.example);
   const [screen, setScreen] = useState<Screen>("landing"), [interests, setInterests] = useState(""), [hopes, setHopes] = useState("");
   const [results, setResults] = useState<Results | null>(null), [selected, setSelected] = useState(0), [busy, setBusy] = useState(false), [error, setError] = useState("");
+  const [gender, setGender] = useState<Gender | "">("");
   const [isExample, setIsExample] = useState(false);
+  const [favourite, setFavourite] = useState(false);
   // No authentication provider or signed-in visitor state exists in this app.
   const isSignedIn = false;
   const showExplorationNav = !!results && ["results", "detail", "storyboard"].includes(screen);
-  const live = useQuery(api.data.stories, results ? { searchKey: results.searchKey } : "skip") as (Story | null)[] | undefined;
+  const live = useQuery(api.data.stories, results ? { searchKey: results.searchKey, gender: gender || "unspecified" } : "skip") as (Story | null)[] | undefined;
   const career = results?.careers[selected], story = live?.[selected] ?? results?.stories?.[selected];
   const go = (next: Screen) => { setError(""); setScreen(next); window.scrollTo({ top: 0, behavior: "instant" }); };
   async function submit(e: FormEvent) {
-    e.preventDefault(); setBusy(true); setError("");
-    try { const value = await recommend({ interests, hopes }); setIsExample(false); setResults(value); setSelected(0); go("results"); }
+    e.preventDefault(); if (!gender) return; setBusy(true); setError("");
+    try { const value = await recommend({ interests, hopes, gender: gender || "unspecified" }); setIsExample(false); setResults(value); setSelected(0); go("results"); }
     catch (e) { setError(errorText(e)); } finally { setBusy(false); }
   }
   async function showExample() {
     setBusy(true); setError("");
-    try { const value = await example({}); setInterests(value.interests); setHopes(value.hopes); setIsExample(true); setResults(value); setSelected(0); go("results"); }
+    try { const value = await example({}); setInterests(value.interests); setHopes(value.hopes); setIsExample(true); setGender("unspecified"); setResults(value); setSelected(0); go("results"); }
     catch (e) { setError(errorText(e)); } finally { setBusy(false); }
   }
-  async function openStory() {
-    if (!results) return; go("storyboard");
-    try { await startStories({ searchKey: results.searchKey, careerIndex: selected, cachedOnly: isExample || results.path === "career-cache" }); }
-    catch (e) { setError(errorText(e)); }
+  function openStory() {
+    if (!results) return;
+    go("storyboard");
   }
   return <div className={`m1${showExplorationNav ? " m-with-nav" : ""}`} data-screen={screen}>
-    <header className="m-header"><div className="m-header-inner"><button className="m-brand" onClick={() => go("landing")} aria-label="Futura 2035 home"><span className="m-brand-mark">f<span /></span><strong>Futura</strong><span className="m-year">2035</span></button><button className="m-info-button" aria-label="About these possibilities" onClick={() => document.getElementById("m-perspective")?.scrollIntoView({ behavior: "smooth" })}><Icon name="info" /></button></div></header>
+    {screen === "storyboard" ? <CareerDayHeader onBack={() => go("detail")} onHome={() => go("landing")} /> : <header className="m-header"><div className="m-header-inner"><button className="m-brand" onClick={() => go("landing")} aria-label="Futura 2035 home"><span className="m-brand-mark">f<span /></span><strong>Futura</strong><span className="m-year">2035</span></button><button className="m-info-button" aria-label="About these possibilities" onClick={() => document.getElementById("m-perspective")?.scrollIntoView({ behavior: "smooth" })}><Icon name="info" /></button></div></header>}
     {showExplorationNav && <nav className="m-exploration-nav" aria-label="Your exploration">
       <p className="m-eyebrow m-nav-eyebrow">YOUR EXPLORATION</p>
       <div className="m-nav-items">
@@ -107,9 +111,10 @@ export default function MilestoneOne() {
         <button className="m-back" onClick={() => go("landing")}><Icon name="back" />Back to possibilities</button>
         <p className="m-eyebrow">TWO QUESTIONS · HORIZON 2035</p><h1>Start with their<br /><em>curiosity.</em></h1><p className="m-lede">What they love. What you hope for. There’s no perfect answer—just a place to begin.</p>
         <form onSubmit={submit}>
+          <section className="m-input-card lavender"><label htmlFor="child-gender">Your child is</label><p>This only changes the illustrated character. Career suggestions stay the same.</p><select id="child-gender" value={gender} required disabled={busy} onChange={e => setGender(e.target.value as Gender | "")}><option value="" disabled>Select an option</option><option value="girl">Girl</option><option value="boy">Boy</option><option value="unspecified">Prefer not to say</option></select></section>
           <section className="m-input-card lavender"><div className="m-input-label"><span className="m-icon-tile"><Icon name="spark" /></span><p className="m-eyebrow">01 / YOUR CHILD</p></div><label htmlFor="interests">What does your child enjoy?</label><p>Subjects, activities, things they choose to read, make or discuss.</p><textarea id="interests" value={interests} onChange={e => setInterests(e.target.value)} placeholder="Economics, book writing, food critique" maxLength={800} required disabled={busy} /><Chips text={interests} /></section>
           <section className="m-input-card mint"><div className="m-input-label"><span className="m-icon-tile"><Icon name="heart" /></span><p className="m-eyebrow">02 / YOUR HOPES</p></div><label htmlFor="hopes">What matters to you as a parent?</label><p>Earning potential, stability, where they might work—or something else.</p><textarea id="hopes" value={hopes} onChange={e => setHopes(e.target.value)} placeholder="Good earning, stability, overseas" maxLength={800} required disabled={busy} /><Chips text={hopes} /></section>
-          <button className="m-primary" disabled={busy || !interests.trim() || !hopes.trim()}>{busy ? "Exploring possible futures…" : "Explore their possibilities"}{busy ? <span className="m-spinner" /> : <Icon name="arrow" />}</button>
+          <button className="m-primary" disabled={busy || !gender || !interests.trim() || !hopes.trim()}>{busy ? "Exploring possible futures…" : "Explore their possibilities"}{busy ? <span className="m-spinner" /> : <Icon name="arrow" />}</button>
           <p className="m-reassurance"><Icon name="lock" />Two questions. No sign-up.</p>
         </form>
       </section>}
@@ -131,14 +136,7 @@ export default function MilestoneOne() {
         <details className="m-accordion" open><summary>Your hopes: {items(hopes).join(", ")}</summary><div><h3>Earning potential</h3><strong>{money(career.salaryMinINR)}–{money(career.salaryMaxINR)} per year</strong><p>{career.salaryBasis}</p><h3>Predictable employment</h3><p>{career.stability}</p><h3>Working internationally</h3><p>{career.overseas}</p></div></details>
         <details className="m-accordion" open><summary>The work in 2035</summary><div><p>{career.description[1]}</p></div></details>
       </section>}
-      {screen === "storyboard" && career && <section id="storyboard" className="m-storyboard" aria-busy={story?.status === "generating"}>
-        <button className="m-back" onClick={() => go("detail")}><Icon name="back" />Back to {career.title}</button>
-        <p className="m-eyebrow">AN ILLUSTRATED WORKDAY</p><h1>A day in the <em>life.</em></h1><p className="m-lede">{career.title}</p>
-        {story?.panels.length ? <div className="m-panels">{story.panels.map((panel, i) => <figure key={`${career.title}-${i}`}><PanelImage key={panel.imageUrl ?? `${career.title}-${i}`} panel={panel} index={i} /><figcaption><p>{panel.caption}</p></figcaption></figure>)}</div>
-          : <div className="m-empty-state"><Icon name="clock" /><p>{error || "The scenes will appear here as they arrive."}</p></div>}
-        {story?.error && <div className="m-error" role="alert"><p>{story.error}</p><button className="m-secondary" onClick={() => go("detail")}>Try again<Icon name="arrow" /></button></div>}
-        <p className="m-run-path">Path ran: {story?.path ?? "saved-storyboard-lookup"}</p><button className="m-secondary" onClick={() => go("results")}>Explore another possibility<Icon name="arrow" /></button>
-      </section>}
+      {screen === "storyboard" && career && results && <CareerDay key={career.title} title={career.title} searchKey={results.searchKey} careerIndex={selected} panels={story?.panels ?? []} />}
       {error && <div className="m-error" role="alert"><Icon name="info" /><p>{error}</p><button className="m-secondary" disabled={busy} onClick={() => screen === "landing" ? showExample() : screen === "storyboard" ? go("detail") : document.querySelector("form")?.requestSubmit()}>Try again<Icon name="arrow" /></button></div>}
       <footer className="m-footer" id="m-perspective"><p>A direction, not a destiny.</p><span>Possibilities to explore together—not predictions or guarantees.</span><small>Futura 2035 · For parents of 15–18-year-olds</small></footer>
     </main>

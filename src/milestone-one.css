@@ -57,3 +57,5 @@
   .m1 .m-nav-item small { font-size: 9px; margin-top: 1px; }
   .m1 .m-nav-motto { display: block; margin: auto 9px 0; font-family: "Source Serif 4", Georgia, serif; font-size: 22px; line-height: 1.35; letter-spacing: -.5px; color: #7d718c; }
 }
+
+.m1 .m-input-card select{display:block;width:100%;margin-top:14px;padding:14px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font:inherit;min-height:48px}.m1 .m-input-card select:focus-visible{outline:2px solid var(--purple);outline-offset:3px}

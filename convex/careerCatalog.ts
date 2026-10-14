@@ -81,6 +81,11 @@ export const CAREER_CATALOG = [
   { title: "Materials Scientist", description: "Develops and tests materials for cleaner energy, medicine and durable products." },
   { title: "Social Worker", description: "Helps people access support and addresses social challenges through trusted human relationships." },
   { title: "Public Policy Analyst", description: "Studies evidence and public needs to improve government decisions and services." },
+  { title: "Corporate Lawyer", description: "Advises organisations on contracts, regulations and business decisions using legal research and professional judgement." },
+  { title: "Chartered Accountant", description: "Checks financial records and advises on accounting, tax and business risks using evidence and professional judgement." },
+  { title: "Civil Servant (IAS/IPS)", description: "Serves the public through administration, policy implementation or policing with accountability and sound judgement." },
+  { title: "Banker", description: "Helps people and businesses manage banking needs, assess credit and make responsible financial decisions." },
+  { title: "Performing Artist", description: "Creates and performs music, dance or theatre through artistic expression, practice and connection with audiences." },
 ] as const;
 
 export const CAREER_TITLES = CAREER_CATALOG.map(career => career.title) as [

@@ -6,7 +6,7 @@ import { internal } from "./_generated/api";
 import { todayControls, estimateINR, PAUSED_MESSAGE } from "./aiControls";
 
 const metadata = {
-  careerTitle: v.string(), callType: v.union(v.literal("careers"), v.literal("captions"), v.literal("panel image")),
+  careerTitle: v.string(), callType: v.union(v.literal("careers"), v.literal("captions"), v.literal("panel image"), v.literal("plan")),
   stage: v.string(), model: v.string(), imageSize: v.optional(v.string()), imageQuality: v.optional(v.string()),
   cacheKey: v.optional(v.string()),
   generationId: v.optional(v.string()), panel: v.optional(v.number()),

@@ -1,9 +1,10 @@
 import { internalMutation, internalQuery, query, mutation } from "./_generated/server";
 import { internal } from "./_generated/api";
-import { storyKey } from "./storyKey";
+import { findStoryboard, storyboardGender, genderValidator } from "./gender";
 import { v, ConvexError } from "convex/values";
 import { istToday, callCap } from "./aiControls";
 import { PAUSED_MESSAGE } from "./aiControls";
+import { failureDetail, failureDetailValidator } from "./storyboardErrors";
 import { CAREER_CATALOG_VERSION } from "./careerCatalog";
 
 // The example only reads an existing result. It never schedules generation or calls AI.
@@ -59,13 +60,13 @@ export const aliasSearch = internalMutation({
   },
 });
 export const saveSearch = internalMutation({
-  args: { key: v.string(), result: v.any() },
+  args: { key: v.string(), result: v.any(), gender: v.optional(genderValidator) },
   handler: async (ctx, args) => {
     const row = await ctx.db
       .query("searches")
       .withIndex("by_key", (q) => q.eq("key", args.key))
       .unique();
-    if (row) return row.result;
+    if (row) { if (args.gender) await ctx.db.patch(row._id, { gender: args.gender }); return row.result; }
     await ctx.db.insert("searches", args);
     return args.result;
   },
@@ -79,7 +80,7 @@ export const getStory = internalQuery({
       .unique(),
 });
 export const claim = internalMutation({
-  args: { key: v.string(), title: v.string(), token: v.string() },
+  args: { key: v.string(), title: v.string(), token: v.string(), gender: v.optional(genderValidator) },
   handler: async (ctx, args) => {
     const row = await ctx.db
       .query("storyboards")
@@ -111,12 +112,26 @@ export const saveStory = internalMutation({
     panels: v.any(),
     status: v.string(),
     raw: v.optional(v.string()),
+    lastError: v.optional(v.string()),
+    failureDetails: v.optional(v.array(failureDetailValidator)),
+    lastFailureAt: v.optional(v.number()),
   },
   handler: async (ctx, { key, token, ...fields }) => {
     const row = await ctx.db
       .query("storyboards")
       .withIndex("by_key", (q) => q.eq("key", key))
       .unique();
+    // A late error or stale final result must never discard an already committed image.
+    if (row?.token === token) {
+      fields.panels = Array.from({ length: Math.max(fields.panels.length, row.panels.length) }, (_, index) =>
+        row.panels[index]?.storageId ? row.panels[index] : fields.panels[index] ?? row.panels[index]);
+    }
+    if (fields.status === "failed" && !fields.lastError) {
+      const details = fields.panels.flatMap((panel: any, index: number) => panel.imageErrorDetails ? [panel.imageErrorDetails] : panel.imageError ? [failureDetail(panel.imageError, "image", index + 1)] : []);
+      fields.failureDetails = details.length ? details : row?.failureDetails ?? [failureDetail("Storyboard incomplete; previous error detail was not recorded.", "completion")];
+      fields.lastError = details.length ? details.map((d: any) => d.message).join("\n") : row?.lastError ?? fields.failureDetails!.map(d => d.message).join("\n");
+      fields.lastFailureAt = Date.now();
+    }
     if (row?.token === token)
       await ctx.db.patch(row._id, {
         ...fields,
@@ -138,15 +153,24 @@ export const savePanel = internalMutation({
     return null;
   },
 });
+// Read-only saved-career links never start a search, plan or image generation.
+export const cachedCareer = query({
+  args: { title: v.string(), gender: genderValidator }, returns: v.any(),
+  handler: async (ctx, { title, gender }) => {
+    const row = await findStoryboard(ctx, title, gender);
+    if (!row) return null;
+    return { title: row.title, status: row.status, panels: await Promise.all(row.panels.map(async (p: any) => ({ caption: p.caption, time: p.time ?? null, imageUrl: p.storageId ? await ctx.storage.getUrl(p.storageId) : null }))) };
+  },
+});
 export const stories = query({
-  args: { searchKey: v.string() }, returns: v.any(),
-  handler: async (ctx, { searchKey }) => {
+  args: { searchKey: v.string(), gender: v.optional(genderValidator) }, returns: v.any(),
+  handler: async (ctx, { searchKey, gender }) => {
     const search = await ctx.db.query("searches").withIndex("by_key", q => q.eq("key", searchKey)).unique();
     if (!search) return [];
     return Promise.all(search.result.careers.map(async (career: any) => {
-      const row = await ctx.db.query("storyboards").withIndex("by_key", q => q.eq("key", storyKey(career.title))).unique();
+      const row = await findStoryboard(ctx, career.title, gender);
       if (!row) return null;
-      return { title: row.title, status: row.status, raw: row.raw ?? null,
+      return { title: row.title, gender: storyboardGender(row) ?? null, status: row.status, raw: row.raw ?? null,
         path: row.status === "ready" ? "storyboard-cache" : row.status === "generating" ? "openai-background-images" : "storyboard-captions-ready",
         error: row.status === "failed" ? "Some illustrations could not finish. Please try again." : null,
         panels: await Promise.all(row.panels.map(async (p: any) => ({ ...p, imageUrl: p.storageId ? await ctx.storage.getUrl(p.storageId) : null }))),
@@ -154,9 +178,9 @@ export const stories = query({
     }));
   },
 });
-// Scheduling returns immediately. The existing atomic claim prevents duplicate paid calls.
+// Legacy cache-only lookup. Only the direct storyboard action can generate; nothing is scheduled.
 export const startStories = mutation({
-  args: { searchKey: v.string(), careerIndex: v.number(), cachedOnly: v.optional(v.boolean()) }, returns: v.null(),
+  args: { searchKey: v.string(), careerIndex: v.number(), gender: v.optional(genderValidator), cachedOnly: v.optional(v.boolean()) }, returns: v.null(),
   handler: async (ctx, args) => {
     const search = await ctx.db.query("searches").withIndex("by_key", q => q.eq("key", args.searchKey)).unique();
     if (!search || (args.careerIndex !== undefined && (!Number.isInteger(args.careerIndex) || !search.result.careers[args.careerIndex])))
@@ -164,17 +188,31 @@ export const startStories = mutation({
     const indexes = [args.careerIndex];
     for (const careerIndex of indexes) {
       const career = search.result.careers[careerIndex];
-      const row = await ctx.db.query("storyboards").withIndex("by_key", q => q.eq("key", storyKey(career.title))).unique();
-      if (row && (row.status === "ready" || args.cachedOnly || process.env.AI_ENABLED !== "true")) {
+      const row = await findStoryboard(ctx, career.title, args.gender);
+      if (args.gender === "unspecified" && !row) throw new ConvexError("No saved storyboard is available for this career yet.");
+      if (row && (row.status === "ready" || args.gender === "unspecified" || args.cachedOnly || process.env.AI_ENABLED !== "true")) {
         if (args.careerIndex !== undefined) await ctx.runMutation(internal.costs.cache, {
           careerTitle: career.title, callType: "panel image", stage: "storyboard-cache", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: "high",
         });
-      } else if (args.cachedOnly || process.env.AI_ENABLED !== "true") {
+      } else if (args.gender === "unspecified" || args.cachedOnly || process.env.AI_ENABLED !== "true") {
         if (args.careerIndex !== undefined) throw new ConvexError(PAUSED_MESSAGE);
       } else if (row?.status !== "generating" || row.lease <= Date.now()) {
-        await ctx.scheduler.runAfter(0, internal.ai.generate, { searchKey: args.searchKey, careerIndex });
+        throw new ConvexError("This storyboard needs illustrations. Open A day in the life to request them.");
       }
     }
     return null;
   },
+});
+
+export const setSearchGender = internalMutation({
+  args: { key: v.string(), gender: genderValidator }, returns: v.null(),
+  handler: async (ctx, args) => {
+    const row = await ctx.db.query("searches").withIndex("by_key", q => q.eq("key", args.key)).unique();
+    if (row) await ctx.db.patch(row._id, { gender: args.gender });
+    return null;
+  },
+});
+export const resolvedStory = internalQuery({
+  args: { title: v.string(), gender: v.optional(genderValidator) }, returns: v.any(),
+  handler: (ctx, args) => findStoryboard(ctx, args.title, args.gender),
 });
