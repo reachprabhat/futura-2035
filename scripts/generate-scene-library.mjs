@@ -22,7 +22,62 @@ async function cli(args) {
 }
 const adminKey = (await cli(["env", "get", "ADMIN_COSTS_KEY"])).replace(/^"|"$/g, "");
 if (adminKey.length < 32) throw new Error("Missing DEV admin credential.");
-const run = async (fn, args) => JSON.parse(await cli(["run", fn, JSON.stringify(args)]));
+const run = async (fn, args) => {
+  const output = await cli(["run", fn, JSON.stringify(args)]);
+  return output ? JSON.parse(output) : null;
+};
+// Explicit one-image comparison. It exits before any shared-library work can run.
+if (process.argv.includes("--boy-v2-test") || process.argv.includes("--boy-v2-proof")) {
+  const generationId = "boy-v2-test";
+  const promptPath = path.join(root, "design/boy-v2-test-prompt.txt");
+  const outputPath = path.join(root, "design/boy-v2-test.png");
+  const evidencePath = path.join(root, "design/boy-v2-test-aiCall.json");
+  const findRows = async () => {
+    let cursor = null;
+    for (let pageIndex = 0; pageIndex < 100; pageIndex++) {
+      const page = await run("costs:rows", { adminKey, paginationOpts: { numItems: 100, cursor } });
+      const found = page.page.filter(row => row.generationId === generationId);
+      if (found.length || page.isDone) return found;
+      cursor = page.continueCursor;
+    }
+    throw new Error("Ledger scan exceeded its safety limit.");
+  };
+  const existingRows = await findRows();
+  if (process.argv.includes("--boy-v2-proof")) {
+    await writeFile(evidencePath, JSON.stringify(existingRows, null, 2));
+    console.log(`EXACT PROMPT\n${await readFile(promptPath, "utf8")}\nAI CALL\n${JSON.stringify(existingRows, null, 2)}`);
+    if (existingRows.length !== 1 || existingRows[0].status !== "succeeded") throw new Error("Expected exactly one successful Boy v2 image call.");
+    process.exit(0);
+  }
+  if (existingRows.length) throw new Error("Boy v2 already has a recorded attempt. No new image was requested.");
+  const { photoCharacter, photoPrompt } = await import("../convex/photoPrompt.ts");
+  const prompt = `${photoPrompt(photoCharacter("boy", "Corporate Lawyer"), "Corporate Lawyer, 9:00: reviewing case files at a wooden desk in a private modern office. Seated, examining an open case folder and blank pages with a pen; a closed laptop nearby.")}\nReference image role: appearance, natural skin tone, lighting and mood only. Match the swept-back voluminous dark hair, thin dark metal rectangular glasses, neat light stubble, calm confident half-smile, navy blazer and open-collar white shirt. Match the look and mood of the reference, not the exact face; create an original fictional Indian man. Replace the reference composition with the requested desk activity. Soft warm indoor window light, shallow depth of field, realistic skin texture. Square eye-level medium shot with face and working hands visible. No readable writing, logos or watermarks.`;
+  await writeFile(promptPath, prompt);
+  const apiKey = (await cli(["env", "get", "OPENAI_API_KEY"])).replace(/^"|"$/g, "");
+  if (!apiKey) throw new Error("DEV image API credential is unavailable.");
+  const { default: OpenAI, toFile } = await import("openai");
+  const ai = new OpenAI({ apiKey, maxRetries: 0, timeout: 150000 });
+  const reference = await toFile(await readFile(path.join(root, "design/person-reference-boy-v2.png")), "person-reference-boy-v2.png", { type: "image/png" });
+  const id = await run("costs:begin", { careerTitle: "Corporate Lawyer", callType: "panel image", stage: "admin-boy-v2-test", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: "medium", generationId, panel: 1 });
+  let response;
+  try {
+    // Exactly one API invocation, one image, and zero SDK retries.
+    response = await ai.images.edit({ model: "gpt-image-1", image: reference, prompt, n: 1, quality: "medium", size: "1024x1024", output_format: "png" });
+  } catch (error) {
+    await run("costs:finish", { id, usage: null, webSearchCalls: 0, error: error instanceof Error ? error.message : String(error) });
+    await writeFile(evidencePath, JSON.stringify(await findRows(), null, 2));
+    throw new Error("The one Boy v2 image request failed. It was recorded; no retry or other generation was made.");
+  }
+  await writeFile(path.join(root, "design/boy-v2-test-response.json"), JSON.stringify({ created: response.created, requestId: response._request_id ?? null, usage: response.usage ?? null }, null, 2));
+  const image = response.data?.[0]?.b64_json;
+  if (image) await writeFile(outputPath, Buffer.from(image, "base64"));
+  await run("costs:finish", { id, usage: response.usage ?? null, ...(response._request_id ? { requestId: response._request_id } : {}), webSearchCalls: 0, ...(!image ? { error: "No image returned." } : {}) });
+  const rows = await findRows();
+  await writeFile(evidencePath, JSON.stringify(rows, null, 2));
+  if (!image || rows.length !== 1 || rows[0].status !== "succeeded") throw new Error("Boy v2 evidence is incomplete. Do not generate again.");
+  console.log(`EXACT PROMPT\n${prompt}\nAI CALL\n${JSON.stringify(rows[0], null, 2)}`);
+  process.exit(0);
+}
 const out = path.join(root, "design/library-evidence");
 await mkdir(out, { recursive: true });
 const startedAt = Date.now();

@@ -45,7 +45,7 @@ it("generates each scene and gender once at medium, preserves locked identities,
   }
   const prompts = mocks.generate.mock.calls.map(([r]) => r.prompt);
   expect(prompts[0]).toContain("20-year-old Indian woman");
-  expect(prompts[2]).toContain("22-year-old Indian man");
+  expect(prompts[2]).toContain("21-year-old Indian man");
   expect(prompts[0]).toContain("unstructured navy blazer");
   expect(prompts[1]).toContain("a clean white coat over a plain light-blue shirt");
   expect(mocks.parse).not.toHaveBeenCalled();

@@ -1,0 +1,36 @@
+[
+  {
+    "_creationTime": 1791955211811.255,
+    "_id": "jh7frns4z8adss0n9z7sfdatyn8g8jj3",
+    "cacheHit": false,
+    "callType": "panel image",
+    "careerTitle": "Corporate Lawyer",
+    "costINR": 4.3119000000000005,
+    "costUSD": 0.04791,
+    "generationId": "boy-v2-test",
+    "imageQuality": "medium",
+    "imageSize": "1024x1024",
+    "model": "gpt-image-1",
+    "panel": 1,
+    "pricingDate": "2026-10-12",
+    "requestId": "req_7457c97bc2b346b997fdfa56995fb409",
+    "stage": "admin-boy-v2-test",
+    "status": "succeeded",
+    "timestamp": 1791955211811,
+    "usage": {
+      "input_tokens": 811,
+      "input_tokens_details": {
+        "image_tokens": 323,
+        "text_tokens": 488
+      },
+      "output_tokens": 1056,
+      "output_tokens_details": {
+        "image_tokens": 1056,
+        "text_tokens": 0
+      },
+      "total_tokens": 1867
+    },
+    "usdToInr": 90,
+    "webSearchCalls": 0
+  }
+]

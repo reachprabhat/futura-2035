@@ -1,12 +1,16 @@
 export const PHOTO_STYLE = "Photorealistic editorial workplace photography, a real-looking Indian person, soft, warm daylight through a window in a modern workspace, shallow depth of field, warm fresh colours, realistic skin texture and natural proportions. Preserve the person's natural Indian skin tone; do not lighten or whiten skin. No illustration, vector art, cartoon, painting, CGI or plastic skin.";
 export const DEFAULT_OUTFIT = "unstructured navy blazer over a plain white crew-neck top, no tie, no logos, neat and well-fitted";
 export const HEALTH_OUTFIT = "a clean white coat over a plain light-blue shirt";
+export const BOY_HEALTH_OUTFIT = "a clean white coat over the open-collar white shirt";
 export const careerOutfit = (title: string) => /doctor|nurse|pharmac|clinical|medical|health|physiotherap|therapist|psychologist|nutritionist|genetic counsellor|biomedical/i.test(title) ? HEALTH_OUTFIT : DEFAULT_OUTFIT;
 // Locked default identities; only the shared outfit selector varies by career.
-export const PERSON_DEFAULTS = Object.freeze({ girl: "20-year-old Indian woman who looks like a final-year college student, fresh youthful face, light natural makeup, long voluminous dark wavy hair falling past her shoulders, gentle candid smile while looking down at a notebook she is writing in, soft grey cardigan over a white top, small earrings, light-medium wheatish skin tone, warm cafe with soft golden bokeh lights behind her, shallow depth of field", boy: "22-year-old Indian man, light-medium wheatish skin tone, curly dark hair, black rectangular glasses, light stubble, thoughtful confident expression, dark casual shirt" });
+export const PERSON_DEFAULTS = Object.freeze({ girl: "20-year-old Indian woman who looks like a final-year college student, fresh youthful face, light natural makeup, long voluminous dark wavy hair falling past her shoulders, gentle candid smile while looking down at a notebook she is writing in, soft grey cardigan over a white top, small earrings, light-medium wheatish skin tone, warm cafe with soft golden bokeh lights behind her, shallow depth of field", boy: "21-year-old Indian man, thick dark hair swept back with volume, thin dark metal rectangular glasses, light neat stubble, calm confident half-smile, navy blazer over an open-collar white shirt, natural light-medium skin tone matching the reference, soft warm indoor light" });
 export const photoCharacter = (gender: "girl" | "boy", title = "Author") => {
   const description = PERSON_DEFAULTS[gender];
-  return description.replace(gender === "girl" ? "soft grey cardigan over a white top" : "dark casual shirt", careerOutfit(title));
+  if (gender === "boy") return careerOutfit(title) === HEALTH_OUTFIT
+    ? `${description}. Medical outfit override: replace the navy blazer with ${BOY_HEALTH_OUTFIT}; retain the white shirt and all identity features.`
+    : description;
+  return description.replace("soft grey cardigan over a white top", careerOutfit(title));
 };
 export function photoPrompt(character: string, caption: string) {
   return [
