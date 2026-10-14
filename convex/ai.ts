@@ -7,10 +7,9 @@ import { z } from "zod";
 import { zodTextFormat } from "openai/helpers/zod";
 import type { ActionCtx } from "./_generated/server";
 import { CAREER_CATALOG, CAREER_CATALOG_VERSION, CAREER_TITLES } from "./careerCatalog";
-import { genderStoryKey, genderValidator, type Gender } from "./gender";
+import { genderValidator, type Gender } from "./gender";
 import { failureDetail } from "./storyboardErrors";
-import { withImageRateLimitRetry } from "./imageRetry";
-import { photoPrompt, photoCharacter } from "./photoPrompt";
+
 
 const Career = z.object({
   title: z.enum(CAREER_TITLES),
@@ -23,25 +22,6 @@ const Career = z.object({
   stability: z.string(),
 });
 const Careers = z.object({ careers: z.array(Career).length(3), note: z.string() });
-const Scenes = z.object({
-  character: z.string(),
-  panels: z
-    .array(
-      z.object({
-        time: z.string(),
-        caption: z.string(),
-        illustration: z.string(),
-      }),
-    )
-    .length(4),
-});
-const ImageCharacter = z.object({
-  age: z.number(),
-  face: z.string(),
-  hair: z.string(),
-  clothing: z.string(),
-  skinTone: z.string(),
-});
 type Panel = {
   time: string;
   caption: string;
@@ -109,29 +89,7 @@ export const photoTest = action({
   returns: v.any(),
   handler: async (ctx, { adminKey, quality, revision }): Promise<any> => {
     await ctx.runQuery(api.costs.controls, { adminKey });
-    if (process.env.CONVEX_CLOUD_URL !== "https://doting-basilisk-558.convex.cloud")
-      throw new ConvexError("Photo tests are restricted to doting-basilisk-558 DEV.");
-    if (revision && quality !== "medium") throw new ConvexError("Revision tests allow medium quality only.");
-    const row = await ctx.runMutation(internal.photoTests.claim, { quality, revision });
-    if (row.status === "ready" && "storageId" in row && row.storageId) return { quality, url: await ctx.storage.getUrl(row.storageId), cached: true };
-    if (row.status !== "claimed") throw new ConvexError("This photo test was already attempted; it will not generate again.");
-    try {
-      const title = revision === "outfit-boy-v1" ? "Corporate Lawyer" : revision === "outfit-girl-v1" ? "Doctor" : "Author";
-      const gender = revision === "boy-v1" || revision === "outfit-boy-v1" ? "boy" : "girl";
-      const source = await ctx.runQuery(internal.data.resolvedStory, { title }) ?? await ctx.runQuery(internal.data.getStory, { key: title });
-      const caption = source?.panels[0]?.caption ?? (revision === "outfit-boy-v1" ? "A corporate lawyer reviews a contract at a modern office desk, considering the terms carefully." : revision === "outfit-girl-v1" ? "A doctor reviews clinical notes and plans patient care at a desk in a bright modern medical workspace." : undefined);
-      if (!caption) throw new Error("Author panel 1 must already have a saved caption.");
-      const prompt = photoPrompt(photoCharacter(gender, title), caption);
-      const result = await tracked(ctx, { careerTitle: title, callType: "panel image", stage: "admin-photo-test", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: quality, generationId: row.key, panel: 1 }, () => client().images.generate({ model: "gpt-image-1", n: 1, size: "1024x1024", quality, output_format: "png", prompt }));
-      const base64 = result.data?.[0]?.b64_json;
-      if (!base64) throw new Error("No image returned.");
-      const storageId = await ctx.storage.store(new Blob([Uint8Array.from(Buffer.from(base64, "base64"))], { type: "image/png" }));
-      await ctx.runMutation(internal.photoTests.finish, { id: row._id, storageId });
-      return { quality, url: await ctx.storage.getUrl(storageId), cached: false, prompt };
-    } catch (error) {
-      await ctx.runMutation(internal.photoTests.finish, { id: row._id, error: error instanceof Error ? error.message : String(error) });
-      throw error;
-    }
+    throw new ConvexError("Per-career image generation is retired. Use the shared scene library.");
   },
 });
 
@@ -239,244 +197,22 @@ export const recommend = action({
   },
 });
 async function generateStory(ctx: ActionCtx, args: { searchKey: string; careerIndex: number; gender?: Gender; prepareOnly?: boolean }, fixed?: { title: string; panels: Panel[]; quality: "medium" }): Promise<any> {
-    const search = fixed ? null : await ctx.runQuery(internal.data.search, {
-      key: args.searchKey,
-    });
-    const career = fixed ? { title: fixed.title } : search?.result.careers[args.careerIndex];
-    const quality = fixed?.quality ?? "high";
-    if (!Number.isInteger(args.careerIndex) || !career)
-      throw new ConvexError("Choose a career from your results first.");
-    const existing = await ctx.runQuery(internal.data.resolvedStory, { title: career.title, gender: args.gender });
-    const key = existing?.key ?? genderStoryKey(career.title, args.gender),
-      token = crypto.randomUUID();
-    if (args.gender === "unspecified" || process.env.AI_ENABLED !== "true") {
-      const saved = existing;
-      if (!saved || (saved.status !== "ready" && !saved.panels.length))
-        throw new ConvexError("Futura is paused for a moment, please try again later");
-      if (args.gender !== "unspecified" && saved.status !== "ready") {
-        const detail = failureDetail(new ConvexError("Futura is paused for a moment, please try again later"), "controls");
-        await ctx.runMutation(internal.data.saveStory, { key: saved.key, token: saved.token, panels: saved.panels, status: "failed", lastError: detail.message, failureDetails: [detail], lastFailureAt: Date.now() });
-        return { title: saved.title, status: "failed", panels: await urls(ctx, saved.panels), path: "storyboard-paused", error: detail.message, raw: saved.raw ?? null };
-      }
-      if (!args.prepareOnly) await ctx.runMutation(internal.costs.cache, { careerTitle: career.title,
-        callType: "panel image", stage: "storyboard-cache", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: quality });
-      return { title: saved.title, status: saved.status, panels: await urls(ctx, saved.panels),
-        path: "storyboard-cache", raw: saved.raw ?? null };
-    }
-    const claim = await ctx.runMutation(internal.data.claim, {
-      key,
-      title: career.title,
-      token,
-      gender: args.gender,
-    });
-    if (claim.state === "cached") {
-      if (!args.prepareOnly) await ctx.runMutation(internal.costs.cache, { careerTitle: career.title, callType: "panel image", stage: "storyboard-cache", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: quality });
-      return {
-        title: claim.row.title,
-        panels: await urls(ctx, claim.row.panels),
-        path: "storyboard-cache",
-        raw: claim.row.raw,
-      };
-    }
-    if (claim.state === "busy")
-      return {
-        title: career.title,
-        panels: await urls(ctx, claim.row.panels),
-        path: "storyboard-in-progress",
-        error:
-          "This career’s storyboard is being illustrated. Try again shortly.",
-      };
-    let panels: Panel[] = claim.row.panels.length ? claim.row.panels : fixed?.panels ?? [],
-      raw = claim.row.raw ?? (fixed ? JSON.stringify({ imageCharacter: photoCharacter("boy", fixed.title), defaultsLocked: true }) : "");
-    const errors: string[] = [];
-    const failureDetails: ReturnType<typeof failureDetail>[] = [];
-    let stage = "cache-seed";
-    let path = panels.length
-      ? "openai-image-retry"
-      : "openai-storyboard-and-images";
-    try {
-    if (fixed && !claim.row.panels.length) {
-      await ctx.runMutation(internal.data.saveStory, { key, token, panels, raw, status: "generating" });
-    }
-    if (!panels.length && (args.gender === "girl" || args.gender === "boy")) {
-      const source = await ctx.runQuery(internal.data.resolvedStory, { title: career.title });
-      if (source?.panels.length) {
-        panels = source.panels.map(({ storageId, imageError, imageErrorDetails, ...scene }: any) => scene);
-        const metadata = JSON.parse(source.raw || "{}");
-        delete metadata.imageCharacter; delete metadata.characterResponse; delete metadata.imageRuns;
-        raw = JSON.stringify(metadata);
-        await ctx.runMutation(internal.data.saveStory, { key, token, panels, raw, status: "generating" });
-      }
-    }
-      stage = "character";
-      const ai = client();
-      if (!panels.length) {
-        stage = "captions";
-        const response = await tracked(ctx, { careerTitle: career.title, callType: "captions", stage: "captions", model: "gpt-4.1-mini", generationId: token }, () => ai.responses.parse({
-          model: "gpt-4.1-mini",
-          max_output_tokens: 1800,
-          temperature: 0.3,
-          input: [
-            {
-              role: "system",
-              content:
-                "Create exactly four chronological day-in-the-life photographic scenes for a plausible 2035 career. Each has a time, ONE concise caption and a specific visual scene. Show concrete tasks, human judgment, collaborating with AI and real-world impact. Keep it grounded, hopeful and understandable to an Indian parent. Give one consistent adult Indian protagonist appearance in character. Do not include skill maps, roadmaps or promises.",
-            },
-            { role: "user", content: JSON.stringify(career) },
-          ],
-          text: { format: zodTextFormat(Scenes, "day_in_the_life") },
-        }));
-        if (!response.output_parsed) throw new Error("Missing captions");
-        panels = response.output_parsed.panels.map((p) => ({
-          ...p,
-          illustration: `${response.output_parsed!.character}. ${p.illustration}`,
-        }));
-        raw = JSON.stringify(response, null, 2);
-        await ctx.runMutation(internal.data.saveStory, {
-          key,
-          token,
-          panels,
-          status: "generating",
-          raw,
-        });
-      }
-      stage = "character";
-      // Image-only preparation: keep career text, captions and cache behavior intact.
-      const imageMetadata = JSON.parse(raw || "{}");
-      if (!imageMetadata.imageCharacter) {
-        const characterResponse = await tracked(ctx, { careerTitle: career.title, callType: "captions", stage: "character", model: "gpt-4.1-mini", generationId: token }, () => ai.responses.parse({
-          model: "gpt-4.1-mini",
-          max_output_tokens: 250,
-          temperature: 0.2,
-          input: [
-            {
-              role: "system",
-              content:
-                "Describe one adult Indian protagonist for four photorealistic workplace photographs. Supply an age between 25 and 45 and brief, concrete face shape/features, hair style/colour, exact clothing/colour, and skin tone. Each string must be a short visual phrase. No names, actions, background, lettering, alternative outfits or multiple people. Keep the total description under 60 words. Use the existing protagonist as context, filling missing appearance details.",
-            },
-            {
-              role: "user",
-              content: JSON.stringify({
-                requestedGender: args.gender === "boy" ? "adult Indian man" : args.gender === "girl" ? "adult Indian woman" : undefined,
-                existingCharacter:
-                  imageMetadata.output_parsed?.character ??
-                  imageMetadata.character ??
-                  career.title,
-              }),
-            },
-          ],
-          text: {
-            format: zodTextFormat(ImageCharacter, "fixed_image_character"),
-          },
-        }));
-        if (!characterResponse.output_parsed)
-          throw new Error("Missing fixed image character");
-        const c = characterResponse.output_parsed;
-        imageMetadata.imageCharacter = (args.gender === "girl" || args.gender === "boy") ? photoCharacter(args.gender, career.title) : `${c.age}-year-old Indian ${args.gender === "boy" ? "man" : "adult"}; face: ${c.face}; hair: ${c.hair}; clothing: ${c.clothing}; skin tone: ${c.skinTone}.`;
-        imageMetadata.characterResponse = characterResponse;
-        console.info(
-          "futura-character-usage",
-          JSON.stringify({
-            title: career.title,
-            model: "gpt-4.1-mini",
-            usage: characterResponse.usage ?? null,
-          }),
-        );
-        raw = JSON.stringify(imageMetadata, null, 2);
-        await ctx.runMutation(internal.data.saveStory, {
-          key,
-          token,
-          panels,
-          status: "generating",
-          raw,
-        });
-      }
-      if (args.prepareOnly) {
-        await ctx.runMutation(internal.data.saveStory, { key, token, panels, status: "prepared", raw });
-        return { title: career.title, panels: await urls(ctx, panels), path: "storyboard-captions-ready", raw, status: "prepared" };
-      }
-      stage = "images";
-      const imageRuns: any[] = [];
-      // Finish each panel, including its single 429 retry, before starting the next.
-      const nextPanels: Panel[] = [];
-      for (let index = 0; index < panels.length; index++) {
-          const panel = panels[index];
-          if (panel.storageId) { nextPanels.push(panel); continue; }
-          try {
-            const prompt = photoPrompt(args.gender === "girl" || args.gender === "boy" ? photoCharacter(args.gender, career.title) : imageMetadata.imageCharacter, panel.caption);
-            const generated = await withImageRateLimitRetry(() => tracked(ctx, { careerTitle: career.title, callType: "panel image", stage: "image", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: quality, generationId: token, panel: index + 1 }, () => ai.images.generate({
-              model: "gpt-image-1",
-              n: 1,
-              size: "1024x1024",
-              quality,
-              output_format: "webp",
-              prompt,
-            })));
-            const imageRun = {
-              panel: index + 1,
-              model: "gpt-image-1",
-              quality,
-              size: "1024x1024",
-              prompt,
-              created: generated.created ?? null,
-              usage: generated.usage ?? null,
-              requestId: generated._request_id ?? null,
-            };
-            imageRuns.push(imageRun);
-            console.info(
-              "futura-image-usage",
-              JSON.stringify({ title: career.title, ...imageRun }),
-            );
-            const base64 = generated.data?.[0]?.b64_json;
-            if (!base64) throw new Error("No image returned");
-            const bytes = Uint8Array.from(Buffer.from(base64, "base64"));
-            const storageId = await ctx.storage.store(
-              new Blob([bytes], { type: "image/webp" }),
-            );
-            const completed = { ...panel, storageId, imageError: undefined, imageErrorDetails: undefined };
-            await ctx.runMutation(internal.data.savePanel, { key, token, index, panel: completed });
-            nextPanels.push(completed);
-          } catch (e) {
-            const message = friendly(e);
-            errors.push(message);
-            const detail = failureDetail(e, "image", index + 1);
-            failureDetails.push(detail);
-            const failed = { ...panel, imageError: message, imageErrorDetails: detail };
-            await ctx.runMutation(internal.data.savePanel, { key, token, index, panel: failed });
-            nextPanels.push(failed);
-          }
-      }
-      panels = nextPanels;
-      imageMetadata.imageRuns = [
-        ...(imageMetadata.imageRuns ?? []),
-        ...imageRuns.sort((a, b) => a.panel - b.panel),
-      ];
-      raw = JSON.stringify(imageMetadata, null, 2);
-    } catch (e) {
-      errors.push(friendly(e));
-      failureDetails.push(failureDetail(e, stage));
-    }
-    const committed = await ctx.runQuery(internal.data.getStory, { key });
-    if (committed?.token === token) panels = Array.from({ length: Math.max(panels.length, committed.panels.length) }, (_, index) => committed.panels[index]?.storageId ? committed.panels[index] : panels[index] ?? committed.panels[index]);
-    const complete = panels.length === 4 && panels.every((p) => p.storageId);
-    if (!complete && !failureDetails.length) failureDetails.push(failureDetail(new Error(`Incomplete storyboard: ${panels.filter(p => p.storageId).length} of 4 images saved.`), "completion"));
-    await ctx.runMutation(internal.data.saveStory, {
-      key,
-      token,
-      panels,
-      ...(!complete ? { lastError: failureDetails.map(d => `${d.stage}${d.panel ? ` panel ${d.panel}` : ""}: ${d.message}`).join("\n"), failureDetails, lastFailureAt: Date.now() } : {}),
-      status: complete ? "ready" : "failed",
-      raw,
-    });
-    if (complete) await ctx.runMutation(internal.costs.completed, { generationId: token });
-    if (!complete) path += ":captions-only-or-partial";
-    return {
-      title: career.title,
-      panels: await urls(ctx, panels),
-      path,
-      error: errors.length ? [...new Set(errors)].join(" ") : undefined,
-      raw,
-    };
+  const search = fixed ? null : await ctx.runQuery(internal.data.search, { key: args.searchKey });
+  const career = fixed ? { title: fixed.title } : search?.result.careers[args.careerIndex];
+  if (!Number.isInteger(args.careerIndex) || !career) throw new ConvexError("Choose a career from your results first.");
+  const existing = await ctx.runQuery(internal.data.resolvedStory, { title: career.title, gender: args.gender });
+  // Archived storyboards are read-only, including partial ones while AI is paused.
+  if (existing?.status === "ready" || (existing?.panels.length && (args.gender === "unspecified" || process.env.AI_ENABLED !== "true"))) {
+    await ctx.runMutation(internal.costs.cache, { careerTitle: career.title, callType: "panel image", stage: "storyboard-cache", model: "gpt-image-1" });
+    return { title: existing.title, status: existing.status, panels: await urls(ctx, existing.panels), path: existing.status === "ready" ? "storyboard-cache" : "storyboard-paused", raw: existing.raw ?? null };
+  }
+  const cached = await ctx.runQuery(internal.sceneLibrary.resolved, { title: career.title, gender: args.gender });
+  if (cached) return cached;
+  if (args.gender === "unspecified" || process.env.AI_ENABLED !== "true") throw new ConvexError("Futura is paused for a moment, please try again later");
+  await ctx.runAction(internal.libraryActions.ensureMapping, { title: career.title });
+  const shared = await ctx.runQuery(internal.sceneLibrary.resolved, { title: career.title, gender: args.gender });
+  if (!shared) throw new ConvexError("This career's shared scenes are not ready yet.");
+  return shared;
 }
 export const storyboard = action({
   args: { searchKey: v.string(), careerIndex: v.number(), gender: v.optional(genderValidator) }, returns: v.any(), handler: (ctx, args) => generateStory(ctx, args),
@@ -522,7 +258,7 @@ export const careerPlan = action({
     }
     if (claim.state === "busy") return null;
     try {
-      const story = await ctx.runQuery(internal.data.resolvedStory, { title: career.title });
+      const story = await ctx.runQuery(internal.data.resolvedStory, { title: career.title }) ?? await ctx.runQuery(internal.sceneLibrary.resolved, { title: career.title });
       const response = await tracked(ctx, { careerTitle: career.title, callType: "plan", stage: "12-month-plan", model: "gpt-4.1-mini", generationId: token }, () => client().responses.parse({
         model: "gpt-4.1-mini", max_output_tokens: 2800, temperature: 0.2,
         input: [

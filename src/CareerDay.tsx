@@ -50,7 +50,7 @@ export default function CareerDay({ title, searchKey, careerIndex, panels, cache
     </section>
     <section className="day-card day-plan"><div className="day-card-heading"><div><h2>Your 12-month plan</h2><p>12 projects. Real skills. A clear path.</p></div><button className="day-chevron" aria-label="Show full 12-month plan" aria-expanded={full} disabled={!plan} onClick={() => setFull(value => !value)}>›</button></div>
       {error || saved?.status === "failed" ? <p className="day-plan-error" role="alert">{error || "This plan could not finish. Reopen the career to try again."}</p> : !plan && !cachedOnly ? <p className="day-plan-loading" role="status">Preparing your monthly projects…</p> : <ol className="day-timeline">{projects.map(project => {
-        const image = panels[(project.month - 1) % 4]?.imageUrl ?? fallbackImage;
+        const image = panels[project.panelIndex]?.imageUrl ?? fallbackImage;
         return <li className={`day-month day-tone-${project.skillIndex}`} key={project.month}>
           <span className="day-timeline-dot" aria-hidden="true">{project.month === 1 ? "✓" : ""}</span><span className="day-month-number">Month {project.month}</span>
           <div className="day-project"><div className="day-project-copy"><h3>{project.title}</h3><span className="day-tag">{skills[project.skillIndex]}</span><p><strong>Build:</strong> {project.build}</p></div>{image ? <img className="day-project-image" src={image} alt={`Workday illustration related to ${skills[project.skillIndex]}`} /> : <div className="day-project-image day-image-placeholder">No saved image</div>}</div>

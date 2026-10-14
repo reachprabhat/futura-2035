@@ -5,6 +5,7 @@ import { v, ConvexError } from "convex/values";
 import { istToday, callCap } from "./aiControls";
 import { PAUSED_MESSAGE } from "./aiControls";
 import { failureDetail, failureDetailValidator } from "./storyboardErrors";
+import { libraryStory } from "./sceneLibrary";
 import { CAREER_CATALOG_VERSION } from "./careerCatalog";
 
 // The example only reads an existing result. It never schedules generation or calls AI.
@@ -158,7 +159,11 @@ export const cachedCareer = query({
   args: { title: v.string(), gender: genderValidator }, returns: v.any(),
   handler: async (ctx, { title, gender }) => {
     const row = await findStoryboard(ctx, title, gender);
-    if (!row) return null;
+    if (!row || row.status !== "ready") {
+      const shared = await libraryStory(ctx, title, gender);
+      if (shared) return shared;
+      if (!row) return null;
+    }
     return { title: row.title, status: row.status, panels: await Promise.all(row.panels.map(async (p: any) => ({ caption: p.caption, time: p.time ?? null, imageUrl: p.storageId ? await ctx.storage.getUrl(p.storageId) : null }))) };
   },
 });
@@ -169,7 +174,11 @@ export const stories = query({
     if (!search) return [];
     return Promise.all(search.result.careers.map(async (career: any) => {
       const row = await findStoryboard(ctx, career.title, gender);
-      if (!row) return null;
+      if (!row || row.status !== "ready") {
+        const shared = await libraryStory(ctx, career.title, gender);
+        if (shared) return shared;
+        if (!row) return null;
+      }
       return { title: row.title, gender: storyboardGender(row) ?? null, status: row.status, raw: row.raw ?? null,
         path: row.status === "ready" ? "storyboard-cache" : row.status === "generating" ? "openai-background-images" : "storyboard-captions-ready",
         error: row.status === "failed" ? "Some illustrations could not finish. Please try again." : null,

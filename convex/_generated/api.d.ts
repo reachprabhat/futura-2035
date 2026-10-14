@@ -8,6 +8,9 @@
  * @module
  */
 
+import type * as sceneCatalog from "../sceneCatalog.js";
+import type * as sceneLibrary from "../sceneLibrary.js";
+import type * as libraryActions from "../libraryActions.js";
 import type * as ai from "../ai.js";
 import type * as aiControls from "../aiControls.js";
 import type * as careerCatalog from "../careerCatalog.js";
@@ -30,6 +33,9 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  sceneCatalog: typeof sceneCatalog;
+  sceneLibrary: typeof sceneLibrary;
+  libraryActions: typeof libraryActions;
   ai: typeof ai;
   aiControls: typeof aiControls;
   careerCatalog: typeof careerCatalog;

@@ -29,54 +29,8 @@ vi.mock("openai", () => {
 });
 const modules = import.meta.glob("./**/*.ts");
 describe("Admin photographic comparison", () => {
-  it("creates only four medium Corporate Lawyer Boy panels in order and reuses the saved storyboard", async () => {
-    vi.stubEnv("ADMIN_COSTS_KEY", "a".repeat(40));
-    vi.stubEnv("CONVEX_CLOUD_URL", "https://doting-basilisk-558.convex.cloud");
-    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
-    const t = convexTest(schema, modules);
-    let completed = 0;
-    mocks.generate.mockImplementation(async request => {
-      const row = await t.query(internal.data.getStory, { key: genderStoryKey("Corporate Lawyer", "boy") });
-      expect(row?.panels.filter((p: any) => p.storageId)).toHaveLength(completed);
-      expect(request.quality).toBe("medium");
-      completed++;
-      return { data: [{ b64_json: "dGVzdA==" }], usage: { input_tokens: 100, input_tokens_details: { text_tokens: 100, image_tokens: 0 }, output_tokens: 1056 } };
-    });
-    const args = { adminKey: "a".repeat(40) };
-    await expect(t.action(api.ai.corporateLawyerStoryboard, { adminKey: "invalid" })).rejects.toThrow("Admin access required");
-    const result = await t.action(api.ai.corporateLawyerStoryboard, args);
-    expect(result.panels.every((p: any) => p.storageId)).toBe(true);
-    expect(mocks.generate).toHaveBeenCalledTimes(4);
-    expect(mocks.parse).not.toHaveBeenCalled(); expect(mocks.create).not.toHaveBeenCalled();
-    const prompts = mocks.generate.mock.calls.map(([r]) => r.prompt);
-    expect(new Set(prompts.map(p => p.split("\n")[0])).size).toBe(1);
-    ["private modern office", "conference room", "law library", "office courtyard"].forEach((setting, i) => expect(prompts[i]).toContain(setting));
-    expect((await t.run(ctx => ctx.db.query("aiCalls").collect())).filter(r => !r.cacheHit)).toHaveLength(4);
-    await t.action(api.ai.corporateLawyerStoryboard, args);
-    expect(mocks.generate).toHaveBeenCalledTimes(4);
-    expect(await t.run(ctx => ctx.db.query("searches").collect())).toHaveLength(0);
-    expect(await t.run(ctx => ctx.db.query("careerPlans").collect())).toHaveLength(0);
-  });
-  it("uses the default and medical outfits for the two fixed medium tests without extra AI calls", async () => {
-    vi.stubEnv("ADMIN_COSTS_KEY", "a".repeat(40));
-    vi.stubEnv("CONVEX_CLOUD_URL", "https://doting-basilisk-558.convex.cloud");
-    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
-    const t = convexTest(schema, modules);
-    mocks.generate.mockResolvedValue({ data: [{ b64_json: "dGVzdA==" }] });
-    for (const revision of ["outfit-boy-v1", "outfit-girl-v1"] as const) {
-      const args = { adminKey: "a".repeat(40), quality: "medium" as const, revision };
-      await expect(t.action(api.ai.photoTest, { ...args, quality: "high" })).rejects.toThrow("medium quality only");
-      const first = await t.action(api.ai.photoTest, args);
-      expect(first.prompt).toContain(revision === "outfit-boy-v1" ? "unstructured navy blazer over a plain white crew-neck top, no tie, no logos, neat and well-fitted" : "a clean white coat over a plain light-blue shirt");
-      expect(first.prompt).not.toContain("soft grey cardigan");
-      expect(first.prompt).not.toContain("dark casual shirt");
-      expect((await t.action(api.ai.photoTest, args)).cached).toBe(true);
-    }
-    expect(mocks.generate).toHaveBeenCalledTimes(2);
-    expect(mocks.parse).not.toHaveBeenCalled();
-    expect((await t.run(ctx => ctx.db.query("aiCalls").collect())).map(r => r.careerTitle)).toEqual(["Corporate Lawyer", "Doctor"]);
-    expect(await t.run(ctx => ctx.db.query("storyboards").collect())).toHaveLength(0);
-  });
+
+
   it("hides archived illustrations without deleting them or starting generation", async () => {
     const t = convexTest(schema, modules);
     await t.mutation(internal.data.saveSearch, { key: "archive-test", result: { careers: [discoveryCareer("Author")] } });
@@ -87,38 +41,8 @@ describe("Admin photographic comparison", () => {
     expect(mocks.generate).not.toHaveBeenCalled();
     expect(mocks.parse).not.toHaveBeenCalled();
   });
-  it("refuses non-admin and wrong deployments before generating", async () => {
-    const t = convexTest(schema, modules);
-    await expect(t.action(api.ai.photoTest, { adminKey: "invalid", quality: "high" })).rejects.toThrow("Admin access required");
-    vi.stubEnv("ADMIN_COSTS_KEY", "a".repeat(40));
-    vi.stubEnv("CONVEX_CLOUD_URL", "https://wrong.convex.cloud");
-    await expect(t.action(api.ai.photoTest, { adminKey: "a".repeat(40), quality: "high" })).rejects.toThrow("restricted");
-    expect(mocks.generate).not.toHaveBeenCalled();
-  });
-  it("generates exactly one panel at each quality, logs both and never repeats", async () => {
-    vi.stubEnv("ADMIN_COSTS_KEY", "a".repeat(40));
-    vi.stubEnv("CONVEX_CLOUD_URL", "https://doting-basilisk-558.convex.cloud");
-    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
-    const t = convexTest(schema, modules);
-    await t.run(ctx => ctx.db.insert("storyboards", { title: "Author", key: genderStoryKey("Author", "girl"), panels: [{ caption: "Reviews a manuscript at a writing desk" }], status: "ready", token: "existing", lease: 0 }));
-    mocks.generate.mockResolvedValue({ data: [{ b64_json: "dGVzdA==" }], usage: { input_tokens: 100, input_tokens_details: { text_tokens: 100, image_tokens: 0 }, output_tokens: 1000 } });
-    for (const quality of ["high", "medium"] as const) {
-      const args = { adminKey: "a".repeat(40), quality };
-      expect((await t.action(api.ai.photoTest, args)).cached).toBe(false);
-      expect((await t.action(api.ai.photoTest, args)).cached).toBe(true);
-    }
-    expect(mocks.generate).toHaveBeenCalledTimes(2);
-    expect(mocks.parse).not.toHaveBeenCalled();
-    const [high, medium] = mocks.generate.mock.calls.map(([r]) => r);
-    expect(high.prompt).toBe(medium.prompt);
-    expect(high.prompt).toContain("20-year-old Indian woman");
-    expect(high.prompt).toContain("Photorealistic");
-    expect(high.quality).toBe("high"); expect(medium.quality).toBe("medium");
-    const rows = await t.run(ctx => ctx.db.query("aiCalls").collect());
-    expect(rows).toHaveLength(2);
-    expect(rows.every(r => r.stage === "admin-photo-test" && r.costINR! > 0)).toBe(true);
-    expect((await t.run(ctx => ctx.db.query("storyboards").collect()))[0].token).toBe("existing");
-  });
+
+
 });
 beforeEach(() => {
   vi.stubEnv("AI_ENABLED", "true");
@@ -247,136 +171,9 @@ describe("Storyboard recovery through the action", () => {
     ).rejects.toThrow(/try again/);
     expect(mocks.parse).not.toHaveBeenCalled();
   });
-  it("keeps captions when images fail, retries only images, then returns saved images without AI calls", async () => {
-    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
-    const t = convexTest(schema, modules);
-    await t.mutation(internal.data.saveSearch, {
-      key: "test-search",
-      result: { careers: [{ title: "Test Career" }] },
-    });
-    const scenes = {
-      character: "A consistent adult protagonist",
-      panels: Array.from({ length: 4 }, (_, i) => ({
-        time: `${9 + i}:00`,
-        caption: `Test scene ${i + 1}`,
-        illustration: `Test illustration ${i + 1}`,
-      })),
-    };
-    mocks.parse
-      .mockResolvedValueOnce({ output_parsed: scenes })
-      .mockResolvedValueOnce({
-        output_parsed: {
-          age: 35,
-          face: "oval face, dark eyes",
-          hair: "black shoulder-length bob",
-          clothing: "sage green kurta",
-          skinTone: "medium brown",
-        },
-      });
-    mocks.generate.mockRejectedValue(new Error("Simulated image failure"));
-    const failed = await t.action(api.ai.storyboard, {
-      searchKey: "test-search",
-      careerIndex: 0,
-    });
-    expect(failed.panels.map((p: any) => p.caption)).toEqual(
-      scenes.panels.map((p) => p.caption),
-    );
-    expect(failed.path).toBe(
-      "openai-storyboard-and-images:captions-only-or-partial",
-    );
-    expect(failed.error).toContain("try again");
-    expect(mocks.parse).toHaveBeenCalledTimes(2);
-    expect(mocks.generate).toHaveBeenCalledTimes(4);
-    for (const [request] of mocks.generate.mock.calls) {
-      expect(request.model).toBe("gpt-image-1");
-      expect(request.quality).toBe("high");
-      expect(request.prompt).toContain(
-        "a single scene, one image, not a grid, collage, comic strip or multiple panels",
-      );
-      expect(request.prompt).toContain(
-        "no text, letters, numbers, words, signs, charts or screens with writing anywhere in the image",
-      );
-      expect(request.prompt).toContain(
-        "Photorealistic editorial workplace photography",
-      );
-      expect(request.prompt.split("\n")[0]).toBe(
-        mocks.generate.mock.calls[0][0].prompt.split("\n")[0],
-      );
-    }
-    mocks.generate.mockResolvedValue({ data: [{ b64_json: "dGVzdA==" }] });
-    const retry = await t.action(api.ai.storyboard, {
-      searchKey: "test-search",
-      careerIndex: 0,
-    });
-    expect(retry.path).toBe("openai-image-retry");
-    expect(retry.panels.every((p: any) => p.storageId && p.imageUrl)).toBe(
-      true,
-    );
-    expect(mocks.parse).toHaveBeenCalledTimes(2);
-    expect(mocks.generate).toHaveBeenCalledTimes(8);
-    vi.stubEnv("AI_ENABLED", "false");
-    vi.stubEnv("DAILY_COST_CAP_INR", "1");
-    const cached = await t.action(api.ai.storyboard, {
-      searchKey: "test-search",
-      careerIndex: 0,
-    });
-    expect(cached.path).toBe("storyboard-cache");
-    expect(mocks.generate).toHaveBeenCalledTimes(8);
-    const used = await t.run((ctx) => ctx.db.query("usage").collect());
-    expect(used[0].calls).toBe(10);
-  });
-  it("finishes and saves each image before starting the next", async () => {
-    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
-    const t = convexTest(schema, modules);
-    await t.mutation(internal.data.saveSearch, { key: "parallel", result: { careers: [{ title: "Parallel Career" }] } });
-    await t.mutation(internal.data.claim, { key: genderStoryKey("Parallel Career"), title: "Parallel Career", token: "prep" });
-    await t.mutation(internal.data.saveStory, { key: genderStoryKey("Parallel Career"), token: "prep", status: "prepared",
-      raw: JSON.stringify({ imageCharacter: "Fixed existing character" }),
-      panels: Array.from({ length: 4 }, (_, i) => ({ time: `${i}`, caption: `Existing caption ${i}`, illustration: "Existing scene" })) });
-    const resolvers: ((value: any) => void)[] = [];
-    mocks.generate.mockImplementation(() => new Promise(resolve => resolvers.push(resolve)));
-    const run = t.action(api.ai.storyboard, { searchKey: "parallel", careerIndex: 0 });
-    const image = { data: [{ b64_json: "dGVzdA==" }], usage: { input_tokens: 20, input_tokens_details: { text_tokens: 20, image_tokens: 0 }, output_tokens: 4160, total_tokens: 4180 } };
-    for (let panel = 0; panel < 4; panel++) {
-      for (let i = 0; i < 100 && resolvers.length < panel + 1; i++) await new Promise(r => setTimeout(r, 1));
-      expect(resolvers).toHaveLength(panel + 1);
-      const partial = await t.query(internal.data.getStory, { key: genderStoryKey("Parallel Career") });
-      expect(partial?.panels.filter((p: any) => p.storageId)).toHaveLength(panel);
-      resolvers[panel](image);
-    }
-    await run;
-    const final = await t.query(internal.data.getStory, { key: genderStoryKey("Parallel Career") });
-    expect(final?.panels.every((p: any) => p.storageId)).toBe(true);
-    const calls = await t.run(ctx => ctx.db.query("aiCalls").collect());
-    expect(calls.filter(c => c.fullStoryboardCompleted)).toHaveLength(1);
-    expect(calls.every(c => c.costUSD === 0.1665)).toBe(true);
-  });
-  it("does not call OpenAI after the daily allowance is used, and still returns saved captions", async () => {
-    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
-    vi.stubEnv("AI_DAILY_CALL_CAP", "1");
-    const t = convexTest(schema, modules);
-    await t.mutation(internal.data.saveSearch, {
-      key: "test-search",
-      result: { careers: [{ title: "Test Career" }] },
-    });
-    mocks.parse.mockResolvedValue({
-      output_parsed: {
-        character: "An adult",
-        panels: Array.from({ length: 4 }, (_, i) => ({
-          time: "09:00",
-          caption: `Test caption ${i}`,
-          illustration: "A test scene",
-        })),
-      },
-    });
-    const result = await t.action(api.ai.storyboard, {
-      searchKey: "test-search",
-      careerIndex: 0,
-    });
-    expect(result.panels).toHaveLength(4);
-    expect(result.error).toContain("limit");
-    expect(mocks.generate).not.toHaveBeenCalled();
-  });
+
+
+
 });
 describe("Gender choices and shared career discovery", () => {
   it("uses the same career cache for girl, boy and unspecified and stores selection metadata", async () => {
@@ -417,99 +214,9 @@ describe("Gender choices and shared career discovery", () => {
     expect(await t.run(ctx => ctx.db.system.query("_scheduled_functions").collect())).toHaveLength(0);
     expect(mocks.create).not.toHaveBeenCalled(); expect(mocks.parse).not.toHaveBeenCalled(); expect(mocks.generate).not.toHaveBeenCalled();
   });
-  it("creates a separate boy version from identical saved scenes once, without replacing girl images", async () => {
-    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
-    const t = convexTest(schema, modules);
-    await t.mutation(internal.data.saveSearch, { key: "gender-story", result: { careers: [discoveryCareer("Economist")] } });
-    const storageId = await t.run(ctx => ctx.storage.store(new Blob(["original girl image"])));
-    const panels = Array.from({ length: 4 }, (_, i) => ({ time: `${i}:00`, caption: `Task ${i}`, illustration: `Scene ${i}`, storageId }));
-    await t.mutation(internal.data.claim, { key: genderStoryKey("Economist", "girl"), title: "Economist", token: "girl", gender: "girl" });
-    await t.mutation(internal.data.saveStory, { key: genderStoryKey("Economist", "girl"), token: "girl", status: "ready", panels, raw: JSON.stringify({ imageCharacter: "Original woman" }) });
-    mocks.parse.mockResolvedValue({ output_parsed: { age: 30, face: "oval", hair: "short black", clothing: "navy suit", skinTone: "brown" } });
-    mocks.generate.mockResolvedValue({ data: [{ b64_json: "dGVzdA==" }] });
-    const result = await t.action(api.ai.storyboard, { searchKey: "gender-story", careerIndex: 0, gender: "boy" });
-    expect(result.panels.map((p: any) => p.caption)).toEqual(panels.map(p => p.caption));
-    expect(result.panels.map((p: any) => p.illustration)).toEqual(panels.map(p => p.illustration));
-    expect(result.panels.every((p: any) => p.storageId !== storageId)).toBe(true);
-    expect((await t.query(internal.data.getStory, { key: genderStoryKey("Economist", "girl") }))?.panels).toEqual(panels);
-    expect(mocks.parse).toHaveBeenCalledTimes(1); expect(mocks.generate).toHaveBeenCalledTimes(4);
-    expect(mocks.generate.mock.calls.every(call => call[0].prompt.includes("22-year-old Indian man"))).toBe(true);
-    const cached = await t.action(api.ai.storyboard, { searchKey: "gender-story", careerIndex: 0, gender: "boy" });
-    expect(cached.path).toBe("storyboard-cache"); expect(mocks.generate).toHaveBeenCalledTimes(4);
-    expect((await t.query(api.data.stories, { searchKey: "gender-story", gender: "unspecified" }))[0].panels[0].storageId).toBe(storageId);
-  });
+
 });
-describe("Explicit storyboard retries", () => {
-  it("persists complete provider errors, without scheduling or automatically retrying", async () => {
-    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
-    const t = convexTest(schema, modules);
-    await t.mutation(internal.data.saveSearch, { key: "retry-errors", result: { careers: [discoveryCareer("Author")] } });
-    await t.mutation(internal.data.claim, { key: genderStoryKey("Author", "girl"), title: "Author", token: "seed", gender: "girl" });
-    const panels = Array.from({ length: 4 }, (_, i) => ({ caption: `Task ${i + 1}`, illustration: `Scene ${i + 1}` }));
-    await t.mutation(internal.data.saveStory, { key: genderStoryKey("Author", "girl"), token: "seed", panels, status: "failed", raw: JSON.stringify({ imageCharacter: "Existing woman" }) });
-    const error = Object.assign(new Error("429 rate_limit_exceeded: image requests exceeded the permitted rate; retry only after the next explicit click."), { status: 429, code: "rate_limit_exceeded", type: "rate_limit_error", request_id: "mock-request-429" });
-    mocks.generate.mockRejectedValue(error);
-    await t.action(api.ai.storyboard, { searchKey: "retry-errors", careerIndex: 0, gender: "girl" });
-    const row = await t.query(internal.data.getStory, { key: genderStoryKey("Author", "girl") });
-    expect(row?.status).toBe("failed"); expect(row?.lastError).toContain(error.message);
-    expect(row?.failureDetails).toHaveLength(4);
-    expect(row?.failureDetails?.every(d => d.message === error.message && d.status === 429 && d.code === "rate_limit_exceeded" && d.requestId === "mock-request-429" && d.stack?.includes(error.message))).toBe(true);
-    expect(row?.panels.every((p: any) => p.imageErrorDetails.message === error.message)).toBe(true);
-    await t.query(api.data.stories, { searchKey: "retry-errors", gender: "girl" });
-    await t.query(api.data.stories, { searchKey: "retry-errors", gender: "girl" });
-    await expect(t.mutation(api.data.startStories, { searchKey: "retry-errors", careerIndex: 0, gender: "girl" })).rejects.toThrow(/Open A day/);
-    expect(mocks.generate).toHaveBeenCalledTimes(8);
-    expect(mocks.retryDelay).toHaveBeenCalledTimes(4);
-    expect(mocks.retryDelay.mock.calls.every(call => call[0] === 20000)).toBe(true);
-    expect(await t.run(ctx => ctx.db.system.query("_scheduled_functions").collect())).toHaveLength(0);
-    mkdirSync("artifacts", { recursive: true });
-    writeFileSync("artifacts/mock-retry-failure-details.json", JSON.stringify(row?.failureDetails, null, 2));
-  });
-  it("retries only the three missing Author images and preserves the saved panel and girl/boy cache separation", async () => {
-    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
-    const t = convexTest(schema, modules);
-    await t.mutation(internal.data.saveSearch, { key: "retry-proof", result: { careers: [discoveryCareer("Author")] } });
-    const firstImage = await t.run(ctx => ctx.storage.store(new Blob(["existing girl panel one"])));
-    const panels = Array.from({ length: 4 }, (_, i) => ({ time: `${9 + i}:00`, caption: `Saved task ${i + 1}`, illustration: `Saved scene ${i + 1}`, ...(i === 0 ? { storageId: firstImage } : { imageError: "Previous image attempt failed." }) }));
-    await t.mutation(internal.data.claim, { key: genderStoryKey("Author", "girl"), title: "Author", token: "seed", gender: "girl" });
-    await t.mutation(internal.data.saveStory, { key: genderStoryKey("Author", "girl"), token: "seed", panels, status: "failed", raw: JSON.stringify({ imageCharacter: "Existing woman" }), lastError: "Previous image attempt failed." });
-    const before = await t.query(internal.data.getStory, { key: genderStoryKey("Author", "girl") });
-    await t.query(api.data.stories, { searchKey: "retry-proof", gender: "girl" });
-    expect(mocks.generate).not.toHaveBeenCalled();
-    mocks.generate.mockResolvedValue({ data: [{ b64_json: "bW9ja2VkLWltYWdl" }], usage: { input_tokens: 0, output_tokens: 0, total_tokens: 0 } });
-    await t.action(api.ai.storyboard, { searchKey: "retry-proof", careerIndex: 0, gender: "girl" });
-    const after = await t.query(internal.data.getStory, { key: genderStoryKey("Author", "girl") });
-    expect(after?._id).toBe(before?._id); expect(after?.status).toBe("ready"); expect(after?.panels[0]).toEqual(before?.panels[0]);
-    expect(after?.panels.every((p: any) => p.storageId && !p.imageError)).toBe(true);
-    expect(after?.panels.map((p: any) => p.caption)).toEqual(before?.panels.map((p: any) => p.caption));
-    expect(after?.lastError).toBe(before?.lastError);
-    expect(mocks.generate).toHaveBeenCalledTimes(3); expect(mocks.parse).not.toHaveBeenCalled();
-    expect((await t.query(api.data.stories, { searchKey: "retry-proof", gender: "boy" }))[0]).toBeNull();
-    await t.action(api.ai.storyboard, { searchKey: "retry-proof", careerIndex: 0, gender: "girl" });
-    expect(mocks.generate).toHaveBeenCalledTimes(3);
-    const mockRows = await t.run(ctx => ctx.db.query("aiCalls").collect());
-    expect(mockRows.filter(r => !r.cacheHit).map(r => r.panel)).toEqual([2, 3, 4]);
-    expect(await t.run(ctx => ctx.db.system.query("_scheduled_functions").collect())).toHaveLength(0);
-    const snapshot = (row: any) => ({ _id: row._id, key: row.key, title: row.title, gender: row.gender, status: row.status, lastError: row.lastError, panels: row.panels });
-    mkdirSync("artifacts", { recursive: true });
-    writeFileSync("artifacts/mock-retry-proof.json", JSON.stringify({ before: snapshot(before), after: snapshot(after), mockImageRequests: mockRows.filter(r => !r.cacheHit).map(r => ({ panel: r.panel, status: r.status, costINR: r.costINR })), existingPanelPreserved: true, captionsPreserved: true, noScheduledFunctions: true, realCostINR: 0 }, null, 2));
-    console.log("MOCK_RETRY_BEFORE " + JSON.stringify(snapshot(before)));
-    console.log("MOCK_RETRY_AFTER " + JSON.stringify(snapshot(after)));
-    console.log("MOCK_IMAGE_REQUESTS " + JSON.stringify(mockRows.filter(r => !r.cacheHit).map(r => ({ panel: r.panel, status: r.status, costINR: r.costINR }))));
-    console.log("MOCK_RETRY_PROOF " + JSON.stringify({ requestedPanels: [2, 3, 4], existingPanelPreserved: true, captionsPreserved: true, noScheduledFunctions: true, realCostINR: 0 }));
-  });
-  it("stores text-stage failures even when no panels were created", async () => {
-    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
-    const t = convexTest(schema, modules);
-    await t.mutation(internal.data.saveSearch, { key: "text-failure", result: { careers: [discoveryCareer("Author")] } });
-    mocks.parse.mockRejectedValue(new Error("Mock caption response did not satisfy the scene schema."));
-    await t.action(api.ai.storyboard, { searchKey: "text-failure", careerIndex: 0, gender: "girl" });
-    const key = genderStoryKey("Author", "girl");
-    const row = await t.query(internal.data.getStory, { key });
-    expect(row?.status).toBe("failed"); expect(row?.lastError).toContain("Mock caption response did not satisfy the scene schema.");
-    expect(row?.failureDetails?.[0].stage).toBe("captions"); expect(mocks.generate).not.toHaveBeenCalled();
-  });
-});
+
 it("keeps an image committed before a stale failure save", async () => {
   const t = convexTest(schema, modules);
   const storageId = await t.run(ctx => ctx.storage.store(new Blob(["saved image"])));
