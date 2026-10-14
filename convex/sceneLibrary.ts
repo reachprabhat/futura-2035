@@ -110,7 +110,7 @@ export async function libraryStory(ctx: Pick<QueryCtx, "db" | "storage">, title:
   }));
   return { title, gender: selectedGender, status: panels.length === 4 && panels.every(p => p.imageUrl) ? "ready" : "prepared", panels, path: "shared-scene-library", raw: JSON.stringify({ libraryVersion: LIBRARY_VERSION }) };
 }
-// Explicit library preview; ordinary cached links continue to prefer archived storyboards.
+// Shared scenes power both ordinary career pages and saved career links.
 export const career = query({ args: { title: v.string(), gender: genderValidator }, returns: v.any(), handler: (ctx, args) => libraryStory(ctx, args.title, args.gender) });
 export const resolved = internalQuery({ args: { title: v.string(), gender: v.optional(genderValidator) }, returns: v.any(), handler: (ctx, args) => libraryStory(ctx, args.title, args.gender) });
 export const inventory = query({

@@ -1,9 +1,8 @@
 import { internalMutation, internalQuery, query, mutation } from "./_generated/server";
 import { internal } from "./_generated/api";
-import { findStoryboard, storyboardGender, genderValidator } from "./gender";
+import { findStoryboard, genderValidator } from "./gender";
 import { v, ConvexError } from "convex/values";
 import { istToday, callCap } from "./aiControls";
-import { PAUSED_MESSAGE } from "./aiControls";
 import { failureDetail, failureDetailValidator } from "./storyboardErrors";
 import { libraryStory } from "./sceneLibrary";
 import { CAREER_CATALOG_VERSION } from "./careerCatalog";
@@ -157,58 +156,26 @@ export const savePanel = internalMutation({
 // Read-only saved-career links never start a search, plan or image generation.
 export const cachedCareer = query({
   args: { title: v.string(), gender: genderValidator }, returns: v.any(),
-  handler: async (ctx, { title, gender }) => {
-    const row = await findStoryboard(ctx, title, gender);
-    if (!row || row.status !== "ready") {
-      const shared = await libraryStory(ctx, title, gender);
-      if (shared) return shared;
-      if (!row) return null;
-    }
-    return { title: row.title, status: row.status, panels: await Promise.all(row.panels.map(async (p: any) => ({ caption: p.caption, time: p.time ?? null, imageUrl: p.storageId ? await ctx.storage.getUrl(p.storageId) : null }))) };
-  },
+  handler: (ctx, { title, gender }) => libraryStory(ctx, title, gender),
 });
 export const stories = query({
   args: { searchKey: v.string(), gender: v.optional(genderValidator) }, returns: v.any(),
   handler: async (ctx, { searchKey, gender }) => {
     const search = await ctx.db.query("searches").withIndex("by_key", q => q.eq("key", searchKey)).unique();
     if (!search) return [];
-    return Promise.all(search.result.careers.map(async (career: any) => {
-      const row = await findStoryboard(ctx, career.title, gender);
-      if (!row || row.status !== "ready") {
-        const shared = await libraryStory(ctx, career.title, gender);
-        if (shared) return shared;
-        if (!row) return null;
-      }
-      return { title: row.title, gender: storyboardGender(row) ?? null, status: row.status, raw: row.raw ?? null,
-        path: row.status === "ready" ? "storyboard-cache" : row.status === "generating" ? "openai-background-images" : "storyboard-captions-ready",
-        error: row.status === "failed" ? "Some illustrations could not finish. Please try again." : null,
-        panels: await Promise.all(row.panels.map(async (p: any) => ({ ...p, imageUrl: p.storageId ? await ctx.storage.getUrl(p.storageId) : null }))),
-      };
-    }));
+    return Promise.all(search.result.careers.map((career: any) => libraryStory(ctx, career.title, gender)));
   },
 });
-// Legacy cache-only lookup. Only the direct storyboard action can generate; nothing is scheduled.
+// Compatibility endpoint for older clients. It only verifies shared scenes are available.
 export const startStories = mutation({
   args: { searchKey: v.string(), careerIndex: v.number(), gender: v.optional(genderValidator), cachedOnly: v.optional(v.boolean()) }, returns: v.null(),
   handler: async (ctx, args) => {
     const search = await ctx.db.query("searches").withIndex("by_key", q => q.eq("key", args.searchKey)).unique();
     if (!search || (args.careerIndex !== undefined && (!Number.isInteger(args.careerIndex) || !search.result.careers[args.careerIndex])))
       throw new ConvexError("Choose a career from your results first.");
-    const indexes = [args.careerIndex];
-    for (const careerIndex of indexes) {
-      const career = search.result.careers[careerIndex];
-      const row = await findStoryboard(ctx, career.title, args.gender);
-      if (args.gender === "unspecified" && !row) throw new ConvexError("No saved storyboard is available for this career yet.");
-      if (row && (row.status === "ready" || args.gender === "unspecified" || args.cachedOnly || process.env.AI_ENABLED !== "true")) {
-        if (args.careerIndex !== undefined) await ctx.runMutation(internal.costs.cache, {
-          careerTitle: career.title, callType: "panel image", stage: "storyboard-cache", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: "high",
-        });
-      } else if (args.gender === "unspecified" || args.cachedOnly || process.env.AI_ENABLED !== "true") {
-        if (args.careerIndex !== undefined) throw new ConvexError(PAUSED_MESSAGE);
-      } else if (row?.status !== "generating" || row.lease <= Date.now()) {
-        throw new ConvexError("This storyboard needs illustrations. Open A day in the life to request them.");
-      }
-    }
+    const career = search.result.careers[args.careerIndex];
+    if (!await libraryStory(ctx, career.title, args.gender))
+      throw new ConvexError("This career's shared scenes are not ready yet.");
     return null;
   },
 });

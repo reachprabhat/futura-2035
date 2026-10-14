@@ -7,7 +7,7 @@ import { z } from "zod";
 import { zodTextFormat } from "openai/helpers/zod";
 import type { ActionCtx } from "./_generated/server";
 import { CAREER_CATALOG, CAREER_CATALOG_VERSION, CAREER_TITLES } from "./careerCatalog";
-import { genderValidator, type Gender } from "./gender";
+import { genderValidator } from "./gender";
 import { failureDetail } from "./storyboardErrors";
 
 
@@ -22,13 +22,6 @@ const Career = z.object({
   stability: z.string(),
 });
 const Careers = z.object({ careers: z.array(Career).length(3), note: z.string() });
-type Panel = {
-  time: string;
-  caption: string;
-  illustration: string;
-  storageId?: any;
-  imageError?: string;
-};
 const normalise = (s: string) =>
   s
     .normalize("NFKC")
@@ -59,15 +52,6 @@ function friendly(e: unknown) {
   }
   return "AI could not finish this request. Please try again.";
 }
-async function urls(ctx: ActionCtx, panels: Panel[]) {
-  return Promise.all(
-    panels.map(async (p) => ({
-      ...p,
-      imageUrl: p.storageId ? await ctx.storage.getUrl(p.storageId) : null,
-    })),
-  );
-}
-
 async function tracked<T extends { usage?: any; _request_id?: string | null; output?: any[] }>(ctx: ActionCtx, metadata: any, call: () => Promise<T>): Promise<T> {
   if (process.env.AI_ENABLED !== "true")
     throw new ConvexError("Futura is paused for a moment, please try again later");
@@ -115,11 +99,7 @@ export const recommend = action({
     if (cached) {
       if (args.gender) await ctx.runMutation(internal.data.setSearchGender, { key, gender: args.gender });
       await ctx.runMutation(internal.costs.cache, { careerTitle: "Career discovery (shared)", callType: "careers", stage: "career-cache", model: "gpt-4.1", cacheKey: key });
-      const stories = await Promise.all(cached.result.careers.map(async (career: any) => {
-        const row = await ctx.runQuery(internal.data.resolvedStory, { title: career.title, gender: args.gender });
-        return row ? { title: row.title, status: row.status, panels: await urls(ctx, row.panels),
-          path: "storyboard-cache", raw: row.raw ?? null } : null;
-      }));
+      const stories = await ctx.runQuery(api.data.stories, { searchKey: key, gender: args.gender });
       return { ...cached.result, searchKey: key, path: "career-cache", stories };
     }
     try {
@@ -196,26 +176,16 @@ export const recommend = action({
     }
   },
 });
-async function generateStory(ctx: ActionCtx, args: { searchKey: string; careerIndex: number; gender?: Gender; prepareOnly?: boolean }, fixed?: { title: string; panels: Panel[]; quality: "medium" }): Promise<any> {
-  const search = fixed ? null : await ctx.runQuery(internal.data.search, { key: args.searchKey });
-  const career = fixed ? { title: fixed.title } : search?.result.careers[args.careerIndex];
-  if (!Number.isInteger(args.careerIndex) || !career) throw new ConvexError("Choose a career from your results first.");
-  const existing = await ctx.runQuery(internal.data.resolvedStory, { title: career.title, gender: args.gender });
-  // Archived storyboards are read-only, including partial ones while AI is paused.
-  if (existing?.status === "ready" || (existing?.panels.length && (args.gender === "unspecified" || process.env.AI_ENABLED !== "true"))) {
-    await ctx.runMutation(internal.costs.cache, { careerTitle: career.title, callType: "panel image", stage: "storyboard-cache", model: "gpt-image-1" });
-    return { title: existing.title, status: existing.status, panels: await urls(ctx, existing.panels), path: existing.status === "ready" ? "storyboard-cache" : "storyboard-paused", raw: existing.raw ?? null };
-  }
-  const cached = await ctx.runQuery(internal.sceneLibrary.resolved, { title: career.title, gender: args.gender });
-  if (cached) return cached;
-  if (args.gender === "unspecified" || process.env.AI_ENABLED !== "true") throw new ConvexError("Futura is paused for a moment, please try again later");
-  await ctx.runAction(internal.libraryActions.ensureMapping, { title: career.title });
-  const shared = await ctx.runQuery(internal.sceneLibrary.resolved, { title: career.title, gender: args.gender });
-  if (!shared) throw new ConvexError("This career's shared scenes are not ready yet.");
-  return shared;
-}
 export const storyboard = action({
-  args: { searchKey: v.string(), careerIndex: v.number(), gender: v.optional(genderValidator) }, returns: v.any(), handler: (ctx, args) => generateStory(ctx, args),
+  args: { searchKey: v.string(), careerIndex: v.number(), gender: v.optional(genderValidator) }, returns: v.any(),
+  handler: async (ctx, args): Promise<any> => {
+    const search = await ctx.runQuery(internal.data.search, { key: args.searchKey });
+    const career = search?.result.careers[args.careerIndex];
+    if (!Number.isInteger(args.careerIndex) || !career) throw new ConvexError("Choose a career from your results first.");
+    const shared = await ctx.runQuery(internal.sceneLibrary.resolved, { title: career.title, gender: args.gender });
+    if (!shared) throw new ConvexError("This career's shared scenes are not ready yet.");
+    return shared;
+  },
 });
 
 
@@ -226,13 +196,9 @@ export const corporateLawyerStoryboard = action({
     await ctx.runQuery(api.costs.controls, { adminKey });
     if (process.env.CONVEX_CLOUD_URL !== "https://doting-basilisk-558.convex.cloud")
       throw new ConvexError("This storyboard run is restricted to doting-basilisk-558 DEV.");
-    const panels = [
-      { time: "9:00", caption: "Reviews a contract at a wooden desk beside a large window in a private modern office.", illustration: "Private office; seated at a wooden desk, examining blank contract pages with a pen." },
-      { time: "11:00", caption: "Discusses negotiation terms in a glass-walled conference room at a long meeting table, speaking to colleagues who remain off camera.", illustration: "Conference room; seated at a long table, open hand gesture, a closed folder and water glass." },
-      { time: "2:00", caption: "Researches a legal question in a bright law library, standing beside tall bookshelves and examining an open reference book with no visible writing.", illustration: "Law library; standing, holding an open blank-paged book; plain unlabelled book spines behind." },
-      { time: "4:00", caption: "Prepares a client briefing on a bench in a sunlit modern office courtyard, organising blank notes with a closed slim folder on his lap.", illustration: "Office courtyard; seated on a bench beside plants and modern architecture, reviewing a slim folder." },
-    ];
-    return await generateStory(ctx, { searchKey: "admin-corporate-lawyer-boy", careerIndex: 0, gender: "boy" }, { title: "Corporate Lawyer", panels, quality: "medium" });
+    const shared = await ctx.runQuery(internal.sceneLibrary.resolved, { title: "Corporate Lawyer", gender: "boy" });
+    if (!shared) throw new ConvexError("Corporate Lawyer's shared scenes are not ready yet.");
+    return shared;
   },
 });
 
@@ -258,7 +224,9 @@ export const careerPlan = action({
     }
     if (claim.state === "busy") return null;
     try {
-      const story = await ctx.runQuery(internal.data.resolvedStory, { title: career.title }) ?? await ctx.runQuery(internal.sceneLibrary.resolved, { title: career.title });
+      const story = await ctx.runQuery(internal.sceneLibrary.resolved, { title: career.title });
+      if (!story || story.panels.length !== 4 || story.panels.some((panel: any) => !panel.imageUrl))
+        throw new ConvexError("This career's shared scenes are not ready yet.");
       const response = await tracked(ctx, { careerTitle: career.title, callType: "plan", stage: "12-month-plan", model: "gpt-4.1-mini", generationId: token }, () => client().responses.parse({
         model: "gpt-4.1-mini", max_output_tokens: 2800, temperature: 0.2,
         input: [

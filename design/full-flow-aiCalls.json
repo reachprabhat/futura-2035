@@ -1,0 +1,172 @@
+{
+  "rows": [
+    {
+      "_creationTime": 1791965671564.663,
+      "_id": "jh78jx61r0j4h7jdvkevjdne4n8g91r5",
+      "cacheHit": true,
+      "cacheKey": "[\"careers-v4-catalog-80\",\"biology, chemistry, debate\",\"high earning medical professional in usa\"]",
+      "callType": "careers",
+      "careerTitle": "Career discovery (shared)",
+      "costINR": 0,
+      "costUSD": 0,
+      "model": "gpt-4.1",
+      "pricingDate": "2026-10-12",
+      "stage": "career-cache",
+      "status": "cached",
+      "timestamp": 1791965671564,
+      "usage": null,
+      "usdToInr": 90
+    },
+    {
+      "_creationTime": 1791965672794.0457,
+      "_id": "jh76qvsmzz2z19dhh5y0tr8tvh8g8e6a",
+      "cacheHit": true,
+      "callType": "plan",
+      "careerTitle": "Doctor",
+      "costINR": 0,
+      "costUSD": 0,
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "stage": "plan-cache",
+      "status": "cached",
+      "timestamp": 1791965672794,
+      "usage": null,
+      "usdToInr": 90
+    },
+    {
+      "_creationTime": 1791965680249.5059,
+      "_id": "jh7asby52xcs66ach56sak1syd8g98kb",
+      "cacheHit": true,
+      "cacheKey": "[\"careers-v4-catalog-80\",\"accountancy, cooking, drawing\",\"good income, mba\"]",
+      "callType": "careers",
+      "careerTitle": "Career discovery (shared)",
+      "costINR": 0,
+      "costUSD": 0,
+      "model": "gpt-4.1",
+      "pricingDate": "2026-10-12",
+      "stage": "career-cache",
+      "status": "cached",
+      "timestamp": 1791965680249,
+      "usage": null,
+      "usdToInr": 90
+    },
+    {
+      "_creationTime": 1791965683093.606,
+      "_id": "jh7avma5vq9wwkqzy5p9gmr7158g87fd",
+      "cacheHit": false,
+      "callType": "plan",
+      "careerTitle": "Financial Analyst",
+      "costINR": 0.08028,
+      "costUSD": 0.000892,
+      "generationId": "ba80ddbf-6e37-43a7-9c68-e70f748cb2d6",
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_462d490eacb942388a3150c11cb28b64",
+      "stage": "12-month-plan",
+      "status": "succeeded",
+      "timestamp": 1791965683093,
+      "usage": {
+        "input_tokens": 462,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 442,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 904
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791965690904.7952,
+      "_id": "jh76jx3y2m57wzn1s53f6csxkn8g8qdj",
+      "cacheHit": true,
+      "cacheKey": "[\"careers-v4-catalog-80\",\"literature, philosphy, watching movies\",\"good earning, overseas opportunity, stability\"]",
+      "callType": "careers",
+      "careerTitle": "Career discovery (shared)",
+      "costINR": 0,
+      "costUSD": 0,
+      "model": "gpt-4.1",
+      "pricingDate": "2026-10-12",
+      "stage": "career-cache",
+      "status": "cached",
+      "timestamp": 1791965690904,
+      "usage": null,
+      "usdToInr": 90
+    },
+    {
+      "_creationTime": 1791965692147.2424,
+      "_id": "jh71a9byz9gb23yqvehzk7nqrd8g8vzb",
+      "cacheHit": true,
+      "callType": "plan",
+      "careerTitle": "Author",
+      "costINR": 0,
+      "costUSD": 0,
+      "model": "gpt-4.1-mini",
+      "pricingDate": "2026-10-12",
+      "stage": "plan-cache",
+      "status": "cached",
+      "timestamp": 1791965692147,
+      "usage": null,
+      "usdToInr": 90
+    }
+  ],
+  "totalCostINR": 0.08028,
+  "imageCalls": 0,
+  "flows": [
+    {
+      "title": "Doctor",
+      "gender": "girl",
+      "interests": "biology, chemistry, debate",
+      "hopes": "high earning medical professional in usa",
+      "screenshot": "design/full-1.png",
+      "mappedScenes": [
+        "health-research",
+        "consultation",
+        "health-planning",
+        "health-explanation"
+      ],
+      "previewMonths": 3,
+      "fullMonths": 12,
+      "skillChips": 4,
+      "width": 390
+    },
+    {
+      "title": "Financial Analyst",
+      "gender": "boy",
+      "interests": "accountancy, cooking, drawing",
+      "hopes": "good income, mba",
+      "screenshot": "design/full-2.png",
+      "mappedScenes": [
+        "research",
+        "meeting",
+        "whiteboard",
+        "presentation"
+      ],
+      "previewMonths": 3,
+      "fullMonths": 12,
+      "skillChips": 4,
+      "width": 390
+    },
+    {
+      "title": "Author",
+      "gender": "boy",
+      "interests": "literature, philosphy, watching movies",
+      "hopes": "good earning, overseas opportunity, stability",
+      "screenshot": "design/full-3.png",
+      "mappedScenes": [
+        "research",
+        "sketching",
+        "documents",
+        "presentation"
+      ],
+      "previewMonths": 3,
+      "fullMonths": 12,
+      "skillChips": 4,
+      "width": 390
+    }
+  ]
+}

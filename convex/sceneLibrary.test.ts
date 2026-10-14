@@ -100,6 +100,8 @@ it("refuses wrong deployment, non-admin, disabled AI and exhausted budget withou
 it("caches one mapping per career across genders and searches, with no per-career image calls", async () => {
   const t = await testBackend();
   for (const key of ["search-a", "search-b"]) await t.mutation(internal.data.saveSearch, { key, result: { careers: [{ title: "Corporate Lawyer" }] } });
+  await expect(t.action(api.ai.storyboard, { searchKey: "search-a", careerIndex: 0, gender: "girl" })).rejects.toThrow(/shared scenes are not ready/);
+  await t.action(api.libraryActions.prepareCareer, { adminKey, title: "Corporate Lawyer" });
   for (const gender of ["girl", "boy"] as const) {
     const result = await t.action(api.ai.storyboard, { searchKey: gender === "girl" ? "search-a" : "search-b", careerIndex: 0, gender });
     expect(result.panels).toHaveLength(4);
@@ -124,7 +126,7 @@ it("uses the same four stored scenes for different careers without copying image
   const before = await t.query(internal.data.getStory, { key });
   await t.action(api.libraryActions.prepareCareer, { adminKey, title: "Corporate Lawyer" });
   expect(await t.query(internal.data.getStory, { key })).toEqual(before);
-  expect((await t.query(api.data.cachedCareer, { title: "Corporate Lawyer", gender: "boy" }))?.panels[0].caption).toBe("Archived task");
+  expect((await t.query(api.data.cachedCareer, { title: "Corporate Lawyer", gender: "boy" }))?.panels[0].caption).toBe("Task 1");
   expect((await t.query(api.sceneLibrary.career, { title: "Corporate Lawyer", gender: "boy" }))?.panels).toHaveLength(4);
 });
 it("rejects scene IDs outside the career outfit group", async () => {

@@ -7,6 +7,7 @@ import { api, internal } from "./_generated/api";
 import { CAREER_CATALOG, CAREER_TITLES, CAREER_CATALOG_VERSION } from "./careerCatalog";
 import { genderStoryKey } from "./gender";
 import { storyKey } from "./storyKey";
+import { mappingKey, sceneKey, eligibleScenes } from "./sceneCatalog";
 const mocks = vi.hoisted(() => ({
   create: vi.fn(),
   parse: vi.fn(),
@@ -51,6 +52,18 @@ beforeEach(() => {
 const discoveryCareer = (title: string) => ({ title, description: ["Future work.", "Human contribution."],
   whyItFits: "Personalised child and parent match.", salaryMinINR: 1000000, salaryMaxINR: 2000000,
   salaryBasis: "Illustrative India range.", overseas: "Possible.", stability: "Tradeoffs." });
+async function seedShared(t: ReturnType<typeof convexTest>, title: string) {
+  const scenes = eligibleScenes(title);
+  const ids = Array.from({ length: 4 }, (_, i) => scenes[i % scenes.length].id);
+  await t.run(async ctx => {
+    await ctx.db.insert("sceneMappings", { key: mappingKey(title), title, status: "ready", token: "seed", lease: 0,
+      panels: ids.map((sceneId, i) => ({ sceneId, time: ["9:00", "11:00", "2:00", "4:00"][i], caption: `Shared task ${i + 1}` })) });
+    for (const gender of ["girl", "boy"] as const) for (const sceneId of new Set(ids)) {
+      const storageId = await ctx.storage.store(new Blob([`${sceneId}-${gender}`], { type: "image/webp" }));
+      await ctx.db.insert("sceneImages", { key: sceneKey(sceneId, gender), sceneId, gender, status: "ready", token: "seed", storageId });
+    }
+  });
+}
 afterEach(() => {
   vi.unstubAllEnvs();
   vi.clearAllMocks();
@@ -104,21 +117,23 @@ describe("Storyboard recovery through the action", () => {
     expect(mocks.create).toHaveBeenCalledTimes(1);
     await expect(t.action(api.ai.recommend, { interests: "writing, Cricket", hopes: "stability, overseas" })).rejects.toThrow(/Futura is paused/);
   });
-  it("serves cached careers and partial storyboards while off without preparing missing stories", async () => {
+  it("serves shared scenes while AI is off and leaves partial archives untouched", async () => {
     const t = convexTest(schema, modules);
     const key = JSON.stringify([CAREER_CATALOG_VERSION, "economics", "stability"]);
     await t.mutation(internal.data.saveSearch, { key, result: { careers: ["Economist", "Author", "Food Scientist"].map(discoveryCareer) } });
     await t.mutation(internal.data.claim, { key: genderStoryKey("Economist", "girl"), title: "Economist", token: "partial" });
     await t.mutation(internal.data.saveStory, { key: genderStoryKey("Economist", "girl"), token: "partial", status: "failed", panels: [{ time: "9 AM", caption: "Saved caption", illustration: "Saved scene" }] });
+    await seedShared(t, "Economist");
     vi.stubEnv("AI_ENABLED", "false");
     const result = await t.action(api.ai.recommend, { interests: " Economics ", hopes: "STABILITY" });
     expect(result.path).toBe("career-cache");
-    expect(result.stories[0].panels[0].caption).toBe("Saved caption");
+    expect(result.stories[0].panels[0].caption).toBe("Shared task 1");
     expect(result.stories[1]).toBeNull();
-    expect((await t.action(api.ai.storyboard, { searchKey: key, careerIndex: 0 })).path).toBe("storyboard-paused");
-    await expect(t.action(api.ai.storyboard, { searchKey: key, careerIndex: 1 })).rejects.toThrow(/Futura is paused/);
+    expect((await t.action(api.ai.storyboard, { searchKey: key, careerIndex: 0 })).path).toBe("shared-scene-library");
+    await expect(t.action(api.ai.storyboard, { searchKey: key, careerIndex: 1 })).rejects.toThrow(/shared scenes are not ready/);
     await expect(t.mutation(api.data.startStories, { searchKey: key, cachedOnly: true } as any)).rejects.toThrow();
     await t.mutation(api.data.startStories, { searchKey: key, careerIndex: 0, cachedOnly: true });
+    expect((await t.query(internal.data.getStory, { key: genderStoryKey("Economist", "girl") }))?.panels[0].caption).toBe("Saved caption");
     expect(mocks.create).not.toHaveBeenCalled(); expect(mocks.parse).not.toHaveBeenCalled(); expect(mocks.generate).not.toHaveBeenCalled();
     expect((await t.run(ctx => ctx.db.query("aiCalls").collect())).every(row => row.cacheHit)).toBe(true);
   });
@@ -147,11 +162,12 @@ describe("Storyboard recovery through the action", () => {
     const panels = Array.from({ length: 4 }, (_, i) => ({ time: `${i}`, caption: "Existing caption", illustration: "Existing scene", storageId: id }));
     await t.mutation(internal.data.claim, { key: genderStoryKey("Food Scientist"), title: "Food Scientist", token: "saved" });
     await t.mutation(internal.data.saveStory, { key: genderStoryKey("Food Scientist"), token: "saved", status: "ready", panels, raw: "{}" });
+    await seedShared(t, "Food Scientist");
     for (const searchKey of ["different-input-a", "different-input-b"]) {
       await t.mutation(internal.data.saveSearch, { key: searchKey, result: { careers: [discoveryCareer("Food Scientist")] } });
       const result = await t.action(api.ai.storyboard, { searchKey, careerIndex: 0 });
-      expect(result.path).toBe("storyboard-cache");
-      expect(result.panels.map((p: any) => p.storageId)).toEqual(panels.map(p => p.storageId));
+      expect(result.path).toBe("shared-scene-library");
+      expect(result.panels.map((p: any) => p.storageId)).not.toEqual(panels.map(p => p.storageId));
     }
     expect(mocks.parse).not.toHaveBeenCalled();
     expect(mocks.generate).not.toHaveBeenCalled();
@@ -200,16 +216,17 @@ describe("Gender choices and shared career discovery", () => {
     expect(await t.run(ctx => ctx.db.query("storyboards").collect())).toHaveLength(0);
     expect(mocks.generate).not.toHaveBeenCalled();
   });
-  it("unspecified returns existing images and refuses a missing storyboard without scheduling or calling AI", async () => {
+  it("unspecified uses shared Girl scenes and refuses a missing mapping without AI", async () => {
     const t = convexTest(schema, modules);
     await t.mutation(internal.data.saveSearch, { key: "choice", result: { careers: [discoveryCareer("Economist"), discoveryCareer("Author")] } });
     const storageId = await t.run(ctx => ctx.storage.store(new Blob(["saved"])));
     await t.mutation(internal.data.claim, { key: genderStoryKey("Economist", "girl"), title: "Economist", token: "girl", gender: "girl" });
     await t.mutation(internal.data.saveStory, { key: genderStoryKey("Economist", "girl"), token: "girl", status: "ready", panels: [{ caption: "Saved scene", storageId }] });
-    expect((await t.query(api.data.stories, { searchKey: "choice", gender: "boy" }))[0]).toBeNull();
-    expect((await t.query(api.data.stories, { searchKey: "choice", gender: "girl" }))[0].panels[0].storageId).toBe(storageId);
+    await seedShared(t, "Economist");
+    expect((await t.query(api.data.stories, { searchKey: "choice", gender: "boy" }))[0].gender).toBe("boy");
+    expect((await t.query(api.data.stories, { searchKey: "choice", gender: "girl" }))[0].panels[0].storageId).not.toBe(storageId);
     await t.mutation(api.data.startStories, { searchKey: "choice", careerIndex: 0, gender: "unspecified" });
-    await expect(t.mutation(api.data.startStories, { searchKey: "choice", careerIndex: 1, gender: "unspecified" })).rejects.toThrow(/No saved storyboard/);
+    await expect(t.mutation(api.data.startStories, { searchKey: "choice", careerIndex: 1, gender: "unspecified" })).rejects.toThrow(/shared scenes are not ready/);
     await expect(t.action(api.ai.storyboard, { searchKey: "choice", careerIndex: 1, gender: "unspecified" })).rejects.toThrow();
     expect(await t.run(ctx => ctx.db.system.query("_scheduled_functions").collect())).toHaveLength(0);
     expect(mocks.create).not.toHaveBeenCalled(); expect(mocks.parse).not.toHaveBeenCalled(); expect(mocks.generate).not.toHaveBeenCalled();
@@ -235,6 +252,7 @@ describe("Career plan text cache", () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
     const t = convexTest(schema, modules), plan = planFixture();
     for (const key of ["plan-search-a", "plan-search-b"]) await t.mutation(internal.data.saveSearch, { key, result: { careers: [discoveryCareer("Author")] } });
+    await seedShared(t, "Author");
     expect(await t.query(api.plans.get, { title: "Author" })).toBeNull();
     expect(mocks.parse).not.toHaveBeenCalled(); expect(await t.run(ctx => ctx.db.query("aiCalls").collect())).toHaveLength(0);
     mocks.parse.mockResolvedValue({ output_parsed: plan, usage: { input_tokens: 1000, output_tokens: 500 } });
@@ -252,6 +270,7 @@ describe("Career plan text cache", () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
     const t = convexTest(schema, modules), plan = planFixture();
     await t.mutation(internal.data.saveSearch, { key: "bad-plan", result: { careers: [discoveryCareer("Author")] } });
+    await seedShared(t, "Author");
     plan.projects[1].month = 1; plan.skills[1] = plan.skills[0];
     mocks.parse.mockResolvedValue({ output_parsed: plan });
     await expect(t.action(api.ai.careerPlan, { searchKey: "bad-plan", careerIndex: 0 })).rejects.toThrow(/try again/);
