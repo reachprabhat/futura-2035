@@ -3,12 +3,13 @@ import { action, internalAction } from "./_generated/server";
 import type { ActionCtx } from "./_generated/server";
 import { api, internal } from "./_generated/api";
 import { v, ConvexError } from "convex/values";
-import OpenAI from "openai";
+import OpenAI, { toFile } from "openai";
 import { z } from "zod";
 import { zodTextFormat } from "openai/helpers/zod";
 import { SCENE_CATALOG, eligibleScenes, LIBRARY_VERSION, sceneKey, mappingKey } from "./sceneCatalog";
 import { CAREER_CATALOG } from "./careerCatalog";
 import { photoCharacter, photoPrompt } from "./photoPrompt";
+import { withImageRateLimitRetry } from "./imageRetry";
 
 const binaryGender = v.union(v.literal("girl"), v.literal("boy"));
 const assertDev = () => {
@@ -39,6 +40,10 @@ export const generateScene = action({
     await ctx.runQuery(api.costs.controls, { adminKey });
     const scene = SCENE_CATALOG.find(s => s.id === sceneId);
     if (!scene) throw new ConvexError("Choose a scene from the shared catalog.");
+    const reference = await ctx.runQuery(internal.sceneLibrary.reference, { gender });
+    if (gender === "boy" && !reference) throw new ConvexError("Upload and lock design/boy-locked.png before generating Boy scenes.");
+    const referenceBlob = reference ? await ctx.storage.get(reference.storageId) : null;
+    if (reference && !referenceBlob) throw new Error("Locked reference file is missing.");
     const token = crypto.randomUUID(), key = sceneKey(sceneId, gender);
     const claim = await ctx.runMutation(internal.sceneLibrary.claimImage, { sceneId, gender, token });
     const metadata = { careerTitle: `Shared scene: ${sceneId} (${gender})`, callType: "panel image" as const, stage: "shared-scene-image", model: "gpt-image-1", imageSize: "1024x1024", imageQuality: "medium", cacheKey: key, generationId: token };
@@ -48,8 +53,11 @@ export const generateScene = action({
       return { sceneId, gender, status: "ready", path: "shared-scene-cache", imageUrl: await ctx.storage.getUrl(claim.row.storageId) };
     }
     try {
-      const prompt = `${anchor}\n${photoPrompt(photoCharacter(gender, scene.health ? "Doctor" : "Author"), scene.activity)}\nSquare crop for a small workday card. Keep face and hands inside the central 70 percent. The activity and pose override the notebook-writing pose in the locked identity description; preserve all identity features and the fixed outfit.`;
-      const result = await tracked(ctx, metadata, () => client().images.generate({ model: "gpt-image-1", n: 1, size: "1024x1024", quality: "medium", output_format: "webp", prompt }));
+      const prompt = `${anchor}\n${photoPrompt(photoCharacter(gender, scene.health ? "Doctor" : "Author"), scene.activity, true)}\nSquare crop for a small workday card. Keep face and hands inside the central 70 percent. The activity and pose override the notebook-writing pose in the locked identity description; preserve all identity features. Outfit: ${scene.health ? "white coat over a white shirt" : "navy blazer over a white shirt"}. Reference is the locked original fictional protagonist; preserve the SAME face throughout the library. Do not copy the reference desk composition into other scenes.`;
+      const referenceFile = referenceBlob ? await toFile(referenceBlob, `${gender}-locked.png`) : null;
+      const result = await withImageRateLimitRetry(() => tracked(ctx, metadata, () => referenceFile
+        ? client().images.edit({ model: "gpt-image-1", image: referenceFile, n: 1, size: "1024x1024", quality: "medium", output_format: "webp", prompt })
+        : client().images.generate({ model: "gpt-image-1", n: 1, size: "1024x1024", quality: "medium", output_format: "webp", prompt })));
       const base64 = result.data?.[0]?.b64_json;
       if (!base64) throw new Error("No shared scene image returned.");
       const storageId = await ctx.storage.store(new Blob([Uint8Array.from(Buffer.from(base64, "base64"))], { type: "image/webp" }));

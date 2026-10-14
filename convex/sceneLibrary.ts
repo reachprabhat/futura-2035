@@ -1,4 +1,4 @@
-import { internalMutation, internalQuery, query } from "./_generated/server";
+import { internalMutation, internalQuery, query, mutation } from "./_generated/server";
 import type { QueryCtx } from "./_generated/server";
 import { v, ConvexError } from "convex/values";
 import { SCENE_CATALOG, LIBRARY_VERSION, mappingKey, sceneKey, eligibleScenes } from "./sceneCatalog";
@@ -9,6 +9,35 @@ const binaryGender = v.union(v.literal("girl"), v.literal("boy"));
 export function requireLibraryDev() {
   if (process.env.CONVEX_CLOUD_URL !== "https://doting-basilisk-558.convex.cloud") throw new ConvexError("Shared library changes are restricted to doting-basilisk-558 DEV.");
 }
+function requireAdmin(adminKey: string) {
+  requireLibraryDev();
+  if (!process.env.ADMIN_COSTS_KEY || adminKey.length < 32 || adminKey !== process.env.ADMIN_COSTS_KEY) throw new ConvexError("Admin access required.");
+}
+const referenceKey = (gender: "girl" | "boy") => `${LIBRARY_VERSION}:${gender}`;
+export const reference = internalQuery({ args: { gender: binaryGender }, returns: v.any(), handler: (ctx, { gender }) => ctx.db.query("sceneReferences").withIndex("by_key", q => q.eq("key", referenceKey(gender))).unique() });
+export const referenceUpload = mutation({ args: { adminKey: v.string() }, returns: v.string(), handler: async (ctx, { adminKey }) => { requireAdmin(adminKey); return ctx.storage.generateUploadUrl(); } });
+export const saveBoyReference = mutation({
+  args: { adminKey: v.string(), storageId: v.id("_storage"), digest: v.string() }, returns: v.null(),
+  handler: async (ctx, { adminKey, storageId, digest }) => {
+    requireAdmin(adminKey);
+    const key = referenceKey("boy");
+    const row = await ctx.db.query("sceneReferences").withIndex("by_key", q => q.eq("key", key)).unique();
+    if (row) { if (row.digest !== digest) throw new ConvexError("Boy reference is already locked to a different image."); return null; }
+    if (!await ctx.db.system.get(storageId)) throw new ConvexError("Reference upload is missing.");
+    await ctx.db.insert("sceneReferences", { key, storageId, digest });
+    return null;
+  },
+});
+export async function libraryTotals(ctx: Pick<QueryCtx, "db">) {
+  let costUSD = 0, costINR = 0, calls = 0, unknownCosts = 0;
+  for await (const row of ctx.db.query("aiCalls").withIndex("by_cacheKey", q => q.gte("cacheKey", `${LIBRARY_VERSION}:`).lt("cacheKey", `${LIBRARY_VERSION};`))) {
+    if (row.cacheHit) continue;
+    calls++; costUSD += row.costUSD ?? 0; costINR += row.costINR ?? 0;
+    if (row.costUSD === null) unknownCosts++;
+  }
+  return { costUSD, costINR, calls, unknownCosts, limitINR: 250, overBudget: costINR > 250 };
+}
+export const totals = query({ args: { adminKey: v.string() }, returns: v.any(), handler: async (ctx, { adminKey }) => { requireAdmin(adminKey); return libraryTotals(ctx); } });
 export const getMapping = internalQuery({
   args: { title: v.string() }, returns: v.any(),
   handler: (ctx, { title }) => ctx.db.query("sceneMappings").withIndex("by_key", q => q.eq("key", mappingKey(title))).unique(),
@@ -61,6 +90,11 @@ export const finishImage = internalMutation({
     const row = await ctx.db.query("sceneImages").withIndex("by_key", q => q.eq("key", sceneKey(sceneId, gender))).unique();
     if (row?.token !== token) throw new Error("Scene generation token mismatch.");
     await ctx.db.patch(row._id, { ...(storageId ? { storageId } : {}), error: error ?? null, status: storageId ? "ready" : "failed" });
+    if (gender === "girl" && storageId) {
+      const key = referenceKey("girl");
+      const reference = await ctx.db.query("sceneReferences").withIndex("by_key", q => q.eq("key", key)).unique();
+      if (!reference) await ctx.db.insert("sceneReferences", { key, storageId });
+    }
     const lock = await ctx.db.query("sceneLibraryLocks").withIndex("by_key", q => q.eq("key", LIBRARY_VERSION)).unique();
     if (lock?.token === token) await ctx.db.patch(lock._id, { token: null });
     return null;

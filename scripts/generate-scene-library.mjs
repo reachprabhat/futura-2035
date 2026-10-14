@@ -26,6 +26,12 @@ const run = async (fn, args) => {
   const output = await cli(["run", fn, JSON.stringify(args)]);
   return output ? JSON.parse(output) : null;
 };
+if (process.argv.includes("--preflight")) {
+  const controls = await run("costs:controls", { adminKey });
+  const inventory = await run("sceneLibrary:inventory", {});
+  console.log(JSON.stringify({ controls, readyImages: inventory.scenes.filter(s => s.status === "ready").length, otherImageStates: inventory.scenes.filter(s => s.status !== "ready" && s.status !== "missing"), readyMappings: inventory.mappings.filter(s => s.status === "ready").length }, null, 2));
+  process.exit(0);
+}
 // Explicit one-image comparison. It exits before any shared-library work can run.
 if (process.argv.includes("--boy-v2-test") || process.argv.includes("--boy-v2-proof")) {
   const generationId = "boy-v2-test";
@@ -88,31 +94,59 @@ if (JSON.parse(before).length >= 1000) throw new Error("Archive verification nee
 const initial = await run("sceneLibrary:inventory", {});
 const controls = await run("costs:controls", { adminKey });
 if (!controls.aiEnabled) throw new Error("DEV AI is disabled; no settings were changed.");
+const budget = async () => {
+  const total = await run("sceneLibrary:totals", { adminKey });
+  await writeFile(path.join(out, "running-total.json"), JSON.stringify(total, null, 2));
+  if (total.overBudget) { console.log(`STOP: library total ₹${total.costINR.toFixed(2)} passed ₹250.`); throw new Error("Library budget passed ₹250; no more AI calls allowed."); }
+  return total;
+};
+await budget();
+const boyBytes = await readFile(path.join(root, "design/boy-locked.png"));
+const boyDigest = createHash("sha256").update(boyBytes).digest("hex");
+const lockedBoy = await run("sceneLibrary:reference", { gender: "boy" });
+if (lockedBoy && lockedBoy.digest !== boyDigest) throw new Error("The stored Boy reference differs from design/boy-locked.png.");
+if (!lockedBoy) {
+  const uploadUrl = await run("sceneLibrary:referenceUpload", { adminKey });
+  const uploaded = await fetch(uploadUrl, { method: "POST", headers: { "Content-Type": "image/png" }, body: boyBytes });
+  if (!uploaded.ok) throw new Error("Boy reference upload failed.");
+  const { storageId } = await uploaded.json();
+  await run("sceneLibrary:saveBoyReference", { adminKey, storageId, digest: boyDigest });
+}
+let done = initial.scenes.filter(s => s.status === "ready").length;
 console.log("target: DEV doting-basilisk-558; generating shared scenes sequentially; no deployment");
 try {
   // No Promise.all: await each completed storage commit before starting the next image.
   for (const scene of initial.scenes) {
     if (scene.status === "ready") continue;
     if (scene.status !== "missing") throw new Error(`Inspect prior attempt: ${scene.sceneId}/${scene.gender} (${scene.status}).`);
+    await budget();
     const result = await run("libraryActions:generateScene", { adminKey, sceneId: scene.sceneId, gender: scene.gender });
     if (result.status !== "ready") throw new Error("Scene was not saved.");
+    const total = await budget();
     const image = await fetch(result.imageUrl);
     if (!image.ok) throw new Error("Could not download saved shared scene.");
     await writeFile(path.join(out, `${scene.sceneId}-${scene.gender}.webp`), Buffer.from(await image.arrayBuffer()));
-    console.log(`saved ${scene.sceneId}/${scene.gender}`);
+    done++;
+    console.log(`saved ${done}/32 ${scene.sceneId}/${scene.gender}; running cost ₹${total.costINR.toFixed(2)}`);
+    if (done % 8 === 0) console.log(`PROGRESS: ${done}/32 images done; running cost ₹${total.costINR.toFixed(2)}`);
   }
+  const completeImages = await run("sceneLibrary:inventory", {});
+  await writeFile(path.join(out, "inventory.json"), JSON.stringify(completeImages, null, 2));
+  if (completeImages.scenes.some(s => s.status !== "ready")) throw new Error("Not all 32 images are ready.");
   for (const career of initial.mappings) {
     if (career.status === "ready") continue;
+    await budget();
     const result = await run("libraryActions:prepareCareer", { adminKey, title: career.title });
     if (result.status !== "ready") throw new Error(`Career mapping incomplete: ${career.title}`);
-    console.log(`mapped ${career.title}`);
+    const total = await budget();
+    console.log(`mapped ${career.title}; library total ₹${total.costINR.toFixed(2)}`);
   }
 } finally {
   const rows = []; let cursor = null;
   do {
     const page = await run("costs:rows", { adminKey, paginationOpts: { numItems: 100, cursor } });
-    rows.push(...page.page.filter(row => row.timestamp >= startedAt && row.cacheKey?.startsWith("shared-scenes-v1:")));
-    cursor = page.isDone || page.page.at(-1)?.timestamp < startedAt ? null : page.continueCursor;
+    rows.push(...page.page.filter(row => row.cacheKey?.startsWith("shared-scenes-v1:")));
+    cursor = page.isDone ? null : page.continueCursor;
   } while (cursor);
   rows.sort((a, b) => a.timestamp - b.timestamp);
   const after = await archive();

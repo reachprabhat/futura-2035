@@ -3,6 +3,7 @@ import { v } from "convex/values";
 import { genderValidator } from "./gender";
 import { failureDetailValidator } from "./storyboardErrors";
 export default defineSchema({
+  sceneReferences: defineTable({ key: v.string(), storageId: v.id("_storage"), digest: v.optional(v.string()) }).index("by_key", ["key"]),
   sceneImages: defineTable({ key: v.string(), sceneId: v.string(), gender: v.union(v.literal("girl"), v.literal("boy")), token: v.string(), status: v.string(), storageId: v.optional(v.id("_storage")), error: v.optional(v.union(v.string(), v.null())) }).index("by_key", ["key"]),
   sceneMappings: defineTable({ key: v.string(), title: v.string(), token: v.string(), status: v.string(), lease: v.number(), panels: v.optional(v.array(v.object({ time: v.string(), caption: v.string(), sceneId: v.string() }))), error: v.optional(v.union(v.string(), v.null())) }).index("by_key", ["key"]),
   sceneLibraryLocks: defineTable({ key: v.string(), token: v.union(v.string(), v.null()) }).index("by_key", ["key"]),
@@ -23,7 +24,7 @@ export default defineSchema({
     requestId: v.optional(v.string()), webSearchCalls: v.optional(v.number()),
     fullStoryboardCompleted: v.optional(v.boolean()), error: v.optional(v.string()),
     pricingDate: v.string(), usdToInr: v.number(),
-  }).index("by_timestamp", ["timestamp"]).index("by_generationId", ["generationId"]).index("by_cache_timestamp", ["cacheHit", "timestamp"]),
+  }).index("by_timestamp", ["timestamp"]).index("by_generationId", ["generationId"]).index("by_cache_timestamp", ["cacheHit", "timestamp"]).index("by_cacheKey", ["cacheKey"]),
   usage: defineTable({ day: v.string(), calls: v.number() }).index("by_day", [
     "day",
   ]),

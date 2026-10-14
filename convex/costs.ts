@@ -4,6 +4,7 @@ import { paginationOptsValidator } from "convex/server";
 import { priceCall, USD_TO_INR, PRICING_DATE, PRICING_URL } from "./pricing";
 import { internal } from "./_generated/api";
 import { todayControls, estimateINR, PAUSED_MESSAGE } from "./aiControls";
+import { libraryTotals } from "./sceneLibrary";
 
 const metadata = {
   careerTitle: v.string(), callType: v.union(v.literal("careers"), v.literal("captions"), v.literal("panel image"), v.literal("plan")),
@@ -14,6 +15,7 @@ const metadata = {
 export const begin = internalMutation({
   args: metadata, returns: v.id("aiCalls"),
   handler: async (ctx, args) => {
+    if (args.cacheKey?.startsWith("shared-scenes-v1:") && (await libraryTotals(ctx)).overBudget) throw new ConvexError("Shared scene library passed the ₹250 limit. Generation stopped.");
     if (process.env.AI_ENABLED !== "true") throw new ConvexError(PAUSED_MESSAGE);
     const today = await todayControls(ctx);
     if (today.estimatedSpendINR + estimateINR(args.model) > today.dailyCostCapINR)
