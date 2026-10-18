@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-labelledby="title">
+  <title id="title">Pathlight</title>
+  <circle cx="122" cy="27" r="19" fill="#be844c"/>
+  <path fill="#5a43c6" d="M15 150V10h79c38 0 61 24 61 59s-23 58-61 58H53v23H15zm38-59h39c17 0 25-7 25-22s-8-22-25-22H53v44z"/>
+  <path fill="#fff" d="M62 54h29c8 0 12 3 12 8 0 4-3 6-9 9-11 5-17 11-17 21 0 7 4 12 11 16h16c-10-5-14-10-14-16 0-5 4-9 13-13 10-5 14-10 14-18 0-12-9-19-25-19H62z"/>
+</svg>

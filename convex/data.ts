@@ -6,19 +6,14 @@ import { istToday, callCap } from "./aiControls";
 import { failureDetail, failureDetailValidator } from "./storyboardErrors";
 import { libraryStory } from "./sceneLibrary";
 import { CAREER_CATALOG_VERSION } from "./careerCatalog";
+import { readTracking, trackingString, trackingBoolean } from "./tracking";
 
-// The example only reads an existing result. It never schedules generation or calls AI.
-export const example = mutation({
+// Read by the screened ai.example action; the cache itself stays private.
+export const exampleSearch = internalQuery({
   args: {}, returns: v.any(),
-  handler: async (ctx) => {
-    const interests = "Economics, book writing, food critique";
-    const hopes = "good earning, stability, overseas";
+  handler: async ctx => {
     const key = JSON.stringify([CAREER_CATALOG_VERSION, "book writing, economics, food critique", "good earning, overseas, stability"]);
-    const saved = await ctx.db.query("searches").withIndex("by_key", q => q.eq("key", key)).unique();
-    if (!saved) throw new ConvexError("The saved example is unavailable for a moment. Please try again later.");
-    await ctx.runMutation(internal.costs.cache, { careerTitle: "Career discovery (shared)", callType: "careers",
-      stage: "career-cache", model: "gpt-4.1", cacheKey: key });
-    return { ...saved.result, interests, hopes, searchKey: key, path: "career-cache", stories: [] };
+    return await ctx.db.query("searches").withIndex("by_key", q => q.eq("key", key)).unique();
   },
 });
 export const reserve = internalMutation({
@@ -69,6 +64,38 @@ export const saveSearch = internalMutation({
     if (row) { if (args.gender) await ctx.db.patch(row._id, { gender: args.gender }); return row.result; }
     await ctx.db.insert("searches", args);
     return args.result;
+  },
+});
+export const replaceSearchResult = internalMutation({
+  args: { key: v.string(), result: v.any() }, returns: v.null(),
+  handler: async (ctx, { key, result }) => {
+    const row = await ctx.db.query("searches").withIndex("by_key", q => q.eq("key", key)).unique();
+    if (row) await ctx.db.patch(row._id, { result });
+    return null;
+  },
+});
+export const logSafetyBlock = internalMutation({
+  args: { rule: v.string(), field: v.string() }, returns: v.null(),
+  handler: async (ctx, { rule, field }) => {
+    await ctx.db.insert("aiSafetyEvents", { timestamp: Date.now(), rule: rule.slice(0, 80), field: field.slice(0, 80) });
+    const key = "ai-safety-block-count";
+    const counter = await ctx.db.query("appSettings").withIndex("by_key", q => q.eq("key", key)).unique();
+    if (counter) await ctx.db.patch(counter._id, { value: (typeof counter.value === "number" ? counter.value : 0) + 1, updatedAt: Date.now() });
+    else await ctx.db.insert("appSettings", { key, value: 1, updatedAt: Date.now() });
+    return null;
+  },
+});
+export const savePlanDisplay = mutation({
+  args: { sessionId: v.string(), searchKey: v.string(), childName: v.string() }, returns: v.null(),
+  handler: async (ctx, { sessionId, searchKey, childName }) => {
+    if (!/^[0-9a-f-]{36}$/i.test(sessionId)) throw new ConvexError("Invalid browser session.");
+    if (searchKey.length > 2000) throw new ConvexError("Invalid saved result key.");
+    const name = childName.trim().slice(0, 30);
+    const row = await ctx.db.query("planDisplayRecords").withIndex("by_sessionId", q => q.eq("sessionId", sessionId)).unique();
+    const fields = { searchKey, childName: name, updatedAt: Date.now() };
+    if (row) await ctx.db.patch(row._id, fields);
+    else await ctx.db.insert("planDisplayRecords", { sessionId, ...fields });
+    return null;
   },
 });
 export const getStory = internalQuery({

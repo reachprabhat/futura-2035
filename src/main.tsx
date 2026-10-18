@@ -3,10 +3,17 @@ import { createRoot } from "react-dom/client";
 import { ConvexProvider, ConvexReactClient, useAction, useMutation, useQuery } from "convex/react";
 import { ConvexError } from "convex/values";
 import { api } from "../convex/_generated/api";
+import "./type-scale.css";
 import "./style.css";
 import AdminCosts from "./AdminCosts";
+import PlanAdmin from "./PlanAdmin";
+import AnalyticsAdmin from "./AnalyticsAdmin";
+import FaqAdmin from "./FaqAdmin";
 import MilestoneOne from "./MilestoneOne";
 import CachedCareerDay from "./CachedCareerDay";
+import { getVisitorId, visitorTracking } from "./visitorTracking";
+import { pathlightLogoUrl, sceneImageUrl } from "./compressedAssets";
+import { displayAiText } from "./displayText";
 type Career = {
   title: string;
   description: string[];
@@ -49,16 +56,18 @@ const message = (e: unknown) =>
   e instanceof ConvexError
     ? String(e.data)
     : "We couldn’t finish that request. Please try again.";
-function PanelImage({ panel, index, failed }: { panel: Story["panels"][number]; index: number; failed: boolean }) {
+function PanelImage({ panel, index, failed }: { panel: Story["panels"][number] & { sceneId?: string }; index: number; failed: boolean }) {
   const [loaded, setLoaded] = useState(false);
+  const imageUrl = sceneImageUrl(panel.sceneId, "girl", panel.imageUrl);
   return <div className="panel-image image-fallback">
     {!loaded && <><span className="number">0{index + 1}</span><p>{panel.imageError || failed ? "Illustration unavailable" : "Illustrating this moment…"}</p></>}
-    {panel.imageUrl && <img src={panel.imageUrl} alt={panel.caption} className={loaded ? "image-visible" : ""} onLoad={() => setLoaded(true)} />}
+    {imageUrl && <img src={imageUrl} alt={displayAiText(panel.caption)} className={loaded ? "image-visible" : ""} onLoad={() => setLoaded(true)} loading={index === 0 ? "eager" : "lazy"} />}
   </div>;
 }
 function App() {
   const recommend = useAction(api.ai.recommend),
     requestStoryboard = useAction(api.ai.storyboard);
+  const visitorId = getVisitorId();
   const [interests, setInterests] = useState(""),
     [hopes, setHopes] = useState(""),
     [results, setResults] = useState<Results | null>(null),
@@ -75,7 +84,7 @@ function App() {
     setError("");
     setSelected(null);
     try {
-      setResults(await recommend({ interests, hopes }));
+      setResults(await recommend({ interests, hopes, tracking: visitorTracking() }));
       setTimeout(
         () =>
           document
@@ -84,7 +93,7 @@ function App() {
         100,
       );
     } catch (e) {
-      setError(message(e));
+      setError(displayAiText(message(e)));
     } finally {
       setBusy(false);
     }
@@ -105,7 +114,7 @@ function App() {
     try {
       await requestStoryboard({ searchKey: results.searchKey, careerIndex: index });
     } catch (e) {
-      setError(message(e));
+      setError(displayAiText(message(e)));
     } finally {
       setBusy(false);
     }
@@ -121,10 +130,8 @@ function App() {
     <>
       <header>
         <div className="header-inner">
-          <a href="/" className="brand" aria-label="Futura 2035 home">
-            <span className="mark">f</span>
-            <strong>Futura</strong>
-            <span>2035</span>
+          <a href="/" className="brand" aria-label="Pathlight home">
+            <img src={pathlightLogoUrl} alt="Pathlight. Real paths. Brighter future." />
           </a>
           <span className="pill">PARENT-LED · FUTURE-FOCUSED</span>
         </div>
@@ -218,7 +225,7 @@ function App() {
               <button className="text-button" onClick={edit} disabled={busy}>
                 ← Edit interests & hopes
               </button>
-              <span className="pill">TARGET HORIZON · 2035</span>
+              <span className="pill">TARGET HORIZON: THE 2030s</span>
             </div>
             <section id="pathways">
               <p className="eyebrow">EXPLORE, COMPARE, THEN PICTURE</p>
@@ -251,15 +258,15 @@ function App() {
                       <span className="eyebrow">POSSIBLE FUTURE</span>
                       <span className="number">0{i + 1}</span>
                     </div>
-                    <h3>{career.title}</h3>
+                    <h3>{displayAiText(career.title)}</h3>
                     <div className="description">
                       {career.description.map((line, j) => (
-                        <p key={j}>{line}</p>
+                        <p key={j}>{displayAiText(line)}</p>
                       ))}
                     </div>
                     <div className="fit">
                       <p className="eyebrow">WHY IT FITS</p>
-                      <p>{career.whyItFits}</p>
+                      <p>{displayAiText(career.whyItFits)}</p>
                     </div>
                     <div className="salary">
                       <strong>
@@ -267,13 +274,13 @@ function App() {
                         {money(career.salaryMaxINR)}
                       </strong>
                       <span>illustrative annual earnings</span>
-                      <small>{career.salaryBasis}</small>
+                      <small>{displayAiText(career.salaryBasis)}</small>
                     </div>
                     <dl>
                       <dt>Stability</dt>
-                      <dd>{career.stability}</dd>
+                      <dd>{displayAiText(career.stability)}</dd>
                       <dt>Overseas possibility</dt>
-                      <dd>{career.overseas}</dd>
+                      <dd>{displayAiText(career.overseas)}</dd>
                     </dl>
                     <button
                       className="primary"
@@ -289,7 +296,7 @@ function App() {
                   </article>
                 ))}
               </div>
-              <p className="note">{results.note}</p>
+              <p className="note">{displayAiText(results.note)}</p>
               {results.sources.length > 0 && (
                 <details>
                   <summary>Research behind these possibilities</summary>
@@ -301,7 +308,7 @@ function App() {
                       .map((s) => (
                         <li key={s.url}>
                           <a href={s.url} target="_blank" rel="noreferrer">
-                            {s.title}
+                          {displayAiText(s.title)}
                           </a>
                         </li>
                       ))}
@@ -313,10 +320,10 @@ function App() {
               <section id="storyboard" aria-busy={story?.status === "generating"}>
                 <div className="story-heading">
                   <div>
-                    <p className="eyebrow">A GLIMPSE INTO 2035</p>
+                    <p className="eyebrow">A GLIMPSE INTO THE 2030s</p>
                     <h2>A day in the life</h2>
                     <p className="career-name">
-                      {results.careers[selected].title}
+                      {displayAiText(results.careers[selected].title)}
                     </p>
                   </div>
                   <button
@@ -350,14 +357,14 @@ function App() {
                           <PanelImage key={panel.imageUrl ?? `${story.title}-${i}`} panel={panel} index={i} failed={story.status === "failed"} />
                           <figcaption>
                             <span className="eyebrow">{panel.time}</span>
-                            <p>{panel.caption}</p>
+                            <p>{displayAiText(panel.caption)}</p>
                           </figcaption>
                         </figure>
                       ))}
                     </div>
                     {story.error && (
                       <div className="error" role="alert">
-                        <p>{story.error}</p>
+                        <p>{displayAiText(story.error)}</p>
                         <p>
                           Your captions and any completed illustrations are
                           kept.
@@ -380,7 +387,7 @@ function App() {
         )}
         {error && (
           <div className="error" role="alert">
-            <p>{error}</p>
+            <p>{displayAiText(error)}</p>
             <p className="run-path">
               Path ran:{" "}
               {selected === null
@@ -404,7 +411,7 @@ function App() {
           <details className="raw-output">
             <summary>Full raw AI output</summary>
             <pre>
-              {JSON.stringify(
+              {displayAiText(JSON.stringify(
                 {
                   careerPath: results.path,
                   careerResponse: JSON.parse(results.raw),
@@ -420,29 +427,30 @@ function App() {
                 },
                 null,
                 2,
-              )}
+              ))}
             </pre>
           </details>
         )}
         <footer>
           <p>“The future is not a job title. It is what they can do.”</p>
-          <span>FUTURA 2035 · POSSIBILITIES, WITH PERSPECTIVE</span>
+          <span>PATHLIGHT · POSSIBILITIES, WITH PERSPECTIVE</span>
         </footer>
       </main>
     </>
   );
 }
 const url = import.meta.env.VITE_CONVEX_URL;
+getVisitorId();
 const savedCareer = new URLSearchParams(window.location.search).get("career");
 const savedGender = new URLSearchParams(window.location.search).get("gender");
 createRoot(document.getElementById("root")!).render(
   url ? (
     <ConvexProvider client={new ConvexReactClient(url)}>
-      {window.location.pathname === "/admin/costs" ? <AdminCosts /> : savedCareer ? <CachedCareerDay title={savedCareer} gender={savedGender === "girl" || savedGender === "boy" ? savedGender : "unspecified"} /> : <MilestoneOne />}
+      {window.location.pathname === "/admin/costs" ? <AdminCosts /> : window.location.pathname === "/admin/analytics" ? <AnalyticsAdmin /> : window.location.pathname === "/admin/faqs" ? <FaqAdmin /> : window.location.pathname === "/admin" ? <PlanAdmin /> : savedCareer ? <CachedCareerDay title={savedCareer} gender={savedGender === "girl" || savedGender === "boy" ? savedGender : "unspecified"} /> : <MilestoneOne />}
     </ConvexProvider>
   ) : (
     <main>
-      <h1>Futura 2035</h1>
+      <h1>Pathlight</h1>
       <p>
         Connect this app to its new Convex project, then restart development.
       </p>

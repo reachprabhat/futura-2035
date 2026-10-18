@@ -11,6 +11,7 @@ import { mappingKey, sceneKey, eligibleScenes } from "./sceneCatalog";
 const mocks = vi.hoisted(() => ({
   create: vi.fn(),
   parse: vi.fn(),
+  moderate: vi.fn(),
   generate: vi.fn(),
   retryDelay: vi.fn().mockResolvedValue(undefined),
 }));
@@ -21,6 +22,7 @@ vi.mock("./imageRetry", async importOriginal => {
 vi.mock("openai", () => {
   class FakeOpenAI {
     responses = { create: mocks.create, parse: mocks.parse };
+    moderations = { create: mocks.moderate };
     images = { generate: mocks.generate };
     static APIError = class extends Error {
       status = 500;
@@ -48,6 +50,8 @@ describe("Admin photographic comparison", () => {
 beforeEach(() => {
   vi.stubEnv("AI_ENABLED", "true");
   vi.stubEnv("DAILY_COST_CAP_INR", "2000");
+  vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
+  mocks.moderate.mockResolvedValue({ results: [{ flagged: false, categories: {} }] });
 });
 const discoveryCareer = (title: string) => ({ title, description: ["Future work.", "Human contribution."],
   whyItFits: "Personalised child and parent match.", salaryMinINR: 1000000, salaryMaxINR: 2000000,
@@ -88,7 +92,7 @@ describe("Storyboard recovery through the action", () => {
     });
     mocks.parse.mockResolvedValue({
       output: [],
-      output_parsed: { careers: ["Economist", "Author", "Food Scientist"].map(discoveryCareer), note: "Test research result" },
+      output_parsed: { safe: true, careers: ["Economist", "Author", "Food Scientist"].map(discoveryCareer), note: "Test research result" },
     });
     const args = {
       interests: "Economics, writing",
@@ -101,7 +105,7 @@ describe("Storyboard recovery through the action", () => {
     expect(await t.run(ctx => ctx.db.query("storyboards").collect())).toHaveLength(0);
     expect((await t.run(ctx => ctx.db.query("aiCalls").collect())).map(row => row.callType)).toEqual(["careers", "careers"]);
     expect(first.careers.map((c: any) => c.title)).toEqual(["Economist", "Author", "Food Scientist"]);
-    expect(JSON.parse(mocks.parse.mock.calls[0][0].input[1].content).careerCatalog).toHaveLength(85);
+    expect(JSON.parse(mocks.parse.mock.calls[0][0].input[1].content).careerCatalog).toHaveLength(88);
     expect(mocks.parse.mock.calls[0][0].input[1].content).toContain(
       "Published workforce research.",
     );
@@ -115,7 +119,7 @@ describe("Storyboard recovery through the action", () => {
     expect(mocks.parse).toHaveBeenCalledTimes(1);
     expect((await t.action(api.ai.recommend, { interests: "writing; Economics", hopes: "overseas,  stability" })).path).toBe("career-cache");
     expect(mocks.create).toHaveBeenCalledTimes(1);
-    await expect(t.action(api.ai.recommend, { interests: "writing, Cricket", hopes: "stability, overseas" })).rejects.toThrow(/Futura is paused/);
+    await expect(t.action(api.ai.recommend, { interests: "writing, Cricket", hopes: "stability, overseas" })).rejects.toThrow(/Pathlight is paused/);
   });
   it("serves shared scenes while AI is off and leaves partial archives untouched", async () => {
     const t = convexTest(schema, modules);
@@ -146,14 +150,14 @@ describe("Storyboard recovery through the action", () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
     const t = convexTest(schema, modules);
     mocks.create.mockResolvedValue({ output: [{ type: "web_search_call", status: "completed", action: { sources: [] } }], output_text: "Research." });
-    mocks.parse.mockResolvedValue({ output_parsed: { careers: titles.map(discoveryCareer), note: "Test result" } });
-    await expect(t.action(api.ai.recommend, { interests: "Test", hopes: "Test" })).rejects.toThrow(/try again/);
+    mocks.parse.mockResolvedValue({ output_parsed: { safe: true, careers: titles.map(discoveryCareer), note: "Test result" } });
+    await expect(t.action(api.ai.recommend, { interests: "Test", hopes: "Test" })).rejects.toThrow();
     expect(await t.run(ctx => ctx.db.query("searches").collect())).toHaveLength(0);
     expect(mocks.generate).not.toHaveBeenCalled();
   });
   it("has 85 unique plain titles and reuses the exact title across different searches", async () => {
-    expect(CAREER_CATALOG).toHaveLength(85);
-    expect(new Set(CAREER_TITLES).size).toBe(85);
+    expect(CAREER_CATALOG).toHaveLength(88);
+    expect(new Set(CAREER_TITLES).size).toBe(88);
     expect(CAREER_CATALOG.every(c => c.description.trim() && !c.description.includes("\n"))).toBe(true);
     expect(storyKey("Food Scientist")).toBe("Food Scientist");
     expect(storyKey("Older Career Name")).toBe("older career name");
@@ -184,7 +188,7 @@ describe("Storyboard recovery through the action", () => {
         interests: "economics",
         hopes: "stability",
       }),
-    ).rejects.toThrow(/try again/);
+    ).rejects.toThrow("Required workforce research did not run");
     expect(mocks.parse).not.toHaveBeenCalled();
   });
 
@@ -209,7 +213,7 @@ describe("Gender choices and shared career discovery", () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
     const t = convexTest(schema, modules);
     mocks.create.mockResolvedValue({ output: [{ type: "web_search_call", status: "completed", action: { sources: [] } }], output_text: "Research" });
-    mocks.parse.mockResolvedValue({ output_parsed: { careers: ["Economist", "Author", "Food Scientist"].map(discoveryCareer), note: "Evidence" } });
+    mocks.parse.mockResolvedValue({ output_parsed: { safe: true, careers: ["Economist", "Author", "Food Scientist"].map(discoveryCareer), note: "Evidence" } });
     await t.action(api.ai.recommend, { interests: "Economics", hopes: "Stability", gender: "boy" });
     expect(JSON.stringify(mocks.create.mock.calls)).not.toContain('"gender"');
     expect(JSON.stringify(mocks.parse.mock.calls)).not.toContain('"gender"');
@@ -246,8 +250,28 @@ it("keeps an image committed before a stale failure save", async () => {
   expect(row?.panels[0].storageId).toBe(storageId);
   expect(row?.lastError).toBe("Later operation failed.");
 });
-const planFixture = () => ({ subtitle: "Turn ideas into memorable stories.", skills: ["Research", "Writing", "Collaboration", "Communication"], projects: Array.from({ length: 12 }, (_, i) => ({ month: i + 1, title: `Project ${i + 1}`, skillIndex: i % 4, panelIndex: i % 4, thumbnailThemeId: "notebook-writing", build: `Portfolio piece ${i + 1}` })) });
+const planFixture = () => {
+  const skills = ["Research", "Writing", "Collaboration", "Communication"];
+  const coreSkills = [...skills, "Design", "Storytelling"];
+  return { safe: true, subtitle: "Turn ideas into memorable stories.", skills, coreSkills, projects: Array.from({ length: 12 }, (_, i) => ({ month: i + 1, title: `Research Chart Project ${i + 1}`, skillIndex: i % 6, targetSkill: coreSkills[i % 6], panelIndex: i % 4, thumbnailThemeId: "notebook-writing", projectDetails: `First, gather simple examples for project ${i + 1}. Then, make a chart using those examples. Share the finished chart with your family.`, successCriteria: [`The chart for project ${i + 1} includes three examples.`, `A family member can read the finished chart for project ${i + 1}.`], timeNeeded: "3-4 hrs / month" })) };
+};
 describe("Career plan text cache", () => {
+  it("repairs array, object, and overlong project detail formats before validating the whole plan", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
+    const t = convexTest(schema, modules), plan = planFixture();
+    await t.mutation(internal.data.saveSearch, { key: "repair-plan-details", result: { careers: [discoveryCareer("Author")] } });
+    await seedShared(t, "Author");
+    plan.projects[9].projectDetails = ["Choose a game your friends enjoy.", "Compare two free ways to track scores.", "Make a score chart.", "Share it with your family."] as any;
+    plan.projects[11].projectDetails = { steps: ["Gather your best project pages.", "Arrange them in a portfolio.", "Show the final portfolio to your family."] } as any;
+    mocks.parse.mockResolvedValue({ output_parsed: plan, usage: { input_tokens: 1000, output_tokens: 500 } });
+    const info = vi.spyOn(console, "info").mockImplementation(() => {});
+    const saved = await t.action(api.ai.careerPlan, { searchKey: "repair-plan-details", careerIndex: 0 });
+    expect(saved.projects[9].projectDetails).toBe("Choose a game your friends enjoy. Compare two free ways to track scores. Make a score chart. Share it with your family.");
+    expect(saved.projects[11].projectDetails).toBe("Gather your best project pages. Arrange them in a portfolio. Show the final portfolio to your family.");
+    expect(info).toHaveBeenCalledWith(expect.stringContaining("month 10"));
+    expect(info).toHaveBeenCalledWith(expect.stringContaining("month 12"));
+    info.mockRestore();
+  });
   it("creates a plan only on its explicit screen request, once per career across searches", async () => {
     vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
     const t = convexTest(schema, modules), plan = planFixture();
@@ -256,9 +280,11 @@ describe("Career plan text cache", () => {
     expect(await t.query(api.plans.get, { title: "Author" })).toBeNull();
     expect(mocks.parse).not.toHaveBeenCalled(); expect(await t.run(ctx => ctx.db.query("aiCalls").collect())).toHaveLength(0);
     mocks.parse.mockResolvedValue({ output_parsed: plan, usage: { input_tokens: 1000, output_tokens: 500 } });
-    expect(await t.action(api.ai.careerPlan, { searchKey: "plan-search-a", careerIndex: 0 })).toEqual(plan);
+    const { safe: _safe, ...safePlan } = plan;
+    const expected = { ...safePlan, projects: plan.projects.map(project => ({ ...project, timeNeeded: "3-4 hrs / month" })) };
+    expect(await t.action(api.ai.careerPlan, { searchKey: "plan-search-a", careerIndex: 0 })).toEqual(expected);
     vi.stubEnv("AI_ENABLED", "false");
-    expect(await t.action(api.ai.careerPlan, { searchKey: "plan-search-b", careerIndex: 0 })).toEqual(plan);
+    expect(await t.action(api.ai.careerPlan, { searchKey: "plan-search-b", careerIndex: 0 })).toEqual(expected);
     expect(mocks.parse).toHaveBeenCalledTimes(1); expect(mocks.generate).not.toHaveBeenCalled(); expect(mocks.create).not.toHaveBeenCalled();
     const rows = await t.run(ctx => ctx.db.query("aiCalls").collect());
     expect(rows.map(r => [r.callType, r.stage, r.cacheHit])).toEqual([["plan", "12-month-plan", false], ["plan", "plan-cache", true]]);
@@ -273,14 +299,98 @@ describe("Career plan text cache", () => {
     await seedShared(t, "Author");
     plan.projects[1].month = 1; plan.skills[1] = plan.skills[0];
     mocks.parse.mockResolvedValue({ output_parsed: plan });
-    await expect(t.action(api.ai.careerPlan, { searchKey: "bad-plan", careerIndex: 0 })).rejects.toThrow(/try again/);
+    const result = await t.action(api.ai.careerPlan, { searchKey: "bad-plan", careerIndex: 0 });
+    expect(result.state).toBe("needs-review");
     const saved = await t.query(api.plans.get, { title: "Author" });
-    expect(saved?.status).toBe("failed"); expect(saved?.plan).toBeUndefined(); expect(mocks.generate).not.toHaveBeenCalled();
+    expect(saved?.status).toBe("needs-review"); expect(saved?.plan).toBeNull(); expect(mocks.generate).not.toHaveBeenCalled();
+  });
+  it("refuses a plan that leaves a core skill out of the monthly projects", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
+    const t = convexTest(schema, modules), plan = planFixture();
+    await t.mutation(internal.data.saveSearch, { key: "missing-core-skill", result: { careers: [discoveryCareer("Author")] } });
+    await seedShared(t, "Author");
+    plan.projects[11].skillIndex = 0;
+    plan.projects[11].targetSkill = plan.coreSkills[0];
+    mocks.parse.mockResolvedValue({ output_parsed: plan });
+    const result = await t.action(api.ai.careerPlan, { searchKey: "missing-core-skill", careerIndex: 0 });
+    expect(result.state).toBe("needs-review");
+    expect((await t.query(api.plans.get, { title: "Author" }))).toMatchObject({ status: "needs-review", plan: null });
   });
   it("refuses a plan for a career outside the selected saved search", async () => {
     const t = convexTest(schema, modules);
     await expect(t.action(api.ai.careerPlan, { searchKey: "not-a-real-search", careerIndex: 0 })).rejects.toThrow(/saved results/);
     expect(mocks.parse).not.toHaveBeenCalled(); expect(mocks.generate).not.toHaveBeenCalled();
+  });
+});
+
+describe("DEV AI safety proof", () => {
+  it("keeps lawful justice careers when moderation flags crime-related wording", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
+    const t = convexTest(schema, modules);
+    const titles = ["Criminal Lawyer", "Forensic Scientist", "Police Officer"];
+    const careers = titles.map(title => ({ ...discoveryCareer(title), description: [
+      `Reviews crime-scene evidence and follows strict legal safeguards as a ${title}.`,
+      `Supports fair criminal-justice decisions through careful work as a ${title}.`,
+    ] }));
+    mocks.moderate.mockImplementation(async ({ input }) => {
+      const flagged = /\bcrime|criminal\b/i.test(input);
+      return { results: [{ flagged, categories: flagged ? { illicit: true } : {} }] };
+    });
+    mocks.create.mockResolvedValue({ output: [{ type: "web_search_call", status: "completed", action: { sources: [] } }], output_text: "Published workforce research." });
+    mocks.parse.mockResolvedValue({ output: [], output_parsed: { safe: true, careers, note: "Safe justice careers." } });
+    const result = await t.action(api.ai.recommend, { interests: "crime", hopes: "stability" });
+    expect(result.careers.map((career: any) => career.title)).toEqual(titles);
+    const events = await t.run(ctx => ctx.db.query("aiSafetyEvents").collect());
+    expect(events.some(event => /^career-\d+-/.test(event.field))).toBe(false);
+  });
+
+  it("blocks harmful inputs, redirects adjacent interests and returns screened careers", async () => {
+    vi.stubEnv("CONVEX_CLOUD_URL", "https://doting-basilisk-558.convex.cloud");
+    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
+    const report: Array<{ input: string; result: string; titles?: string[]; redirection?: string }> = [];
+    const cases = [
+      { input: "crime", titles: ["Corporate Lawyer", "Civil Servant (IAS/IPS)", "Journalist"] },
+      { input: "killer", blocked: true },
+      { input: "hacker", titles: ["Cybersecurity Analyst", "Software Engineer", "Privacy Specialist"] },
+      { input: "how to hack accounts", blocked: true },
+      { input: "music", titles: ["Performing Artist", "Author", "Game Designer"] },
+      { input: "economics", titles: ["Economist", "Data Analyst", "Public Policy Analyst"] },
+    ];
+    for (const entry of cases) {
+      const t = convexTest(schema, modules);
+      mocks.create.mockResolvedValue({ output: [{ type: "web_search_call", status: "completed", action: { sources: [] } }], output_text: "Published workforce research." });
+      mocks.parse.mockResolvedValue({ output: [], output_parsed: { safe: true, careers: entry.titles?.map(discoveryCareer) ?? [], note: "Safe possibilities to explore." } });
+      if (entry.blocked) {
+        await expect(t.action(api.ai.recommend, { interests: entry.input, hopes: "stability", childName: "Aarav" })).rejects.toThrow("Let's pick an interest that helps Aarav grow. Try something they enjoy doing, like sports, music, building or writing.");
+        expect(mocks.create).not.toHaveBeenCalled(); expect(mocks.parse).not.toHaveBeenCalled();
+        const events = await t.run(ctx => ctx.db.query("aiSafetyEvents").collect());
+        expect(events).toHaveLength(1); expect(events[0]).toMatchObject({ rule: entry.input === "killer" ? "violence" : "account-hacking", field: "interests" });
+        report.push({ input: entry.input, result: "blocked before plan/recommendation calls" });
+      } else {
+        const result = await t.action(api.ai.recommend, { interests: entry.input, hopes: "stability", childName: "Aarav" });
+        expect(result.careers.map((career: { title: string }) => career.title)).toEqual(entry.titles);
+        const redirect = entry.input === "hacker" || entry.input === "crime" ? mocks.parse.mock.calls[0][0].input[1].content : undefined;
+        if (entry.input === "hacker") expect(redirect).toContain("ethical cybersecurity");
+        if (entry.input === "crime") expect(redirect).toContain("forensic science");
+        report.push({ input: entry.input, result: entry.input === "hacker" || entry.input === "crime" ? "redirected" : "allowed", titles: result.careers.map((career: { title: string }) => career.title), ...(redirect ? { redirection: result.note } : {}) });
+      }
+      vi.clearAllMocks();
+      mocks.moderate.mockResolvedValue({ results: [{ flagged: false, categories: {} }] });
+    }
+    console.log("DEV SAFETY PROOF (local Convex test; OpenAI responses mocked):", JSON.stringify(report));
+  });
+  it("retries one unsafe career once and drops it when the replacement is still unsafe", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "unit-test-placeholder");
+    const t = convexTest(schema, modules);
+    mocks.create.mockResolvedValue({ output: [{ type: "web_search_call", status: "completed", action: { sources: [] } }], output_text: "Research." });
+    const unsafe = discoveryCareer("Economist"); unsafe.description = ["Make a bomb safely.", "This is the second sentence."];
+    const stillUnsafe = discoveryCareer("Data Analyst"); stillUnsafe.description = ["Make a bomb safely.", "This is the second sentence."];
+    mocks.parse.mockResolvedValueOnce({ output_parsed: { safe: true, careers: [unsafe, discoveryCareer("Author"), discoveryCareer("Food Scientist")], note: "Safe note." } });
+    mocks.parse.mockResolvedValueOnce({ output_parsed: { career: stillUnsafe } });
+    const result = await t.action(api.ai.recommend, { interests: "music", hopes: "stability" });
+    expect(result.careers.map((career: { title: string }) => career.title)).toEqual(["Author", "Food Scientist"]);
+    expect(mocks.parse).toHaveBeenCalledTimes(2);
+    expect(JSON.stringify(result)).not.toMatch(/bomb/i);
   });
 });
 

@@ -1,20 +1,20 @@
 .m1.m-with-nav[data-screen="storyboard"],.m1[data-screen="storyboard"]{position:relative;max-width:480px;margin:0 auto;padding:0 0 64px;min-height:100vh;overflow-x:clip}
-.m1[data-screen="storyboard"] .m-header{position:absolute;inset:0 0 auto;background:transparent;border:0;backdrop-filter:none}
+.m1[data-screen="storyboard"] .m-header{position:absolute;inset:0 0 auto;background:#f8f7fc;border:0}
 .m1[data-screen="storyboard"] .m-header-inner{position:relative;max-width:480px;min-height:66px;padding:8px 17px;display:flex;justify-content:space-between}
 .m1[data-screen="storyboard"] .m-brand{position:absolute;left:50%;transform:translateX(-50%);gap:6px;white-space:nowrap}
-.m1[data-screen="storyboard"] .m-brand strong{font-size:19px;letter-spacing:-.6px}
-.m1[data-screen="storyboard"] .m-brand-mark{font-size:31px;width:18px}
-.m1[data-screen="storyboard"] .m-year{font-size:8px;padding:2px 5px}
+.m1[data-screen="storyboard"] .m-brand strong{font-size:var(--type-body);letter-spacing:-.6px}
+.m1[data-screen="storyboard"] .m-brand-mark{font-size:var(--type-body);width:18px}
+.m1[data-screen="storyboard"] .m-year{font-size:var(--type-label);padding:2px 5px}
 .m1 .day-header-back,.m1 .day-heart{width:36px;height:42px;padding:8px;border:0;background:none;color:var(--purple);display:grid;place-items:center}
 .m1 .day-heart{margin-left:auto}.m1 .day-heart[aria-pressed="true"] svg{fill:var(--purple)}
 .m1[data-screen="storyboard"] .m-main{width:100%;max-width:480px;margin:0;padding:0}
 .m1[data-screen="storyboard"] .m-exploration-nav,.m1[data-screen="storyboard"] .m-footer{display:none}
-.m1 .career-day{padding:0 14px 4px;line-height:1.4}
+.m1 .career-day{padding:0 14px 4px;line-height:var(--line-body)}
 .m1 .day-hero{position:relative;height:226px;margin:0 -14px;padding:79px 24px 29px;overflow:hidden;background:linear-gradient(145deg,#e8f4ed,#f0eafa 65%,#fcf0e6)}
 .m1 .day-hero-copy{position:relative;z-index:2;width:55%;max-width:242px}
-.m1 .day-eyebrow{font:700 9px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:1px;color:#68578a;margin:0 0 5px}
-.m1 .day-hero h1{font-family:"DM Sans",Arial,sans-serif;font-size:24px;font-weight:700;letter-spacing:-.65px;line-height:1.05;min-height:51px;margin:0 0 5px;text-wrap:balance;overflow-wrap:anywhere}
-.m1 .day-subtitle{font-size:12px;line-height:1.35;margin:0;color:#55496b;max-width:155px;min-height:32px;text-wrap:balance}
+.m1 .day-eyebrow{font:700 var(--type-label)/var(--line-label) "DM Sans",Arial,sans-serif;letter-spacing:1px;color:#68578a;margin:0 0 5px}
+.m1 .day-hero h1{font-family:"DM Sans",Arial,sans-serif;font-size:var(--type-page);font-weight:700;letter-spacing:-.65px;line-height:var(--line-page);min-height:51px;margin:0 0 5px;text-wrap:balance;overflow-wrap:anywhere}
+.m1 .day-subtitle{font-size:var(--type-body);line-height:var(--line-body);margin:0;color:#55496b;max-width:155px;min-height:32px;text-wrap:balance}
 .m1 .day-hero-image{position:absolute;right:-5%;top:0;width:62%;height:112%;object-fit:cover;object-position:60% 25%;mask-image:linear-gradient(to right,transparent 0%,#000 38%);border:0}
 .m1 .day-strip{position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:-38px -14px 0;z-index:3;padding:0 3px}
 .m1 .day-wave{position:absolute;left:0;top:35px;width:100%;height:112px;z-index:1;pointer-events:none;overflow:visible}
@@ -26,38 +26,289 @@
 .m1 .day-moment-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
 .m1 .day-round-icon{z-index:2;display:grid;place-items:center;width:46px;height:46px;margin-top:-17px;position:relative;border:3px solid #fff;border-radius:50%;background:var(--tone-ink);color:#fff;box-shadow:0 0 0 3px color-mix(in srgb,var(--tone-ink) 15%,transparent),0 3px 8px #39264e15}
 .m1 .day-round-icon svg{width:24px;height:24px}
-.m1 .day-moment time{z-index:2;font-size:12px;font-weight:700;margin-top:7px;line-height:1.2}
-.m1 .day-moment-label{z-index:2;font-size:10px;font-weight:600;line-height:1.3;margin-top:2px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.m1 .day-moment time{z-index:2;font-size:var(--type-label);font-weight:700;margin-top:7px;line-height:var(--line-label)}
+.m1 .day-moment-label{z-index:2;font-size:var(--type-label);font-weight:600;line-height:var(--line-label);margin-top:2px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
 .m1 .day-tone-0{--tone-bg:#f0eafa;--tone-ink:#7655bc}.m1 .day-tone-1{--tone-bg:#e8f4ed;--tone-ink:#478b73}.m1 .day-tone-2{--tone-bg:#fcf0e6;--tone-ink:#be844c}.m1 .day-tone-3{--tone-bg:#f7eaf2;--tone-ink:#aa6a92}
 .m1 .day-card{background:linear-gradient(120deg,#f0edfa,#edf4f4);border:1px solid #fff;border-radius:14px;padding:11px 9px 9px;margin:0 0 8px;box-shadow:0 2px 7px #40315806}
 .m1 .day-card-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:9px}
-.m1 .day-card-heading h2{font-family:"DM Sans",Arial,sans-serif;font-weight:700;font-size:13px;line-height:1.35;letter-spacing:-.2px;margin:0 0 3px}
-.m1 .day-card-heading p{font-size:10px;line-height:1.4;color:#7c7889;margin:0}
-.m1 .day-chevron{width:24px;height:24px;padding:0;border:0;display:grid;place-items:center;background:#fffc;border-radius:50%;color:var(--purple);font-size:23px;line-height:1;flex:none;box-shadow:0 2px 6px #40315808}
-.m1 .day-skill-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
-.m1 .day-skill{border:2px solid #fff;background:var(--tone-bg);border-radius:9px;height:67px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:5px 3px;color:var(--tone-ink);text-align:center;gap:5px}
-.m1 .day-skill svg{width:18px;height:18px;flex:none}
-.m1 .day-skill span{font-size:9px;line-height:1.2;min-height:22px;max-width:52px;font-weight:600;text-wrap:balance;overflow-wrap:anywhere}
+.m1 .day-card-heading h2{font-family:"DM Sans",Arial,sans-serif;font-weight:700;font-size:var(--type-card);line-height:var(--line-card);letter-spacing:-.2px;margin:0 0 3px}
+.m1 .day-card-heading p{font-size:var(--type-secondary);line-height:var(--line-secondary);color:#5a5667;margin:0}
+.m1 .day-chevron{width:44px;height:44px;padding:0;border:0;display:grid;place-items:center;background:#fffc;border-radius:50%;color:var(--purple);font-size:var(--type-section);line-height:var(--line-section);flex:none;box-shadow:0 2px 6px #40315808}
+.m1 .day-skill-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+.m1 .day-skill{border:2px solid #fff;background:var(--tone-bg);border-radius:9px;min-height:67px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:5px 3px;color:var(--tone-ink);text-align:center;gap:5px}
+.m1 .day-skill svg{width:20px;height:20px;flex:none}
+.m1 .day-skill span{font-size:var(--type-label);line-height:var(--line-label);min-height:22px;max-width:100%;font-weight:600;text-wrap:balance;word-break:normal;overflow-wrap:normal;hyphens:none}
 .m1 .day-plan{padding-bottom:3px}
 .m1 .day-timeline{list-style:none;margin:0;padding:0}
 .m1 .day-month{position:relative;display:flex;align-items:stretch;gap:6px;min-height:68px;padding:0 0 4px 29px}
 .m1 .day-month:before{content:"";position:absolute;left:10px;top:17px;bottom:-9px;width:1px;background:#a6bfc2}
 .m1 .day-month:last-child:before{display:none}
-.m1 .day-timeline-dot{position:absolute;z-index:1;left:1px;top:6px;width:19px;height:19px;border-radius:50%;border:1px solid #9bb4bf;background:#fff;color:#fff;display:grid;place-items:center;font-size:13px}
+.m1 .day-timeline-dot{position:absolute;z-index:1;left:0;top:4px;width:24px;height:24px;border-radius:50%;border:1px solid #9bb4bf;background:#fff;color:#fff;display:grid;place-items:center;font-size:var(--type-section)}
 .m1 .day-month:first-child .day-timeline-dot{background:#478b73;border-color:#478b73;box-shadow:0 0 0 3px #e8f4ed}
-.m1 .day-month-number{position:absolute;z-index:1;left:36px;top:9px;width:47px;font-size:9px;line-height:1.4;font-weight:700;white-space:nowrap}
+.m1 .day-month-number{position:absolute;z-index:1;left:36px;top:9px;width:47px;font-size:var(--type-label);line-height:var(--line-label);font-weight:700;white-space:nowrap}
 .m1 .day-project{display:flex;min-height:64px;padding:6px 6px 6px 58px;gap:7px;flex:1;min-width:0;background:#fff;border:1px solid #ece8f2;border-radius:9px}
-.m1 .day-project-copy{flex:1;min-width:0;font-size:8px;line-height:1.2}
-.m1 .day-project h3{font-family:"DM Sans",Arial,sans-serif;font-size:10px;font-weight:700;line-height:1.3;margin:0 0 3px;color:#423653;letter-spacing:0}
-.m1 .day-tag{display:inline-block;max-width:100%;font-size:8px;line-height:1.3;padding:2px 5px;border-radius:7px;background:var(--tone-bg);color:var(--tone-ink);font-weight:600}
-.m1 .day-project p{font-size:8px;line-height:1.35;margin:3px 0 0;color:#7c7889}
+.m1 .day-project-copy{flex:1;min-width:0;font-size:var(--type-secondary);line-height:var(--line-body)}
+.m1 .day-project h3{font-family:"DM Sans",Arial,sans-serif;font-size:var(--type-card);font-weight:700;line-height:var(--line-card);margin:0 0 3px;color:#423653;letter-spacing:0}
+.m1 .day-tag{display:inline-block;max-width:100%;font-size:var(--type-label);line-height:var(--line-label);padding:2px 5px;border-radius:7px;background:var(--tone-bg);color:var(--tone-ink);font-weight:600}
+.m1 .day-project p{font-size:var(--type-secondary);line-height:var(--line-body);margin:3px 0 0;color:#5a5667}
 .m1 .day-project p strong{font-weight:600}
 .m1 .day-project-image{width:64px;height:50px;flex:none;object-fit:cover;object-position:center 25%;border-radius:7px;align-self:center}
-.m1 .day-image-placeholder{display:grid;place-items:center;background:#eeebf4;color:#8a8097;font-size:8px;text-align:center;padding:6px;height:100%}
+.m1 .day-image-placeholder{display:grid;place-items:center;background:#eeebf4;color:#665c73;font-size:var(--type-body);text-align:center;padding:6px;height:100%}
 .m1 .day-sticky{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:6px 16px max(8px,env(safe-area-inset-bottom));background:linear-gradient(transparent,#f8f7fc 10%);z-index:40}
-.m1 .day-sticky .m-primary{justify-content:center;min-height:28px;padding:5px 12px;border-radius:999px;font-size:11px;text-align:center;box-shadow:0 3px 10px #5a43c617}
-.m1 .day-plan-loading,.m1 .day-plan-error{font-size:11px;padding:16px 5px;margin:0;color:var(--muted)}
+.m1 .day-sticky .m-primary{justify-content:center;min-height:52px;padding:5px 12px;border-radius:999px;font-size:var(--type-cta);text-align:center;box-shadow:0 3px 10px #5a43c617}
+.m1 .day-plan-loading,.m1 .day-plan-error{font-size:var(--type-secondary);padding:16px 5px;margin:0;color:var(--muted)}
+.m1 .day-locked-plan{margin:9px 0 7px;padding:11px 10px 10px;border:1px solid #e5dff1;border-radius:11px;background:linear-gradient(140deg,#f7f4fc,#f2f7f4)}
+.m1 .day-locked-plan>h3{margin:0 0 8px;font:700 var(--type-section)/var(--line-section) "DM Sans",Arial,sans-serif;color:#57466f}
+.m1 .day-locked-months{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.m1 .day-locked-month{min-width:0;padding:5px 6px;border:1px solid #fff;border-radius:7px;background:#ffffffc9;overflow:hidden}
+.m1 .day-locked-month span{display:block;font-size:var(--type-label);font-weight:700;color:#645873;margin-bottom:2px}
+.m1 .day-locked-month strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;user-select:none;font-size:var(--type-body);line-height:var(--line-body);color:#514566}
+.m1 .day-plan-pitch{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin:3px 0 16px;font-size:var(--type-secondary);line-height:var(--line-secondary);font-weight:400;text-align:center;color:#5a5667}
+.m1 .day-locked-price{margin:16px 0 0;text-align:center;font:400 var(--type-body)/var(--line-body) "DM Sans",Arial,sans-serif;color:#423653}
+.m1 .day-locked-price strong{font-size:var(--type-body);font-weight:700}
+.m1 .day-locked-price + .day-pay-button{margin-top:12px!important}
+.m1 .day-pay-button{min-height:52px!important;padding:7px 12px!important;font-size:var(--type-cta);justify-content:center!important}
+.m1 .day-payment-confirmation{margin:7px 1px 0!important;font-size:var(--type-secondary);line-height:var(--line-secondary);color:#3d755d}
+.m1 .day-pay-error{margin:7px 1px!important;color:#9b4a40;font-size:var(--type-secondary);line-height:var(--line-secondary)}
+.m1 .day-unlocked-pill{padding:4px 7px;border-radius:99px;background:#e8f4ed;color:#34765d;font-size:var(--type-label);font-weight:700}
+.m1 .day-plan-actions{display:grid;gap:7px;margin:12px 0 10px}
+.m1 .day-plan-actions .m-primary,.m1 .day-plan-actions .m-secondary{min-height:52px;padding:8px 12px;font-size:var(--type-cta);justify-content:center;border-radius:10px}
+.m1 .day-unlocked-label{display:block;padding:7px 10px;text-align:center;color:#37765f;font-size:var(--type-label);font-weight:700}
+.m1 .plan-pay-screen{padding:74px 5px 24px}
+.m1 .day-pay-back{display:block;min-height:44px;margin:0 0 12px;padding:8px 2px;border:0;background:none;color:var(--purple);font-size:var(--type-label);font-weight:600}
+.m1 .day-pay-card{padding:16px 14px 14px;border:1px solid #ece7f4;border-radius:16px;background:#fff;box-shadow:0 8px 26px #4031580c}
+.m1 .day-pay-card h1{margin:4px 0 3px;font:500 var(--type-page)/var(--line-page) "Source Serif 4",Georgia,serif;letter-spacing:-.5px}
+.m1 .day-pay-career{margin:0;color:var(--type-body-color);font-size:var(--type-body)}
+.m1 .day-pay-price{margin:7px 0 9px!important;text-align:center;font:700 var(--type-card)/var(--line-card) "DM Sans",Arial,sans-serif;color:#423653}
+.m1 .day-upi-button{display:flex;min-height:52px;margin:2px 0 10px;padding:9px 12px;align-items:center;justify-content:center;border-radius:10px;text-align:center;font-size:var(--type-cta);font-weight:700;text-decoration:none}
+.m1 .day-pay-qr{display:block;width:min(224px,74vw);height:auto;aspect-ratio:1;object-fit:contain;margin:0 auto 7px;border:1px solid #f0edf3;border-radius:8px}
+.m1 .day-pay-instruction{max-width:270px;margin:0 auto 11px!important;text-align:center;font-size:var(--type-secondary);line-height:var(--line-secondary);color:#574d65}
+.m1 .day-pay-form{display:grid;gap:5px}
+.m1 .day-pay-form label{font-size:var(--type-label);font-weight:600;color:#514761}
+.m1 .day-pay-form input{width:100%;height:37px;padding:7px 9px;border:1px solid #dcd5e7;border-radius:8px;background:#fdfcff;color:#423653;font:inherit;font-size:var(--type-body)}
+.m1 .day-pay-form input:focus{outline:2px solid #aa99e8;outline-offset:1px}
+.m1 .day-pay-form .m-primary{min-height:52px;margin-top:4px;padding:7px 12px;justify-content:center;font-size:var(--type-cta);border-radius:10px}
+.m1 .day-pay-form button:disabled{cursor:wait}
 @media(min-width:600px){.m1.m-with-nav[data-screen="storyboard"] .m-main{margin:0 auto;width:100%;max-width:480px}.m1[data-screen="storyboard"] .m-header-inner{padding:8px 17px;min-height:66px}}
 @media(prefers-reduced-motion:reduce){.m1 .day-sticky{scroll-behavior:auto}}
 
+/* Keep the brand clear of the hero image and let its copy set the hero height. */
+.m1[data-screen="storyboard"] .m-header{position:relative;inset:auto;z-index:20;background:#f8f7fc;border-bottom:1px solid var(--line)}
+.m1[data-screen="storyboard"] .m-header-inner{min-height:66px}
+.m1 .day-hero{height:auto;min-height:0;padding:18px 24px 6px}
+.m1 .day-hero-copy{width:59%;max-width:242px}
+.m1 .day-hero h1{min-height:0}
+.m1 .day-subtitle{max-width:none;min-height:0;font-size:var(--type-body);line-height:var(--line-body);text-wrap:pretty;overflow:visible}
+.m1 .day-hero-image{top:0;bottom:0;height:auto}
+.m1 .day-strip{margin:0 -14px}
+.m1 .day-plan-pitch{display:block;margin:3px 0 16px;font-size:var(--type-secondary);line-height:var(--line-secondary);font-weight:400;text-align:center;color:#5a5667}
+.m1 .day-locked-price{margin:16px 0 0;text-align:center;font-size:var(--type-body);line-height:var(--line-body);font-weight:400}
+.m1 .day-pay-button{min-height:52px!important;font-size:var(--type-cta)}
+.m1 .day-gender-picker{margin:0 0 9px;padding:9px;border:1px solid #e5dff1;border-radius:9px;background:#fff;text-align:center}
+.m1 .day-gender-picker>p{margin:0 0 7px;font-size:var(--type-secondary);font-weight:600;color:#514761}
+.m1 .day-gender-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.m1 .day-gender-options button{min-height:44px;border:1px solid #dcd5e7;border-radius:9px;background:#fff;color:#423653;font-size:var(--type-cta);font-weight:600}
+.m1 .day-gender-options button:hover{border-color:#aa99e8;background:#f8f7fc}
 
+
+
+.m1 .day-eyebrow { letter-spacing: normal; }
+
+/* Stack the day description above its image so every line sits on a solid surface. */
+.m1 .day-hero { display: flex; flex-direction: column; height: auto; min-height: 0; margin: 0 -14px; padding: 0; overflow: hidden; background: #f0eafa; }
+.m1 .day-hero-copy { position: relative; z-index: auto; width: 100%; max-width: none; padding: 20px 24px 16px; background: #f0eafa; }
+.m1 .day-hero h1 { min-height: 0; font-family: "Source Serif 4",Georgia,serif; font-size: var(--type-page); line-height: var(--line-page); color: var(--type-headline-color); }
+.m1 .day-subtitle { max-width: none; min-height: 0; font-size: var(--type-body); line-height: var(--line-body); color: var(--type-body-color); text-wrap: pretty; }
+
+/* Workday skill labels wrap cleanly on narrow phone screens. */
+.m1 .day-moment-label { white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; word-break: normal; hyphens: none; max-width: 100%; min-height: 0; text-align: center; text-wrap: balance; }
+.m1 .day-hero-image { position: relative; inset: auto; display: block; width: 100%; height: 220px; object-fit: cover; object-position: 60% 25%; mask-image: none; }
+.m1 .day-eyebrow, .m1 .day-card-heading p, .m1 .day-project p, .m1 .day-plan-pitch, .m1 .day-plan-loading, .m1 .day-plan-error, .m1 .day-pay-instruction, .m1 .day-payment-confirmation, .m1 .day-pay-career, .m1 .day-locked-month span, .m1 .day-locked-month strong { color: var(--type-secondary-color); }
+.m1 .day-project h3, .m1 .day-card-heading h2, .m1 .day-locked-plan>h3 { color: var(--type-headline-color); }
+.m1 .day-skill span, .m1 .day-tag, .m1 .day-moment time, .m1 .day-moment-label { color: var(--type-secondary-color); }
+.m1 .day-header-back, .m1 .day-heart { width: 44px; height: 44px; }
+.m1 .day-timeline { padding-left: 32px; }
+.m1 .day-timeline-dot { left: 0; width: 24px; height: 24px; font-size: var(--type-section); }
+@media (max-width: 420px) { .m1 .day-skill-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+
+.m1 .day-locked-months { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.m1 .day-locked-month strong { font-size: var(--type-secondary); line-height: var(--line-secondary); white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.m1 .day-locked-month span { font-size: var(--type-label); line-height: var(--line-label); }
+.m1 .day-pay-button, .m1 .day-plan-actions .m-primary, .m1 .day-plan-actions .m-secondary, .m1 .day-upi-button, .m1 .day-pay-form .m-primary { min-height: 52px !important; font-size: var(--type-cta); line-height: var(--line-cta); }
+.m1 .day-chevron { width: 44px; height: 44px; font-size: var(--type-section); }
+.m1 .day-skill-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+
+.m1 .day-pay-career, .m1 .day-pay-price, .m1 .day-locked-price, .m1 .day-pay-instruction, .m1 .day-payment-confirmation, .m1 .day-pay-error, .m1 .day-pay-form label, .m1 .day-pay-form input, .m1 .day-gender-picker>p { color: var(--type-body-color); }
+.m1 .day-unlocked-pill, .m1 .day-unlocked-label { color: var(--type-secondary-color); }
+
+/* Keep the shared brand header identical on the storyboard and Plan screens. */
+.m1[data-screen="storyboard"] { max-width: 720px; padding-bottom: 0; }
+.m1[data-screen="storyboard"] .m-header { position: sticky; inset: auto; z-index: 20; background: #f8f7fc; border-bottom: 1px solid var(--line); }
+.m1[data-screen="storyboard"] .m-header-inner { max-width: 720px; min-height: 72px; padding: 0 20px; }
+.m1[data-screen="storyboard"] .m-brand { position: static; left: auto; transform: none; gap: 0; white-space: normal; }
+.m1[data-screen="storyboard"] .m-main { width: 100%; max-width: 480px; margin: 0 auto; padding: 0; }
+.m1[data-screen="storyboard"] .m-footer { display: none; }
+.m1 .career-day { width: 100%; max-width: 480px; margin: 0 auto; }
+.m1 .day-screen-back { margin-bottom: 10px; color: var(--purple); }
+
+.m1 .day-eyebrow { letter-spacing: 0.06em; }
+.m1 .day-pay-instruction, .m1 .day-payment-confirmation, .m1 .day-pay-form label { color: var(--type-secondary-color); }
+.m1 .day-card-heading h2, .m1 .day-project h3 { font-weight: 600; }
+.m1 .day-locked-plan>h3 { font-weight: 600; }
+.m1 .day-upi-button { font-weight: 600; }
+
+/* Month labels and titles get their own full-width rows; thumbnails stay 64×50. */
+.m1 .day-project{display:grid;grid-template-columns:minmax(0,1fr) 64px;grid-template-areas:"month month" "title title" "copy image";align-items:start;padding:7px;gap:4px 7px}
+.m1 .day-month-number{position:static;grid-area:month;width:auto;z-index:auto;white-space:normal}
+.m1 .day-project h3{grid-area:title;min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:var(--line-card);margin:0}
+.m1 .day-project-copy{grid-area:copy;min-width:0}
+.m1 .day-project-image{grid-area:image;width:64px;height:50px;align-self:center}
+.m1 .day-project-copy{display:grid;gap:4px;font-size:var(--type-secondary);line-height:var(--line-secondary)}
+.m1 .day-project-field>strong{font-size:var(--type-secondary);line-height:var(--line-secondary);font-weight:600;color:var(--type-headline-color)}
+.m1 .day-project-field p{margin:1px 0 0;font-size:var(--type-secondary);line-height:var(--line-secondary);color:var(--type-body-color)}
+.m1 .day-project-field ul{margin:2px 0 0;padding-left:18px;font-size:var(--type-secondary);line-height:var(--line-secondary);color:var(--type-body-color)}
+.m1 .day-project-time{font-size:var(--type-secondary);line-height:var(--line-secondary);color:var(--type-secondary-color)}
+.m1 .day-project-image-empty{background:#eeebf4}
+.m1 .day-locked-month strong{filter:blur(3px);user-select:none}
+.m1 .day-view-plan-button{display:flex;width:100%;min-height:52px;align-items:center;justify-content:center;font-size:var(--type-cta);line-height:var(--line-cta);font-weight:600}
+.m1 .day-full-plan{padding-top:11px}
+.m1 .day-full-plan-heading{padding:8px 2px 13px}
+.m1 .day-full-plan-heading .day-eyebrow{margin:0 0 4px}
+.m1 .day-full-plan-heading h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:var(--type-page);line-height:var(--line-page);color:var(--type-headline-color)}
+.m1 .day-full-plan-heading>p:last-child{margin:5px 0 0;font-size:var(--type-body);line-height:var(--line-body);color:var(--type-body-color)}
+.m1 .day-full-plan-day-in-life{margin:0 0 18px;padding:13px 14px;border:1px solid #ece8f2;border-radius:11px;background:#fff}
+.m1 .day-full-plan-day-in-life h2{margin:0 0 5px;font-size:var(--type-section);line-height:var(--line-section);font-weight:600;color:var(--type-headline-color)}
+.m1 .day-full-plan-day-in-life p{margin:0;font-size:var(--type-body);line-height:var(--line-body);color:var(--type-body-color)}
+.m1 .day-full-plan-list{display:grid;gap:9px;list-style:none;margin:24px 0 0;padding:0}
+.m1 .day-full-plan-card{min-width:0;padding:11px 10px;border:1px solid #ece8f2;border-radius:11px;background:#fff}
+.m1 .day-full-plan-card-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:var(--type-label);line-height:var(--line-label);font-weight:700;color:var(--type-secondary-color)}
+.m1 .day-full-plan-card-heading img{width:64px;height:50px;flex:none;object-fit:cover;object-position:center 25%;border-radius:7px}
+.m1 .day-full-plan-card h2{margin:3px 0 8px;font-size:var(--type-card);line-height:var(--line-card);font-weight:600;color:var(--type-headline-color)}
+.m1 .day-full-plan-field{margin:0 0 7px}
+.m1 .day-full-plan-field h3{margin:0 0 2px;font-size:var(--type-secondary);line-height:var(--line-secondary);font-weight:600;color:var(--type-secondary-color)}
+.m1 .day-full-plan-field p,.m1 .day-full-plan-field ul{margin:0;font-size:var(--type-body);line-height:var(--line-body);color:var(--type-body-color)}
+.m1 .day-full-plan-field ul{padding-left:20px}
+.m1 .day-full-plan-time{font-size:var(--type-secondary);line-height:var(--line-secondary);color:var(--type-secondary-color)}
+.m1 .day-full-plan-actions{display:grid;gap:8px;margin:14px 0 18px}
+.m1 .day-full-plan-actions .m-primary,.m1 .day-full-plan-actions .m-secondary{min-height:52px;padding:8px 12px;font-size:var(--type-cta);line-height:var(--line-cta);justify-content:center;border-radius:10px}
+
+/* Shared image-first month card used on the career and full-plan screens. */
+.m1 .day-timeline{padding:0}
+.m1 .day-month{position:static;display:block;min-height:0;padding:0}
+.m1 .day-month:before,.m1 .day-timeline-dot{display:none}
+.m1 .day-project,.m1 .day-full-plan-card{display:block;min-width:0;padding:0;overflow:hidden;border:1px solid #ece8f2;border-radius:12px;background:#fff}
+.m1 .day-project{width:100%;}
+.m1 .day-full-plan-card{padding:0}
+.m1 .day-plan-card-image{display:block;width:100%;height:140px;object-fit:cover;object-position:center 30%;border-radius:11px 11px 0 0}
+.m1 .day-project-image-empty{background:#eeebf4}
+.m1 .day-plan-card-content{min-width:0;padding:12px}
+.m1 .day-plan-card-content>.day-month-number{display:block;margin:0 0 3px;font-size:var(--type-label);line-height:var(--line-label);color:var(--type-secondary-color)}
+.m1 .day-plan-card-content>h2,.m1 .day-plan-card-content>h3{display:block;margin:0 0 9px;font-size:var(--type-card);line-height:var(--line-card);font-weight:600;color:var(--type-headline-color);overflow-wrap:anywhere}
+.m1 .day-plan-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0}
+.m1 .day-plan-chip{min-width:0;padding:8px;border-radius:9px;background:#f8f7fc}
+.m1 .day-plan-chip>h3,.m1 .day-plan-chip>strong{display:block;margin:0 0 2px;font-size:var(--type-secondary);line-height:var(--line-secondary);font-weight:600;color:var(--type-secondary-color)}
+.m1 .day-plan-chip>p{margin:0;font-size:var(--type-body);line-height:var(--line-body);color:var(--type-body-color);overflow-wrap:anywhere}
+.m1 .day-project-field,.m1 .day-full-plan-field{margin:0 0 9px;min-width:0}
+.m1 .day-project-field>strong,.m1 .day-full-plan-field>h3{display:block;margin:0 0 2px;font-size:var(--type-secondary);line-height:var(--line-secondary);font-weight:600;color:var(--type-secondary-color)}
+.m1 .day-project-field>p,.m1 .day-project-field>ul,.m1 .day-full-plan-field>p,.m1 .day-full-plan-field>ul{margin:0;font-size:var(--type-body);line-height:var(--line-body);color:var(--type-body-color);overflow-wrap:anywhere}
+.m1 .day-project-field>ul,.m1 .day-full-plan-field>ul{padding-left:20px}
+.m1 .day-full-plan-card h2{margin:0 0 9px}
+@media(max-width:359px){.m1 .day-plan-highlights{grid-template-columns:1fr}}
+.m1 .day-core-skills{margin:0 0 11px}
+.m1 .day-core-skills>h2{margin:0 0 6px;font-size:var(--type-section);line-height:var(--line-section);font-weight:600;letter-spacing:normal;color:var(--type-headline-color)}
+.m1 .day-core-skill-summary{margin:0 0 8px;font-size:var(--type-label);line-height:var(--line-label);color:var(--type-secondary-color)}
+.m1 .day-core-skill-list{display:flex;flex-wrap:wrap;gap:8px}
+.m1 .day-core-skill{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:6px 12px;border-radius:9px;background:var(--tone-bg);color:var(--tone-ink);font-size:var(--type-label);line-height:var(--line-label);font-weight:600;overflow-wrap:anywhere}
+.m1 .day-core-skill>small{font-size:var(--type-label);line-height:var(--line-label);font-weight:400;color:var(--type-secondary-color)}
+.m1 .day-skill-highlight{display:flex;min-width:0;flex-direction:column;justify-content:center;gap:2px;padding:7px 9px;border-radius:9px;background:var(--tone-bg);color:var(--tone-ink);overflow-wrap:anywhere}
+.m1 .day-skill-highlight>span{font-size:var(--type-label);line-height:var(--line-label);font-weight:600;color:var(--tone-ink)}
+.m1 .day-skill-highlight>strong{font-size:var(--type-body);line-height:var(--line-body);font-weight:700;color:var(--tone-ink)}
+.m1 .day-plan-highlights>.day-plan-chip{display:flex;flex-direction:column;justify-content:center}
+
+/* One spacing scale shared by the web plan and its PDF. */
+.m1 .day-full-plan{--plan-space-1:4px;--plan-space-2:8px;--plan-space-3:12px;--plan-space-4:16px;--plan-space-6:24px;display:flex;flex-direction:column;gap:var(--plan-space-3)}
+.m1 .day-full-plan-heading{padding:8px 2px 0}
+.m1 .day-full-plan-day-in-life{margin:0;padding:var(--plan-space-3);}
+.m1 .day-full-plan-day-in-life h2,.m1 .day-core-skills>h2{margin:0 0 var(--plan-space-1)}
+.m1 .day-core-skills{display:grid;gap:var(--plan-space-1);margin:0}
+.m1 .day-core-skills>h2{margin:0}
+.m1 .day-core-skill-summary{margin:0}
+.m1 .day-core-skill-list{gap:var(--plan-space-2)}
+.m1 .day-full-plan-list{gap:var(--plan-space-3);margin:0}
+.m1 .day-plan-card-content{display:flex;flex-direction:column;gap:0;padding:var(--plan-space-3)}
+.m1 .day-plan-card-content>.day-month-number{margin:0 0 var(--plan-space-1)}
+.m1 .day-full-plan-card h2{margin:0}
+.m1 .day-plan-card-content>h2{margin:0 0 var(--plan-space-3)}
+.m1 .day-plan-card-content>h2:has(+ .day-plan-highlights){margin-bottom:var(--plan-space-1)}
+.m1 .day-plan-highlights{gap:var(--plan-space-2);margin:0 0 var(--plan-space-3)}
+.m1 .day-plan-highlights:last-child,.m1 .day-full-plan-field:last-child{margin-bottom:0}
+.m1 .day-skill-highlight{gap:var(--plan-space-1)}
+.m1 .day-full-plan-field{display:flex;flex-direction:column;gap:var(--plan-space-1);margin:0 0 var(--plan-space-3)}
+.m1 .day-full-plan-field>h3{margin:0}
+.m1 .day-full-plan-field>p,.m1 .day-full-plan-field>ul{margin:0}
+.m1 .day-full-plan-field>ul{display:grid;gap:var(--plan-space-1)}
+.m1 .day-full-plan-actions{gap:var(--plan-space-2);margin:0}
+.m1 .day-full-plan-actions .m-primary,.m1 .day-full-plan-actions .m-secondary{min-height:52px}
+
+/* Stored 2030s career text stays readable at four columns and on narrow screens. */
+.m1 .day-hero-copy{font-weight:400;color:var(--type-body-color)}
+.m1 .day-subtitle{font-weight:400;color:var(--type-body-color)}
+.m1 .day-moment-label{display:block;width:min(94px,calc(100vw - 32px));max-width:calc(100vw - 32px);white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:normal;word-break:normal;hyphens:none;min-height:2.4em;font-weight:600;text-align:center;text-wrap:balance;letter-spacing:-.25px;transform:scaleX(.88)}
+.m1 .day-moment:nth-of-type(3) .day-moment-label{width:min(120px,calc(100vw - 32px));transform:translateX(-2px) scaleX(.88)}
+@media(max-width:375px){.m1 .day-moment-label{letter-spacing:-.4px}.m1 .day-moment:nth-of-type(3) .day-moment-label{transform:scaleX(.88)}}
+.m1 .day-skill-grid{align-items:stretch;gap:8px}
+.m1 .day-skill{min-width:0;min-height:0;height:100%;align-items:flex-start;justify-content:flex-start;padding:12px;gap:6px;text-align:left}
+.m1 .day-skill svg{align-self:flex-start;margin:0}
+.m1 .day-skill span{display:block;width:100%;align-self:stretch;font-size:15px;line-height:1.25;font-weight:700;text-align:left;text-wrap:initial;word-break:normal;overflow-wrap:normal;hyphens:none}
+.m1 .day-skill p{width:100%;min-width:0;margin:0;font-size:var(--type-label);line-height:1.45;font-weight:400;color:var(--type-body-color);text-align:left;overflow-wrap:anywhere}
+.m1 .day-plan-card-heading{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;align-items:start;padding:12px 12px 0}
+.m1 .day-plan-card-heading .day-plan-card-image{display:block;width:76px;height:76px;object-fit:cover;object-position:center 30%;border-radius:9px}
+.m1 .day-plan-card-heading-copy{min-width:0}
+.m1 .day-plan-card-heading-copy>.day-month-number{display:block;margin:0 0 3px;font-size:var(--type-label);line-height:var(--line-label);color:var(--type-secondary-color)}
+.m1 .day-plan-card-heading-copy>h2,.m1 .day-plan-card-heading-copy>h3{margin:0 0 7px;font-size:var(--type-card);line-height:var(--line-card);font-weight:600;color:var(--type-headline-color);overflow-wrap:anywhere}
+.m1 .day-plan-card-heading-copy .day-skill-highlight{padding:6px 8px}
+.m1 .day-plan-card-content{padding-top:10px}
+.m1 .day-plan-time{display:flex;gap:6px;align-items:baseline;margin:0;font-size:var(--type-secondary);line-height:var(--line-secondary);color:var(--type-secondary-color)}
+.m1 .day-plan-time>strong{font-weight:600}
+
+/* Monthly cards: full-width photo, then title, paired skill/time boxes, then details. */
+.m1 .day-plan-card-heading{display:contents}
+.m1 .day-plan-card-heading-copy{display:contents}
+.m1 .day-plan-card-image{display:block;width:100%;height:140px;object-fit:cover;object-position:center 30%;border-radius:11px 11px 0 0}
+.m1 .day-project,.m1 .day-full-plan-card{overflow:hidden}
+.m1 .day-plan-card-content{display:flex;min-width:0;flex-direction:column;gap:0;padding:12px}
+.m1 .day-plan-card-content>.day-month-number{display:block;margin:0 0 4px;font-size:var(--type-label);line-height:var(--line-label);color:var(--type-secondary-color)}
+.m1 .day-plan-card-content>h2,.m1 .day-plan-card-content>h3{display:block;margin:0 0 9px;font-size:var(--type-card);line-height:var(--line-card);font-weight:700;color:var(--type-headline-color);overflow-wrap:anywhere}
+.m1 .day-plan-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:8px;margin:0 0 12px}
+.m1 .day-plan-highlights>.day-skill-highlight,.m1 .day-plan-highlights>.day-time-highlight{box-sizing:border-box;display:flex;min-width:0;height:100%;flex-direction:column;justify-content:center;gap:3px;padding:9px;border-radius:9px}
+.m1 .day-plan-highlights>.day-skill-highlight{background:#f0eafa;color:#6646ab}
+.m1 .day-plan-highlights>.day-skill-highlight>span{font-size:var(--type-label);line-height:var(--line-label);font-weight:600;color:#6646ab}
+.m1 .day-plan-highlights>.day-skill-highlight>strong{font-size:var(--type-body);line-height:var(--line-body);font-weight:700;color:#6646ab}
+.m1 .day-plan-highlights>.day-time-highlight{background:#f3f2f5}
+.m1 .day-plan-highlights>.day-time-highlight>strong{margin:0;font-size:var(--type-label);line-height:var(--line-label);font-weight:600;color:var(--type-secondary-color)}
+.m1 .day-plan-highlights>.day-time-highlight>p{margin:0;font-size:var(--type-body);line-height:var(--line-body);color:var(--type-body-color);overflow-wrap:anywhere}
+.m1 .day-full-plan-field,.m1 .day-project-field{margin:0 0 12px}
+.m1 .day-full-plan-field:last-child,.m1 .day-project-field:last-child{margin-bottom:0}
+.m1 .day-full-plan-field>h3,.m1 .day-project-field>strong{display:block;margin:0 0 4px;font-size:var(--type-secondary);line-height:var(--line-secondary);font-weight:600;color:var(--type-secondary-color)}
+.m1 .day-full-plan-field>p,.m1 .day-project-field>p{margin:0}
+
+/* The app and PDF both render these cards through PlanMonthCard. */
+.m1 .day-plan-card-image{width:100%;height:auto;aspect-ratio:2.78;object-fit:cover;object-position:center 30%;border-radius:11px 11px 0 0}
+.m1 .plan-pdf-render-root{width:680px;background:#fff}
+.m1 .plan-pdf-render-root .plan-pdf-month-list{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.m1 .plan-pdf-render-root .plan-pdf-month-item{overflow:visible;border:0;background:transparent;box-shadow:none}
+.m1 .plan-pdf-month-card{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:310px;overflow:hidden;border:1px solid #e7e2ed;border-radius:15px;background:#fff;color:#292537;break-inside:avoid}
+.m1 .plan-pdf-month-image{display:block;width:100%;height:100%;min-height:310px;object-fit:cover;object-position:center 30%;background:#f3f2f5}
+.m1 .plan-pdf-month-content{display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:10px;padding:18px 20px}
+.m1 .plan-pdf-month-label{font-size:11px;line-height:1.2;font-weight:700;letter-spacing:.08em;color:#7258a6}
+.m1 .plan-pdf-month-content>h2{margin:0;font-size:24px;line-height:1.18;font-weight:700;letter-spacing:-.025em;color:#292537;overflow-wrap:anywhere}
+.m1 .plan-pdf-skill-chip{display:flex;max-width:100%;flex-wrap:wrap;align-items:baseline;gap:4px;margin:0;padding:7px 10px;border-radius:9px;background:#f0eafa;color:#6646ab;font-size:13px;line-height:1.3}
+.m1 .plan-pdf-skill-chip>span{font-weight:600}
+.m1 .plan-pdf-skill-chip>strong{font-weight:700}
+.m1 .plan-pdf-month-field{display:flex;min-width:0;flex-direction:column;gap:4px}
+.m1 .plan-pdf-month-field>h3{margin:0;font-size:13px;line-height:1.25;font-weight:700;color:#51476a}
+.m1 .plan-pdf-month-field>p,.m1 .plan-pdf-month-field>ul{margin:0;font-size:13px;line-height:1.4;color:#393644;overflow-wrap:anywhere}
+.m1 .plan-pdf-month-field>ul{display:grid;gap:3px;padding-left:19px}
+.m1 .plan-pdf-success-field{margin-bottom:0}
+.m1 .plan-pdf-time{margin:auto 0 0;padding-top:3px;font-size:13px;line-height:1.3;color:#51476a}
+.m1 .plan-pdf-time>strong{font-weight:700}

@@ -1,6 +1,6 @@
-# Futura 2035 — milestone 1
+# Pathlight — milestone 1
 
-A parent enters a child's interests and their hopes, explores up to three AI-generated 2035 careers, chooses one and sees four illustrated day-in-the-life panels. No login, payments, PDF, skill map or roadmap.
+A parent enters a child's interests and their hopes, explores up to three AI-generated careers for the 2030s, chooses one and sees four illustrated day-in-the-life panels. No login, payments, PDF, skill map or roadmap.
 
 ## Run locally
 
@@ -20,7 +20,7 @@ All OpenAI calls run in `convex/ai.ts` actions. Workforce research uses `gpt-4.1
 
 Every OpenAI request reserves one call in an atomic Convex mutation, including failed calls. The global daily cap is 100 calls per UTC day; `AI_DAILY_CALL_CAP` in Convex can lower this from 1 to 100. OpenAI web search may have separate tool charges; the limit counts API requests, not dollars or internal tool invocations. A fresh complete flow needs seven calls (one research briefing, one career reply, one scene reply, four illustrations).
 
-Equivalent comma-separated inputs reuse saved career recommendations. Storyboards are indexed by normalized career title. Their images live in Convex file storage, linked to the title in the `storyboards` table. Completed storyboards are reused across searches; a generation lease prevents concurrent duplicates. Captions survive image failures, and retries request only missing illustrations. Incomplete attempts show the path that ran and a Try again button. Salaries are illustrative INR annual ranges in today's purchasing power, not verified 2035 forecasts.
+Equivalent comma-separated inputs reuse saved career recommendations. Storyboards are indexed by normalized career title. Their images live in Convex file storage, linked to the title in the `storyboards` table. Completed storyboards are reused across searches; a generation lease prevents concurrent duplicates. Captions survive image failures, and retries request only missing illustrations. Incomplete attempts show the path that ran and a Try again button. Salaries are illustrative INR annual ranges in today's purchasing power, not verified forecasts for the 2030s.
 
 Inputs and AI responses are stored in this development project's Convex database for reuse. No data is read from any other local project.
 

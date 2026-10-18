@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 468 135" role="img" aria-labelledby="title desc">
+  <title id="title">Pathlight</title>
+  <desc id="desc">A purple P with a white winding path and an orange sun, beside the Pathlight name and tagline.</desc>
+  <g aria-hidden="true">
+    <circle cx="124" cy="22" r="18" fill="#be844c"/>
+    <path fill="#5a43c6" d="M17 119V17h67c35 0 56 20 56 51s-21 51-56 51H52v-27h31c19 0 29-8 29-24S102 44 83 44H48v75z"/>
+    <path d="M37 119V44h12v75z" fill="#5a43c6"/>
+    <path d="M55 62h27c8 0 12 3 12 8 0 4-3 6-9 9-11 5-17 11-17 21 0 7 4 12 11 16h16c-10-5-14-10-14-16 0-5 4-9 13-13 10-5 14-10 14-18 0-12-9-19-25-19H55z" fill="#fff"/>
+  </g>
+  <text x="169" y="76" fill="#5a43c6" font-family="'DM Sans',Arial,sans-serif" font-size="59" font-weight="700" letter-spacing="-2.5">Pathlight</text>
+  <text x="171" y="108" fill="#68578a" font-family="'DM Sans',Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="1.2">Real paths. Brighter future.</text>
+</svg>

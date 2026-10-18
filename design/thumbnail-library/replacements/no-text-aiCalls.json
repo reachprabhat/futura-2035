@@ -1,0 +1,107 @@
+{
+  "rows": [
+    {
+      "_creationTime": 1791971786794.8792,
+      "_id": "jh73rhqvbab1zgv6k9x67da6358g8xtq",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:presentation-slides",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: presentation-slides",
+      "costINR": 1.08765,
+      "costUSD": 0.012085,
+      "generationId": "thumbnail-no-text-v1:presentation-slides",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_658a1cae9966457aaeefbd5dab5f053d",
+      "stage": "plan-thumbnail-replacement",
+      "status": "succeeded",
+      "timestamp": 1791971786794,
+      "usage": {
+        "input_tokens": 241,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 241
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 513
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791971802652.7114,
+      "_id": "jh72dbypzg6h0nxd91pzb4nbr98g9a79",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:field-visit",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: field-visit",
+      "costINR": 1.0944,
+      "costUSD": 0.01216,
+      "generationId": "thumbnail-no-text-v1:field-visit",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_9097e01bc14d4a5da479c9655d03ee13",
+      "stage": "plan-thumbnail-replacement",
+      "status": "succeeded",
+      "timestamp": 1791971802652,
+      "usage": {
+        "input_tokens": 256,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 256
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 528
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    },
+    {
+      "_creationTime": 1791971821122.6326,
+      "_id": "jh71jfdzne0zn7bagbnxt85d518g9e4x",
+      "cacheHit": false,
+      "cacheKey": "plan-thumbnails-v1:law-contract",
+      "callType": "plan",
+      "careerTitle": "Plan thumbnail: law-contract",
+      "costINR": 1.0908,
+      "costUSD": 0.01212,
+      "generationId": "thumbnail-no-text-v1:law-contract",
+      "imageQuality": "low",
+      "imageSize": "1024x1024",
+      "model": "gpt-image-1",
+      "pricingDate": "2026-10-12",
+      "requestId": "req_fa9a49ef92fc41f5a6cab74d0dd9eb68",
+      "stage": "plan-thumbnail-replacement",
+      "status": "succeeded",
+      "timestamp": 1791971821122,
+      "usage": {
+        "input_tokens": 248,
+        "input_tokens_details": {
+          "image_tokens": 0,
+          "text_tokens": 248
+        },
+        "output_tokens": 272,
+        "output_tokens_details": {
+          "image_tokens": 272,
+          "text_tokens": 0
+        },
+        "total_tokens": 520
+      },
+      "usdToInr": 90,
+      "webSearchCalls": 0
+    }
+  ],
+  "totalCostINR": 3.27285
+}

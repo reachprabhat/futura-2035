@@ -10,7 +10,16 @@
     "build": "tsc --noEmit && vite build",
     "test:backend": "vitest run",
     "check:browser": "node scripts/check-browser.mjs",
-    "deploy": "node scripts/deploy.mjs"
+    "deploy": "node scripts/deploy.mjs",
+    "release:copy-images": "tsx scripts/copy-prod-library-images.mjs",
+    "release:copy-content": "tsx scripts/copy-prod-library-content.mjs",
+    "release:copy-roles": "tsx scripts/copy-prod-roles.mjs",
+    "generate:roles-2030s": "node scripts/generate-career-roles-2030s.mjs",
+    "generate:earnings-2030s": "node scripts/generate-career-earnings-2030s.mjs",
+    "generate:earnings-completion": "node scripts/generate-career-earnings-completion.mjs",
+    "generate:role-shorts": "node scripts/generate-career-role-shorts-2030s.mjs",
+    "release:set-default-settings": "node scripts/set-prod-default-settings.mjs",
+    "release:check": "tsx scripts/check-prod-release.mjs"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +28,8 @@
   "dependencies": {
     "@convex-dev/static-hosting": "^0.2.1",
     "convex": "^1.46.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
     "openai": "^7.32.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
@@ -31,6 +42,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "convex-test": "^0.0.61",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vite": "^8.3.4",
     "vitest": "^5.0.3"

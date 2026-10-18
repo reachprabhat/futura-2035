@@ -1,0 +1,19 @@
+:root {
+  --type-page: 34px;
+  --line-page: 1.15;
+  --type-section: 24px;
+  --line-section: 1.25;
+  --type-card: 19px;
+  --line-card: 1.35;
+  --type-body: 16px;
+  --line-body: 1.55;
+  --type-secondary: 14px;
+  --line-secondary: 1.5;
+  --type-label: 13px;
+  --line-label: 1.35;
+  --type-cta: 17px;
+  --line-cta: 1.3;
+  --type-headline-color: #1F1B2E;
+  --type-body-color: #3A3A48;
+  --type-secondary-color: #555566;
+}

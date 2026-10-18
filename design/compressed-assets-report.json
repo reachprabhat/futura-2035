@@ -1,0 +1,583 @@
+{
+  "source": "DEV doting-basilisk-558",
+  "quality": 75,
+  "maxWidth": 900,
+  "images": 57,
+  "averageSourceBytes": 1068378.8421052631,
+  "averageCompressedBytes": 26368.842105263157,
+  "estimatedCareerPageImageBytes": 191734,
+  "estimateIncludes": "Pathlight logo, four scene images, and the three visible project thumbnails; excludes the payment screen QR.",
+  "outputRoot": "src/assets/optimized",
+  "assets": [
+    {
+      "id": "research:girl",
+      "kind": "scene",
+      "relativePath": "scenes/research-girl.webp",
+      "sourceBytes": 1145860,
+      "compressedBytes": 28506,
+      "width": 900,
+      "height": 900,
+      "sha256": "cbd1b00aedbaf5b7e2e9d16efaba923902b528c738e999b59b408000b3db17db"
+    },
+    {
+      "id": "research:boy",
+      "kind": "scene",
+      "relativePath": "scenes/research-boy.webp",
+      "sourceBytes": 1185864,
+      "compressedBytes": 33392,
+      "width": 900,
+      "height": 900,
+      "sha256": "46acf0038266bcfb10c7b0748efbb00fc11b05ea4175080976ed74a445cd3e4d"
+    },
+    {
+      "id": "meeting:girl",
+      "kind": "scene",
+      "relativePath": "scenes/meeting-girl.webp",
+      "sourceBytes": 1134846,
+      "compressedBytes": 28722,
+      "width": 900,
+      "height": 900,
+      "sha256": "0d78bcf0663cd977ef0ca3ca552e3bba3846284bc919f0826498a05480c4cd5e"
+    },
+    {
+      "id": "meeting:boy",
+      "kind": "scene",
+      "relativePath": "scenes/meeting-boy.webp",
+      "sourceBytes": 1158650,
+      "compressedBytes": 30438,
+      "width": 900,
+      "height": 900,
+      "sha256": "d6037733d5ae9a1f500fdedd277381e04f068767eee2ff3533af35020cfa8099"
+    },
+    {
+      "id": "whiteboard:girl",
+      "kind": "scene",
+      "relativePath": "scenes/whiteboard-girl.webp",
+      "sourceBytes": 1129404,
+      "compressedBytes": 26424,
+      "width": 900,
+      "height": 900,
+      "sha256": "8776d490b6b834abeb3138e055ac3e0d967d1a56a65b653a948abed3f6052af2"
+    },
+    {
+      "id": "whiteboard:boy",
+      "kind": "scene",
+      "relativePath": "scenes/whiteboard-boy.webp",
+      "sourceBytes": 1115268,
+      "compressedBytes": 26650,
+      "width": 900,
+      "height": 900,
+      "sha256": "ab9237afab194dab3c74a422a74beac5cd4e8b92bdfd9c60e7c4010a7fd7be8d"
+    },
+    {
+      "id": "presentation:girl",
+      "kind": "scene",
+      "relativePath": "scenes/presentation-girl.webp",
+      "sourceBytes": 1139212,
+      "compressedBytes": 28858,
+      "width": 900,
+      "height": 900,
+      "sha256": "f60c04dee76f8602c67204581e07418b45164a0e853b82823897d450e0c6395f"
+    },
+    {
+      "id": "presentation:boy",
+      "kind": "scene",
+      "relativePath": "scenes/presentation-boy.webp",
+      "sourceBytes": 1140606,
+      "compressedBytes": 25238,
+      "width": 900,
+      "height": 900,
+      "sha256": "5487127767f8203be87a667db1d87835f2e72d7ec1f33228d9e191338b7832cc"
+    },
+    {
+      "id": "documents:girl",
+      "kind": "scene",
+      "relativePath": "scenes/documents-girl.webp",
+      "sourceBytes": 1110514,
+      "compressedBytes": 27858,
+      "width": 900,
+      "height": 900,
+      "sha256": "4fbb24ec92f7a62347f9994c3f08e06ab59a75d118a6b53b7d9f44dde6725420"
+    },
+    {
+      "id": "documents:boy",
+      "kind": "scene",
+      "relativePath": "scenes/documents-boy.webp",
+      "sourceBytes": 1105984,
+      "compressedBytes": 25302,
+      "width": 900,
+      "height": 900,
+      "sha256": "b594372f6c4987a75319ae853f3a2e049f253e3443a82ea9e2318ed65df5c58b"
+    },
+    {
+      "id": "coding:girl",
+      "kind": "scene",
+      "relativePath": "scenes/coding-girl.webp",
+      "sourceBytes": 1137294,
+      "compressedBytes": 27848,
+      "width": 900,
+      "height": 900,
+      "sha256": "59ad8f7da2deb94ac2da0d32e8620f8a134d99242fa730bb134cf58b1d1465f1"
+    },
+    {
+      "id": "coding:boy",
+      "kind": "scene",
+      "relativePath": "scenes/coding-boy.webp",
+      "sourceBytes": 1132158,
+      "compressedBytes": 29734,
+      "width": 900,
+      "height": 900,
+      "sha256": "ae82da1b704c986bd06c5a5141ead4d10a83bc2f1737e4b6550ecc91ae6d6502"
+    },
+    {
+      "id": "lab:girl",
+      "kind": "scene",
+      "relativePath": "scenes/lab-girl.webp",
+      "sourceBytes": 1145654,
+      "compressedBytes": 28236,
+      "width": 900,
+      "height": 900,
+      "sha256": "c339b06f2a4ca2f82b2940524877221187746f0b9f6bc20abacdd12cf4a64c14"
+    },
+    {
+      "id": "lab:boy",
+      "kind": "scene",
+      "relativePath": "scenes/lab-boy.webp",
+      "sourceBytes": 1155022,
+      "compressedBytes": 29328,
+      "width": 900,
+      "height": 900,
+      "sha256": "2bf0a72ffefb668435b3c90b57900a2b13bc15fea73eb76951b780252d013aed"
+    },
+    {
+      "id": "field:girl",
+      "kind": "scene",
+      "relativePath": "scenes/field-girl.webp",
+      "sourceBytes": 1144856,
+      "compressedBytes": 27538,
+      "width": 900,
+      "height": 900,
+      "sha256": "afcb2f3cef1d83937a56156f87025c639ec04c00018854481309cfb4450d5231"
+    },
+    {
+      "id": "field:boy",
+      "kind": "scene",
+      "relativePath": "scenes/field-boy.webp",
+      "sourceBytes": 1168262,
+      "compressedBytes": 34088,
+      "width": 900,
+      "height": 900,
+      "sha256": "51e58f4cbda93b2a24a832087931c782419a2c7fd21ed6eb3e9da242e839ee0d"
+    },
+    {
+      "id": "sketching:girl",
+      "kind": "scene",
+      "relativePath": "scenes/sketching-girl.webp",
+      "sourceBytes": 1155410,
+      "compressedBytes": 31142,
+      "width": 900,
+      "height": 900,
+      "sha256": "bc54447c04aa5c47945bb972e54a67dabfeccbb438a1d1cea45616ef89c64b15"
+    },
+    {
+      "id": "sketching:boy",
+      "kind": "scene",
+      "relativePath": "scenes/sketching-boy.webp",
+      "sourceBytes": 1142004,
+      "compressedBytes": 29308,
+      "width": 900,
+      "height": 900,
+      "sha256": "df0949009a93ee39ca362ad8f2f83f8e5747857a486680074fe910c137040924"
+    },
+    {
+      "id": "interview:girl",
+      "kind": "scene",
+      "relativePath": "scenes/interview-girl.webp",
+      "sourceBytes": 1175578,
+      "compressedBytes": 28296,
+      "width": 900,
+      "height": 900,
+      "sha256": "d7c7fc73b0f2d92519baf52d9c7092e358157a822994be93d4b1ec1e55ff42fe"
+    },
+    {
+      "id": "interview:boy",
+      "kind": "scene",
+      "relativePath": "scenes/interview-boy.webp",
+      "sourceBytes": 1168262,
+      "compressedBytes": 32688,
+      "width": 900,
+      "height": 900,
+      "sha256": "728e8dad4062b8953c1773d16eb4d76d6ff04fc05e52469d885cc9767487575f"
+    },
+    {
+      "id": "prototype:girl",
+      "kind": "scene",
+      "relativePath": "scenes/prototype-girl.webp",
+      "sourceBytes": 1141794,
+      "compressedBytes": 29206,
+      "width": 900,
+      "height": 900,
+      "sha256": "bad38116474c8b6a79c6400a522157161a9a8e6f9eb6f3f9b64da85b0bdd8d7f"
+    },
+    {
+      "id": "prototype:boy",
+      "kind": "scene",
+      "relativePath": "scenes/prototype-boy.webp",
+      "sourceBytes": 1180034,
+      "compressedBytes": 34204,
+      "width": 900,
+      "height": 900,
+      "sha256": "6f6c0685679f8729465e0a256d776355da6f20f158c53cf04fb01ec871d4d976"
+    },
+    {
+      "id": "practice:girl",
+      "kind": "scene",
+      "relativePath": "scenes/practice-girl.webp",
+      "sourceBytes": 1115194,
+      "compressedBytes": 25864,
+      "width": 900,
+      "height": 900,
+      "sha256": "bee40706a169b81a355fac7e86e21c351e93efe414f342f28656413b5ccdd273"
+    },
+    {
+      "id": "practice:boy",
+      "kind": "scene",
+      "relativePath": "scenes/practice-boy.webp",
+      "sourceBytes": 1135728,
+      "compressedBytes": 26802,
+      "width": 900,
+      "height": 900,
+      "sha256": "e509c496f36a25b70c8ea73406243277880a3a48709d4efb3b990aff53d00f8e"
+    },
+    {
+      "id": "health-research:girl",
+      "kind": "scene",
+      "relativePath": "scenes/health-research-girl.webp",
+      "sourceBytes": 1127432,
+      "compressedBytes": 29980,
+      "width": 900,
+      "height": 900,
+      "sha256": "81300440d61246045595fda029a70f26b5f56e2ff919b33f6ede39c48d8cbc75"
+    },
+    {
+      "id": "health-research:boy",
+      "kind": "scene",
+      "relativePath": "scenes/health-research-boy.webp",
+      "sourceBytes": 1136104,
+      "compressedBytes": 28212,
+      "width": 900,
+      "height": 900,
+      "sha256": "4693113c8a0f62f6e9a07a2e496be6d62e80ebe6531849f020c7f4147fed8b7c"
+    },
+    {
+      "id": "consultation:girl",
+      "kind": "scene",
+      "relativePath": "scenes/consultation-girl.webp",
+      "sourceBytes": 1117854,
+      "compressedBytes": 26822,
+      "width": 900,
+      "height": 900,
+      "sha256": "ae0a8fa12cfe93c847875e6d8d23f538bcbf505ce358207460ab5d264a5ab6f3"
+    },
+    {
+      "id": "consultation:boy",
+      "kind": "scene",
+      "relativePath": "scenes/consultation-boy.webp",
+      "sourceBytes": 1134114,
+      "compressedBytes": 26778,
+      "width": 900,
+      "height": 900,
+      "sha256": "08db4d95be5f88067195cdf953f72b8207f164b8a5f46549b5001744f5a4ea2e"
+    },
+    {
+      "id": "health-planning:girl",
+      "kind": "scene",
+      "relativePath": "scenes/health-planning-girl.webp",
+      "sourceBytes": 1137588,
+      "compressedBytes": 31204,
+      "width": 900,
+      "height": 900,
+      "sha256": "3aec7435b25e730d9fd256b9b1e0dda24e5216ab70a15902b6f6ac6f189adf3e"
+    },
+    {
+      "id": "health-planning:boy",
+      "kind": "scene",
+      "relativePath": "scenes/health-planning-boy.webp",
+      "sourceBytes": 1123402,
+      "compressedBytes": 30114,
+      "width": 900,
+      "height": 900,
+      "sha256": "bc508f3f2e3423023ca5a54006cd58e5b27f3b43ec5cbc806b242c485ec0e5d7"
+    },
+    {
+      "id": "health-explanation:girl",
+      "kind": "scene",
+      "relativePath": "scenes/health-explanation-girl.webp",
+      "sourceBytes": 1149474,
+      "compressedBytes": 31956,
+      "width": 900,
+      "height": 900,
+      "sha256": "da47724f1dd08d7ae74cb11e7a37eceb4c5ad4598fc7190667c2c6333d5dc831"
+    },
+    {
+      "id": "health-explanation:boy",
+      "kind": "scene",
+      "relativePath": "scenes/health-explanation-boy.webp",
+      "sourceBytes": 1120072,
+      "compressedBytes": 28068,
+      "width": 900,
+      "height": 900,
+      "sha256": "fe56591a2f3506f985c987e4b37f5f0d9f86e5de7f672ea8105654518eae6997"
+    },
+    {
+      "id": "laptop-charts",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/laptop-charts.webp",
+      "sourceBytes": 1049112,
+      "compressedBytes": 25336,
+      "width": 900,
+      "height": 900,
+      "sha256": "9e1faa296a1da8c5ae62795ee03924e3fe1ce393d4225234965c153c28227b8a"
+    },
+    {
+      "id": "spreadsheet",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/spreadsheet.webp",
+      "sourceBytes": 1123622,
+      "compressedBytes": 29422,
+      "width": 900,
+      "height": 900,
+      "sha256": "97e7eb170941544638a6e6057f593081a64ab0f3963a33ecf15089e3796a7827"
+    },
+    {
+      "id": "notebook-writing",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/notebook-writing.webp",
+      "sourceBytes": 1061284,
+      "compressedBytes": 20514,
+      "width": 900,
+      "height": 900,
+      "sha256": "1b9874ead5e0d30af7b794228ebcdc853b646e08f0155ae6f27112bfa40d0f00"
+    },
+    {
+      "id": "reading-research",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/reading-research.webp",
+      "sourceBytes": 1123790,
+      "compressedBytes": 28602,
+      "width": 900,
+      "height": 900,
+      "sha256": "a005921c64b796a8cea38f016f78aab5a40a1669ab8c9aa0be91b8547b406f7c"
+    },
+    {
+      "id": "interview",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/interview.webp",
+      "sourceBytes": 1051020,
+      "compressedBytes": 20504,
+      "width": 900,
+      "height": 900,
+      "sha256": "0233eb4bbfdb40c5cc12c8a238fbd9313fee51d05bcb75c21714fb2873e81ac2"
+    },
+    {
+      "id": "survey-form",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/survey-form.webp",
+      "sourceBytes": 1033212,
+      "compressedBytes": 21442,
+      "width": 900,
+      "height": 900,
+      "sha256": "90cdb3031b8b836e66ec7eed099f08619e09a2cf118f25518d6e3750c98c30cb"
+    },
+    {
+      "id": "sticky-note-brainstorm",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/sticky-note-brainstorm.webp",
+      "sourceBytes": 975960,
+      "compressedBytes": 15988,
+      "width": 900,
+      "height": 900,
+      "sha256": "bc2cab533e1de30a8d77f6ecb61f916a8ddb125315707d7dbdb5eedeaab8601a"
+    },
+    {
+      "id": "prototype-testing",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/prototype-testing.webp",
+      "sourceBytes": 1055238,
+      "compressedBytes": 25364,
+      "width": 900,
+      "height": 900,
+      "sha256": "d965c9660de021610b4bf49d2c2ab15d55d60474d0666058aff34d84259218b8"
+    },
+    {
+      "id": "planning-board",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/planning-board.webp",
+      "sourceBytes": 1048740,
+      "compressedBytes": 23406,
+      "width": 900,
+      "height": 900,
+      "sha256": "083fbd725ea74d5b69231c1822a5e747fe68e1578f26d5c7d39d56753bc2debc"
+    },
+    {
+      "id": "presentation-slides",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/presentation-slides.webp",
+      "sourceBytes": 1010160,
+      "compressedBytes": 19756,
+      "width": 900,
+      "height": 900,
+      "sha256": "5a78c574793a98425816f881262238d523eb0d6f72e1efe6a3b4cfa8c8656a59"
+    },
+    {
+      "id": "workshop-class",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/workshop-class.webp",
+      "sourceBytes": 1119620,
+      "compressedBytes": 31504,
+      "width": 900,
+      "height": 900,
+      "sha256": "bbfff12cdaedfdc7ad53fe6bda09fb34289ed337fb8d167fb4a52ed57ae15244"
+    },
+    {
+      "id": "coding-screen",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/coding-screen.webp",
+      "sourceBytes": 1071836,
+      "compressedBytes": 26686,
+      "width": 900,
+      "height": 900,
+      "sha256": "709bf62ab688c361aa292b1fe61c4ed651326f3fd8ae212c70a2dfa5ada029b0"
+    },
+    {
+      "id": "design-sketch",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/design-sketch.webp",
+      "sourceBytes": 1056326,
+      "compressedBytes": 26988,
+      "width": 900,
+      "height": 900,
+      "sha256": "03adc304cb86a489150bea3027cfc1bd9b012e5b49969f82461b04fe02608292"
+    },
+    {
+      "id": "video-recording",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/video-recording.webp",
+      "sourceBytes": 1053742,
+      "compressedBytes": 22926,
+      "width": 900,
+      "height": 900,
+      "sha256": "97a3c527bf7d36f0ac75fbcd4f6666640fb4de29b37db8bc5c164164c31c1b94"
+    },
+    {
+      "id": "poster-making",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/poster-making.webp",
+      "sourceBytes": 1048600,
+      "compressedBytes": 21326,
+      "width": 900,
+      "height": 900,
+      "sha256": "393b0c3ced6564f1cb4310185fdd6c66399f71122b7c2c505268ce0777438e59"
+    },
+    {
+      "id": "lab-bench",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/lab-bench.webp",
+      "sourceBytes": 1021466,
+      "compressedBytes": 20178,
+      "width": 900,
+      "height": 900,
+      "sha256": "d289a108583b072a074f07bf918656ea9c2d5607113db887ddcd05c03598febf"
+    },
+    {
+      "id": "medical-tools",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/medical-tools.webp",
+      "sourceBytes": 1046264,
+      "compressedBytes": 22740,
+      "width": 900,
+      "height": 900,
+      "sha256": "8f68a15661d013541bdf44dc27ad036bb8016c78105e92f25c265811095801a3"
+    },
+    {
+      "id": "model-making",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/model-making.webp",
+      "sourceBytes": 1023328,
+      "compressedBytes": 19416,
+      "width": 900,
+      "height": 900,
+      "sha256": "073f6cf48fc9eca11ac0f5e6c7fc4ac5f84d3c270f280525197ef71ed0f7e5cc"
+    },
+    {
+      "id": "field-visit",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/field-visit.webp",
+      "sourceBytes": 1107108,
+      "compressedBytes": 31968,
+      "width": 900,
+      "height": 900,
+      "sha256": "84476bf66daa1ddeba19ec044778458075f146456bb39ec11eea9fb37ffcc75e"
+    },
+    {
+      "id": "finished-project",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/finished-project.webp",
+      "sourceBytes": 1036992,
+      "compressedBytes": 22872,
+      "width": 900,
+      "height": 900,
+      "sha256": "56b61f3c46d922968c4f0a43160c9a9f3f52ccc02edc14beb9be73101a33cb53"
+    },
+    {
+      "id": "stage-rehearsal",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/stage-rehearsal.webp",
+      "sourceBytes": 1018022,
+      "compressedBytes": 19066,
+      "width": 900,
+      "height": 900,
+      "sha256": "4223d092c3ab645f2435e34a17c93e34954b7edf21bfa521542e125008a98c66"
+    },
+    {
+      "id": "kitchen-tasting",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/kitchen-tasting.webp",
+      "sourceBytes": 1087412,
+      "compressedBytes": 30862,
+      "width": 900,
+      "height": 900,
+      "sha256": "b6057467e51417dff43687a4a9f9889d0314993307705a96837300e58c1659fb"
+    },
+    {
+      "id": "law-contract",
+      "kind": "thumbnail",
+      "relativePath": "thumbnails/law-contract.webp",
+      "sourceBytes": 1035960,
+      "compressedBytes": 20682,
+      "width": 900,
+      "height": 900,
+      "sha256": "efc114ad1c3a69fd82dee2addc8a8d277778fddeb01136f21ad62840c13cd54a"
+    },
+    {
+      "id": "pathlight-logo",
+      "kind": "brand",
+      "relativePath": "brand/pathlight-logo.webp",
+      "sourceBytes": 1198,
+      "compressedBytes": 4214,
+      "width": 300,
+      "height": 87,
+      "sha256": "c5554d86e89817792565e0e530361ecee96c10e1c8929587a26057b823731d62"
+    },
+    {
+      "id": "upi-qr",
+      "kind": "payment",
+      "relativePath": "brand/upi-qr.webp",
+      "sourceBytes": 128084,
+      "compressedBytes": 22458,
+      "width": 684,
+      "height": 654,
+      "sha256": "cdd197bafea594761b909c7443a1b756a978fec4a13a7a6dd88c30adf1b0669c"
+    }
+  ]
+}

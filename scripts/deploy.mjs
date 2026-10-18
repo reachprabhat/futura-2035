@@ -9,12 +9,13 @@ function run(bin, args) {
  const result = spawnSync(process.execPath, [bin, ...args], { stdio: 'inherit' });
  if (result.status !== 0) process.exit(result.status ?? 1);
 }
-console.log('Deploying Futura 2035 backend to production.');
-run(convex, ['deploy', '--yes']);
+console.log('Deploying Pathlight backend to production.');
 const urls = JSON.parse(execFileSync(process.execPath, [convex, 'run', '--prod', '--component', 'staticHosting', 'lib:getUrls', '{}', '--typecheck=disable', '--codegen=disable'], { encoding: 'utf8', stdio: ['ignore','pipe','pipe'] }));
-if (urls.cloudUrl !== 'https://nautical-chicken-192.convex.cloud') throw new Error('Unexpected Futura production target; upload stopped.');
-console.log('Building Futura frontend for production.');
+if (urls.cloudUrl !== 'https://nautical-chicken-192.convex.cloud') throw new Error('Unexpected Pathlight production target; deployment stopped.');
+console.log(`Verified production target: ${urls.cloudUrl}`);
+run(convex, ['deploy', '--yes']);
+console.log('Building Pathlight frontend for production.');
 await build({ configFile: false, envFile: false, define: { 'import.meta.env.VITE_CONVEX_URL': JSON.stringify(urls.cloudUrl) } });
-console.log('Uploading Futura frontend to Convex production.');
+console.log('Uploading Pathlight frontend to Convex production.');
 run(hosting, ['upload', '--prod']);
 console.log(`Live: ${urls.siteUrl}`);

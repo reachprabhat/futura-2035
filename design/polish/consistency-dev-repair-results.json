@@ -1,0 +1,1053 @@
+{
+  "deployment": "dev:doting-basilisk-558",
+  "processedPlans": 84,
+  "repairedPlans": 10,
+  "needsReviewPlans": 74,
+  "errors": 0,
+  "aiCalls": 168,
+  "results": [
+    {
+      "career": "Actuary",
+      "planId": "jn7ebqz1n9dsg4ham370j6wads8gagbb",
+      "aiCalls": 2,
+      "costUSD": 0.0041776,
+      "state": "needs-review",
+      "months": [
+        7
+      ]
+    },
+    {
+      "career": "Agricultural Scientist",
+      "planId": "jn7b2c9nmgrzkahsvnxccwfv2x8gb8b4",
+      "aiCalls": 2,
+      "costUSD": 0.0030080000000000003,
+      "state": "fixed",
+      "months": []
+    },
+    {
+      "career": "AI Engineer",
+      "planId": "jn7c6g4zmhzmr7rynfh95awyms8gb5bm",
+      "aiCalls": 2,
+      "costUSD": 0.0038972000000000004,
+      "state": "needs-review",
+      "months": [
+        5,
+        7,
+        9,
+        10,
+        12
+      ]
+    },
+    {
+      "career": "AI Safety Analyst",
+      "planId": "jn7f528r9bqn4mdef6zvpe87xn8gaxqd",
+      "aiCalls": 2,
+      "costUSD": 0.0039884000000000005,
+      "state": "needs-review",
+      "months": [
+        3,
+        8,
+        11,
+        12
+      ]
+    },
+    {
+      "career": "Animator",
+      "planId": "jn7f4s2md8347rfre25k20tq918gafd6",
+      "aiCalls": 2,
+      "costUSD": 0.0012696,
+      "state": "needs-review",
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "error": "The model returned a different set of months than the failing set."
+    },
+    {
+      "career": "Assistive Technology Designer",
+      "planId": "jn72gvny91hgjrbp94f877agws8gbnbk",
+      "aiCalls": 2,
+      "costUSD": 0.0049508,
+      "state": "needs-review",
+      "months": [
+        2,
+        3,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "career": "Author",
+      "planId": "jn716kf2kc9s5s0f48reqfg7018g7bm8",
+      "aiCalls": 2,
+      "costUSD": 0.0037464000000000004,
+      "state": "needs-review",
+      "months": [
+        1,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "career": "Automation Engineer",
+      "planId": "jn71e30g22fktqb81n7aysswn58gawrj",
+      "aiCalls": 2,
+      "costUSD": 0.0048444000000000004,
+      "state": "needs-review",
+      "months": [
+        1,
+        8,
+        9,
+        10,
+        12
+      ]
+    },
+    {
+      "career": "Banker",
+      "planId": "jn74tmct5cbb3enghyrrk1e7q98gb77r",
+      "aiCalls": 2,
+      "costUSD": 0.0041712,
+      "state": "needs-review",
+      "months": [
+        3,
+        5,
+        9,
+        10,
+        12
+      ]
+    },
+    {
+      "career": "Bioinformatics Analyst",
+      "planId": "jn7ffje3mdw4dpv91v6bntevvh8gb5a5",
+      "aiCalls": 2,
+      "costUSD": 0.003979600000000001,
+      "state": "needs-review",
+      "months": [
+        3,
+        4,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "career": "Biomedical Engineer",
+      "planId": "jn7ctre5mnszjmj7kbx9beyvss8garv0",
+      "aiCalls": 2,
+      "costUSD": 0.004346000000000001,
+      "state": "needs-review",
+      "months": [
+        5,
+        8,
+        12
+      ]
+    },
+    {
+      "career": "Biotechnology Researcher",
+      "planId": "jn7bpmx94yvbz71vxyaj7fdeex8gbv18",
+      "aiCalls": 2,
+      "costUSD": 0.0027608,
+      "state": "fixed",
+      "months": []
+    },
+    {
+      "career": "Career Adviser",
+      "planId": "jn7anbyc6frnp7e34chjqjrt1x8ga8nw",
+      "aiCalls": 2,
+      "costUSD": 0.002496,
+      "state": "needs-review",
+      "months": [
+        4,
+        7,
+        9
+      ]
+    },
+    {
+      "career": "Chartered Accountant",
+      "planId": "jn7e0dt4n60p4v338hfavey96x8gbyft",
+      "aiCalls": 2,
+      "costUSD": 0.0023424,
+      "state": "needs-review",
+      "months": [
+        4,
+        10
+      ]
+    },
+    {
+      "career": "Circular Economy Specialist",
+      "planId": "jn76bx2jvwfq6appj7655qm60h8gav6b",
+      "aiCalls": 2,
+      "costUSD": 0.0023784,
+      "state": "needs-review",
+      "months": [
+        4,
+        5,
+        10
+      ]
+    },
+    {
+      "career": "Civil Servant (IAS/IPS)",
+      "planId": "jn7e3zz30dc9b8pe9evfm4tnnd8gatpw",
+      "aiCalls": 2,
+      "costUSD": 0.0036532000000000005,
+      "state": "needs-review",
+      "months": [
+        9,
+        11,
+        12
+      ]
+    },
+    {
+      "career": "Climate Data Analyst",
+      "planId": "jn75bztk2mq3ypgkegaq7156h58gazq3",
+      "aiCalls": 2,
+      "costUSD": 0.0033063999999999997,
+      "state": "fixed",
+      "months": []
+    },
+    {
+      "career": "Cloud Engineer",
+      "planId": "jn71s95wckj65vk21e4dywtvr98gbcf6",
+      "aiCalls": 2,
+      "costUSD": 0.0045188,
+      "state": "needs-review",
+      "months": [
+        2,
+        4,
+        8,
+        10
+      ]
+    },
+    {
+      "career": "Community Health Worker",
+      "planId": "jn7aej6y2wrd747djmm3x918158gavdf",
+      "aiCalls": 2,
+      "costUSD": 0.003434,
+      "state": "needs-review",
+      "months": [
+        8,
+        11,
+        12
+      ]
+    },
+    {
+      "career": "Conservation Scientist",
+      "planId": "jn75carmkmccqddbjh9yyn6swn8gb5k9",
+      "aiCalls": 2,
+      "costUSD": 0.002394,
+      "state": "needs-review",
+      "months": [
+        4,
+        5,
+        6,
+        7,
+        12
+      ]
+    },
+    {
+      "career": "Consumer Insights Analyst",
+      "planId": "jn7bwnj7mp6t72kr5brzdmd0bn8gajgc",
+      "aiCalls": 2,
+      "costUSD": 0.0037692000000000003,
+      "state": "fixed",
+      "months": []
+    },
+    {
+      "career": "Content Strategist",
+      "planId": "jn73w00qr0ctejv6h49y6ryr5x8gba09",
+      "aiCalls": 2,
+      "costUSD": 0.004312000000000001,
+      "state": "needs-review",
+      "months": [
+        5,
+        9,
+        10,
+        12
+      ]
+    },
+    {
+      "career": "Corporate Lawyer",
+      "planId": "jn78jcj6b2m23kn58dsmg3n93h8g97k7",
+      "aiCalls": 2,
+      "costUSD": 0.0046651999999999996,
+      "state": "needs-review",
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        12
+      ]
+    },
+    {
+      "career": "Cybersecurity Analyst",
+      "planId": "jn7bhnrm8snsw6ykb6m8sw8bv18gayk6",
+      "aiCalls": 2,
+      "costUSD": 0.0035424,
+      "state": "needs-review",
+      "months": [
+        6,
+        12
+      ]
+    },
+    {
+      "career": "Data Analyst",
+      "planId": "jn708w61m2jz8b6kpc70hkt5s18gajy9",
+      "aiCalls": 2,
+      "costUSD": 0.004001599999999999,
+      "state": "fixed",
+      "months": []
+    },
+    {
+      "career": "Data Scientist",
+      "planId": "jn7af0vda06gaaavc7xb13dchh8gb1h5",
+      "aiCalls": 2,
+      "costUSD": 0.0038740000000000003,
+      "state": "needs-review",
+      "months": [
+        2,
+        7
+      ]
+    },
+    {
+      "career": "Digital Accessibility Specialist",
+      "planId": "jn7bc2vajfqg731e8pdwtahws18gazjf",
+      "aiCalls": 2,
+      "costUSD": 0.0042484,
+      "state": "needs-review",
+      "months": [
+        4,
+        8,
+        12
+      ]
+    },
+    {
+      "career": "Digital Artist",
+      "planId": "jn792wxvcyzhsrywytme9ygvd18gby3s",
+      "aiCalls": 2,
+      "costUSD": 0.003953600000000001,
+      "state": "needs-review",
+      "months": [
+        1,
+        7,
+        10
+      ]
+    },
+    {
+      "career": "Doctor",
+      "planId": "jn784864nfdsyd1xm0w2pnztsn8g8nc7",
+      "aiCalls": 2,
+      "costUSD": 0.0032356000000000004,
+      "state": "needs-review",
+      "months": [
+        2
+      ]
+    },
+    {
+      "career": "Documentary Filmmaker",
+      "planId": "jn71r073n4mqqg8kbmg38nxnbn8gawrp",
+      "aiCalls": 2,
+      "costUSD": 0.002662,
+      "state": "needs-review",
+      "months": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12
+      ]
+    },
+    {
+      "career": "Economic Policy Analyst",
+      "planId": "jn72z1hkat6f0hwq61n407yy198gbcjd",
+      "aiCalls": 2,
+      "costUSD": 0.0043916,
+      "state": "needs-review",
+      "months": [
+        8,
+        10
+      ]
+    },
+    {
+      "career": "Economist",
+      "planId": "jn756gdp72t7waz2egvrjbd8td8g7n73",
+      "aiCalls": 2,
+      "costUSD": 0.0031524000000000005,
+      "state": "fixed",
+      "months": []
+    },
+    {
+      "career": "Editor",
+      "planId": "jn7f2za7q15d0g8dz027dgy4xs8gbxcw",
+      "aiCalls": 2,
+      "costUSD": 0.0024184000000000002,
+      "state": "needs-review",
+      "months": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "career": "Energy Storage Engineer",
+      "planId": "jn7ahg1a2q0rfzq423fjav4aj58gb9d3",
+      "aiCalls": 2,
+      "costUSD": 0.0043344,
+      "state": "needs-review",
+      "months": [
+        1,
+        7,
+        9,
+        11
+      ]
+    },
+    {
+      "career": "Environmental Scientist",
+      "planId": "jn71brqvz5bss4k86kx5vapcdn8gazyd",
+      "aiCalls": 2,
+      "costUSD": 0.002784,
+      "state": "needs-review",
+      "months": [
+        4,
+        6,
+        8,
+        12
+      ]
+    },
+    {
+      "career": "Financial Analyst",
+      "planId": "jn7b9m0z90cmda3fyh31h3yrmd8g9xfb",
+      "aiCalls": 2,
+      "costUSD": 0.00212,
+      "state": "needs-review",
+      "months": [
+        3,
+        7,
+        8
+      ]
+    },
+    {
+      "career": "Financial Planner",
+      "planId": "jn7brsmnbeb69r3kgvakmtqs5d8gbey3",
+      "aiCalls": 2,
+      "costUSD": 0.0026528000000000003,
+      "state": "needs-review",
+      "months": [
+        2,
+        9,
+        11
+      ]
+    },
+    {
+      "career": "Food Critic",
+      "planId": "jn7d4a9emqt22ptrxg44d620s98g9apd",
+      "aiCalls": 2,
+      "costUSD": 0.0036975999999999997,
+      "state": "needs-review",
+      "months": [
+        9
+      ]
+    },
+    {
+      "career": "Food Safety Specialist",
+      "planId": "jn783j9r6qmh8yjp8p5p1q3ahx8gbgjf",
+      "aiCalls": 2,
+      "costUSD": 0.0035268,
+      "state": "needs-review",
+      "months": [
+        8,
+        9,
+        10,
+        12
+      ]
+    },
+    {
+      "career": "Food Scientist",
+      "planId": "jn78499fb2wnzgx5y2sbvrbc998gbqcf",
+      "aiCalls": 2,
+      "costUSD": 0.0037152,
+      "state": "needs-review",
+      "months": [
+        7,
+        8,
+        11
+      ]
+    },
+    {
+      "career": "Food Systems Analyst",
+      "planId": "jn7afzh3hq38vb65022dw3rz9d8gab98",
+      "aiCalls": 2,
+      "costUSD": 0.0043464,
+      "state": "needs-review",
+      "months": [
+        2,
+        3,
+        7,
+        9,
+        10
+      ]
+    },
+    {
+      "career": "Game Designer",
+      "planId": "jn73z0341gzad6bs6940f1krk58gaxgk",
+      "aiCalls": 2,
+      "costUSD": 0.0024396000000000005,
+      "state": "needs-review",
+      "months": [
+        2,
+        3,
+        6,
+        8,
+        9,
+        11
+      ]
+    },
+    {
+      "career": "Game Developer",
+      "planId": "jn75psmpnq545fgz56fagq9g6n8ganw1",
+      "aiCalls": 2,
+      "costUSD": 0.0038284,
+      "state": "fixed",
+      "months": []
+    },
+    {
+      "career": "Genetic Counsellor",
+      "planId": "jn7dpnvmty0r9hxb2hczry7bqs8gbdrh",
+      "aiCalls": 2,
+      "costUSD": 0.0035067999999999996,
+      "state": "needs-review",
+      "months": [
+        5,
+        9,
+        10
+      ]
+    },
+    {
+      "career": "Health Data Analyst",
+      "planId": "jn7esbr6x9jd587xzw60a8zr5d8gbvev",
+      "aiCalls": 2,
+      "costUSD": 0.003434,
+      "state": "needs-review",
+      "months": [
+        4,
+        6,
+        7
+      ]
+    },
+    {
+      "career": "Illustrator",
+      "planId": "jn75jwm9f9wx7esfv6bdz1htpn8ga05g",
+      "aiCalls": 2,
+      "costUSD": 0.0009724000000000001,
+      "state": "needs-review",
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "error": "The model returned a different set of months than the failing set."
+    },
+    {
+      "career": "Industrial Designer",
+      "planId": "jn72ebxwd8cy4rha4mwnv8cfh18gbbsr",
+      "aiCalls": 2,
+      "costUSD": 0.0044648000000000005,
+      "state": "needs-review",
+      "months": [
+        4,
+        5,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "career": "Journalist",
+      "planId": "jn78s7r2y1zed344c9qb0cahhh8gap51",
+      "aiCalls": 2,
+      "costUSD": 0.0040688,
+      "state": "needs-review",
+      "months": [
+        2,
+        4,
+        5,
+        6,
+        9
+      ]
+    },
+    {
+      "career": "Learning Designer",
+      "planId": "jn794fd7smbygn9jnkbef00f258ga2t0",
+      "aiCalls": 2,
+      "costUSD": 0.003516,
+      "state": "fixed",
+      "months": []
+    },
+    {
+      "career": "Market Researcher",
+      "planId": "jn7a5mp00n2m802tsn239y4p9d8gawtx",
+      "aiCalls": 2,
+      "costUSD": 0.0025356000000000003,
+      "state": "needs-review",
+      "months": [
+        3,
+        7,
+        9
+      ]
+    },
+    {
+      "career": "Materials Scientist",
+      "planId": "jn72zdr97hvphc285kj7xh9mt98gb555",
+      "aiCalls": 2,
+      "costUSD": 0.0044136,
+      "state": "needs-review",
+      "months": [
+        5,
+        6,
+        9,
+        12
+      ]
+    },
+    {
+      "career": "Medical Illustrator",
+      "planId": "jn7f123rmfre4p957djhvqmar98ga0z8",
+      "aiCalls": 2,
+      "costUSD": 0.003742,
+      "state": "needs-review",
+      "months": [
+        2
+      ]
+    },
+    {
+      "career": "Medical Researcher",
+      "planId": "jn7dh403pt13p13qrenvxkye7x8gb6pr",
+      "aiCalls": 2,
+      "costUSD": 0.0038688000000000004,
+      "state": "needs-review",
+      "months": [
+        3,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "career": "Nurse",
+      "planId": "jn7dgbhh21158s1r0y7ete7exn8gahyj",
+      "aiCalls": 2,
+      "costUSD": 0.0024788,
+      "state": "needs-review",
+      "months": [
+        9,
+        11
+      ]
+    },
+    {
+      "career": "Nutritionist",
+      "planId": "jn75ydevfyzdfpvq5zz2185p1d8gbf7c",
+      "aiCalls": 2,
+      "costUSD": 0.0042708,
+      "state": "needs-review",
+      "months": [
+        3,
+        6,
+        7,
+        8,
+        12
+      ]
+    },
+    {
+      "career": "Occupational Therapist",
+      "planId": "jn76x3jvw5jhytf00vr20zz2rn8gayp5",
+      "aiCalls": 2,
+      "costUSD": 0.002634,
+      "state": "needs-review",
+      "months": [
+        4,
+        8,
+        9,
+        12
+      ]
+    },
+    {
+      "career": "Operations Research Analyst",
+      "planId": "jn703fdz6b9ejgzb6cy8sbhtjs8gajny",
+      "aiCalls": 2,
+      "costUSD": 0.0037020000000000004,
+      "state": "needs-review",
+      "months": [
+        7,
+        8,
+        10
+      ]
+    },
+    {
+      "career": "Physiotherapist",
+      "planId": "jn72bjmathwdkkx0pd1va7x4qx8gaww1",
+      "aiCalls": 2,
+      "costUSD": 0.0034904000000000003,
+      "state": "needs-review",
+      "months": [
+        1,
+        8,
+        9
+      ]
+    },
+    {
+      "career": "Precision Farming Specialist",
+      "planId": "jn79snbb9n7sytnb52jb6mzh7x8gasrb",
+      "aiCalls": 2,
+      "costUSD": 0.0026968,
+      "state": "needs-review",
+      "months": [
+        5,
+        10,
+        11
+      ]
+    },
+    {
+      "career": "Privacy Specialist",
+      "planId": "jn785c1e1f6178yqn0fash524d8gby7z",
+      "aiCalls": 2,
+      "costUSD": 0.0023248,
+      "state": "needs-review",
+      "months": [
+        2,
+        3,
+        5,
+        8,
+        9
+      ]
+    },
+    {
+      "career": "Product Manager",
+      "planId": "jn77zk9xz0339f4t9xx74wvrh18gby57",
+      "aiCalls": 2,
+      "costUSD": 0.0013212,
+      "state": "needs-review",
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "error": "The model returned a different set of months than the failing set."
+    },
+    {
+      "career": "Psychologist",
+      "planId": "jn73zw2v1y83100epb3mdhw3yn8ga7pd",
+      "aiCalls": 2,
+      "costUSD": 0.0034824,
+      "state": "needs-review",
+      "months": [
+        6,
+        11
+      ]
+    },
+    {
+      "career": "Public Health Analyst",
+      "planId": "jn7dcs2cns8hqmjby5240dqe858gbm62",
+      "aiCalls": 2,
+      "costUSD": 0.0039232,
+      "state": "needs-review",
+      "months": [
+        3,
+        9,
+        12
+      ]
+    },
+    {
+      "career": "Public Policy Analyst",
+      "planId": "jn7f2m9fnk78bg9tmp7qj7w3498ga5ak",
+      "aiCalls": 2,
+      "costUSD": 0.002592,
+      "state": "needs-review",
+      "months": [
+        4,
+        6,
+        7,
+        10
+      ],
+      "error": "The model returned a different set of months than the failing set."
+    },
+    {
+      "career": "Renewable Energy Engineer",
+      "planId": "jn75zcyxvmvzaex0vyw4ya0p9n8gazfn",
+      "aiCalls": 2,
+      "costUSD": 0.0035804,
+      "state": "needs-review",
+      "months": [
+        8,
+        9,
+        12
+      ]
+    },
+    {
+      "career": "Risk Analyst",
+      "planId": "jn76s8p2rvzv0bmcr09r6kf3rn8gb0v6",
+      "aiCalls": 2,
+      "costUSD": 0.0032224000000000003,
+      "state": "fixed",
+      "months": []
+    },
+    {
+      "career": "Robotics Engineer",
+      "planId": "jn7a5xkaznqedgvqrdg90jzygd8gahb5",
+      "aiCalls": 2,
+      "costUSD": 0.0040876,
+      "state": "needs-review",
+      "months": [
+        6,
+        11,
+        12
+      ]
+    },
+    {
+      "career": "Science Communicator",
+      "planId": "jn71zm81zkrsrqd5mar9wc1hg18gb1mf",
+      "aiCalls": 2,
+      "costUSD": 0.0038772,
+      "state": "needs-review",
+      "months": [
+        5,
+        6,
+        7,
+        8,
+        10
+      ]
+    },
+    {
+      "career": "Simulation Designer",
+      "planId": "jn75xzntabahydwjrs32ewf8cs8gam0b",
+      "aiCalls": 2,
+      "costUSD": 0.0040044,
+      "state": "needs-review",
+      "months": [
+        3,
+        7,
+        9
+      ]
+    },
+    {
+      "career": "Social Worker",
+      "planId": "jn76fdrv5zsj53ng593bkwyr8d8gaav3",
+      "aiCalls": 2,
+      "costUSD": 0.0035244000000000004,
+      "state": "needs-review",
+      "months": [
+        6
+      ]
+    },
+    {
+      "career": "Software Engineer",
+      "planId": "jn7fq6zn2x80v7w045xha7yxds8gawq6",
+      "aiCalls": 2,
+      "costUSD": 0.004403200000000001,
+      "state": "needs-review",
+      "months": [
+        2,
+        4,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12
+      ]
+    },
+    {
+      "career": "Sports Coach",
+      "planId": "jn7fswcr88493jry9dpgas97n98gaxbk",
+      "aiCalls": 2,
+      "costUSD": 0.0008712,
+      "state": "needs-review",
+      "months": [
+        6
+      ]
+    },
+    {
+      "career": "Sports Data Analyst",
+      "planId": "jn724wyw3p2fzv4ex0re1zckfh8gbj49",
+      "aiCalls": 2,
+      "costUSD": 0.0038664,
+      "state": "needs-review",
+      "months": [
+        10
+      ]
+    },
+    {
+      "career": "Sports Physiotherapist",
+      "planId": "jn77wb1z6bw88gke1gb3rvvm6x8gby3z",
+      "aiCalls": 2,
+      "costUSD": 0.0038344,
+      "state": "needs-review",
+      "months": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "career": "Sports Psychologist",
+      "planId": "jn76x8syyewd95krct8be06xks8gaffz",
+      "aiCalls": 2,
+      "costUSD": 0.004218800000000001,
+      "state": "needs-review",
+      "months": [
+        5,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "career": "Sports Scientist",
+      "planId": "jn72vg0k8pg0crr9wftc41p5xs8gbrh7",
+      "aiCalls": 2,
+      "costUSD": 0.0037004,
+      "state": "needs-review",
+      "months": [
+        5
+      ]
+    },
+    {
+      "career": "Sports Technology Engineer",
+      "planId": "jn71bmv2kqrq3txf290m6mswz18gae9d",
+      "aiCalls": 2,
+      "costUSD": 0.0034508000000000004,
+      "state": "needs-review",
+      "months": [
+        8
+      ]
+    },
+    {
+      "career": "Supply Chain Analyst",
+      "planId": "jn788tskw5x2s7hqqr4fv9963h8garfx",
+      "aiCalls": 2,
+      "costUSD": 0.0038856000000000003,
+      "state": "needs-review",
+      "months": [
+        5
+      ]
+    },
+    {
+      "career": "Sustainability Consultant",
+      "planId": "jn7btw1va0e9ba5q3bdzry14hd8ga6fd",
+      "aiCalls": 2,
+      "costUSD": 0.0025316,
+      "state": "needs-review",
+      "months": [
+        2,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "career": "Teacher",
+      "planId": "jn7ade53bkg1kkq0za21h0zzy98gahz9",
+      "aiCalls": 2,
+      "costUSD": 0.004133599999999999,
+      "state": "needs-review",
+      "months": [
+        2,
+        4,
+        10,
+        11
+      ]
+    },
+    {
+      "career": "Transport Planner",
+      "planId": "jn7578yx7v4zx6dc6hvkk0jcxx8gbxv2",
+      "aiCalls": 2,
+      "costUSD": 0.0043632,
+      "state": "needs-review",
+      "months": [
+        10
+      ]
+    },
+    {
+      "career": "Urban Planner",
+      "planId": "jn7f0c4wfrb24z0atj51bzwga18gb0yc",
+      "aiCalls": 2,
+      "costUSD": 0.0025168,
+      "state": "needs-review",
+      "months": [
+        3,
+        4,
+        7
+      ]
+    },
+    {
+      "career": "User Experience Designer",
+      "planId": "jn7ar8yx6589qmt4tjnqrtnfcx8gb4zj",
+      "aiCalls": 2,
+      "costUSD": 0.0032404,
+      "state": "fixed",
+      "months": []
+    },
+    {
+      "career": "Water Engineer",
+      "planId": "jn7d5nr3s3m6mt75ec2yjfk7518gayk0",
+      "aiCalls": 2,
+      "costUSD": 0.0041948,
+      "state": "needs-review",
+      "months": [
+        10,
+        12
+      ]
+    }
+  ],
+  "costUSD": 0.29028160000000003
+}

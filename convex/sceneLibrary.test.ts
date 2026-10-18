@@ -4,7 +4,7 @@ import { beforeEach, afterEach, expect, it, vi } from "vitest";
 import schema from "./schema";
 import { api, internal } from "./_generated/api";
 import { CAREER_CATALOG } from "./careerCatalog";
-import { SCENE_CATALOG, eligibleScenes } from "./sceneCatalog";
+import { SCENE_CATALOG, eligibleScenes, CREATIVE_CAREERS } from "./sceneCatalog";
 import { genderStoryKey } from "./gender";
 const mocks = vi.hoisted(() => ({ generate: vi.fn(), parse: vi.fn() }));
 vi.mock("openai", () => ({ toFile: async (blob: Blob) => blob, default: class { images = { generate: mocks.generate, edit: mocks.generate }; responses = { parse: mocks.parse }; } }));
@@ -36,10 +36,17 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllEnvs());
 
-it("defines 16 scenes with at least three outfit-compatible choices for all 85 careers", () => {
-  expect(SCENE_CATALOG).toHaveLength(16);
-  expect(CAREER_CATALOG).toHaveLength(85);
+it("defines the shared scenes and creative theme with compatible choices for all 88 careers", () => {
+  expect(SCENE_CATALOG).toHaveLength(21);
+  expect(CREATIVE_CAREERS).toHaveLength(15);
+  for (const excluded of ["Food Critic", "Journalist", "Science Communicator", "Medical Illustrator", "Game Developer"]) {
+    expect(CREATIVE_CAREERS).not.toContain(excluded);
+    expect(eligibleScenes(excluded).some(scene => scene.id.startsWith("creative-"))).toBe(false);
+  }
+  expect(CAREER_CATALOG).toHaveLength(88);
   for (const career of CAREER_CATALOG) expect(eligibleScenes(career.title).length).toBeGreaterThanOrEqual(3);
+  expect(eligibleScenes("Digital Artist").map(scene => scene.id)).toEqual(["creative-hero", "creative-brief", "creative-making", "creative-feedback", "creative-share"]);
+  expect(eligibleScenes("Economist").some(scene => scene.id.startsWith("creative-"))).toBe(false);
 });
 it("generates each scene and gender once at medium, preserves locked identities, and logs actual cost", async () => {
   const t = await testBackend();
@@ -67,6 +74,22 @@ it("generates each scene and gender once at medium, preserves locked identities,
   expect(rows.filter(r => !r.cacheHit)).toHaveLength(4);
   expect(rows.filter(r => r.cacheHit).every(r => r.costUSD === 0)).toBe(true);
   expect(rows.find(r => !r.cacheHit)?.costUSD).toBeCloseTo(0.04274);
+});
+it("uses informal Indian clothing for creative images and allows only capped retries", async () => {
+  const t = await testBackend();
+  await t.action(api.libraryActions.generateScene, { adminKey, sceneId: "creative-hero", gender: "girl" });
+  await t.action(api.libraryActions.generateScene, { adminKey, sceneId: "creative-hero", gender: "boy" });
+  for (const [request] of mocks.generate.mock.calls) {
+    expect(request.prompt).toContain("informal Indian cotton clothing");
+    expect(request.prompt).not.toContain("navy blazer");
+  }
+  expect((await t.run(ctx => ctx.db.query("creativeSceneGenerationBudgets").collect()))[0].calls).toBe(2);
+
+  mocks.generate.mockRejectedValueOnce(new Error("provider timeout"));
+  await expect(t.action(api.libraryActions.generateScene, { adminKey, sceneId: "creative-brief", gender: "girl" })).rejects.toThrow("provider timeout");
+  await t.action(api.libraryActions.generateScene, { adminKey, sceneId: "creative-brief", gender: "girl", retry: true });
+  expect((await t.run(ctx => ctx.db.query("creativeSceneGenerationBudgets").collect()))[0].calls).toBe(4);
+  expect(mocks.generate).toHaveBeenCalledTimes(4);
 });
 it("blocks concurrent image generation across different scenes and genders", async () => {
   const t = await testBackend();

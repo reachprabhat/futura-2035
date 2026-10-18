@@ -1,0 +1,8 @@
+AI driven intent based software product.
+
+It lets parent key in "What are potential career options for my son in 2035. He is currently studying commerce with advanced maths at NPS Kalkere Bangalore. He has deep interest in writing and have published a kids'novel also. I belief there will always be a career opportunity in Finance even in AI age. Help me visualize what suitable career oppuetunity will look like in 2035."
+
+
+I expect the AI to give me 3 top career options by matching intent with how various publication, thought leaders, Big tech leaders, politicians, Policy makers, etc are visualizing career in an volatile, Climate change impacted and AI first world. 
+
+These career choice should for atleast 5-10 years.

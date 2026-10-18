@@ -44,17 +44,19 @@ it("generates and stores each low quality theme once, with a real aiCalls row", 
 
 it("tags an existing plan with one cached text call and exposes the tags on its cached projects", async () => {
   const t = convexTest(schema, modules);
-  const plan = { subtitle: "A year of curious ideas.", skills: ["Research", "Writing", "Analysis", "Making"], projects: Array.from({ length: 12 }, (_, i) => ({ month: i + 1, title: `Project ${i + 1}`, skillIndex: i % 4, panelIndex: i % 4, build: `Outcome ${i + 1}` })) };
+  const coreSkills = ["Research", "Writing", "Analysis", "Making", "Design", "Storytelling"];
+  const plan = { subtitle: "A year of curious ideas.", skills: coreSkills.slice(0, 4), coreSkills, projects: Array.from({ length: 12 }, (_, i) => ({ month: i + 1, title: `Project ${i + 1}`, skillIndex: i % 6, targetSkill: coreSkills[i % 6], panelIndex: i % 4, build: `Outcome ${i + 1}` })) };
   await t.mutation(internal.data.saveSearch, { key: "tag-search", result: { careers: [{ title: "Author" }] } });
-  await t.run(ctx => ctx.db.insert("careerPlans", { key: storyKey("Author"), title: "Author", status: "ready", token: "plan", lease: 0, plan }));
+  await t.run(ctx => ctx.db.insert("careerPlans", { key: storyKey("Author"), title: "Author", status: "ready", safetyChecked: true, token: "plan", lease: 0, plan }));
   const tags = Array.from({ length: 12 }, (_, i) => ({ month: i + 1, themeId: THUMBNAIL_THEMES[i % THUMBNAIL_THEMES.length].id }));
   mocks.parse.mockResolvedValue({ output_parsed: { tags }, usage: { input_tokens: 500, output_tokens: 100 } });
   expect(await t.action(api.planThumbnailActions.tagCachedPlan, { searchKey: "tag-search", careerIndex: 0 })).toEqual(tags);
   const saved = await t.query(api.plans.get, { title: "Author" });
-  expect(saved?.plan.projects.map((project: any) => project.thumbnailThemeId)).toEqual(tags.map(tag => tag.themeId));
+  expect(saved?.plan?.projects.map((project: any) => project.thumbnailThemeId)).toEqual(tags.map(tag => tag.themeId));
   expect(await t.action(api.planThumbnailActions.tagCachedPlan, { searchKey: "tag-search", careerIndex: 0 })).toEqual(tags);
   expect(mocks.parse).toHaveBeenCalledTimes(1);
-  const row = await t.query(internal.planThumbnails.getTags, { title: "Author" });
-  expect(row).toMatchObject({ key: thumbnailTagsKey("Author"), status: "ready", tags });
+  const projects = plan.projects.map(project => ({ month: project.month, title: project.title, skillIndex: project.skillIndex, targetSkill: project.targetSkill }));
+  const row = await t.query(internal.planThumbnails.getTags, { title: "Author", projects });
+  expect(row).toMatchObject({ key: thumbnailTagsKey("Author", projects), status: "ready", tags });
   expect(await t.query(internal.planThumbnails.getImage, { themeId: "laptop-charts" })).toBeNull();
 });

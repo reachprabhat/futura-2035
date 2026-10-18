@@ -9,7 +9,7 @@ Read this before building or changing any screen. If a choice isn't covered here
 ## 1\. The feeling, in labels
 
 refer to overall.png for the overall feeling.
-Use the same header. Change company name from "Future map 2035" to "Futura 2035"
+Use the same header. Change company name from "Future map" to "Pathlight"
 
 Remove reference to "Concept" or "Demo" from the attached images
 

@@ -1,0 +1,108 @@
+{
+  "startedAt": 1791974853890,
+  "requestToken": "9d456428-cb28-43ff-aff8-a4b9565994f9992e28e5d7314d08bc1c8097ad07ac86",
+  "request": {
+    "career": "Doctor",
+    "gender": "girl",
+    "amount": 199,
+    "status": "approved"
+  },
+  "funnelRows": [
+    {
+      "_creationTime": 1791974879352.7092,
+      "_id": "kx7cqkesgx250pw40hnyswvvvd8g8m8h",
+      "career": "Doctor",
+      "createdAt": 1791974879352,
+      "event": "share",
+      "gender": "girl",
+      "requestId": "m57es689jn1pa9mq3dt7kfcgrd8g9s26"
+    },
+    {
+      "_creationTime": 1791974877064.9944,
+      "_id": "kx7fb7zad0f86fykadafjqjn718g8shd",
+      "career": "Doctor",
+      "createdAt": 1791974877064,
+      "event": "download",
+      "gender": "girl",
+      "requestId": "m57es689jn1pa9mq3dt7kfcgrd8g9s26"
+    },
+    {
+      "_creationTime": 1791974870428.4019,
+      "_id": "kx7bv9azgdesrzk13a3kwxxtsn8g8etj",
+      "amount": 199,
+      "career": "Doctor",
+      "createdAt": 1791974870428,
+      "event": "approved",
+      "gender": "girl",
+      "requestId": "m57es689jn1pa9mq3dt7kfcgrd8g9s26"
+    },
+    {
+      "_creationTime": 1791974866320.1016,
+      "_id": "kx78e5esjdrm22gxea3v92q2758g8xf0",
+      "career": "Doctor",
+      "createdAt": 1791974866320,
+      "event": "locked-card-view",
+      "gender": "girl",
+      "requestId": "m57es689jn1pa9mq3dt7kfcgrd8g9s26"
+    },
+    {
+      "_creationTime": 1791974864448.7227,
+      "_id": "kx7d64zfycj63msvzh6nzn6fys8g9qjv",
+      "career": "Doctor",
+      "createdAt": 1791974864448,
+      "event": "locked-card-view",
+      "gender": "girl",
+      "requestId": "m57es689jn1pa9mq3dt7kfcgrd8g9s26"
+    },
+    {
+      "_creationTime": 1791974863851.1008,
+      "_id": "kx7acybd3g7h4fwcb70ts9cvvd8g9dr4",
+      "amount": 199,
+      "career": "Doctor",
+      "createdAt": 1791974863851,
+      "event": "payment-submitted",
+      "gender": "girl",
+      "requestId": "m57es689jn1pa9mq3dt7kfcgrd8g9s26"
+    },
+    {
+      "_creationTime": 1791974863138.5671,
+      "_id": "kx78gpggx703sphmvc1wx7yws98g860k",
+      "amount": 199,
+      "career": "Doctor",
+      "createdAt": 1791974863138,
+      "event": "pay-tap",
+      "gender": "girl"
+    },
+    {
+      "_creationTime": 1791974860931.6248,
+      "_id": "kx77hn466yre2mtjh6vbhhf2eh8g94v7",
+      "career": "Author",
+      "createdAt": 1791974860931,
+      "event": "locked-card-view",
+      "gender": "boy"
+    },
+    {
+      "_creationTime": 1791974856855.6414,
+      "_id": "kx7b63pyknqre3czd8eh670e6s8g86he",
+      "career": "Doctor",
+      "createdAt": 1791974856855,
+      "event": "locked-card-view",
+      "gender": "girl"
+    }
+  ],
+  "aiCallRowsAdded": 0,
+  "pdfBytes": 648947,
+  "shareFallback": {
+    "url": "https://wa.me/?text=Doctor%20%E2%80%94%2012-month%20plan%0AMonth%201%3A%20Explore%20Medical%20Journals%0AMonth%202%3A%20Symptom%20Diary%0AMonth%203%3A%20Interview%20a%20Family%20Member%0AMonth%204%3A%20Create%20a%20Health%20Survey%0AMonth%205%3A%20Plan%20a%20Healthy%20Routine%0AMonth%206%3A%20Build%20a%20Team%20Poster%0AMonth%207%3A%20Make%20an%20Anatomical%20Model%0AMonth%208%3A%20Explain%20a%20Condition%0AMonth%209%3A%20Role-play%20Patient%20Talk%0AMonth%2010%3A%20Research%20a%20Medical%20Tool%0AMonth%2011%3A%20Case%20Study%20Summary%0AMonth%2012%3A%20Health%20Awareness%20Campaign",
+    "text": "Doctor — 12-month plan\nMonth 1: Explore Medical Journals\nMonth 2: Symptom Diary\nMonth 3: Interview a Family Member\nMonth 4: Create a Health Survey\nMonth 5: Plan a Healthy Routine\nMonth 6: Build a Team Poster\nMonth 7: Make an Anatomical Model\nMonth 8: Explain a Condition\nMonth 9: Role-play Patient Talk\nMonth 10: Research a Medical Tool\nMonth 11: Case Study Summary\nMonth 12: Health Awareness Campaign"
+  },
+  "screenshots": [
+    "design/pay-1-locked-doctor.png",
+    "design/pay-1-locked-author.png",
+    "design/pay-2-qr.png",
+    "design/pay-3-pending.png",
+    "design/pay-4-unlocked.png",
+    "design/pay-5-admin-price.png"
+  ],
+  "pdf": "design/share-plan.pdf"
+}

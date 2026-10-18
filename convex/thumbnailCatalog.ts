@@ -28,4 +28,10 @@ export const THUMBNAIL_THEMES = [
 export type ThumbnailThemeId = typeof THUMBNAIL_THEMES[number]["id"];
 export const THUMBNAIL_THEME_IDS = THUMBNAIL_THEMES.map(theme => theme.id) as [ThumbnailThemeId, ...ThumbnailThemeId[]];
 export const thumbnailThemeKey = (themeId: string) => `${THUMBNAIL_LIBRARY_VERSION}:${themeId}`;
-export const thumbnailTagsKey = (title: string) => `${THUMBNAIL_LIBRARY_VERSION}:tags:${title}`;
+export function thumbnailTagsKey(title: string, projects?: Array<{ month: number; title: string; targetSkill?: string; skillIndex?: number }>) {
+  if (!projects?.length) return `${THUMBNAIL_LIBRARY_VERSION}:tags:${title}`;
+  const signature = projects.map(project => `${project.month}:${project.title.trim().toLocaleLowerCase()}:${project.targetSkill ?? project.skillIndex ?? ""}`).join("|");
+  let hash = 2166136261;
+  for (let index = 0; index < signature.length; index++) hash = Math.imul(hash ^ signature.charCodeAt(index), 16777619);
+  return `${THUMBNAIL_LIBRARY_VERSION}:tags:${title}:${(hash >>> 0).toString(36)}`;
+}

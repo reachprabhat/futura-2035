@@ -1,17 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,500;0,600;1,500&display=swap");
 :root {
   font-family: "DM Sans", Arial, sans-serif;
-  color: #15312e;
+  color: var(--type-body-color);
   background: #f5f6ef;
   font-synthesis: none;
   font-weight: 400;
-  font-size: 15px;
+  font-size: var(--type-body);
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
+  font-weight: 400;
+  letter-spacing: normal;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 button,
 textarea {
@@ -52,8 +56,9 @@ header {
   align-items: center;
   color: inherit;
   text-decoration: none;
-  font-size: 22px;
+  font-size: var(--type-body);
 }
+.brand img { display:block; width:min(270px,60vw); height:auto; }
 .mark {
   background: #15312e;
   color: #e9efc9;
@@ -62,15 +67,15 @@ header {
   height: 40px;
   text-align: center;
   font:
-    600 35px "Source Serif 4",
+    600 var(--type-section) "Source Serif 4",
     Georgia;
 }
 .pill {
   border: 1px solid #d7e1d8;
   border-radius: 30px;
   padding: 8px 12px;
-  font-size: 10px;
-  letter-spacing: 1.2px;
+  font-size: var(--type-label);
+  letter-spacing: max(0em, 0.06em);
   white-space: nowrap;
 }
 main {
@@ -85,15 +90,15 @@ main {
   align-items: end;
 }
 .eyebrow {
-  font-size: 11px;
+  font-size: var(--type-label);
   letter-spacing: 1.6px;
   font-weight: 600;
   margin: 0 0 18px;
 }
 h1 {
-  font-size: 58px;
+  font-size: var(--type-body);
   letter-spacing: -2.5px;
-  line-height: 1.1;
+  line-height: var(--line-body);
   margin: 20px 0 24px;
   font-weight: 700;
 }
@@ -103,9 +108,9 @@ h1 em {
   white-space: nowrap;
 }
 .lede {
-  font-size: 16px;
-  line-height: 1.75;
-  color: #536c6b;
+  font-size: var(--type-body);
+  line-height: var(--line-body);
+  color: var(--type-body-color);
   margin: 0;
 }
 aside {
@@ -114,12 +119,12 @@ aside {
   margin-bottom: 5px;
 }
 aside strong {
-  font-size: 16px;
+  font-size: var(--type-body);
 }
 aside p {
-  font-size: 13px;
-  line-height: 1.7;
-  color: #536c6b;
+  font-size: var(--type-body);
+  line-height: var(--line-body);
+  color: var(--type-body-color);
   margin-bottom: 0;
 }
 .input-grid {
@@ -143,12 +148,12 @@ label {
   display: block;
   font-family: "Source Serif 4", Georgia, serif;
   font-weight: 600;
-  font-size: 21px;
+  font-size: var(--type-label);
 }
 .input-grid section > p:not(.eyebrow) {
-  font-size: 13px;
-  color: #536c6b;
-  line-height: 1.6;
+  font-size: var(--type-label);
+  color: var(--type-body-color);
+  line-height: var(--line-label);
   margin: 8px 0 14px;
 }
 textarea {
@@ -160,7 +165,7 @@ textarea {
   background: #fcfdf8;
   border-radius: 12px;
   padding: 16px;
-  line-height: 1.6;
+  line-height: var(--line-body);
   color: #15312e;
 }
 textarea:focus {
@@ -168,7 +173,7 @@ textarea:focus {
   outline-offset: 2px;
 }
 textarea::placeholder {
-  color: #71807b;
+  color: var(--type-secondary-color);
 }
 .form-footer {
   display: flex;
@@ -184,15 +189,15 @@ textarea::placeholder {
   border-radius: 10px;
   padding: 15px 20px;
   font-weight: 700;
-  min-height: 48px;
+  min-height: 52px;
 }
 .primary:hover:not(:disabled) {
   background: #2b4942;
 }
 .form-footer small {
   max-width: 280px;
-  line-height: 1.6;
-  color: #536c6b;
+  line-height: var(--line-label);
+  color: var(--type-body-color);
 }
 .section-top {
   display: flex;
@@ -200,6 +205,8 @@ textarea::placeholder {
   align-items: center;
   padding: 32px 0;
 }
+.admin-brand { display: inline-flex; align-items: center; flex: 0 0 auto; line-height: 0; }
+.admin-brand img { display: block; width: 150px; max-width: 34vw; height: auto; }
 .text-button {
   background: transparent;
   color: #15312e;
@@ -210,29 +217,29 @@ textarea::placeholder {
 }
 h2 {
   font-family: "Source Serif 4", Georgia, serif;
-  font-size: 32px;
-  line-height: 1.2;
+  font-size: var(--type-section);
+  line-height: var(--line-section);
   letter-spacing: -0.7px;
   margin: 0 0 14px;
 }
 .section-description {
-  color: #536c6b;
-  line-height: 1.6;
+  color: var(--type-body-color);
+  line-height: var(--line-body);
   max-width: 640px;
 }
 .profile {
   display: flex;
   gap: 40px;
   padding: 18px 0 26px;
-  font-size: 14px;
+  font-size: var(--type-body);
 }
 .profile span {
   flex: 1;
-  line-height: 1.7;
+  line-height: var(--line-label);
 }
 .profile strong {
   display: block;
-  font-size: 10px;
+  font-size: var(--type-label);
   letter-spacing: 1.4px;
   margin-bottom: 4px;
 }
@@ -263,19 +270,19 @@ h2 {
   align-items: center;
 }
 .card-top .eyebrow {
-  font-size: 10px;
+  font-size: var(--type-label);
   letter-spacing: 0.8px;
   margin: 0;
 }
 .number {
   font:
-    24px "Source Serif 4",
+    var(--type-label) "Source Serif 4",
     Georgia;
 }
 h3 {
-  font-size: 24px;
+  font-size: var(--type-card);
   letter-spacing: -0.5px;
-  line-height: 1.2;
+  line-height: var(--line-card);
   margin: 24px 0 20px;
 }
 .career h3 {
@@ -284,8 +291,8 @@ h3 {
 .description p,
 .fit p:not(.eyebrow),
 dd {
-  font-size: 13px;
-  line-height: 1.65;
+  font-size: var(--type-body);
+  line-height: var(--line-body);
 }
 .description {
   min-height: 130px;
@@ -308,14 +315,14 @@ dd {
 }
 .salary strong {
   display: block;
-  font-size: 17px;
+  font-size: var(--type-card);
 }
 .salary span,
 .salary small {
   display: block;
-  font-size: 11px;
-  color: #536c6b;
-  line-height: 1.6;
+  font-size: var(--type-label);
+  color: var(--type-body-color);
+  line-height: var(--line-label);
   margin-top: 5px;
 }
 dl {
@@ -323,28 +330,28 @@ dl {
   flex: 1;
 }
 dt {
-  font-size: 11px;
+  font-size: var(--type-label);
   font-weight: 700;
   margin: 14px 0 4px;
 }
 dd {
   margin: 0;
-  color: #536c6b;
+  color: var(--type-body-color);
 }
 .career button {
   width: 100%;
   margin-top: 16px;
-  font-size: 13px;
+  font-size: var(--type-cta);
 }
 .note {
-  font-size: 13px;
-  color: #536c6b;
-  line-height: 1.7;
+  font-size: var(--type-body);
+  color: var(--type-body-color);
+  line-height: var(--line-body);
   margin: 24px 0;
 }
 details {
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: var(--type-body);
+  line-height: var(--line-body);
 }
 summary {
   cursor: pointer;
@@ -366,8 +373,8 @@ a {
   margin-bottom: 26px;
 }
 .career-name {
-  font-size: 18px;
-  color: #536c6b;
+  font-size: var(--type-card);
+  color: var(--type-body-color);
 }
 .panel-grid {
   display: grid;
@@ -394,7 +401,7 @@ figure img {
 .admin-costs { padding-top: 28px; padding-bottom: 28px; }
 .admin-costs input { display: block; padding: 14px; margin: 14px 0; width: 100%; max-width: 440px; border: 1px solid #c5d5c7; border-radius: 12px; background: #fcfdf8; }
 .cost-table { overflow-x: auto; margin: 24px 0; }
-.cost-table table { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; }
+.cost-table table { width: 100%; border-collapse: collapse; background: #fff; font-size: var(--type-body); }
 .cost-table th, .cost-table td { padding: 16px; text-align: left; vertical-align: top; border: 1px solid #d7e1d8; }
 .cost-table th { background: #e9efcc; }
 figcaption {
@@ -404,7 +411,7 @@ figcaption .eyebrow {
   margin: 0;
 }
 figcaption p {
-  line-height: 1.65;
+  line-height: var(--line-body);
   margin: 10px 0 0;
 }
 .image-fallback {
@@ -414,7 +421,7 @@ figcaption p {
   justify-content: center;
   flex-direction: column;
   background: #e9efcc;
-  color: #536c6b;
+  color: var(--type-body-color);
 }
 .error {
   padding: 24px;
@@ -422,14 +429,14 @@ figcaption p {
   border: 1px solid #b1bea0;
   border-radius: 16px;
   margin: 24px 0;
-  line-height: 1.6;
+  line-height: var(--line-body);
 }
 .error p {
   margin: 0 0 16px;
 }
 .run-path {
-  font-size: 12px;
-  color: #536c6b;
+  font-size: var(--type-body);
+  color: var(--type-body-color);
   overflow-wrap: anywhere;
   margin: 16px 0;
 }
@@ -441,7 +448,7 @@ figcaption p {
   background: #e9efcc;
 }
 .loading p {
-  line-height: 1.6;
+  line-height: var(--line-body);
 }
 .spinner {
   display: inline-block;
@@ -469,7 +476,7 @@ pre {
   padding: 20px;
   border: 1px solid #d7e1d8;
   border-radius: 12px;
-  font-size: 11px;
+  font-size: var(--type-body);
 }
 footer {
   margin: 54px 0 24px;
@@ -479,12 +486,12 @@ footer {
 }
 footer p {
   font-family: "Source Serif 4", Georgia, serif;
-  font-size: 22px;
+  font-size: var(--type-section);
 }
 footer span {
-  font-size: 9px;
-  letter-spacing: 1.3px;
-  color: #536c6b;
+  font-size: var(--type-label);
+  letter-spacing: normal;
+  color: var(--type-body-color);
 }
 @media (max-width: 1220px) {
   main,
@@ -493,7 +500,7 @@ footer span {
     margin-right: 28px;
   }
   h1 {
-    font-size: 50px;
+    font-size: var(--type-page);
   }
   .intro {
     gap: 30px;
@@ -509,15 +516,15 @@ footer span {
     min-height: 76px;
   }
   .brand {
-    font-size: 20px;
+    font-size: var(--type-body);
     gap: 9px;
   }
   .header-inner > .pill {
-    font-size: 8px;
+    font-size: var(--type-label);
     max-width: 112px;
     white-space: normal;
     text-align: center;
-    line-height: 1.5;
+    line-height: var(--line-label);
     padding: 6px 8px;
   }
   .intro {
@@ -525,21 +532,21 @@ footer span {
     padding: 36px 0 26px;
   }
   .eyebrow {
-    font-size: 9px;
+    font-size: var(--type-label);
     letter-spacing: 1.3px;
   }
   h1 {
-    font-size: 40px;
+    font-size: var(--type-page);
     letter-spacing: -1.8px;
     margin-top: 18px;
   }
   h1 em {
     white-space: normal;
-    font-size: 38px;
+    font-size: var(--type-page);
   }
   .lede {
-    font-size: 14px;
-    line-height: 1.75;
+    font-size: var(--type-body);
+    line-height: var(--line-body);
   }
   .desktop {
     display: none;
@@ -549,10 +556,10 @@ footer span {
     padding-left: 16px;
   }
   aside strong {
-    font-size: 14px;
+    font-size: var(--type-body);
   }
   aside p {
-    font-size: 12px;
+    font-size: var(--type-body);
   }
   .input-grid {
     grid-template-columns: 1fr;
@@ -566,13 +573,13 @@ footer span {
     border-top: 1px solid #d7e1d8;
   }
   label {
-    font-size: 20px;
+    font-size: var(--type-label);
   }
   .input-grid section > p:not(.eyebrow) {
-    font-size: 12px;
+    font-size: var(--type-label);
   }
   textarea {
-    font-size: 16px;
+    font-size: var(--type-body);
     min-height: 110px;
     padding: 12px;
   }
@@ -585,7 +592,7 @@ footer span {
   .form-footer small {
     display: block;
     text-align: center;
-    font-size: 11px;
+    font-size: var(--type-label);
     max-width: none;
     margin-top: 14px;
   }
@@ -593,17 +600,17 @@ footer span {
     gap: 15px;
   }
   .section-top .pill {
-    font-size: 8px;
+    font-size: var(--type-label);
     padding: 8px;
   }
   .section-top button {
-    font-size: 12px;
+    font-size: var(--type-label);
   }
   h2 {
-    font-size: 28px;
+    font-size: var(--type-section);
   }
   .section-description {
-    font-size: 13px;
+    font-size: var(--type-body);
   }
   .profile {
     display: block;
@@ -612,7 +619,7 @@ footer span {
   .profile span {
     display: block;
     margin-top: 14px;
-    font-size: 13px;
+    font-size: var(--type-label);
   }
   .career-grid {
     grid-template-columns: 1fr;
@@ -635,8 +642,8 @@ footer span {
     padding-bottom: 0;
   }
   .career-name {
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: var(--type-card);
+    line-height: var(--line-card);
   }
   .panel-grid {
     grid-template-columns: 1fr;
@@ -646,22 +653,40 @@ footer span {
     padding: 20px;
   }
   figcaption p {
-    font-size: 14px;
+    font-size: var(--type-body);
   }
   .loading {
     padding: 36px 20px;
   }
   .loading h3 {
-    font-size: 21px;
+    font-size: var(--type-section);
   }
   .loading p {
-    font-size: 13px;
+    font-size: var(--type-body);
   }
   footer {
     margin-top: 36px;
   }
   footer p {
-    font-size: 19px;
-    line-height: 1.5;
+    font-size: var(--type-section);
+    line-height: var(--line-section);
   }
 }
+
+/* Keep secondary copy crisp and evenly tracked. */
+.pill, .eyebrow, .profile strong, footer span, .card-top .eyebrow { letter-spacing: normal; }
+
+/* Shared role colours for the legacy and shared surfaces. */
+h1, h2, h3 { color: var(--type-headline-color); }
+.lede, .description p, .fit p:not(.eyebrow), dd, aside p, .section-description { color: var(--type-body-color); }
+.salary span, .salary small, .note, footer span, .run-path, .form-footer small { color: var(--type-secondary-color); }
+
+:root { color: var(--type-body-color); }
+textarea { color: var(--type-body-color); }
+a { color: var(--type-body-color); }
+.career-name { color: var(--type-headline-color); }
+
+.primary, .career button { min-height: 52px; font-size: var(--type-cta); line-height: var(--line-cta); font-weight: 600; }
+.pill, .eyebrow, .profile strong, .card-top .eyebrow { letter-spacing: 0.06em; }
+
+h2, h3 { font-weight: 600; }

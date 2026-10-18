@@ -1,0 +1,2069 @@
+{
+  "deployment": "dev:doting-basilisk-558",
+  "checkedPlans": 85,
+  "passedPlans": 14,
+  "failedPlans": 71,
+  "failedMonths": 259,
+  "availableLibraryImages": 23,
+  "fallbackImageAvailable": true,
+  "failingPlans": [
+    {
+      "career": "AI Engineer",
+      "planId": "jn7c6g4zmhzmr7rynfh95awyms8gb5bm",
+      "months": [
+        {
+          "month": 5,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "AI Safety Analyst",
+      "planId": "jn7f528r9bqn4mdef6zvpe87xn8gaxqd",
+      "months": [
+        {
+          "month": 3,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Animator",
+      "planId": "jn7f4s2md8347rfre25k20tq918gafd6",
+      "months": [
+        {
+          "month": 1,
+          "issues": [
+            "title must name a specific project and its output",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 2,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 3,
+          "issues": [
+            "title must name a specific project and its output",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 4,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Assistive Technology Designer",
+      "planId": "jn72gvny91hgjrbp94f877agws8gbnbk",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 3,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Author",
+      "planId": "jn716kf2kc9s5s0f48reqfg7018g7bm8",
+      "months": [
+        {
+          "month": 1,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Automation Engineer",
+      "planId": "jn71e30g22fktqb81n7aysswn58gawrj",
+      "months": [
+        {
+          "month": 1,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Banker",
+      "planId": "jn74tmct5cbb3enghyrrk1e7q98gb77r",
+      "months": [
+        {
+          "month": 3,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Bioinformatics Analyst",
+      "planId": "jn7ffje3mdw4dpv91v6bntevvh8gb5a5",
+      "months": [
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Biomedical Engineer",
+      "planId": "jn7ctre5mnszjmj7kbx9beyvss8garv0",
+      "months": [
+        {
+          "month": 5,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Career Adviser",
+      "planId": "jn7anbyc6frnp7e34chjqjrt1x8ga8nw",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Chartered Accountant",
+      "planId": "jn7e0dt4n60p4v338hfavey96x8gbyft",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Circular Economy Specialist",
+      "planId": "jn76bx2jvwfq6appj7655qm60h8gav6b",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Civil Servant (IAS/IPS)",
+      "planId": "jn7e3zz30dc9b8pe9evfm4tnnd8gatpw",
+      "months": [
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Cloud Engineer",
+      "planId": "jn71s95wckj65vk21e4dywtvr98gbcf6",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 4,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Community Health Worker",
+      "planId": "jn7aej6y2wrd747djmm3x918158gavdf",
+      "months": [
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Conservation Scientist",
+      "planId": "jn75carmkmccqddbjh9yyn6swn8gb5k9",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Content Strategist",
+      "planId": "jn73w00qr0ctejv6h49y6ryr5x8gba09",
+      "months": [
+        {
+          "month": 5,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Corporate Lawyer",
+      "planId": "jn78jcj6b2m23kn58dsmg3n93h8g97k7",
+      "months": [
+        {
+          "month": 1,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 2,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 4,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Cybersecurity Analyst",
+      "planId": "jn7bhnrm8snsw6ykb6m8sw8bv18gayk6",
+      "months": [
+        {
+          "month": 6,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Data Scientist",
+      "planId": "jn7af0vda06gaaavc7xb13dchh8gb1h5",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Digital Accessibility Specialist",
+      "planId": "jn7bc2vajfqg731e8pdwtahws18gazjf",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Digital Artist",
+      "planId": "jn792wxvcyzhsrywytme9ygvd18gby3s",
+      "months": [
+        {
+          "month": 10,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Doctor",
+      "planId": "jn784864nfdsyd1xm0w2pnztsn8g8nc7",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Documentary Filmmaker",
+      "planId": "jn71r073n4mqqg8kbmg38nxnbn8gawrp",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 3,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 4,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Economic Policy Analyst",
+      "planId": "jn72z1hkat6f0hwq61n407yy198gbcjd",
+      "months": [
+        {
+          "month": 8,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Editor",
+      "planId": "jn7f2za7q15d0g8dz027dgy4xs8gbxcw",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 3,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 4,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Energy Storage Engineer",
+      "planId": "jn7ahg1a2q0rfzq423fjav4aj58gb9d3",
+      "months": [
+        {
+          "month": 1,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Environmental Scientist",
+      "planId": "jn71brqvz5bss4k86kx5vapcdn8gazyd",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Financial Analyst",
+      "planId": "jn7b9m0z90cmda3fyh31h3yrmd8g9xfb",
+      "months": [
+        {
+          "month": 3,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Financial Planner",
+      "planId": "jn7brsmnbeb69r3kgvakmtqs5d8gbey3",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Food Critic",
+      "planId": "jn7d4a9emqt22ptrxg44d620s98g9apd",
+      "months": [
+        {
+          "month": 9,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Food Safety Specialist",
+      "planId": "jn783j9r6qmh8yjp8p5p1q3ahx8gbgjf",
+      "months": [
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Food Scientist",
+      "planId": "jn78499fb2wnzgx5y2sbvrbc998gbqcf",
+      "months": [
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Food Systems Analyst",
+      "planId": "jn7afzh3hq38vb65022dw3rz9d8gab98",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 3,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Game Designer",
+      "planId": "jn73z0341gzad6bs6940f1krk58gaxgk",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 3,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Genetic Counsellor",
+      "planId": "jn7dpnvmty0r9hxb2hczry7bqs8gbdrh",
+      "months": [
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Health Data Analyst",
+      "planId": "jn7esbr6x9jd587xzw60a8zr5d8gbvev",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Illustrator",
+      "planId": "jn75jwm9f9wx7esfv6bdz1htpn8ga05g",
+      "months": [
+        {
+          "month": 1,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 2,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 3,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 4,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "title must name a specific project and its output",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Industrial Designer",
+      "planId": "jn72ebxwd8cy4rha4mwnv8cfh18gbbsr",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Journalist",
+      "planId": "jn78s7r2y1zed344c9qb0cahhh8gap51",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Market Researcher",
+      "planId": "jn7a5mp00n2m802tsn239y4p9d8gawtx",
+      "months": [
+        {
+          "month": 3,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Materials Scientist",
+      "planId": "jn72zdr97hvphc285kj7xh9mt98gb555",
+      "months": [
+        {
+          "month": 5,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Medical Illustrator",
+      "planId": "jn7f123rmfre4p957djhvqmar98ga0z8",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Medical Researcher",
+      "planId": "jn7dh403pt13p13qrenvxkye7x8gb6pr",
+      "months": [
+        {
+          "month": 5,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Nurse",
+      "planId": "jn7dgbhh21158s1r0y7ete7exn8gahyj",
+      "months": [
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Nutritionist",
+      "planId": "jn75ydevfyzdfpvq5zz2185p1d8gbf7c",
+      "months": [
+        {
+          "month": 3,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Occupational Therapist",
+      "planId": "jn76x3jvw5jhytf00vr20zz2rn8gayp5",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Operations Research Analyst",
+      "planId": "jn703fdz6b9ejgzb6cy8sbhtjs8gajny",
+      "months": [
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Physiotherapist",
+      "planId": "jn72bjmathwdkkx0pd1va7x4qx8gaww1",
+      "months": [
+        {
+          "month": 1,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Precision Farming Specialist",
+      "planId": "jn79snbb9n7sytnb52jb6mzh7x8gasrb",
+      "months": [
+        {
+          "month": 5,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Privacy Specialist",
+      "planId": "jn785c1e1f6178yqn0fash524d8gby7z",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 3,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Product Manager",
+      "planId": "jn77zk9xz0339f4t9xx74wvrh18gby57",
+      "months": [
+        {
+          "month": 1,
+          "issues": [
+            "title must name a specific project and its output",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 2,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 3,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 4,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience",
+            "success criteria need 2-3 checkable bullets",
+            "time must be exactly \"3-4 hrs / month\""
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Psychologist",
+      "planId": "jn73zw2v1y83100epb3mdhw3yn8ga7pd",
+      "months": [
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Public Health Analyst",
+      "planId": "jn7dcs2cns8hqmjby5240dqe858gbm62",
+      "months": [
+        {
+          "month": 3,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Public Policy Analyst",
+      "planId": "jn7f2m9fnk78bg9tmp7qj7w3498ga5ak",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Renewable Energy Engineer",
+      "planId": "jn75zcyxvmvzaex0vyw4ya0p9n8gazfn",
+      "months": [
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Robotics Engineer",
+      "planId": "jn7a5xkaznqedgvqrdg90jzygd8gahb5",
+      "months": [
+        {
+          "month": 6,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Science Communicator",
+      "planId": "jn71zm81zkrsrqd5mar9wc1hg18gb1mf",
+      "months": [
+        {
+          "month": 5,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Simulation Designer",
+      "planId": "jn75xzntabahydwjrs32ewf8cs8gam0b",
+      "months": [
+        {
+          "month": 3,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Social Worker",
+      "planId": "jn76fdrv5zsj53ng593bkwyr8d8gaav3",
+      "months": [
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Software Engineer",
+      "planId": "jn7fq6zn2x80v7w045xha7yxds8gawq6",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 4,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 5,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Sports Coach",
+      "planId": "jn7fswcr88493jry9dpgas97n98gaxbk",
+      "months": [
+        {
+          "month": 6,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Sports Data Analyst",
+      "planId": "jn724wyw3p2fzv4ex0re1zckfh8gbj49",
+      "months": [
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Sports Physiotherapist",
+      "planId": "jn77wb1z6bw88gke1gb3rvvm6x8gby3z",
+      "months": [
+        {
+          "month": 8,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Sports Psychologist",
+      "planId": "jn76x8syyewd95krct8be06xks8gaffz",
+      "months": [
+        {
+          "month": 5,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 6,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Sports Scientist",
+      "planId": "jn72vg0k8pg0crr9wftc41p5xs8gbrh7",
+      "months": [
+        {
+          "month": 5,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Supply Chain Analyst",
+      "planId": "jn788tskw5x2s7hqqr4fv9963h8garfx",
+      "months": [
+        {
+          "month": 5,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Sustainability Consultant",
+      "planId": "jn7btw1va0e9ba5q3bdzry14hd8ga6fd",
+      "months": [
+        {
+          "month": 2,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 8,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 9,
+          "issues": [
+            "success criteria need 2-3 checkable bullets"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Teacher",
+      "planId": "jn7ade53bkg1kkq0za21h0zzy98gahz9",
+      "months": [
+        {
+          "month": 4,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output",
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 11,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Urban Planner",
+      "planId": "jn7f0c4wfrb24z0atj51bzwga18gb0yc",
+      "months": [
+        {
+          "month": 3,
+          "issues": [
+            "title must name a specific project and its output"
+          ]
+        },
+        {
+          "month": 4,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        },
+        {
+          "month": 7,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    },
+    {
+      "career": "Water Engineer",
+      "planId": "jn7d5nr3s3m6mt75ec2yjfk7518gayk0",
+      "months": [
+        {
+          "month": 10,
+          "issues": [
+            "title must name a specific project and its output",
+            "success criteria need 2-3 checkable bullets"
+          ]
+        },
+        {
+          "month": 12,
+          "issues": [
+            "details need 3-4 concrete sentences, a made artifact, and a named audience"
+          ]
+        }
+      ]
+    }
+  ]
+}

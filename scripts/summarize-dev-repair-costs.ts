@@ -1,0 +1,5 @@
+﻿import { readFile } from 'node:fs/promises'; import { ConvexHttpClient } from 'convex/browser'; import { api } from '../convex/_generated/api';
+const key=process.env.PATHLIGHT_DEV_ADMIN_KEY;if(!key)throw new Error('Missing DEV admin key');
+const c=new ConvexHttpClient('https://doting-basilisk-558.convex.cloud');let cursor:string|null=null;const calls:any[]=[];do{const page:any=await c.query(api.costs.rows,{adminKey:key,paginationOpts:{numItems:100,cursor},includeTest:true});calls.push(...page.page);cursor=page.isDone?null:page.continueCursor;}while(cursor);
+const repair=calls.filter(x=>x.visitorId==='dev-saved-plan-repair-batch'&&String(x.stage).startsWith('saved-plan-quality-repair-'));
+console.log(JSON.stringify({repairCalls:repair.length,succeeded:repair.filter(x=>x.status==='succeeded').length,failed:repair.filter(x=>x.status==='failed').length,pending:repair.filter(x=>x.status==='pending').length,priced:repair.filter(x=>typeof x.costUSD==='number').length,missingCost:repair.filter(x=>typeof x.costUSD!=='number').length,knownCostUSD:repair.reduce((s,x)=>s+(typeof x.costUSD==='number'?x.costUSD:0),0)},null,2));

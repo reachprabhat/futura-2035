@@ -1,6 +1,6 @@
 import type { QueryCtx } from "./_generated/server";
 
-export const PAUSED_MESSAGE = "Futura is paused for a moment, please try again later";
+export const PAUSED_MESSAGE = "Pathlight is paused for a moment, please try again later";
 export function istToday(now = Date.now()) {
   const day = new Date(now + 19800000).toISOString().slice(0, 10);
   const start = Date.parse(`${day}T00:00:00+05:30`);

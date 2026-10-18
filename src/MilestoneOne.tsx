@@ -6,9 +6,9 @@ import "./milestone-one.css";
 import CareerDay from "./CareerDay";
 import CareerDayHeader from "./CareerDayHeader";
 
-type Career = { title: string; description: string[]; whyItFits: string; salaryMinINR: number; salaryMaxINR: number; salaryBasis: string; stability: string; overseas: string };
-type Panel = { time?: string; caption: string; imageUrl: string | null; imageError?: string };
-type Story = { title: string; status?: string; panels: Panel[]; path: string; error?: string; raw?: string };
+type Career = { title: string; description: string[]; whyItFits: string; salaryMinINR?: number; salaryMaxINR?: number; salaryBasis?: string; stability: string; overseas: string };
+type Panel = { time?: string; caption: string; imageUrl: string | null; imageError?: string; sceneId?: string };
+type Story = { title: string; status?: string; panels: Panel[]; path: string; error?: string; raw?: string; roleShort2030s?: string; earnings2030sLow?: number; earnings2030sHigh?: number; earnings2030sBasis?: string; heroSceneId?: string; heroImageUrl?: string | null };
 type Results = { careers: Career[]; note: string; searchKey: string; path: string; stories?: (Story | null)[]; sources: { title: string; url: string }[] };
 type Gender = "girl" | "boy" | "unspecified";
 type Screen = "landing" | "input" | "results" | "detail" | "storyboard";
@@ -17,6 +17,9 @@ function Icon({ name, className = "" }: { name: IconName; className?: string }) 
   const paths: Record<IconName, React.ReactNode> = {
     arrow: <path d="M4 12h16m-6-6 6 6-6 6" />, back: <path d="m14 6-6 6 6 6" />,
     spark: <><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z" /><path d="M20 2v4m-2-2h4" /></>,
+    bulb: <><path d="M9 18h6M10 21h4M8.5 14.5a7 7 0 1 1 7 0c-1.2 1-1.5 2-1.5 3.5h-4c0-1.5-.3-2.5-1.5-3.5Z" /><path d="M12 7v4m-2-2h4" /></>,
+    branch: <><circle cx="6" cy="19" r="2" /><circle cx="18" cy="5" r="2" /><circle cx="18" cy="17" r="2" /><path d="M8 19h3a3 3 0 0 0 3-3V8a3 3 0 0 1 3-3M11 16h2a3 3 0 0 0 3 3h0" /></>,
+    stairs: <><path d="M4 20h5v-4h5v-4h5V8h1" /><path d="m17 5 4 3-4 3" /></>,
     leaf: <><path d="M19 4C8 2 3 8 6 15c6 6 15 0 13-11Z" /><path d="M4 21 16 9M9 15v-5" /></>,
     heart: <path d="M12 20 4 12C-2 5 7 0 12 7c5-7 14-2 8 5Z" />,
     compass: <><circle cx="12" cy="12" r="9" /><path d="m16 8-2 6-6 2 2-6Z" /></>,

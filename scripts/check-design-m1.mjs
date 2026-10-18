@@ -45,7 +45,7 @@ try {
   await page.getByLabel("What does your child enjoy?").fill("Economics, book writing, food critique");
   await page.getByLabel("What matters to you as a parent?").fill("good earning, stability, overseas");
   await capture("input");
-  await page.getByRole("button", { name: "Futura 2035 home" }).click();
+  await page.getByRole("button", { name: "Pathlight home" }).click();
   // Open the example exactly once. Its endpoint is cache-only, even if AI is enabled.
   await page.getByRole("button", { name: "Take a look at an example" }).click();
   await page.locator(".m-career").nth(2).waitFor();

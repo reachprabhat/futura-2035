@@ -8,20 +8,13 @@ import { internal, api } from "./_generated/api";
 const modules = import.meta.glob("./**/*.ts");
 afterEach(() => vi.unstubAllEnvs());
 describe("AI limits and reusable storyboards", () => {
-  it("opens only a saved example while AI is off, and never generates a missing example", async () => {
+  it("keeps the cached sample private until the screened example action reads it", async () => {
     const t = convexTest(schema, modules);
-    vi.stubEnv("AI_ENABLED", "false");
-    await expect(t.mutation(api.data.example, {})).rejects.toThrow(/saved example is unavailable/);
+    await expect(t.query(internal.data.exampleSearch, {})).resolves.toBeNull();
     const key = JSON.stringify([CAREER_CATALOG_VERSION, "book writing, economics, food critique", "good earning, overseas, stability"]);
     const result = { careers: [{ title: "Economist" }, { title: "Author" }, { title: "Food Critic" }], note: "Existing AI result", sources: [] };
     await t.mutation(internal.data.saveSearch, { key, result });
-    const value = await t.mutation(api.data.example, {});
-    expect(value.careers).toEqual(result.careers);
-    expect(value.path).toBe("career-cache");
-    const calls = await t.run(ctx => ctx.db.query("aiCalls").collect());
-    expect(calls).toHaveLength(1);
-    expect(calls[0]).toMatchObject({ cacheHit: true, costINR: 0, costUSD: 0, cacheKey: key });
-    expect(await t.run(ctx => ctx.db.query("usage").collect())).toHaveLength(0);
+    expect(await t.query(internal.data.exampleSearch, {})).toMatchObject({ key, result });
   });
   it("allows configured limits above 100 and defaults to 300", async () => {
     vi.stubEnv("AI_DAILY_CALL_CAP", "200");
