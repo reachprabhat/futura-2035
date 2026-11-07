@@ -15,7 +15,7 @@ const gender = v.union(v.literal("girl"), v.literal("boy"));
 function requireAdmin(adminKey: string) {
   assertSupportedDeployment();
   const expected = process.env.ADMIN_COSTS_KEY;
-  if (!expected || adminKey.length < 32 || adminKey !== expected) throw new ConvexError("Admin access required.");
+  if (!expected || adminKey.length < 10 || adminKey !== expected) throw new ConvexError("Admin access required.");
 }
 function assertDev() {
   if (process.env.CONVEX_CLOUD_URL !== "https://doting-basilisk-558.convex.cloud") throw new ConvexError("Plan payments are restricted to doting-basilisk-558 DEV.");
@@ -40,8 +40,8 @@ async function readPaymentMode(ctx: Pick<QueryCtx, "db">): Promise<"free_preview
   const setting = await ctx.db.query("appSettings").withIndex("by_key", q => q.eq("key", paymentModeKey)).unique();
   return setting?.value === "paid" ? "paid" : DEFAULT_PAYMENT_MODE;
 }
-type AnalyticsEvent = "landing-view" | "example-viewed" | "gender-picked" | "career-search" | "career-opened" | "day-viewed" | "plan-preview-viewed" | "locked-card-view" | "pay-tap" | "full-plan-shown" | "payment-submitted" | "approved" | "rejected" | "pdf-download" | "whatsapp-share";
-type AnalyticsDimensions = { visitorId?: string; ref?: string; referrerDomain?: string; isTest?: boolean; career?: string; gender?: "girl" | "boy" | "unspecified"; age?: 13 | 14 | 15 | 16; amount?: number; device?: "mobile" | "desktop"; entryPath?: "Example" | "Search" | "Unknown"; paymentMode?: "free_preview" | "paid"; seedBatch?: string };
+type AnalyticsEvent = "landing-view" | "example-viewed" | "gender-picked" | "career-search" | "career-opened" | "day-viewed" | "plan-preview-viewed" | "locked-card-view" | "pay-tap" | "full-plan-shown" | "payment-submitted" | "approved" | "rejected" | "pdf-download" | "whatsapp-share" | "page-time";
+type AnalyticsDimensions = { visitorId?: string; ref?: string; referrerDomain?: string; isTest?: boolean; career?: string; page?: string; seconds?: number; gender?: "girl" | "boy" | "unspecified"; age?: 13 | 14 | 15 | 16; amount?: number; device?: "mobile" | "desktop"; entryPath?: "Example" | "Search" | "Unknown"; paymentMode?: "free_preview" | "paid"; seedBatch?: string };
 async function writeAnalytics(ctx: MutationCtx, event: AnalyticsEvent, values: AnalyticsDimensions, createdAt = Date.now()) {
   assertSupportedDeployment();
   const visitorId = values.visitorId ?? "unknown";
@@ -51,14 +51,14 @@ async function writeAnalytics(ctx: MutationCtx, event: AnalyticsEvent, values: A
     const landing = previous.find(row => row.event === "landing-view" && (row.entryPath ?? "Unknown") === "Unknown");
     if (landing) { await ctx.db.patch(landing._id, { entryPath, ...(!landing.ref && values.ref ? { ref: values.ref } : {}), ...(!landing.referrerDomain && values.referrerDomain ? { referrerDomain: values.referrerDomain } : {}), ...(!landing.device && values.device ? { device: values.device } : {}), ...(values.age ? { age: values.age } : {}), ...(values.paymentMode ? { paymentMode: values.paymentMode } : {}) }); return; }
   }
-  const duplicate = previous.find(row => row.event === event && (event !== "landing-view" || (row.entryPath ?? "Unknown") === entryPath));
+  const duplicate = event === "page-time" ? undefined : previous.find(row => row.event === event && (event !== "landing-view" || (row.entryPath ?? "Unknown") === entryPath));
   if (duplicate && !values.seedBatch) {
     const patch = { ...(!duplicate.ref && values.ref ? { ref: values.ref } : {}), ...(!duplicate.referrerDomain && values.referrerDomain ? { referrerDomain: values.referrerDomain } : {}), ...(!duplicate.device && values.device ? { device: values.device } : {}), ...(values.age ? { age: values.age } : {}) };
     if (Object.keys(patch).length) await ctx.db.patch(duplicate._id, patch);
     return;
   }
   const paymentMode = values.paymentMode ?? await readPaymentMode(ctx);
-  await ctx.db.insert("analyticsEvents", { event, visitorId, isTest: values.isTest ?? true, createdAt, paymentMode, entryPath, ...(values.ref ? { ref: values.ref } : {}), ...(values.referrerDomain ? { referrerDomain: values.referrerDomain } : {}), ...(values.device ? { device: values.device } : {}), ...(values.career ? { career: values.career } : {}), ...(values.gender ? { gender: values.gender } : {}), ...(values.age ? { age: values.age } : {}), ...(values.amount !== undefined ? { amount: values.amount } : {}), ...(values.seedBatch ? { seedBatch: values.seedBatch } : {}) });
+  await ctx.db.insert("analyticsEvents", { event, visitorId, isTest: values.isTest ?? true, createdAt, paymentMode, entryPath, ...(values.page ? { page: values.page } : {}), ...(values.seconds !== undefined ? { seconds: values.seconds } : {}), ...(values.ref ? { ref: values.ref } : {}), ...(values.referrerDomain ? { referrerDomain: values.referrerDomain } : {}), ...(values.device ? { device: values.device } : {}), ...(values.career ? { career: values.career } : {}), ...(values.gender ? { gender: values.gender } : {}), ...(values.age ? { age: values.age } : {}), ...(values.amount !== undefined ? { amount: values.amount } : {}), ...(values.seedBatch ? { seedBatch: values.seedBatch } : {}) });
 }
 
 const migrationPage = v.object({ done: v.boolean(), cursor: v.union(v.string(), v.null()), updated: v.number() });
@@ -163,7 +163,7 @@ export const initializeProductionDefaults = mutation({
     if (process.env.CONVEX_CLOUD_URL !== "https://nautical-chicken-192.convex.cloud")
       throw new ConvexError("Default production settings can only be initialized on nautical-chicken-192.");
     const expected = process.env.ADMIN_COSTS_KEY;
-    if (!expected || adminKey.length < 32 || adminKey !== expected) throw new ConvexError("Admin access required.");
+    if (!expected || adminKey.length < 10 || adminKey !== expected) throw new ConvexError("Admin access required.");
     for (const [key, value] of [[priceKey, DEFAULT_PLAN_PRICE], [paymentModeKey, DEFAULT_PAYMENT_MODE]] as const) {
       const row = await ctx.db.query("appSettings").withIndex("by_key", q => q.eq("key", key)).unique();
       if (row) await ctx.db.patch(row._id, { value, updatedAt: Date.now() });
@@ -174,7 +174,7 @@ export const initializeProductionDefaults = mutation({
 });
 
 export const logAnalytics = mutation({
-  args: { event: v.union(v.literal("landing-view"), v.literal("example-viewed"), v.literal("gender-picked"), v.literal("career-search"), v.literal("career-opened"), v.literal("day-viewed"), v.literal("plan-preview-viewed"), v.literal("full-plan-shown")), tracking: v.optional(v.any()), career: v.optional(v.string()), gender: v.optional(v.union(gender, v.literal("unspecified"))), entryPath: v.optional(v.union(v.literal("Example"), v.literal("Search"), v.literal("Unknown"))) },
+  args: { event: v.union(v.literal("landing-view"), v.literal("example-viewed"), v.literal("gender-picked"), v.literal("career-search"), v.literal("career-opened"), v.literal("day-viewed"), v.literal("plan-preview-viewed"), v.literal("full-plan-shown"), v.literal("page-time")), tracking: v.optional(v.any()), career: v.optional(v.string()), page: v.optional(v.string()), seconds: v.optional(v.number()), gender: v.optional(v.union(gender, v.literal("unspecified"))), entryPath: v.optional(v.union(v.literal("Example"), v.literal("Search"), v.literal("Unknown"))) },
   returns: v.null(),
   handler: async (ctx, args) => {
     assertSupportedDeployment();
@@ -183,7 +183,8 @@ export const logAnalytics = mutation({
     const isTest = trackingBoolean(tracking.isTest);
     if (!visitorId || visitorId.length > 100) throw new ConvexError("Visitor id is invalid.");
     if (args.career && (args.career.trim().length === 0 || args.career.length > 120)) throw new ConvexError("Career name is invalid.");
-    await writeAnalytics(ctx, args.event, { visitorId, isTest, ref: trackingString(tracking.ref), referrerDomain: trackingString(tracking.referrerDomain), age: [13, 14, 15, 16].includes(tracking.age as number) ? tracking.age as 13 | 14 | 15 | 16 : undefined, career: args.career?.trim(), gender: args.gender, entryPath: args.entryPath, device: tracking.device === "mobile" || tracking.device === "desktop" ? tracking.device : undefined });
+    if (args.event === "page-time" && (!args.page || args.page.length > 80 || !Number.isFinite(args.seconds) || args.seconds! < 0 || args.seconds! > 1800)) throw new ConvexError("Page time is invalid.");
+    await writeAnalytics(ctx, args.event, { visitorId, isTest, ref: trackingString(tracking.ref), referrerDomain: trackingString(tracking.referrerDomain), age: [13, 14, 15, 16].includes(tracking.age as number) ? tracking.age as 13 | 14 | 15 | 16 : undefined, career: args.career?.trim(), page: args.page, seconds: args.seconds, gender: args.gender, entryPath: args.entryPath, device: tracking.device === "mobile" || tracking.device === "desktop" ? tracking.device : undefined });
     return null;
   },
 });
@@ -403,7 +404,7 @@ export const analyticsFunnel = query({
       ctx.db.query("planUnlockEvents").withIndex("by_createdAt", q => q.gte("createdAt", start).lte("createdAt", end)).take(5000),
       ctx.db.query("aiCalls").withIndex("by_timestamp", q => q.gte("timestamp", start).lte("timestamp", end)).take(5000),
     ]);
-    const rows: FunnelEventRow[] = stored.filter(row => includeTest || !row.isTest).map(row => ({ event: row.event, visitorId: row.visitorId, isTest: row.isTest ?? true, createdAt: row.createdAt, career: row.career, gender: row.gender, amount: row.amount, paymentMode: row.paymentMode, device: row.device, entryPath: row.entryPath, ref: row.ref, referrerDomain: row.referrerDomain }));
+    const rows: FunnelEventRow[] = stored.filter(row => row.event !== "page-time" && (includeTest || !row.isTest)).map(row => ({ event: row.event, visitorId: row.visitorId, isTest: row.isTest ?? true, createdAt: row.createdAt, career: row.career, gender: row.gender, amount: row.amount, paymentMode: row.paymentMode, device: row.device, entryPath: row.entryPath, ref: row.ref, referrerDomain: row.referrerDomain }));
     const canonicalKeys = new Set(rows.map(row => row.visitorId + "|" + row.event + "|" + (row.career ?? "")));
     for (const row of oldRows) {
       const event = row.event === "download" ? "pdf-download" : row.event === "share" ? "whatsapp-share" : row.event;
@@ -441,6 +442,43 @@ export const analyticsFunnel = query({
     const aiCost = aiFiltered.reduce((sum, row) => sum + (row.costINR ?? 0), 0), payers = new Set(filtered.filter(row => row.event === "payment-submitted" || row.event === "approved").map(row => row.visitorId));
     const revenue = filtered.filter(row => row.event === "approved").reduce((sum, row) => sum + (row.amount ?? 0), 0);
     return { ...math, funnel: math.funnels.combined, visitors: visitorRows.sort((a, b) => b.firstSeen - a.firstSeen), visitorSummaries, untaggedCount, topCareers: [...careerMap].map(([careerName, set]) => ({ career: careerName, opens: set.size })).sort((a, b) => b.opens - a.opens), paymentTapsByCareer: [...tapsMap].map(([careerName, set]) => ({ career: careerName, taps: set.size })).sort((a, b) => b.taps - a.taps), careers, refs: [...new Set(rows.map(row => row.ref).filter((value): value is string => Boolean(value)))].sort(), totals: { visitors: summaryMath.visitors.length, aiCalls: aiFiltered.length, aiCost, averagePerVisitor: summaryMath.visitors.length ? aiCost / summaryMath.visitors.length : 0, averagePerPayingParent: payers.size ? aiCost / payers.size : 0, payingParents: payers.size, revenue }, truncated: stored.length === 5000 || oldRows.length === 5000 || aiRows.length === 5000 };
+  },
+});
+
+export const usageByDate = query({
+  args: { adminKey: v.string(), start: v.number(), end: v.number() }, returns: v.any(),
+  handler: async (ctx, { adminKey, start, end }) => {
+    requireAdmin(adminKey);
+    const [events, calls] = await Promise.all([
+      ctx.db.query("analyticsEvents").withIndex("by_createdAt", q => q.gte("createdAt", start).lte("createdAt", end)).take(5000),
+      ctx.db.query("aiCalls").withIndex("by_timestamp", q => q.gte("timestamp", start).lte("timestamp", end)).take(5000),
+    ]);
+    const daily = new Map<string, { visits: number; visitors: Set<string>; times: Map<string, number[]>; users: Map<string, number>; flows: Map<string, { cost: number; done: boolean; visitor: string }>; unknownTestFlags: number }>();
+    const dayFor = (timestamp: number) => new Date(timestamp + 330 * 60000).toISOString().slice(0, 10);
+    const day = (key: string) => { let value = daily.get(key); if (!value) { value = { visits: 0, visitors: new Set(), times: new Map(), users: new Map(), flows: new Map(), unknownTestFlags: 0 }; daily.set(key, value); } return value; };
+    for (let timestamp = start; timestamp <= end; timestamp += 24 * 60 * 60 * 1000) day(dayFor(timestamp));
+    for (const row of events) {
+      if (row.isTest === true) continue;
+      const value = day(dayFor(row.createdAt));
+      if (row.isTest === undefined) value.unknownTestFlags++;
+      if (row.event === "landing-view") { value.visits++; value.visitors.add(row.visitorId); }
+      if (row.event === "page-time" && row.page && typeof row.seconds === "number") { const samples = value.times.get(row.page) ?? []; samples.push(row.seconds); value.times.set(row.page, samples); }
+    }
+    for (const row of calls) {
+      if (row.isTest === true) continue;
+      const value = day(dayFor(row.timestamp)), visitor = row.visitorId ?? "unknown";
+      if (row.isTest === undefined) value.unknownTestFlags++;
+      value.users.set(visitor, (value.users.get(visitor) ?? 0) + (row.costINR ?? 0));
+      if (row.generationId) {
+        const flow = value.flows.get(row.generationId) ?? { cost: 0, done: false, visitor };
+        flow.cost += row.costINR ?? 0; flow.done ||= row.fullStoryboardCompleted === true; value.flows.set(row.generationId, flow);
+      }
+    }
+    const median = (values: number[]) => { const a = [...values].sort((x, y) => x - y), n = a.length; return n ? (n % 2 ? a[(n - 1) / 2] : (a[n / 2 - 1] + a[n / 2]) / 2) : null; };
+    return { days: [...daily].map(([date, value]) => {
+      const costs = [...value.users.values()], flows = [...value.flows.values()], pages = [...value.times].map(([page, samples]) => ({ page, averageSeconds: samples.reduce((s, n) => s + n, 0) / samples.length, medianSeconds: median(samples) }));
+      return { date, visits: value.visits, uniqueUsers: value.visitors.size, pages, pageTimeTracked: pages.length > 0, userAverageINR: costs.length ? costs.reduce((s, n) => s + n, 0) / costs.length : 0, userMedianINR: median(costs) ?? 0, userHighestINR: costs.length ? Math.max(...costs) : 0, flows: flows.map(flow => ({ costINR: flow.cost, visitorId: flow.visitor, completed: flow.done })), flowCount: flows.length, flowsPerUser: value.users.size ? flows.length / value.users.size : 0, averageCompletedFlowINR: flows.filter(flow => flow.done).length ? flows.filter(flow => flow.done).reduce((s, f) => s + f.cost, 0) / flows.filter(flow => flow.done).length : null, incompleteFlows: flows.filter(flow => !flow.done).length, unknownTestFlags: value.unknownTestFlags };
+    }).sort((a, b) => b.date.localeCompare(a.date)), truncated: events.length === 5000 || calls.length === 5000 };
   },
 });
 

@@ -11,7 +11,7 @@ export function requireLibraryDev() {
 }
 function requireAdmin(adminKey: string) {
   requireLibraryDev();
-  if (!process.env.ADMIN_COSTS_KEY || adminKey.length < 32 || adminKey !== process.env.ADMIN_COSTS_KEY) throw new ConvexError("Admin access required.");
+  if (!process.env.ADMIN_COSTS_KEY || adminKey.length < 10 || adminKey !== process.env.ADMIN_COSTS_KEY) throw new ConvexError("Admin access required.");
 }
 const referenceKey = (gender: "girl" | "boy") => `${LIBRARY_VERSION}:${gender}`;
 export const reference = internalQuery({ args: { gender: binaryGender }, returns: v.any(), handler: (ctx, { gender }) => ctx.db.query("sceneReferences").withIndex("by_key", q => q.eq("key", referenceKey(gender))).unique() });

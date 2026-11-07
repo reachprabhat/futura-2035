@@ -172,6 +172,23 @@
 .m1 .day-locked-month strong{filter:blur(3px);user-select:none}
 .m1 .day-view-plan-button{display:flex;width:100%;min-height:52px;align-items:center;justify-content:center;font-size:var(--type-cta);line-height:var(--line-cta);font-weight:600}
 .m1 .day-full-plan{padding-top:11px}
+.m1 .day-full-plan-back{display:block;min-height:44px;padding:8px 2px;border:0;background:none;color:var(--purple);font-size:var(--type-body);font-weight:600}
+.m1 .day-full-plan-back-bottom{align-self:center;margin-top:4px;margin-bottom:calc(40px + env(safe-area-inset-bottom, 0px));text-align:center}
+.m1 .day-example-context{--example-tint:var(--lavender);--example-accent:var(--purple);display:grid;gap:10px;margin:0 0 14px;padding:13px;border:1px solid var(--line);border-radius:14px;background:var(--example-tint)}
+.m1 .day-example-context.day-example-boy{--example-tint:var(--mint);--example-accent:var(--type-secondary-color)}
+.m1 .day-example-person{display:flex;align-items:center;gap:10px}
+.m1 .day-example-avatar{display:flex;width:38px;height:38px;flex:0 0 38px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--example-accent);font-size:var(--type-card);font-weight:700}
+.m1 .day-example-person .day-eyebrow{margin:0 0 2px;font-size:var(--type-secondary);line-height:var(--line-secondary)}
+.m1 .day-example-person strong{font-size:var(--type-label);line-height:var(--line-label);color:var(--type-headline-color)}
+.m1 .day-example-description{margin:0;font-size:var(--type-label);line-height:var(--line-label);color:var(--type-body-color)}
+.m1 .day-example-interests{display:flex;flex-wrap:wrap;gap:5px}
+.m1 .day-example-interests>span{padding:4px 7px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--type-secondary-color);font-size:var(--type-secondary);line-height:var(--line-secondary)}
+.m1 .day-example-opportunities{display:grid;gap:8px}
+.m1 .day-example-opportunity{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.m1 .day-example-opportunity h2{margin:0 0 5px;font-family:"DM Sans",Arial,sans-serif;font-size:var(--type-label);line-height:var(--line-label);font-weight:700;letter-spacing:0;color:var(--type-headline-color)}
+.m1 .day-example-opportunity ul{display:grid;gap:4px;margin:0;padding:0;list-style:none}
+.m1 .day-example-opportunity li{display:flex;align-items:flex-start;gap:6px;font-size:var(--type-secondary);line-height:var(--line-secondary);color:var(--type-body-color)}
+.m1 .day-example-opportunity svg{width:14px;height:14px;flex:0 0 14px;margin-top:1px;fill:none;stroke:var(--example-accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .m1 .day-full-plan-heading{padding:8px 2px 13px}
 .m1 .day-full-plan-heading .day-eyebrow{margin:0 0 4px}
 .m1 .day-full-plan-heading h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:var(--type-page);line-height:var(--line-page);color:var(--type-headline-color)}

@@ -4,6 +4,7 @@ import { api } from "../convex/_generated/api";
 import { displayAiText } from "./displayText";
 import { USD_TO_INR, PRICING_DATE, PRICING_URL } from "../convex/pricing";
 import BrandLogo from "./BrandLogo";
+import { adminLockRemaining, recordAdminFailure, rememberedAdminKey, saveAdminSession } from "./adminSession";
 
 function Report({ adminKey, lock }: { adminKey: string; lock: () => void }) {
   const [includeTest, setIncludeTest] = useState(false);
@@ -41,16 +42,17 @@ function Report({ adminKey, lock }: { adminKey: string; lock: () => void }) {
     <p><a href={PRICING_URL}>Official OpenAI pricing</a> · prices checked {PRICING_DATE}</p>
   </>;
 }
-class CostErrorBoundary extends Component<{ children: React.ReactNode; reset: () => void }, { error: boolean }> {
+class CostErrorBoundary extends Component<{ children: React.ReactNode; reset: () => void; failed: () => void }, { error: boolean }> {
   state = { error: false };
   static getDerivedStateFromError() { return { error: true }; }
+  componentDidCatch() { this.props.failed(); this.props.reset(); }
   render() { return this.state.error ? <div className="error" role="alert"><p>Admin access required. Check your admin key.</p><button className="primary" onClick={this.props.reset}>Try again</button></div> : this.props.children; }
 }
 export default function AdminCosts() {
-  const [input, setInput] = useState(""), [adminKey, setAdminKey] = useState("");
+  const [input, setInput] = useState(""), [adminKey, setAdminKey] = useState(rememberedAdminKey), [keep, setKeep] = useState(false);
   function lock() { setAdminKey(""); setInput(""); }
-  return <main className="admin-costs">{adminKey ? <CostErrorBoundary reset={lock}><Report adminKey={adminKey} lock={lock} /></CostErrorBoundary> : <>
+  return <main className="admin-costs">{adminKey ? <CostErrorBoundary reset={lock} failed={recordAdminFailure}><Report adminKey={adminKey} lock={lock} /></CostErrorBoundary> : <>
     <BrandLogo /><h1>Admin costs</h1><p className="section-description">Enter your separate admin key to view costs.</p>
-    <form onSubmit={e => { e.preventDefault(); setAdminKey(input); }}><label htmlFor="admin-key">Admin key</label><input id="admin-key" type="password" value={input} onChange={e => setInput(e.target.value)} autoComplete="off" required /><button className="primary">View costs</button></form>
+    <form onSubmit={e => { e.preventDefault(); if(input.length < 10 || adminLockRemaining() > 0) return; saveAdminSession(input,keep); setAdminKey(input); }}><label htmlFor="admin-key">Admin key</label><input id="admin-key" type="password" minLength={10} value={input} onChange={e => setInput(e.target.value)} autoComplete="off" required /><label><input type="checkbox" checked={keep} onChange={e => setKeep(e.target.checked)} /> Keep me signed in on this phone for 30 days</label><button className="primary" disabled={adminLockRemaining() > 0}>View costs</button>{adminLockRemaining() > 0 && <p role="alert">Too many wrong attempts. Try again in {Math.ceil(adminLockRemaining()/60000)} minutes.</p>}</form>
   </>}</main>;
 }

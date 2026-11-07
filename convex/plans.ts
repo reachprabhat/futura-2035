@@ -74,7 +74,7 @@ export const qualityReviewList = query({
   args: { adminKey: v.string() }, returns: v.array(v.object({ id: v.id("careerPlans"), title: v.string(), status: v.string(), createdAt: v.number(), issues: v.array(v.object({ month: v.number(), issues: v.array(v.string()) })), plan: v.any() })),
   handler: async (ctx, { adminKey }) => {
     const expected = process.env.ADMIN_COSTS_KEY;
-    if (!expected || adminKey.length < 32 || adminKey !== expected) throw new Error("Admin access required.");
+    if (!expected || adminKey.length < 10 || adminKey !== expected) throw new Error("Admin access required.");
     const [reviewRows, readyRows] = await Promise.all([
       ctx.db.query("careerPlans").withIndex("by_status", q => q.eq("status", "needs-review")).take(500),
       ctx.db.query("careerPlans").withIndex("by_status", q => q.eq("status", "ready")).take(500),

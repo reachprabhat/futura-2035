@@ -6,6 +6,7 @@ import type { Id } from "../convex/_generated/dataModel";
 import { FaqBootstrap, type FaqPage } from "./ManagedFaqs";
 import BrandLogo from "./BrandLogo";
 import "./plan-admin.css";
+import { adminLockRemaining, recordAdminFailure, rememberedAdminKey, saveAdminSession } from "./adminSession";
 
 type Faq = { id: Id<"faqs">; page: FaqPage; question: string; answer: string; displayOrder: number };
 type Draft = { question: string; answer: string };
@@ -95,17 +96,18 @@ function AdminFaqList({ adminKey, lock }: { adminKey: string; lock: () => void }
 }
 
 export default function FaqAdmin() {
-  const [input, setInput] = useState(""), [adminKey, setAdminKey] = useState("");
+  const [input, setInput] = useState(""), [adminKey, setAdminKey] = useState(rememberedAdminKey), [keep, setKeep] = useState(false);
   function lock() { setAdminKey(""); setInput(""); }
-  return <main className="plan-admin faq-admin"><FaqBootstrap />{adminKey ? <FaqBoundary key={adminKey} reset={lock}><AdminFaqList adminKey={adminKey} lock={lock} /></FaqBoundary> : <>
+  return <main className="plan-admin faq-admin"><FaqBootstrap />{adminKey ? <FaqBoundary key={adminKey} reset={lock} failed={recordAdminFailure}><AdminFaqList adminKey={adminKey} lock={lock} /></FaqBoundary> : <>
     <div className="plan-admin-top"><BrandLogo /><span className="plan-admin-badge">ADMIN · DEV</span><a className="plan-admin-link" href="/admin">Plan payments</a></div>
     <h1>Frequently asked questions</h1><p>Enter your admin key to manage landing and results FAQs.</p>
-    <form className="plan-admin-auth" onSubmit={event => { event.preventDefault(); setAdminKey(input); }}><label htmlFor="faq-admin-key">Admin key</label><input id="faq-admin-key" type="password" value={input} onChange={event => setInput(event.target.value)} autoComplete="off" required /><button type="submit">Open FAQ manager</button></form>
+    <form className="plan-admin-auth" onSubmit={event => { event.preventDefault(); if(input.length < 10 || adminLockRemaining() > 0) return; saveAdminSession(input, keep); setAdminKey(input); }}><label htmlFor="faq-admin-key">Admin key</label><input id="faq-admin-key" type="password" minLength={10} value={input} onChange={event => setInput(event.target.value)} autoComplete="off" required /><label><input type="checkbox" checked={keep} onChange={e => setKeep(e.target.checked)} /> Keep me signed in on this phone for 30 days</label><button type="submit" disabled={adminLockRemaining() > 0}>Open FAQ manager</button>{adminLockRemaining() > 0 && <p role="alert">Too many wrong attempts. Try again in {Math.ceil(adminLockRemaining()/60000)} minutes.</p>}</form>
   </>}</main>;
 }
 
-class FaqBoundary extends Component<{ children: React.ReactNode; reset: () => void }, { failed: boolean }> {
+class FaqBoundary extends Component<{ children: React.ReactNode; reset: () => void; failed: () => void }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
+  componentDidCatch() { this.props.failed(); this.props.reset(); }
   render() { return this.state.failed ? <div className="plan-admin-error" role="alert"><p>Admin access required. Check your admin key.</p><button type="button" onClick={this.props.reset}>Try again</button></div> : this.props.children; }
 }

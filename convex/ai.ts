@@ -138,6 +138,285 @@ export const photoTest = action({
   },
 });
 
+const ProjectTestProfile = z.object({
+  age: z.union([z.number(), z.string()]),
+  interests: z.string(),
+  strengths: z.string(),
+  personalityTraits: z.string().optional(),
+  competencyLevel: z.string(),
+  domain: z.string().optional(),
+}).strict();
+const ProjectCareerPickDraft = z.object({
+  careers: z.array(z.object({
+    domain: z.string(),
+    career: z.string(),
+    whyFits: z.string(),
+    domainFitNote: z.string(),
+    howHardThisIs: z.string(),
+    nearbyCareer: z.string(),
+  }).strict()).length(3),
+}).strict();
+const ProjectCareerSkillsDraft = z.object({
+  skills: z.array(z.object({ name: z.string(), evidence: z.string() }).strict()).length(3),
+  closestSkill: z.string(),
+  closestSkillReason: z.string(),
+  earningPotential: z.string(),
+  workingAbroad: z.string(),
+  project: z.object({
+    title: z.string(),
+    timeEstimate: z.enum(["3 hours", "3.5 hours", "4 hours", "3–4 hours"]),
+    materialsBudget: z.string(),
+    materials: z.array(z.string()),
+    steps: z.array(z.string()),
+    endProduct: z.string(),
+    skillsBuilt: z.array(z.string()).min(1),
+  }).strict(),
+}).strict();
+const projectCareerPickPrompt = `From the child's age, interests, strengths, personality traits, competency level, and optional requested domain, suggest exactly three distinct aspirational career paths: the ambitious, selective, top-of-field version a child could dream of, not a safe nearby, entry-level, support, teaching, or coaching job. Examples: swimming → International Swimmer; Lego/problem solving → Robotics Engineer or Aerospace Engineer; Banking → Investment Banker, Fund Manager, or Portfolio Manager. Choose age-appropriate paths while keeping the ambition high. A requested domain is a firm requirement: at least one of the three must be an aspirational career genuinely in that domain; do not substitute a nearby job. For each career return a concise career name, plain domain label, howHardThisIs (one honest plain line about how competitive or difficult the path is, not discouragement), and nearbyCareer (one specific nearby career that uses overlapping skills). Return whyFits grounded in this child's specific supplied inputs. Also return domainFitNote: for the career in the requested domain, give one honest line only if the child's interests and strengths do not directly fit that domain; describe which stated inputs are relevant and which are not an obvious match. If the inputs are a reasonable fit, return an empty string. If no domain was requested, return an empty string. Do not claim certainty or invent interests, values, goals, or traits. Return only the requested fields.`;
+const projectCareerSkillsPrompt = `For the supplied child and one career path, identify exactly three useful skills for that career. The child's exact age is important: match every project idea and every child-facing word to that age. For ages 11–12, use short steps and a clear, simple build-and-try activity. For ages 15–16, use a more challenging fair test: change one thing at a time, compare several tries, and explain the result, while keeping the child safe. Do not give a teen a babyish activity. Write project title, materials, steps, endProduct, skill names, skill evidence, and closestSkillReason in short, simple sentences the child can understand. Use common words; avoid jargon, long sentences, and expert terms. Use simple skill names too; explain any career word in the evidence. The child is learning, not doing an expert's job: never ask them to design a real training plan, diagnose anyone, invest real money, make professional decisions, or give advice. They should observe, try a small safe activity, and compare what happened. For each skill, give one or two short sentences linking it to the child's stated strengths or competency level; do not repeat a sentence or say the same thing twice. Pick exactly one skill as closest to the child already, using only their supplied strengths and competency level, and explain it in one different short sentence. Keep earningPotential and workingAbroad in plain English for an adult; use a cautious level and one short reason for earningPotential, with no made-up salary number or promise, and one practical line for workingAbroad. Make exactly one project that takes 3–4 hours and visibly uses at least one named child interest. It must be mostly hands-on: build, make, try, observe, or compare something. At least three of the 4–6 ordered steps must be hands-on. Writing may be needed in at most one step, and then only a few notes or check marks. The child should be able to do most of it themselves. Do not make a notebook, essay, research report, or plan the main activity. Materials must be common household items or cost less than ₹500 in total; state the total as materialsBudget, for example “₹0 using household items” or “₹100–₹300”. Never require a discontinued or expensive kit (including LEGO Mindstorms). If a kit could help, make it optional and give a household alternative in the same materials list. Keep risky activities safe, but do not put adult-supervision notes inside steps; the app shows one project-level note if needed. If the child swims, runs, performs, dances, or does another physical activity, a parent or helper must do all timing, filming, measuring, counting, and recording while the child does the activity. Never ask the child to time, film, or record themselves while moving. Set timeEstimate to exactly one of: "3 hours", "3.5 hours", "4 hours", or "3–4 hours". Include a concrete end product and skillsBuilt listing one or more of the three skill names exactly. If the career is in healthcare or medicine, make the project a fictional learning activity only: no real medicine, diagnosis, treatment, patient details, or advice. Return only the requested fields.`;
+
+// DEV-only admin tool. Each call is intentionally uncached so input changes can be compared.
+export const testProjectSuggestions = action({
+  args: {
+    adminKey: v.string(),
+    profile: v.object({
+      age: v.union(v.number(), v.string()), interests: v.string(), strengths: v.string(),
+      personalityTraits: v.optional(v.string()), competencyLevel: v.string(), domain: v.optional(v.string()),
+    }),
+  },
+  returns: v.object({
+    careers: v.array(v.object({
+      domain: v.string(), career: v.string(), whyFits: v.string(), howHardThisIs: v.string(), nearbyCareer: v.string(), domainFitNote: v.string(),
+      skills: v.array(v.object({ name: v.string(), evidence: v.string() })),
+      closestSkill: v.string(), closestSkillReason: v.string(), earningPotential: v.string(), workingAbroad: v.string(),
+      project: v.object({ title: v.string(), timeEstimate: v.string(), materialsBudget: v.string(), adultNote: v.union(v.string(), v.null()), materials: v.array(v.string()), steps: v.array(v.string()), endProduct: v.string(), skillsBuilt: v.array(v.string()) }),
+      careerCallCostINR: v.union(v.number(), v.null()),
+      allocatedCareerPickCostINR: v.union(v.number(), v.null()),
+      totalCostINR: v.union(v.number(), v.null()),
+    })),
+    careerPickCostINR: v.union(v.number(), v.null()),
+    totalRunCostINR: v.union(v.number(), v.null()),
+  }),
+  handler: async (ctx, { adminKey, profile }): Promise<{
+    careers: Array<{
+      domain: string; career: string; whyFits: string; howHardThisIs: string; nearbyCareer: string; domainFitNote: string;
+      skills: Array<{ name: string; evidence: string }>;
+      closestSkill: string; closestSkillReason: string; earningPotential: string; workingAbroad: string;
+      project: { title: string; timeEstimate: "3 hours" | "3.5 hours" | "4 hours" | "3–4 hours"; materialsBudget: string; adultNote: string | null; materials: string[]; steps: string[]; endProduct: string; skillsBuilt: string[] };
+      careerCallCostINR: number | null; allocatedCareerPickCostINR: number | null; totalCostINR: number | null;
+    }>;
+    careerPickCostINR: number | null; totalRunCostINR: number | null;
+  }> => {
+    if (process.env.CONVEX_CLOUD_URL !== "https://doting-basilisk-558.convex.cloud") throw new ConvexError("Project suggestions are restricted to doting-basilisk-558 DEV.");
+    await ctx.runQuery(api.costs.controls, { adminKey });
+    const validatedProfile = ProjectTestProfile.parse(profile);
+    const pickGenerationId = `project-test-career-pick-${crypto.randomUUID()}`;
+    const pickResponse = await tracked(ctx, {
+      careerTitle: `Project test: age ${validatedProfile.age}`,
+      callType: "careers", stage: "dev-project-career-pick", model: "gpt-4.1-mini", generationId: pickGenerationId,
+      visitorId: "admin-project-test", isTest: true,
+    }, () => client().responses.parse({
+      model: "gpt-4.1-mini", max_output_tokens: 1200, temperature: 0.5,
+      input: [
+        { role: "system", content: projectCareerPickPrompt },
+        { role: "user", content: JSON.stringify(validatedProfile) },
+      ],
+      text: { format: zodTextFormat(ProjectCareerPickDraft, "project_career_paths") },
+    }));
+    const picks = ProjectCareerPickDraft.parse(pickResponse.output_parsed).careers;
+    const pickCall: { costINR: number | null } | null = await ctx.runQuery(internal.costs.byGeneration, { generationId: pickGenerationId });
+    const careerPickCostINR = pickCall?.costINR ?? null;
+    const requestedDomain = validatedProfile.domain?.trim() ?? "";
+    let requestedDomainIndex = requestedDomain
+      ? picks.findIndex(career => `${career.career} ${career.domain}`.toLowerCase().includes(requestedDomain.toLowerCase()))
+      : -1;
+    if (requestedDomain && requestedDomainIndex < 0) requestedDomainIndex = picks.findIndex(career => `${career.career} ${career.domain} ${career.whyFits}`.toLowerCase().includes(requestedDomain.toLowerCase()));
+    const careers = await Promise.all(picks.map(async (career, careerIndex) => {
+      const generationId = `project-test-career-project-${crypto.randomUUID()}`;
+      const response = await tracked(ctx, {
+        careerTitle: career.career,
+        callType: "plan", stage: "dev-project-career-skills", model: "gpt-4.1-mini", generationId,
+        visitorId: "admin-project-test", isTest: true,
+      }, () => client().responses.parse({
+        model: "gpt-4.1-mini", max_output_tokens: 1400, temperature: 0.5,
+        input: [
+          { role: "system", content: projectCareerSkillsPrompt },
+          { role: "user", content: JSON.stringify({ profile: validatedProfile, career }) },
+        ],
+        text: { format: zodTextFormat(ProjectCareerSkillsDraft, "career_skills_and_project") },
+      }));
+      const draft = ProjectCareerSkillsDraft.parse(response.output_parsed);
+      const closestSkill = draft.skills.find(skill => skill.name.toLowerCase() === draft.closestSkill.trim().toLowerCase())?.name ?? draft.skills[0].name;
+      const closestSkillReason = `Your “${validatedProfile.strengths.trim() || "stated strength"}” strength at a “${validatedProfile.competencyLevel}” level makes ${closestSkill} a good skill to build on now.`;
+      const validBuiltSkills = draft.project.skillsBuilt.filter(skill => draft.skills.some(candidate => candidate.name === skill));
+      const seenSkillSentences = new Set<string>();
+      const skills = draft.skills.map(skill => {
+        const sentences = skill.evidence.match(/[^.!?]+[.!?]?/g)?.map(sentence => sentence.trim()).filter(Boolean) ?? [];
+        const uniqueSentences: string[] = [];
+        for (const sentence of sentences) {
+          const key = sentence.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+          if (!key || seenSkillSentences.has(key) || uniqueSentences.some(existing => existing.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim() === key)) continue;
+          uniqueSentences.push(sentence);
+          seenSkillSentences.add(key);
+          if (uniqueSentences.length === 2) break;
+        }
+        const evidence = uniqueSentences.length
+          ? uniqueSentences.join(" ")
+          : `Your “${validatedProfile.strengths.trim() || "stated strength"}” strength can help you practise ${skill.name}.`;
+        return { ...skill, evidence };
+      });
+      const cleanClosestSkillReason = closestSkillReason.trim().toLowerCase() === skills.find(skill => skill.name === closestSkill)?.evidence.trim().toLowerCase()
+        ? `Your “${validatedProfile.strengths.trim() || "stated strength"}” is a good starting point for ${closestSkill}.`
+        : closestSkillReason;
+      const projectText = JSON.stringify({ materials: draft.project.materials, steps: draft.project.steps });
+      const waterActivity = /\b(?:water|pool|swim|swimming|bath|basin)\b/i.test(projectText);
+      const expensiveOrDiscontinuedKit = /mindstorms|robotics kit|drone kit|3d printer|arduino kit/i.test(projectText);
+      const overBudget = /₹\s*(?:[5-9]\d\d|[1-9]\d{3,})/.test(draft.project.materialsBudget);
+      const asksForExpertWork = /\b(?:workout plan|training plan|training regimen|training schedule|diagnos(?:e|is)|invest(?:ing|ment)?|prescrib\w*|treat a patient)\b/i.test(`${draft.project.title} ${draft.project.steps.join(" ")}`);
+      const handsOnSteps = draft.project.steps.filter(step => /\b(?:build|make|fold|cut|try|test|move|measure|time|watch|observe|compare|attach|place|push|shape|change|draw|paint|mix|sort|match|show)\b/i.test(step)).length;
+      const useHouseholdFallback = expensiveOrDiscontinuedKit || overBudget || asksForExpertWork || handsOnSteps < 3;
+      let writingSteps = 0;
+      const seenSteps = new Set<string>();
+      const safeSteps = draft.project.steps.slice(0, 6).map(step => {
+          let safeStep = step;
+          if (/\b(?:write|record|note|list|journal|log|report|label|describe|plan|research)\b/i.test(step)) {
+            writingSteps += 1;
+            if (writingSteps > 1) safeStep = "Compare what happened on your tries. Point to the result that worked best.";
+          }
+          let lineKey = safeStep.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+          if (seenSteps.has(lineKey)) safeStep = "Move your model back to the start and try it once more.";
+          lineKey = safeStep.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+          seenSteps.add(lineKey);
+          const activityWords = "(?:swim|run|perform|dance|sing|act|exercise|race)\\w*";
+          const physicalProfile = new RegExp(`\\b${activityWords}\\b`, "i").test(`${validatedProfile.interests} ${validatedProfile.strengths}`);
+          const physicalActivity = new RegExp(`\\b(?:you|your|yourself)\\b[^.!?]{0,120}\\b${activityWords}\\b|\\b${activityWords}\\b[^.!?]{0,120}\\b(?:you|your|yourself)\\b`, "i").test(safeStep)
+            || (physicalProfile && /\\b(?:you|your|yourself)\\b/i.test(safeStep));
+          if (physicalActivity && /\b(?:time|timing|stopwatch|timer|film|video|record|write down|count|measure)\b/i.test(safeStep)) {
+            const activity = /\b(?:swim|swimming|lap|stroke|pool)\b/i.test(safeStep)
+              ? "Do the planned swim or laps while a parent times you and records the result."
+              : /\b(?:run|running|race)\b/i.test(safeStep)
+                ? "Do the planned run while a parent times you and records the result."
+                : "Do your performance while a parent films it or records the result.";
+            safeStep = activity;
+          }
+          return safeStep;
+        });
+      const interestUsesSwimming = /swim|pool/i.test(validatedProfile.interests);
+      const interestUsesLego = /lego|building|building blocks/i.test(validatedProfile.interests);
+      const hasSwimmingOrBuildingInterest = interestUsesSwimming || interestUsesLego;
+      const fallbackSkills = draft.skills.filter(skill => /problem|observ|measure|build|design|test|goal/i.test(skill.name)).map(skill => skill.name).slice(0, 2);
+      const householdFallback = {
+        title: interestUsesSwimming && interestUsesLego ? "Build and Test a LEGO Swim Lane Model" : interestUsesSwimming ? "Build and Test a Paper Swim Lane Model" : interestUsesLego ? "Build and Test a LEGO Toy Track" : `Make and Test a Model of ${validatedProfile.interests.trim() || "Something You Like"}`,
+        timeEstimate: draft.project.timeEstimate,
+        materialsBudget: "₹0–₹100 using household items",
+        materials: hasSwimmingOrBuildingInterest ? [
+          interestUsesLego ? "LEGO bricks you already have, or strips of paper or cardboard" : "Paper or cardboard from home",
+          interestUsesSwimming ? "A small toy swimmer or a folded paper swimmer" : "A small toy or paper model of your interest",
+          "A flat table or tray",
+          "Pencil and paper for one check mark",
+        ] : ["Paper or cardboard from home", "A small toy or paper model of your interest", "Tape", "Pencil and paper for one check mark"],
+        steps: interestUsesSwimming ? [
+          "Make three lanes on a flat table using LEGO bricks or strips of paper.",
+          "Make a small swimmer from a toy or folded paper.",
+          "Give it one gentle push along the first lane and see how straight it moves.",
+          "Try the same push in another lane and compare how far the swimmer moves.",
+          "Change one lane, then try both lanes again to see what changed.",
+          "Mark the lane that worked best with one check mark.",
+        ] : interestUsesLego ? [
+          "Make two short tracks on a flat table using LEGO bricks or strips of paper.",
+          "Choose a small toy that can slide along the tracks.",
+          "Give the toy one gentle push along the first track and see how far it goes.",
+          "Try the same push along the second track and compare the distance.",
+          "Change one part of a track and try both tracks again.",
+          "Mark the track that worked best with one check mark.",
+        ] : [
+          `Make a small model of ${validatedProfile.interests.trim() || "something you like"} from paper or cardboard.`,
+          "Try moving or changing one part of your model and watch what happens.",
+          "Make a second version with one small change.",
+          "Try both versions the same way and compare what they do.",
+          "Change one more part and try both versions again.",
+          "Mark the version that worked best with one check mark.",
+        ],
+        endProduct: interestUsesSwimming ? "A small swim lane model and a tested toy swimmer that show which lane worked best." : interestUsesLego ? "A small LEGO toy track and a test that shows which track worked best." : `Two small models of ${validatedProfile.interests.trim() || "something you like"} that you tried and compared.`,
+        skillsBuilt: fallbackSkills.length ? fallbackSkills : (validBuiltSkills.length ? validBuiltSkills : [closestSkill]).slice(0, 2),
+      };
+      const projectDraft = useHouseholdFallback ? householdFallback : {
+        ...draft.project,
+        skillsBuilt: validBuiltSkills.length ? validBuiltSkills : [closestSkill],
+        steps: safeSteps,
+      };
+      const call: { costINR: number | null } | null = await ctx.runQuery(internal.costs.byGeneration, { generationId });
+      const careerCallCostINR = call?.costINR ?? null;
+      const allocatedCareerPickCostINR = careerPickCostINR === null ? null : careerPickCostINR / 3;
+      const interest = validatedProfile.interests.trim() || "interests not provided";
+      const strength = validatedProfile.strengths.trim() || "strengths not provided";
+      const trait = validatedProfile.personalityTraits?.trim() || "personality traits not provided";
+      const level = validatedProfile.competencyLevel.trim() || "competency level not provided";
+      const whyTemplates = [
+        `Your interest in “${interest}” and strength in “${strength}” both connect to the practice required in ${career.career}.`,
+        `At age ${validatedProfile.age}, your “${trait}” approach and “${level}” experience give you a personal starting point for ${career.career}.`,
+        `The mix of “${interest}” and “${trait}” is a specific reason to explore ${career.career}; your “${strength}” adds another useful starting point.`,
+      ];
+      const domainMismatch = requestedDomain && careerIndex === requestedDomainIndex && career.domainFitNote.trim()
+        ? ` ${career.domainFitNote.trim()}`
+        : "";
+      const whyFits = `${whyTemplates[careerIndex]}${domainMismatch}`;
+      const healthcarePath = /medicine|medical|health|doctor|pediatric|physician|surgeon|nurs|clinical/i.test(`${career.domain} ${career.career}`);
+      const unsafeHealthcareProject = healthcarePath && /\b(?:dose|dosage|medication|prescription|diagnos(?:e|is|tic)|treatment|patient data|medical advice|clinical|disease|symptom)\b/i.test(JSON.stringify(projectDraft));
+      const rawProject = unsafeHealthcareProject ? {
+        title: "Build a Measured Model of One Body System",
+        timeEstimate: "3.5 hours" as const,
+        materialsBudget: "Under ₹500 using household items",
+        materials: ["Poster paper or cardboard", "Colored paper", "Markers", "Scissors", "Glue or tape", "Ruler", "An age-appropriate anatomy book"],
+        steps: [
+          "Choose one body system, such as the respiratory or digestive system, and find a child-friendly anatomy reference.",
+          "Draw a simple body outline and use a ruler to plan where the main parts will go.",
+          "Cut colored paper into shapes for the main parts and arrange them on the outline using the reference.",
+          "Label each part and write one basic body-function fact from the reference beside it.",
+          "Make three short quiz questions about the labeled parts, with answers on the back of separate cards.",
+          "Explain the model and quiz to a family member, then adjust any labels that were hard to understand.",
+        ],
+        endProduct: "A labeled body-system model and a three-question learning quiz based on a child-friendly reference.",
+        skillsBuilt: draft.skills.map(skill => skill.name).filter(name => /anatom|medical|biology|communicat|explain|measure|math|visual|observ|attention/i.test(name)).slice(0, 3),
+      } : projectDraft;
+      if (unsafeHealthcareProject && rawProject.skillsBuilt.length === 0) rawProject.skillsBuilt.push(draft.skills[0].name);
+      const finalProjectText = JSON.stringify({ materials: rawProject.materials, steps: rawProject.steps });
+      const adultNeeded = /\b(?:water|pool|swim|height|ladder|tools?|scissors?|knife|sharp|heat|hot|travel|outside|internet|online|website|video|climb|road|drive|fly|flying|open space|field|run|running|dance|sing|acting|stage)\b/i.test(finalProjectText) || /\b(?:adult|parent|guardian)\b/i.test(finalProjectText);
+      const stripInlineSafetyNote = (line: string) => line
+        .replace(/\(?\s*an adult must be with you[^.!?]*[.!?]?\)?/gi, "")
+        .replace(/\(?\s*an adult must be present[^.!?]*[.!?]?\)?/gi, "")
+        .replace(/\s+/g, " ").trim();
+      const project = {
+        ...rawProject,
+        adultNote: adultNeeded ? "An adult must be with you." : null,
+        materials: rawProject.materials.map(stripInlineSafetyNote),
+        steps: rawProject.steps.map(stripInlineSafetyNote),
+      };
+      return {
+        ...career,
+        whyFits,
+        howHardThisIs: career.howHardThisIs,
+        nearbyCareer: career.nearbyCareer,
+        domainFitNote: career.domainFitNote,
+        skills,
+        closestSkill,
+        closestSkillReason: cleanClosestSkillReason,
+        earningPotential: draft.earningPotential,
+        workingAbroad: draft.workingAbroad,
+        project,
+        careerCallCostINR,
+        allocatedCareerPickCostINR,
+        totalCostINR: careerCallCostINR === null || allocatedCareerPickCostINR === null ? null : careerCallCostINR + allocatedCareerPickCostINR,
+      };
+    }));
+    const runCosts = careers.map(career => career.careerCallCostINR);
+    const totalRunCostINR = careerPickCostINR === null || runCosts.some(cost => cost === null)
+      ? null
+      : careerPickCostINR + (runCosts as number[]).reduce((sum, cost) => sum + cost, 0);
+    return { careers, careerPickCostINR, totalRunCostINR };
+  },
+});
+
 export const example = action({
   args: { tracking: v.optional(v.any()) }, returns: v.any(),
   handler: async (ctx, { tracking: rawTracking }): Promise<any> => {

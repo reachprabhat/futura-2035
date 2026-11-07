@@ -35,7 +35,7 @@ export const controls = query({
   args: { adminKey: v.string() }, returns: v.any(),
   handler: async (ctx, { adminKey }) => {
     const expected = process.env.ADMIN_COSTS_KEY;
-    if (!expected || adminKey.length < 32 || adminKey !== expected) throw new ConvexError("Admin access required.");
+    if (!expected || adminKey.length < 10 || adminKey !== expected) throw new ConvexError("Admin access required.");
     return await todayControls(ctx);
   },
 });
@@ -99,7 +99,7 @@ export const rows = query({
   args: { adminKey: v.string(), paginationOpts: paginationOptsValidator, includeTest: v.optional(v.boolean()) }, returns: v.any(),
   handler: async (ctx, { adminKey, paginationOpts, includeTest = false }) => {
     const expected = process.env.ADMIN_COSTS_KEY;
-    if (!expected || adminKey.length < 32 || adminKey !== expected) throw new ConvexError("Admin access required.");
+    if (!expected || adminKey.length < 10 || adminKey !== expected) throw new ConvexError("Admin access required.");
     const query = ctx.db.query("aiCalls").withIndex("by_timestamp").order("desc");
     const result = await (includeTest ? query : query.filter(q => q.eq(q.field("isTest"), false))).paginate(paginationOpts);
     return { ...result, pricingDate: PRICING_DATE, pricingUrl: PRICING_URL, usdToInr: USD_TO_INR };
@@ -110,7 +110,7 @@ export const planFailures = query({
   returns: v.array(v.object({ generationId: v.string(), careerTitle: v.string(), stage: v.string(), error: v.string(), timestamp: v.number(), isTest: v.boolean() })),
   handler: async (ctx, { adminKey, includeTest = false }) => {
     const expected = process.env.ADMIN_COSTS_KEY;
-    if (!expected || adminKey.length < 32 || adminKey !== expected) throw new ConvexError("Admin access required.");
+    if (!expected || adminKey.length < 10 || adminKey !== expected) throw new ConvexError("Admin access required.");
     const rows = await ctx.db.query("planGenerationErrors").withIndex("by_timestamp").order("desc").take(100);
     return rows.filter(row => includeTest || !row.isTest).map(({ generationId, careerTitle, stage, error, timestamp, isTest }) => ({ generationId, careerTitle, stage, error, timestamp, isTest }));
   },

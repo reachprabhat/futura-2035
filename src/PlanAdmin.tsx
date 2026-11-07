@@ -7,6 +7,7 @@ import "./plan-admin.css";
 import { lockedMessageForCareer, setThisBrowserIsMe, thisBrowserIsMe } from "./visitorTracking";
 import { displayAiText } from "./displayText";
 import BrandLogo from "./BrandLogo";
+import { adminAttemptsLeft, adminLockRemaining, recordAdminFailure, rememberedAdminKey, saveAdminSession } from "./adminSession";
 
 function AdminReport({ adminKey, lock }: { adminKey: string; lock: () => void }) {
   const [includeTest, setIncludeTest] = useState(false);
@@ -96,15 +97,18 @@ function AdminReport({ adminKey, lock }: { adminKey: string; lock: () => void })
 }
 
 export default function PlanAdmin() {
-  const [input, setInput] = useState(""), [adminKey, setAdminKey] = useState("");
+  const [input, setInput] = useState(""), [adminKey, setAdminKey] = useState(rememberedAdminKey), [keep, setKeep] = useState(false);
   function lock() { setAdminKey(""); setInput(""); }
-  return <main className="plan-admin">{adminKey ? <AdminReportBoundary key={adminKey} reset={lock}><AdminReport adminKey={adminKey} lock={lock} /></AdminReportBoundary> : <>
-    <BrandLogo /><h1>Plan payments</h1><p>Enter your admin key to manage price and payment requests.</p><form className="plan-admin-auth" onSubmit={event => { event.preventDefault(); setAdminKey(input); }}><label htmlFor="plan-admin-key">Admin key</label><input id="plan-admin-key" type="password" value={input} onChange={event => setInput(event.target.value)} autoComplete="off" required /><button type="submit">Open plan payments</button></form>
+  return <main className="plan-admin">{adminKey ? <AdminReportBoundary key={adminKey} reset={lock} failed={recordAdminFailure}><AdminReport adminKey={adminKey} lock={lock} /></AdminReportBoundary> : <>
+    <BrandLogo /><h1>Plan payments</h1><p>Enter your admin key to manage price and payment requests.</p><form className="plan-admin-auth" onSubmit={event => { event.preventDefault(); if (input.length < 10 || adminLockRemaining() > 0) return; saveAdminSession(input, keep); setAdminKey(input); }}><label htmlFor="plan-admin-key">Admin key</label><input id="plan-admin-key" type="password" minLength={10} value={input} onChange={event => setInput(event.target.value)} autoComplete="off" required /><button type="submit" disabled={adminLockRemaining() > 0}>Open plan payments</button></form>
+    <label className="plan-admin-test-toggle"><input type="checkbox" checked={keep} onChange={event => setKeep(event.target.checked)} /> Keep me signed in on this phone for 30 days</label>
+    {adminLockRemaining() > 0 && <p role="alert">Too many wrong attempts. Try again in {Math.ceil(adminLockRemaining() / 60000)} minutes.</p>}
   </>}</main>;
 }
 
-class AdminReportBoundary extends Component<{ children: React.ReactNode; reset: () => void }, { failed: boolean }> {
+class AdminReportBoundary extends Component<{ children: React.ReactNode; reset: () => void; failed: () => void }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
+  componentDidCatch() { this.props.failed(); this.props.reset(); }
   render() { return this.state.failed ? <div className="plan-admin-error" role="alert"><p>Admin access required. Check your admin key.</p><button type="button" onClick={this.props.reset}>Try again</button></div> : this.props.children; }
 }

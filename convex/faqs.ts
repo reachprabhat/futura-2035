@@ -36,7 +36,7 @@ const defaults: { page: FaqPage; question: string; answer: string }[] = [
 
 function requireAdmin(adminKey: string) {
   const expected = process.env.ADMIN_COSTS_KEY;
-  if (!expected || adminKey.length < 32 || adminKey !== expected) throw new ConvexError("Admin access required.");
+  if (!expected || adminKey.length < 10 || adminKey !== expected) throw new ConvexError("Admin access required.");
 }
 
 async function rowsForPage(ctx: Pick<QueryCtx, "db">, page: FaqPage) {

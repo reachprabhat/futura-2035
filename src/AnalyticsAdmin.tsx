@@ -5,6 +5,7 @@ import { displayAiText } from "./displayText";
 import BrandLogo from "./BrandLogo";
 import "./plan-admin.css";
 import { setThisBrowserIsMe, thisBrowserIsMe } from "./visitorTracking";
+import { adminLockRemaining, recordAdminFailure, rememberedAdminKey, saveAdminSession } from "./adminSession";
 
 type Step = { event: string; label: string; visitors: number; percentStart: number; dropPercent: number; medianMs: number | null };
 type TimelineRow = { event: string; visitorId: string; isTest: boolean; createdAt: number; career?: string; amount?: number; paymentMode?: string; device?: string; entryPath?: string; ref?: string };
@@ -26,6 +27,27 @@ function deploymentName() {
 function FunnelTable({ title, rows }: { title: string; rows: Step[] }) {
   return <section className="analytics-funnel-panel"><h3>{title}</h3><table className="analytics-table"><thead><tr><th>Step</th><th>Visitors</th><th>% start</th><th>% drop</th><th>Median from previous</th></tr></thead><tbody>{rows.map((row, index) => { const label = index === 1 ? title === "Example path" ? "Example possibilities viewed" : title === "Search path" ? "Career search" : "Example view or career search" : row.label; return <tr key={row.event}><th>{index + 1}. {label}</th><td>{row.visitors}</td><td>{row.percentStart}%</td><td>{index ? `${row.dropPercent}%` : "—"}</td><td>{duration(row.medianMs)}</td></tr>; })}</tbody></table></section>;
 }
+type UsageDay = { date: string; visits: number; uniqueUsers: number; pages: { page: string; averageSeconds: number; medianSeconds: number }[]; pageTimeTracked: boolean; userAverageINR: number; userMedianINR: number; userHighestINR: number; flowsPerUser: number; averageCompletedFlowINR: number | null; flowCount: number; incompleteFlows: number; unknownTestFlags: number; flows: { costINR: number; completed: boolean }[] };
+function UsageByDate({ adminKey }: { adminKey: string }) {
+  const today = new Date(Date.now() + 330 * 60000);
+  const [startDate, setStartDate] = useState(() => { const d = new Date(today); d.setUTCDate(d.getUTCDate() - 6); return d.toISOString().slice(0, 10); });
+  const [endDate, setEndDate] = useState(today.toISOString().slice(0, 10));
+  const start = Date.parse(startDate + "T00:00:00Z") - 330 * 60000, end = Date.parse(endDate + "T23:59:59.999Z") - 330 * 60000;
+  const result = useQuery(api.planUnlocks.usageByDate, start <= end ? { adminKey, start, end } : "skip") as { days: UsageDay[]; truncated: boolean } | undefined;
+  return <section className="analytics-section"><h2>Usage by date <small>IST</small></h2>
+    <div className="analytics-controls"><label>From <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} /></label><label>To <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} /></label></div>
+    {!result ? <p role="status">Loading dated usage…</p> : <>
+      {result.truncated && <p className="plan-admin-error">This range reached the 5,000-row read limit.</p>}
+      <div className="usage-days">{result.days.map(day => <article className="usage-day" key={day.date}><h3>{day.date}</h3>
+        <p>Visits <strong>{day.visits}</strong> · Unique users <strong>{day.uniqueUsers}</strong>{day.unknownTestFlags > 0 && <> · Test status unknown for <strong>{day.unknownTestFlags}</strong> records</>}</p>
+        <h4>Time spent per page</h4>{day.pageTimeTracked ? day.pages.map(page => <p key={page.page}>{page.page}: average {Math.round(page.averageSeconds)} sec, median {Math.round(page.medianSeconds)} sec</p>) : <p>Not tracked yet</p>}
+        <h4>AI cost per user</h4><p>Average {rupees(day.userAverageINR)} · median {rupees(day.userMedianINR)} · highest {rupees(day.userHighestINR)}</p>
+        <h4>Cost per end-to-end flow per user</h4><p>{day.flowCount} flows · {day.flowsPerUser.toFixed(2)} flows per user · average completed flow {day.averageCompletedFlowINR === null ? "—" : rupees(day.averageCompletedFlowINR)}</p>
+        {day.flows.map((flow, index) => <p key={index}>Flow {index + 1}: {rupees(flow.costINR)} · {flow.completed ? "Completed" : "Did not finish"}</p>)}
+      </article>)}</div>
+    </>}
+  </section>;
+}
 function AnalyticsReport({ adminKey }: { adminKey: string }) {
   const now = new Date(), earlier = new Date(now); earlier.setDate(now.getDate() - 30);
   const [startDate, setStartDate] = useState(dateInput(earlier)), [endDate, setEndDate] = useState(dateInput(now));
@@ -41,6 +63,7 @@ function AnalyticsReport({ adminKey }: { adminKey: string }) {
   return <>
     <div className="plan-admin-top"><BrandLogo /><span className="plan-admin-badge">ADMIN · {deploymentName()}</span><a className="plan-admin-link" href="/admin">Plan payments</a></div>
     <h1>Visitor analytics</h1>
+    <UsageByDate adminKey={adminKey} />
     <div className="analytics-controls">
       <label>From <input type="date" value={startDate} onChange={event => setStartDate(event.target.value)} /></label>
       <label>To <input type="date" value={endDate} onChange={event => setEndDate(event.target.value)} /></label>
@@ -65,11 +88,12 @@ function AnalyticsReport({ adminKey }: { adminKey: string }) {
   </>;
 }
 export default function AnalyticsAdmin() {
-  const [input, setInput] = useState(""), [adminKey, setAdminKey] = useState("");
-  return <main className="plan-admin analytics-admin">{adminKey ? <AnalyticsBoundary><AnalyticsReport adminKey={adminKey} /></AnalyticsBoundary> : <><div className="plan-admin-top"><BrandLogo /><span className="plan-admin-badge">ADMIN · {deploymentName()}</span><a className="plan-admin-link" href="/admin">Plan payments</a></div><h1>Visitor analytics</h1><p>Enter your admin key to view visitor activity, costs, and approved revenue.</p><form className="plan-admin-auth" onSubmit={event => { event.preventDefault(); setAdminKey(input); }}><label htmlFor="analytics-admin-key">Admin key</label><input id="analytics-admin-key" type="password" value={input} onChange={event => setInput(event.target.value)} autoComplete="off" required /><button type="submit">Open analytics</button></form></>}</main>;
+  const [input, setInput] = useState(""), [adminKey, setAdminKey] = useState(rememberedAdminKey), [keep, setKeep] = useState(false);
+  return <main className="plan-admin analytics-admin">{adminKey ? <AnalyticsBoundary failed={recordAdminFailure}><AnalyticsReport adminKey={adminKey} /></AnalyticsBoundary> : <><div className="plan-admin-top"><BrandLogo /><span className="plan-admin-badge">ADMIN · {deploymentName()}</span><a className="plan-admin-link" href="/admin">Plan payments</a></div><h1>Visitor analytics</h1><p>Enter your admin key to view visitor activity, costs, and approved revenue.</p><form className="plan-admin-auth" onSubmit={event => { event.preventDefault(); if(input.length < 10 || adminLockRemaining() > 0) return; saveAdminSession(input, keep); setAdminKey(input); }}><label htmlFor="analytics-admin-key">Admin key</label><input id="analytics-admin-key" type="password" minLength={10} value={input} onChange={event => setInput(event.target.value)} autoComplete="off" required /><label><input type="checkbox" checked={keep} onChange={e => setKeep(e.target.checked)} /> Keep me signed in on this phone for 30 days</label><button type="submit" disabled={adminLockRemaining() > 0}>Open analytics</button>{adminLockRemaining() > 0 && <p role="alert">Too many wrong attempts. Try again in {Math.ceil(adminLockRemaining()/60000)} minutes.</p>}</form></>}</main>;
 }
-class AnalyticsBoundary extends Component<{ children: React.ReactNode }, { failed: boolean }> {
+class AnalyticsBoundary extends Component<{ children: React.ReactNode; failed: () => void }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
+  componentDidCatch() { this.props.failed(); }
   render() { return this.state.failed ? <div className="plan-admin-error" role="alert"><p>Admin access required. Check your admin key.</p><a href="/admin/analytics">Try again</a></div> : this.props.children; }
 }

@@ -14,14 +14,14 @@ function requireReleaseAdmin(adminKey: string) {
   if (!knownCloudUrls.includes(process.env.CONVEX_CLOUD_URL ?? ""))
     throw new ConvexError("Compressed image writes are restricted to the configured DEV and production deployments.");
   const expected = process.env.ADMIN_COSTS_KEY;
-  if (!expected || adminKey.length < 32 || adminKey !== expected) throw new ConvexError("Admin access required.");
+  if (!expected || adminKey.length < 10 || adminKey !== expected) throw new ConvexError("Admin access required.");
 }
 
 function requireProductionReleaseAdmin(adminKey: string) {
   if (process.env.CONVEX_CLOUD_URL !== "https://nautical-chicken-192.convex.cloud")
     throw new ConvexError("Career content imports are restricted to nautical-chicken-192 PROD.");
   const expected = process.env.ADMIN_COSTS_KEY;
-  if (!expected || adminKey.length < 32 || adminKey !== expected) throw new ConvexError("Admin access required.");
+  if (!expected || adminKey.length < 10 || adminKey !== expected) throw new ConvexError("Admin access required.");
 }
 
 const mappingPanel = v.object({ time: v.string(), caption: v.string(), sceneId: v.string() });

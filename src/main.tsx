@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { ConvexProvider, ConvexReactClient, useAction, useMutation, useQuery } from "convex/react";
 import { ConvexError } from "convex/values";
@@ -9,9 +9,10 @@ import AdminCosts from "./AdminCosts";
 import PlanAdmin from "./PlanAdmin";
 import AnalyticsAdmin from "./AnalyticsAdmin";
 import FaqAdmin from "./FaqAdmin";
+import ProjectTestAdmin from "./ProjectTestAdmin";
 import MilestoneOne from "./MilestoneOne";
 import CachedCareerDay from "./CachedCareerDay";
-import { getVisitorId, visitorTracking } from "./visitorTracking";
+import { analyticsTracking, getVisitorId, visitorTracking } from "./visitorTracking";
 import { pathlightLogoUrl, sceneImageUrl } from "./compressedAssets";
 import { displayAiText } from "./displayText";
 type Career = {
@@ -441,12 +442,48 @@ function App() {
 }
 const url = import.meta.env.VITE_CONVEX_URL;
 getVisitorId();
+function PageTimeTracker() {
+  const log = useMutation(api.planUnlocks.logAnalytics);
+  const state = useRef({ started: Date.now(), sent: false, page: window.location.pathname });
+  useEffect(() => {
+    if (window.location.pathname.startsWith("/admin")) return;
+    const finish = () => {
+      if (state.current.sent) return;
+      state.current.sent = true;
+      const seconds = Math.min(1800, Math.max(0, Math.round((Date.now() - state.current.started) / 1000)));
+      if (seconds > 0) void log({ event: "page-time", page: state.current.page, seconds, tracking: analyticsTracking() }).catch(() => {});
+    };
+    const resume = () => { state.current = { started: Date.now(), sent: false, page: window.location.pathname }; };
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") finish(); else if (state.current.sent) resume(); });
+    window.addEventListener("pagehide", finish);
+    return () => { finish(); window.removeEventListener("pagehide", finish); };
+  }, [log]);
+  return null;
+}
+function AdminMobileTables() {
+  useEffect(() => {
+    if (!window.location.pathname.startsWith("/admin")) return;
+    const labelTables = () => document.querySelectorAll(".plan-admin table, .admin-costs table").forEach(table => {
+      const labels = [...table.querySelectorAll("thead th")].map(cell => cell.textContent?.trim() ?? "");
+      table.querySelectorAll("tbody tr").forEach(row => row.querySelectorAll("td").forEach((cell, index) => {
+        if (labels[index]) cell.setAttribute("data-label", labels[index]);
+      }));
+    });
+    labelTables();
+    const observer = new MutationObserver(labelTables);
+    observer.observe(document.getElementById("root")!, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
+  return null;
+}
 const savedCareer = new URLSearchParams(window.location.search).get("career");
 const savedGender = new URLSearchParams(window.location.search).get("gender");
 createRoot(document.getElementById("root")!).render(
   url ? (
     <ConvexProvider client={new ConvexReactClient(url)}>
-      {window.location.pathname === "/admin/costs" ? <AdminCosts /> : window.location.pathname === "/admin/analytics" ? <AnalyticsAdmin /> : window.location.pathname === "/admin/faqs" ? <FaqAdmin /> : window.location.pathname === "/admin" ? <PlanAdmin /> : savedCareer ? <CachedCareerDay title={savedCareer} gender={savedGender === "girl" || savedGender === "boy" ? savedGender : "unspecified"} /> : <MilestoneOne />}
+      <PageTimeTracker />
+      <AdminMobileTables />
+      {window.location.pathname === "/admin/project-test" ? <ProjectTestAdmin /> : window.location.pathname === "/admin/costs" ? <AdminCosts /> : window.location.pathname === "/admin/analytics" ? <AnalyticsAdmin /> : window.location.pathname === "/admin/faqs" ? <FaqAdmin /> : window.location.pathname === "/admin" ? <PlanAdmin /> : savedCareer ? <CachedCareerDay title={savedCareer} gender={savedGender === "girl" || savedGender === "boy" ? savedGender : "unspecified"} /> : <MilestoneOne />}
     </ConvexProvider>
   ) : (
     <main>
